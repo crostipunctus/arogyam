@@ -5,4 +5,23 @@
 
 // Example of a variable override to change Around background color
 // Remove the "//" to comment it in and see it in action!
-// $body-bg: #12263F;
+// $body-bg: #448c74;
+$primary: #448c74 !default;
+$secondary: $gray-200  !default;
+$info: green !default;
+$success: #3fca90 !default;
+$warning: #edcb50 !default;
+$danger: #ed5050 !default;
+$light: $white  !default;
+$dark: $gray-900  !default;
+
+// Bootstrap's $theme-colors map
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark) !default;
