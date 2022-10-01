@@ -10,3 +10,4 @@ import "./lightgallery.js"
 import "./swiper-bundle.js"
 import "./main.js"
 import "./locales-all.js"
+

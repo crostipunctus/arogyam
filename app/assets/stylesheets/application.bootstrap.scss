@@ -1,9 +1,9 @@
 @import './variables';
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
-@import './theme.scss';
+@import './user-variables';
 @import './theme.css';
 @import './theme.min.css';
-@import './lightgallery-bundle.css';
-@import './swiper-bundle.css';
-@import './main.css';
+
+@import 'bootstrap/scss/bootstrap';
+@import './theme.scss';
+
+@import 'bootstrap-icons/font/bootstrap-icons';
