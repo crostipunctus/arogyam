@@ -7831,6 +7831,7 @@ fieldset:disabled .btn {
 
 .d-block {
   display: block !important;
+  color: white;
 }
 
 .d-grid {
