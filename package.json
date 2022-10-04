@@ -14,7 +14,9 @@
     "esbuild": "^0.15.10",
     "fullcalendar": "^5.11.3",
     "lightgallery": "^2.6.1",
-    "sass": "^1.55.0"
+    "sass": "^1.55.0",
+    "ssr-window": "^4.0.2",
+    "swiper": "^8.4.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",

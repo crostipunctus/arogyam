@@ -31,7 +31,7 @@ $gray-900: #121519 !default;
 $black: #000 !default;
 
 // Theme colors
-$primary: #266651 !default;
+$primary: #266651;
 $secondary: $gray-200  !default;
 $info: #1b76b3 !default;
 $success: #3fca90 !default;
@@ -39,6 +39,7 @@ $warning: #edcb50 !default;
 $danger: #ed5050 !default;
 $light: $white  !default;
 $dark: $gray-900  !default;
+$terracota: #cb6843;
 
 // Bootstrap's $theme-colors map
 $theme-colors: (
