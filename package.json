@@ -13,7 +13,6 @@
     "bootstrap-icons": "^1.9.1",
     "esbuild": "^0.15.10",
     "fullcalendar": "^5.11.3",
-    "lightgallery": "^2.6.1",
     "sass": "^1.55.0",
     "ssr-window": "^4.0.2",
     "swiper": "^8.4.2"

@@ -209,11 +209,6 @@
   "resolved" "https://registry.npmjs.org/is-number/-/is-number-7.0.0.tgz"
   "version" "7.0.0"
 
-"lightgallery@^2.6.1":
-  "integrity" "sha512-Lwcr4uEqzTBP3u7FurJo+kBT2BuNMXgFpP1iCwbS+5uSXHyzApolUwAm9TmQ7lLpTMVPIti5a5wwQNplw769ZQ=="
-  "resolved" "https://registry.npmjs.org/lightgallery/-/lightgallery-2.6.1.tgz"
-  "version" "2.6.1"
-
 "normalize-path@^3.0.0", "normalize-path@~3.0.0":
   "integrity" "sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA=="
   "resolved" "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
