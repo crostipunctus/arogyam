@@ -10,11 +10,8 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-
    
-   
-  
-    <!-- SEO Meta Tags-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.js"></script>
 
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -139,26 +136,15 @@
           }, 1500);
         };
       })();
-       
     </script>
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" id="google-font">
-    <!-- Vendor styles-->
-    
-   
-    
-    <!-- Main Theme Styles + Bootstrap-->
-    
-  
-    
-
-    
   </head>
-
   <body>
-  <%= render 'layouts/navbar' %>
+    <%= render 'layouts/navbar' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
