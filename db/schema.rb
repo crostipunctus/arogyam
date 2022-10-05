@@ -10,5 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 0) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_052621) do
+  create_table "packages", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "cost"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> packages
 end

@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :blog
+
+  get "packages" => "packages#index"
 end
