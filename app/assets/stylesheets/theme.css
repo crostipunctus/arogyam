@@ -49,7 +49,8 @@
   --ar-black-rgb: 0, 0, 0;
   --ar-body-color-rgb: 87, 96, 113;
   --ar-body-bg-rgb: 255, 255, 255;
-  --ar-font-sans-serif: "Inter", sans-serif;
+  --ar-font-sans-serif: "Barlow";
+  --ar-font-serif: "Courier Prime";
   --ar-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --ar-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --ar-root-font-size: 1rem;
@@ -8948,7 +8949,9 @@ fieldset:disabled .btn {
 }
 
 .fs-sm {
-  font-size: calc(var(--ar-body-font-size) * 0.875) !important;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 500;
+  font-size: calc(var(--ar-body-font-size)) !important;
 }
 
 .fs-xs {
@@ -14122,7 +14125,7 @@ button:focus {
 
 @font-face {
   font-family: "around-icons";
-  src: url("../fonts/around-icons.ttf?den6mh") format("truetype"), url("../fonts/around-icons.woff?den6mh") format("woff"), url("../fonts/around-icons.svg?den6mh#around-icons") format("svg");
+  src: url("assets/fonts/around-icons.ttf?den6mh") format("truetype"), url("assets/fonts/around-icons.woff?den6mh") format("woff"), url("assets/fonts/around-icons.svg?den6mh#around-icons") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -18178,7 +18181,7 @@ hr.dropdown-divider {
   --ar-heading-color: #fff;
   --ar-body-color: rgba(255, 255, 255, .7);
   border-color: var(--ar-primary) !important;
-  background-color: var(--ar-primary) !important;
+  background-color: var(--ar-terracota) !important;
 }
 
 .card-hover-primary:hover .card-title {
@@ -20697,7 +20700,7 @@ img-comparison-slider:focus {
 
 .dark-mode .card-hover-primary:hover {
   border-color: var(--ar-primary) !important;
-  background-color: var(--ar-primary) !important;
+  background-color: var(--ar-terracota) !important;
 }
 
 .dark-mode .accordion:not(.ignore-dark-mode) {

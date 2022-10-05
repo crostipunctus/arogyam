@@ -31,7 +31,7 @@ $gray-900: #121519 !default;
 $black: #000 !default;
 
 // Theme colors
-$primary: #266651;
+$primary: #414833;
 $secondary: $gray-200  !default;
 $info: #1b76b3 !default;
 $success: #3fca90 !default;
@@ -126,8 +126,8 @@ $box-shadow-lg: 0 .5rem 1.75rem -.125rem rgba(208, 208, 196, .48) !default;
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif: 'Inter',
-  sans-serif !default;
+$font-family-sans-serif: 'Barlow',
+  sans-serif;
 
 $font-size-root: 1rem !default;
 $font-size-base: $font-size-root  !default;
