@@ -73,7 +73,7 @@
   --ar-link-color: #448c74;
   --ar-link-hover-color: #37715d;
   --ar-code-color: #e3116c;
-  --ar-terracota: #cb6843;
+  --ar-terracota: #cc6666;
   --ar-highlight-bg: #fff3cd;
 }
 
@@ -81,6 +81,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+#playButton {
+  background-color: var(--ar-terracota);
+  border: none;
 }
 
 :root {
@@ -17319,6 +17324,11 @@ hr.dropdown-divider {
   align-items: center;
   padding: calc(var(--ar-navbar-brand-padding-y) * 0.5) 0;
   font-weight: var(--ar-navbar-brand-font-weight);
+
+}
+
+#navbarBrand {
+  color: var(--ar-terracota);
 }
 
 .navbar-collapse {
