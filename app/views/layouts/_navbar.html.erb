@@ -9,67 +9,13 @@
             <label class="form-check-label" for="theme-mode"><i class="bi bi-moon"></i></label>
           </div><a class="btn btn-primary btn-sm fs-sm order-lg-3 d-none d-sm-inline-flex" href="#" target="_blank" rel="noopener"><i class="bi bi-basket2 fs-xl me-2 ms-n1"></i>Book package</a>
           <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-          
           <nav class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
-             
-              <li class="nav-item dropdown"><a class="nav-link" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Packages<i id="dropdown-icon" class="bi bi-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item " href="#" data-bs-toggle="dropdown" aria-expanded="false">Portfolio <i class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="portfolio-list-v1.html">List View v.1</a></li>
-                      <li><a class="dropdown-item" href="portfolio-list-v2.html">List View v.2</a></li>
-                      <li><a class="dropdown-item" href="portfolio-grid-v1.html">Grid View v.1</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item" href="#" data-bs-toggle="dropdown" aria-expanded="false">Shop <i class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="shop-catalog.html">Catalog (Listing)</a></li>
-                      <li><a class="dropdown-item" href="shop-single.html">Product Page</a></li>
-                      <li><a class="dropdown-item" href="shop-checkout.html">Checkout</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item" href="#" data-bs-toggle="dropdown" aria-expanded="false">Blog <i  class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="blog-grid-sidebar.html">Grid View with Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-grid.html">Grid View no Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-list-sidebar.html">List View with Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-list.html">List View no Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-single-v1.html">Single post v.1</a></li>
-                      <li><a class="dropdown-item" href="blog-single-v2.html">Single post v.2</a></li>
-                      <li><a class="dropdown-item" href="blog-single-v3.html">Single post v.3</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item" href="#" data-bs-toggle="dropdown" aria-expanded="false">About <i  class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="about-agency.html">About - Agency</a></li>
-                      <li><a class="dropdown-item" href="about-product.html">About - Product</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item" href="#" data-bs-toggle="dropdown" aria-expanded="false">Services <i  class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="services-v1.html">Services v.1</a></li>
-                      <li><a class="dropdown-item" href="services-v2.html">Services v.2</a></li>
-                      <li><a class="dropdown-item" href="services-v3.html">Services v.3</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">The Sacred Grove<i id="dropdown-icon" class="bi bi-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item" href="#" data-bs-toggle="dropdown" aria-expanded="false">The Satsang Foundation <i  class="bi bi-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="account-signin.html">Other Concerns</a></li>
-                      <li><a class="dropdown-item" href="account-signup.html">Sri M</a></li>
-                    </ul>
-                  </li>
-                  <li><a class="dropdown-item" href="account-overview.html">Overview</a></li>
-                  <li><a class="dropdown-item" href="account-settings.html">Settings</a></li>
-                </ul>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="components/typography.html">About</a></li>
-              <li class="nav-item"><a class="nav-link" href="components/typography.html">Contact</a></li>
+              <li class="nav-item"><%= link_to "Packages", '#', class: "nav-link"%></li>                
+              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link"%></li> 
               <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link"%></li>
+              <li class="nav-item"><a class="nav-link" href="components/typography.html">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="components/typography.html">About</a></li>
             </ul>
           </nav>
         </div>
