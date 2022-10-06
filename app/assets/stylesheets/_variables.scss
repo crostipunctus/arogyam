@@ -40,6 +40,16 @@ $danger: #ed5050 !default;
 $light: $white  !default;
 $dark: $gray-900  !default;
 $terracota: #cb6843;
+$yelloworange: #FFAE42;
+
+#playButton {
+  background-color: $yelloworange;
+  border: none;
+}
+
+.d-block {
+  color: white;
+}
 
 // Bootstrap's $theme-colors map
 $theme-colors: (
