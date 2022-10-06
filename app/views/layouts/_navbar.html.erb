@@ -3,7 +3,7 @@
               <%= logo %>
               </span><%= link_to "ArogyaM", root_path, id: "navbarBrand", class: "navbar-brand pe-sm-3", data: { turbo: false }%>
           <a class="btn btn-primary btn-sm fs-sm order-lg-3 d-none d-sm-inline-flex" href="#" target="_blank" rel="noopener"><i class="bi bi-basket2 fs-xl me-2 ms-n1"></i>Book package</a>
-          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span id="hamburger" class="navbar-toggler-icon"></span></button>
           <nav class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link", data: {turbo: false}%></li>                

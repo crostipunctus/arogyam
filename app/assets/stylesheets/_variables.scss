@@ -51,6 +51,16 @@ $yelloworange: #FFAE42;
   color: white;
 }
 
+.nav-item {
+  font-size: 13pt;
+}
+
+#hamburger {
+  color: white;
+
+}
+
+
 // Bootstrap's $theme-colors map
 $theme-colors: (
   'primary': $primary,
@@ -523,7 +533,7 @@ $navbar-transition: background-color .1s ease-in-out !default;
 $navbar-nav-link-padding-x: 1rem !default;
 
 // Brand
-$navbar-brand-font-size: 1.375rem !default;
+$navbar-brand-font-size: 1.5rem !default;
 $navbar-brand-font-weight: $font-weight-semibold  !default;
 $navbar-brand-padding-y: $spacer * .5 !default;
 

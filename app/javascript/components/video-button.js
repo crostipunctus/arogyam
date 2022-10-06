@@ -3,6 +3,9 @@
  * @requires https://github.com/sachinchoolur/lightGallery
 */
 
+var lightGallery = require('lightgallery');
+import lgVideo from 'lightgallery/plugins/zoom'
+
 const videoButton = (() => {
 
   let button = document.querySelectorAll('[data-bs-toggle="video"]');
