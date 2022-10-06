@@ -75,6 +75,7 @@
   --ar-code-color: #e3116c;
   --ar-terracota: #cc6666;
   --ar-highlight-bg: #fff3cd;
+  --ar-nav-link-font-size: 12pt;
 }
 
 *,
@@ -84,7 +85,7 @@
 }
 
 #playButton {
-  background-color: var(--ar-terracota);
+  background-color: #ffae42;
   border: none;
 }
 
@@ -4122,7 +4123,7 @@ fieldset:disabled .btn {
   --ar-nav-link-padding-x: 1.75rem;
   --ar-nav-link-padding-y: 0.725rem;
   --ar-nav-link-font-weight: 500;
-  --ar-nav-link-color: var(--ar-gray-800);
+  --ar-nav-link-color: white;
   --ar-nav-link-hover-color: var(--ar-primary);
   --ar-nav-link-disabled-color: var(--ar-gray-600);
   display: flex;
@@ -4264,7 +4265,7 @@ fieldset:disabled .btn {
   --ar-navbar-brand-padding-y: 0.5rem;
   --ar-navbar-brand-margin-end: 1rem;
   --ar-navbar-brand-font-size: 1.375rem;
-  --ar-navbar-brand-color: var(--ar-gray-800);
+  --ar-navbar-brand-color: var(--ar-yellow);
   --ar-navbar-brand-hover-color: var(--ar-gray-800);
   --ar-navbar-nav-link-padding-x: 1rem;
   --ar-navbar-toggler-padding-y: 0.625rem;
@@ -8947,6 +8948,7 @@ fieldset:disabled .btn {
 
 .fs-lg {
   font-size: calc(var(--ar-body-font-size) * 1.125) !important;
+  color: white;
 }
 
 .fs-base {
@@ -9163,7 +9165,7 @@ fieldset:disabled .btn {
 
 .bg-primary {
   --ar-bg-opacity: 1;
-  background-color: rgba(var(--ar-terracota-rgb), var(--ar-bg-opacity)) !important;
+  background-color: rgba(var(--ar-secondary), var(--ar-bg-opacity)) !important;
 
 }
 
