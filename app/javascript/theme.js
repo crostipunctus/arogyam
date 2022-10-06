@@ -31,7 +31,7 @@ import inputAutoFocus from './components/input-autofocus';
 import tooltip from './components/tooltip';
 import popover from './components/popover';
 import toast from './components/toast';
-import videoButton from './components/video-button';
+
 import priceSwitch from './components/price-switch';
 import checkboxToggle from './components/checkbox-toggle';
 import countdown from './components/countdown';
