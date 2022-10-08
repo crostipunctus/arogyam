@@ -64,6 +64,19 @@ $yelloworange: #FFAE42;
   font-size: 13pt;
 }
 
+@media (max-width: 1200px) {
+  .display-1 {
+    font-size: 5rem;
+    color: white;
+  }
+}
+
+
+@media (max-width: 992px) {
+  #navbarBrand {
+    display: none;
+  }
+}
 
 
 // Bootstrap's $theme-colors map
