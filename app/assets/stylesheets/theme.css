@@ -7856,6 +7856,12 @@ fieldset:disabled .btn {
   color: white;
 }
 
+@media (max-width: 767.98px) {
+  .d-block {
+    display: none;
+  }
+}
+
 .d-grid {
   display: grid !important;
 }
