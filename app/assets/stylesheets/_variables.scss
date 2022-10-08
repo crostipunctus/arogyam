@@ -78,6 +78,19 @@ $yelloworange: #FFAE42;
   }
 }
 
+@media (max-width: 380px) {
+  .d-block {
+    color: black;
+    top: 10px;
+    font-size: 10pt;
+  }
+}
+
+@media (max-width: 646px) {
+  #playbuttontext {
+    color: black;
+  }
+}
 
 // Bootstrap's $theme-colors map
 $theme-colors: (
