@@ -25,12 +25,7 @@
                 <%= image_tag("IMG_5271.jpg") %>
               </div>
             </div>
-            <div class="swiper-slide">
-              <div class="swiper-slide-cover bg-position-top-center" style="background-image: url(assets/img/landing/yoga-studio/hero/02.jpg);"></div>
-            </div>
-            <div class="swiper-slide">
-              <div class="swiper-slide-cover bg-position-top-center" style="background-image: url(assets/img/landing/yoga-studio/hero/03.jpg);"></div>
-            </div>
+         
           </div>
           <div class="swiper-pagination mb-4"></div>
         </div>
@@ -41,7 +36,7 @@
              
               <h1 class="display-1 mb-4">ArogyaM</h1>
               <p class="d-block fs-xl pb-2 mb-4 mb-md-5" style="max-width: 500px;">The best yoga and meditation practices, adapted at a high level to the needs of the modern pace of life.</p>
-              <div class="position-relative d-inline-flex align-items-center"><a id="playButton" class="btn btn-icon btn-lg btn-primary rounded-circle stretched-link" href="https://www.youtube.com/c/TheSatsangFoundation" data-bs-toggle="video" target="_blank"><i class="bi bi-play-btn" style="font-size: 2rem"></i></a><span class="fs-lg fw-semibold ms-3">Watch Video</span></div>
+              <div class="position-relative d-inline-flex align-items-center"><a id="playButton" class="btn btn-icon btn-lg btn-primary rounded-circle stretched-link" href="https://www.youtube.com/c/TheSatsangFoundation" data-bs-toggle="video" target="_blank"><i class="bi bi-play-btn" style="font-size: 2rem"></i></a><span id="playbuttontext" class="fs-lg fw-semibold ms-3">Watch Video</span></div>
             </div>
           </div>
         </div>
@@ -310,52 +305,65 @@
     <div class="container overflow-hidden py-5 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
       <div class="masonry-grid" data-columns="2">
           <!-- Item-->
-          <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;branding&quot;]">
-            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 512px;">
+           <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
+            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
               <div class="zoom-effect-wrapper">
-                <div class="zoom-effect-img"><%= image_tag("TSF_8502.jpeg", width: 700)%></div>
+                <div class="zoom-effect-img"><%= image_tag("TSF_8502.jpeg", width: 512)%></div>
               </div>
-              <div class="pt-4 mt-lg-2">
-                <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Healthy Yellow</a></h2>
-                <div class="d-flex justify-content-between fs-lg text-muted"><span>Branding,
-                    Packaging</span><span>2022</span></div>
-              </div>
+              
             </div>
           </article>
           <!-- Item-->
           <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
             <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
               <div class="zoom-effect-wrapper">
-                <div class="zoom-effect-img"><%= image_tag("TSF_8502.jpeg", width: 700)%></div>
+                <div class="zoom-effect-img"><%= image_tag("hand.jpeg", width: 704)%></div>
               </div>
-              <div class="pt-4 mt-lg-2">
-                <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Sen Jonson</a></h2>
-                <div class="d-flex justify-content-between fs-lg text-muted"><span>Stationery
-                    design</span><span>2022</span></div>
+              
+            </div>
+          </article>
+          <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
+            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
+              <div class="zoom-effect-wrapper">
+                <div class="zoom-effect-img"><%= image_tag("food.jpeg", width: 600)%></div>
+              </div>
+              
+            </div>
+          </article>
+          <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
+            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
+              <div class="zoom-effect-wrapper">
+                <div class="zoom-effect-img"><%= image_tag("foot.jpeg", width: 600)%></div>
+              </div>
+              
+            </div>
+          </article>
+          <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
+            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
+              <div class="zoom-effect-wrapper">
+                <div class="zoom-effect-img"><%= image_tag("reflection.jpeg")%></div>
+              </div>
+              
+            </div>
+          </article>
+          <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
+            <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
+              <div class="zoom-effect-wrapper">
+                <div class="zoom-effect-img"><%= image_tag("flowers.jpeg")%></div>
               </div>
             </div>
           </article>
           <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
             <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
               <div class="zoom-effect-wrapper">
-                <div class="zoom-effect-img"><%= image_tag("TSF_8502.jpeg", width: 700)%></div>
-              </div>
-              <div class="pt-4 mt-lg-2">
-                <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Sen Jonson</a></h2>
-                <div class="d-flex justify-content-between fs-lg text-muted"><span>Stationery
-                    design</span><span>2022</span></div>
+                <div class="zoom-effect-img"><%= image_tag("medicines.jpeg", width: 600)%></div>
               </div>
             </div>
           </article>
           <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
             <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
               <div class="zoom-effect-wrapper">
-                <div class="zoom-effect-img"><%= image_tag("TSF_8502.jpeg", width: 400)%></div>
-              </div>
-              <div class="pt-4 mt-lg-2">
-                <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Sen Jonson</a></h2>
-                <div class="d-flex justify-content-between fs-lg text-muted"><span>Stationery
-                    design</span><span>2022</span></div>
+                <div class="zoom-effect-img"><%= image_tag("yoga.jpeg", width: 600)%></div>
               </div>
             </div>
           </article>

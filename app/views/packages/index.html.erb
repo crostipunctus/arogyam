@@ -10,7 +10,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 pb-sm-3 pb-md-4 pb-xl-5">
       <!-- Item-->
       <% @packages.each do |package| %>
-      <div class="col"><a class="card card-hover-primary bg-secondary border-0 h-100 text-decoration-none" href="#">
+      <div class="col"> <a class="card card-hover-primary bg-secondary border-0 h-100 text-decoration-none" href="/packages/<%= package.id %>" data-turbo="false">
           <div class="card-body pb-0">
             <h3 class="h4 card-title mt-0"><%= package.name %></h3>
             <p class="card-text"><%= package.description %></p>

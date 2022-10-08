@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :blog
 
   get "packages" => "packages#index"
+  get "packages/:id" => "packages#show", as: :package
 end
