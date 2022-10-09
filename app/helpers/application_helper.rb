@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def logo 
-    image_tag('logo.png', height: 75, width: 75)
+    link_to image_tag('logo.png', height: 75, width: 75), root_path
   end 
 
 end
