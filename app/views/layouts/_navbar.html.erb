@@ -2,7 +2,7 @@
         <div class="container"><span class="text-primary flex-shrink-0 me-2">
               <%= logo %>
               </span><%= link_to "ArogyaM", root_path, id: "navbarBrand", class: "navbar-brand pe-sm-3", data: { turbo: false }%>
-          <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-list lg" style="font-size: 2rem"></i></button>
+          <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
           <nav class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link", data: {turbo: false}%></li>                

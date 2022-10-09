@@ -64,10 +64,9 @@ $yelloworange: #FFAE42;
   font-size: 13pt;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 409px) {
   .display-1 {
     font-size: 5rem;
-    color: white;
   }
 }
 
@@ -78,9 +77,9 @@ $yelloworange: #FFAE42;
   }
 }
 
-@media (max-width: 380px) {
+
+@media (max-width: 409px) {
   .d-block {
-    color: black;
     top: 10px;
     font-size: 10pt;
   }
@@ -91,6 +90,25 @@ $yelloworange: #FFAE42;
     color: black;
   }
 }
+
+.bi-list {
+  color: white;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 50px;
+}
+
+@media (min-width: 1500px) {
+  .belowimage {
+    position: relative;
+    top: 150px;
+  }
+}
+
 
 // Bootstrap's $theme-colors map
 $theme-colors: (
