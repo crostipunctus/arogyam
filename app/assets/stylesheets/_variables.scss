@@ -47,9 +47,12 @@ $yelloworange: #FFAE42;
 }
 
 #playButton {
+  position: relative;
   background-color: $yelloworange;
   border: none;
 }
+
+
 
 #playbuttontext {
   color: white;
@@ -78,14 +81,30 @@ $yelloworange: #FFAE42;
 }
 
 
-@media (max-width: 409px) {
+@media (max-width: 455px) {
   .d-block {
-    top: 10px;
-    font-size: 10pt;
+    position: relative;
+    top: 100px;
+    color: black;
+
   }
 }
 
-@media (max-width: 646px) {
+@media (max-width: 455px) {
+  #playButton {
+    position: relative;
+    top: 100px;
+
+
+  }
+
+  #playbuttontext {
+    position: relative;
+    top: 100px;
+  }
+}
+
+@media (max-width: 553px) {
   #playbuttontext {
     color: black;
   }
