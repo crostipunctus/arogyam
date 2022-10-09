@@ -90,6 +90,18 @@ $yelloworange: #FFAE42;
   }
 }
 
+@media (max-width: 602px) {
+  #playButton {
+    position: relative;
+    top: 70px
+  }
+
+  #playbuttontext {
+    position: relative;
+    top: 70px
+  }
+}
+
 @media (max-width: 455px) {
   #playButton {
     position: relative;
@@ -102,9 +114,13 @@ $yelloworange: #FFAE42;
     position: relative;
     top: 100px;
   }
+
+  .display-1 {
+    color: white;
+  }
 }
 
-@media (max-width: 553px) {
+@media (max-width: 602px) {
   #playbuttontext {
     color: black;
   }
