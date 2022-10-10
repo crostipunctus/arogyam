@@ -146,6 +146,21 @@ $yelloworange: #FFAE42;
   }
 }
 
+.card-hover-secondary:hover {
+  background-color: $terracota !important;
+
+}
+
+.card-body:hover h4,
+p {
+  color: white;
+}
+
+
+
+
+
+
 
 // Bootstrap's $theme-colors map
 $theme-colors: (

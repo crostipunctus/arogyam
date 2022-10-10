@@ -18200,8 +18200,8 @@ hr.dropdown-divider {
 .card-hover-primary:hover {
   --ar-heading-color: #fff;
   --ar-body-color: rgba(255, 255, 255, .7);
-  border-color: var(--ar-primary) !important;
-  background-color: var(--ar-terracota) !important;
+  border-color: var(--ar-primary);
+  background-color: var(--ar-terracota);
 }
 
 .card-hover-primary:hover .card-title {
