@@ -156,11 +156,14 @@ p {
   color: white;
 }
 
+.form-control {
+  display: block;
+  width: 500px;
+}
 
-
-
-
-
+#package {
+  color: black;
+}
 
 // Bootstrap's $theme-colors map
 $theme-colors: (

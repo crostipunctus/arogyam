@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :blog
-
+  get "packages/new" => "packages#new" 
   get "packages" => "packages#index"
   get "packages/:id" => "packages#show", as: :package
+  get "packages/:id/edit" => "packages#edit"
+  patch "packages" => "packages#update"
+
+  
+  post "packages" => "packages#create"
+
 end

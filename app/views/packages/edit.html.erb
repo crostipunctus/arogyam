@@ -1,0 +1,22 @@
+
+<div class="h-100 d-flex align-items-center justify-content-center">
+  <%= form_with(model: @package) do |f|%>
+    <div class="mb-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :cost %>
+      <%= f.number_field :cost, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :duration %>
+      <%= f.number_field :duration, class: "form-control" %>
+    </div>
+    <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>

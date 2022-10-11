@@ -1,9 +1,35 @@
-<main class="page-wrapper">
-<section class="ignore-dark-mode position-relative min-vh-100 py-5">
-  <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-    <div class="container py-5 mt-5 mb-2 mb-sm-3 mb-lg-4 mb-xxl-5">
-            <h1 class="text-center"><%= @package.name %></h1>
-        <%= image_tag("IMG_5218.jpg", class: "d-block rounded-5 mb-3 mb-xl-4 mb-xxl-5")  %>  
-    </div>
-  </section>
-</main>
+
+   
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+  
+      <!-- Page content-->
+      <div class="overflow-hidden">
+        <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+          <!-- Breadcrumb-->
+          <nav aria-label="breadcrumb">
+            <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Portfolio list v.1</li>
+            </ol>
+          </nav>
+          <!-- Page title-->
+          <h1 class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
+          <!-- Item-->
+         
+          <article class="row align-items-center card-hover pb-5 mb-md-2 mb-lg-3 mb-xl-4" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
+            <div class="col-md-7 offset-xxl-1 mb-4 mb-md-0"><a href="portfolio-single-v1.html"><img class="rounded-5" src="/assets/flowers.jpg" width="500" alt="Image"></a></div>
+            <div class="col-md-5 col-xl-4" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
+              <div class="ms-md-4 ms-lg-5 ms-xxl-0" style="max-width: 330px;">
+                <div class="text-muted mb-2">Duration:</div>
+                <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
+                <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.description%></p>
+                <div class="text-muted mb-2">Cost:</div>
+                <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
+              </div>
+            </div>
+          </article>
+          
+      </div>
+    </main>
