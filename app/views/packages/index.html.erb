@@ -13,7 +13,7 @@
       <div class="col"> <a class="card card-hover-secondary bg-secondary border-0 h-100 text-decoration-none" href="/packages/<%= package.id %>" data-turbo="false">
           <div class="card-body pb-0">
             <h3 class="h4 card-title mt-0"><%= package.name %></h3>
-            <p class="card-text"><%= truncate(package.description, length: 100) %></p>
+            <p class="card-text"><%= truncate(package.content, length: 100) %></p>
           </div>
           <div class="card-footer border-0 py-3 my-3 mb-sm-4">
             <div class="btn btn-lg btn-icon btn-outline-primary rounded-circle pe-none"><i class="bi bi-arrow-right"></i>
