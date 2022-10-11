@@ -1,5 +1,5 @@
 
-<div class="h-100 d-flex align-items-center justify-content-center">
+<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
   <%= form_with(model: @package) do |f|%>
     <div class="mb-3">
       <%= f.label :name %>
@@ -19,11 +19,11 @@
     </div>
     <div class="form-group">
       <%= f.label :eligibility %>
-      <%= f.text_area :eligibility, class: "form-control" %>
+      <%= f.rich_text_area :eligibility, class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :note %>
-      <%= f.text_area :note, class: "form-control" %>
+      <%= f.rich_text_area :note, class: "form-control" %>
     </div>
     <%= f.submit class:"btn btn-primary"%>
   <% end %>
