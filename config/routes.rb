@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "packages" => "packages#index"
   get "packages/:id" => "packages#show", as: :package
   get "packages/:id/edit" => "packages#edit"
-  patch "packages" => "packages#update"
+  patch "packages/:id" => "packages#update"
 
   
   post "packages" => "packages#create"

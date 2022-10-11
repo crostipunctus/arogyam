@@ -9,6 +9,7 @@
     "@hotwired/stimulus": "^3.1.0",
     "@hotwired/turbo-rails": "^7.2.0",
     "@popperjs/core": "^2.11.6",
+    "@rails/actiontext": "^7.0.4",
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.1",
     "esbuild": "^0.15.10",
@@ -18,7 +19,8 @@
     "sass": "^1.55.0",
     "shufflejs": "^6.1.0",
     "ssr-window": "^4.0.2",
-    "swiper": "^8.4.2"
+    "swiper": "^8.4.2",
+    "trix": "^2.0.0-beta.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",

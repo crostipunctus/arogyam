@@ -2,10 +2,13 @@
 
 //= require swiper
 
+Turbo.session.drive = false
+
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
-
+import "trix"
+import "@rails/actiontext"
 
 
 import "./theme"
@@ -36,4 +39,5 @@ const swiper = new Swiper('.swiper', {
   scrollbar: {
     el: '.swiper-scrollbar',
   },
-});
+}); import "trix"
+import "@rails/actiontext"
