@@ -156,6 +156,10 @@ p {
   color: white;
 }
 
+.trix-content.hover {
+  color: white
+}
+
 .form-control {
   display: block;
   width: 500px;
@@ -214,7 +218,7 @@ $text-muted: var(--#{$prefix}gray-600) !default;
 
 // Links
 
-$link-color: $primary !default;
+$link-color: $primary;
 $link-decoration: underline !default;
 $link-hover-color: darken($link-color, 8%) !default;
 $link-hover-decoration: none !default;

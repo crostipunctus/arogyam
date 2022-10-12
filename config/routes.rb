@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "packages/:id/edit" => "packages#edit"
   patch "packages/:id" => "packages#update"
 
+  get "contact" => "contact#index"
+  get "about" => "about#index"
   
   post "packages" => "packages#create"
 

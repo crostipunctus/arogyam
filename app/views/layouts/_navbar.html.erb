@@ -6,10 +6,10 @@
           <nav class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link", data: {turbo: false}%></li>                
-              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link"%></li> 
-              <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link"%></li>
-              <li class="nav-item"><a class="nav-link" href="components/typography.html">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="components/typography.html">About</a></li>
+              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link", data: {turbo: false}%></li> 
+              <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link", data: {turbo: false}%></li>
+               <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link", data: {turbo: false}%></li> 
+               <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
             </ul>
           </nav>
         </div>
