@@ -2,3 +2,151 @@
 // user.scss
 // Use this to write your custom SCSS
 //
+
+.bg-success {
+  --ar-bg-opacity: 1;
+  background-color: #e78774 !important;
+}
+
+.bg-footer {
+  background-color: $secondary;
+}
+
+#playButton {
+  position: relative;
+  background-color: $yelloworange;
+  border: none;
+}
+
+
+
+#playbuttontext {
+  color: white;
+}
+
+
+.d-block {
+  color: white;
+}
+
+.nav-item {
+  font-size: 13pt;
+}
+
+@media (max-width: 409px) {
+  .display-1 {
+    font-size: 5rem;
+  }
+}
+
+
+@media (max-width: 992px) {
+  #navbarBrand {
+    display: none;
+  }
+}
+
+
+@media (max-width: 455px) {
+  .d-block {
+    position: relative;
+    top: 100px;
+    color: black;
+
+  }
+}
+
+@media (max-width: 602px) {
+  #playButton {
+    position: relative;
+    top: 70px
+  }
+
+  #playbuttontext {
+    position: relative;
+    top: 70px
+  }
+}
+
+@media (max-width: 455px) {
+  #playButton {
+    position: relative;
+    top: 100px;
+
+
+  }
+
+  #playbuttontext {
+    position: relative;
+    top: 100px;
+  }
+
+  .display-1 {
+    color: white;
+  }
+
+
+}
+
+@media (max-width: 602px) {
+  #playbuttontext {
+    color: black;
+  }
+}
+
+.bi-list {
+  color: white;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 50px;
+}
+
+@media (min-width: 1500px) {
+  .belowimage {
+    position: relative;
+    top: 150px;
+  }
+}
+
+.card-hover-secondary:hover {
+  background-color: $terracota !important;
+
+}
+
+.card-body:hover h4,
+p {
+  color: white;
+}
+
+.trix-content.hover {
+  color: white
+}
+
+.form-control {
+  display: block;
+  width: 500px;
+}
+
+#package {
+  color: black;
+}
+
+.admin {
+  display: inline-flex;
+}
+
+.trix-content {
+  color: black;
+}
+
+.trix-content:hover {
+  color: white;
+}
+
+.card-footer:hover {
+  color: white;
+}

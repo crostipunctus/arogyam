@@ -7,9 +7,16 @@
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link", data: {turbo: false}%></li>                
               <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link", data: {turbo: false}%></li> 
-              <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link", data: {turbo: false}%></li>
+              <% if current_user_admin? %>
+                <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link", data: {turbo: false}%></li>
+              <% end %>
               <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link", data: {turbo: false}%></li> 
               <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
+              <% if current_user %>
+                <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link", data: {turbo: false}, data: { turbo_method: :delete } %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "Sign in", new_user_session_path, class: "nav-link", data: {turbo: false}%></li> 
+              <% end %>
             </ul>
           </nav>
         </div>

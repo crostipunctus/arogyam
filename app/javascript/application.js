@@ -41,3 +41,5 @@ const swiper = new Swiper('.swiper', {
   },
 }); import "trix"
 import "@rails/actiontext"
+
+

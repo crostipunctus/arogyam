@@ -9186,7 +9186,7 @@ fieldset:disabled .btn {
 
 .bg-success {
   --ar-bg-opacity: 1;
-  background-color: rgba(var(--ar-success-rgb), var(--ar-bg-opacity)) !important;
+  background-color: #febaad;
 }
 
 .bg-info {

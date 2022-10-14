@@ -31,6 +31,16 @@
                 <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></p>
                 <div class="text-muted mb-2">Cost:</div>
                 <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
+                
+                <% if current_user_admin? %>
+                  <div class="admin", data-turbo="false">
+                    <%= link_to "Edit package", edit_package_path(@package), class: "btn btn-primary btn-sm" %>
+                  </div>
+                  <div  class="admin">
+                    <%= button_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", id:"destroyButton", method: :delete %>
+                  </div>
+                <% end %>
+                
               </div>
             </div>
           </article>

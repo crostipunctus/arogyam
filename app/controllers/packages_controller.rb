@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  before_action :current_user_admin?, only: [:new, :edit, :destroy]
 
   def index 
     @packages = Package.all 
@@ -35,6 +36,13 @@ class PackagesController < ApplicationController
       redirect_to root, status: :unprocessable_entity
     end
 
+  end 
+
+  def destroy 
+    @package = Package.find(params[:id])
+    @package.destroy 
+
+    redirect_to packages_url
   end 
 
   private 
