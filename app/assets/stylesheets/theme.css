@@ -14140,13 +14140,7 @@ button:focus {
   }
 }
 
-@font-face {
-  font-family: "around-icons";
-  src: url("assets/fonts/around-icons.ttf?den6mh") format("truetype"), url("assets/fonts/around-icons.woff?den6mh") format("woff"), url("assets/fonts/around-icons.svg?den6mh#around-icons") format("svg");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
+
 
 [class^=ai-],
 [class*=" ai-"],
