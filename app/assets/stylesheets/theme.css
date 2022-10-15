@@ -3421,7 +3421,7 @@ fieldset:disabled .btn {
   --ar-btn-border-color: #448c74;
   --ar-btn-hover-color: #000;
   --ar-btn-hover-bg: #448c74;
-  --ar-btn-hover-border-color: #448c74;
+  --ar-btn-hover-border-color: none !important;
   --ar-btn-focus-shadow-rgb: 68, 140, 116;
   --ar-btn-active-color: #000;
   --ar-btn-active-bg: #448c74;

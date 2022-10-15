@@ -1,21 +1,21 @@
-<header class="navbar navbar-expand-lg fixed-top navbar-ignore-dark-mode ignore-dark-mode">
+<header class="navbar  navbar-expand-lg navbar-light bg-light fixed-top navbar-ignore-dark-mode ignore-dark-mode">
         <div class="container"><span class="text-primary flex-shrink-0 me-2">
               <%= logo %>
-              </span><%= link_to "ArogyaM", root_path, id: "navbarBrand", class: "navbar-brand pe-sm-3", data: { turbo: false }%>
+              </span><%= link_to "ArogyaM", root_path, id: "navbarBrand", class: "navbar-brand pe-sm-3", data: {turbo: false} %>
           <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
           <nav class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
-              <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link", data: {turbo: false}%></li>                
-              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link", data: {turbo: false}%></li> 
+              <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
+              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link" %></li> 
               <% if current_user_admin? %>
-                <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link", data: {turbo: false}%></li>
+                <li class="nav-item"><%= link_to "Blog", blog_index_path, class: "nav-link" %></li>
               <% end %>
-              <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link", data: {turbo: false}%></li> 
-              <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
+              <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
+              <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
               <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link", data: {turbo: false}, data: { turbo_method: :delete } %></li>
+                <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
               <% else %>
-                <li class="nav-item"><%= link_to "Sign in", new_user_session_path, class: "nav-link", data: {turbo: false}%></li> 
+                <li class="nav-item"><%= link_to "Sign in", new_user_session_path, class: "nav-link"%></li> 
               <% end %>
             </ul>
           </nav>

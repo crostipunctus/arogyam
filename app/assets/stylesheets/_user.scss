@@ -24,6 +24,7 @@
 
 
 
+
 #playbuttontext {
   color: white;
 }
@@ -98,9 +99,7 @@
   }
 }
 
-.bi-list {
-  color: white;
-}
+
 
 .background {
   position: absolute;
@@ -112,9 +111,27 @@
 @media (min-width: 1500px) {
   .belowimage {
     position: relative;
-    top: 150px;
+    top: 200px;
   }
 }
+
+.btn-outline-primary {
+  --ar-btn-color: #448c74;
+  --ar-btn-border-color: #448c74;
+  --ar-btn-hover-color: #000;
+  --ar-btn-hover-bg: #448c74;
+  --ar-btn-hover-border-color: none !important;
+  --ar-btn-focus-shadow-rgb: 68, 140, 116;
+  --ar-btn-active-color: #000;
+  --ar-btn-active-bg: #448c74;
+  --ar-btn-active-border-color: #448c74;
+  --ar-btn-active-shadow: unset;
+  --ar-btn-disabled-color: #448c74;
+  --ar-btn-disabled-bg: transparent;
+  --ar-btn-disabled-border-color: #448c74;
+  --ar-gradient: none;
+}
+
 
 .card-hover-secondary:hover {
   background-color: $terracota !important;
@@ -158,5 +175,9 @@ p {
 }
 
 #roundButton {
+  color: black !important;
+}
+
+.fs-lg {
   color: black !important;
 }

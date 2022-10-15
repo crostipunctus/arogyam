@@ -8,7 +8,7 @@
 */
 
 import themeModeSwitch from './components/theme-mode-switch';
-import stickyNavbar from './components/sticky-navbar';
+
 import animateOnscroll from './components/animation-on-scroll';
 import smoothScroll from './smooth-scroll';
 import scrollTopButton from './components/scroll-top-button';

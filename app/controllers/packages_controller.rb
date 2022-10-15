@@ -39,10 +39,11 @@ class PackagesController < ApplicationController
   end 
 
   def destroy 
+    
     @package = Package.find(params[:id])
     @package.destroy 
 
-    redirect_to packages_url
+    redirect_to packages_path
   end 
 
   private 
