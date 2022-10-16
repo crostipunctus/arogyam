@@ -18,7 +18,7 @@
 
 #playButton {
   position: relative;
-  background-color: $yelloworange;
+  background-color: #FFF36D;
   border: none;
 }
 
@@ -31,6 +31,8 @@
 
 
 .d-block {
+
+  font-family: 'Noto Serif', serif;
   color: white;
 }
 
@@ -44,12 +46,18 @@
   }
 }
 
+#navbarBrand {
+  margin-top: 10px;
+
+}
+
 
 @media (max-width: 992px) {
   #navbarBrand {
     display: none;
   }
 }
+
 
 
 @media (max-width: 455px) {
@@ -59,6 +67,8 @@
     color: black;
 
   }
+
+
 }
 
 @media (max-width: 602px) {
@@ -84,6 +94,9 @@
   #playbuttontext {
     position: relative;
     top: 100px;
+    color: white !important;
+    font-family: 'Noto Serif', serif;
+
   }
 
   .display-1 {
@@ -185,4 +198,26 @@ p {
 
 .fs-lg {
   color: black !important;
+  font-family: 'Noto Serif', serif;
+}
+
+@media (max-width: 455px) {
+  #playbuttontext {
+    color: white;
+  }
+}
+
+
+
+.logo {
+  margin-top: 30;
+  margin-bottom: 20px;
+}
+
+.packages {
+  font-family: 'Noto Serif', serif;
+}
+
+#treelogo {
+  margin-right: 7px;
 }

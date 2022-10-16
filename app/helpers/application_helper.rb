@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def logo 
-    link_to image_tag('logo.png', height: 75, width: 75), root_path, data: {turbo: false}
+    link_to image_tag('treeicon.png', height: 70, width: 70), root_path, data: {turbo: false}
   end 
 
  
