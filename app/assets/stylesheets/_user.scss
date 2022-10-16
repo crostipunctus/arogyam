@@ -18,39 +18,57 @@
 
 #playButton {
   position: relative;
-  background-color: #FFF36D;
+  background-color: white;
   border: none;
 }
 
 
 
+.peacewellness {
+  color: white;
+  font-size: 15pt;
+  margin-top: 20px;
+}
+
+@media (max-width: 630) {
+  .peacewellness {
+    color: black;
+  }
+}
 
 #playbuttontext {
   color: white;
 }
 
+@media (max-width: 854px) {
+  #playButton {
+    background-color: black;
+  }
 
-.d-block {
-
-  font-family: 'Noto Serif', serif;
-  color: white;
+  #playbuttontext {
+    color: black;
+  }
 }
+
 
 .nav-item {
   font-size: 13pt;
 }
 
+.title {
+  color: white;
+  margin-bottom: 30px;
+  font-family: "Noto Serif", serif;
+  font-size: 25pt;
+}
+
 @media (max-width: 409px) {
-  .display-1 {
-    font-size: 5rem;
+
+  #navbarBrand {
+    margin-top: 10px;
+
   }
 }
-
-#navbarBrand {
-  margin-top: 10px;
-
-}
-
 
 @media (max-width: 992px) {
   #navbarBrand {
@@ -60,16 +78,7 @@
 
 
 
-@media (max-width: 455px) {
-  .d-block {
-    position: relative;
-    top: 100px;
-    color: black;
 
-  }
-
-
-}
 
 @media (max-width: 602px) {
   #playButton {
@@ -94,14 +103,11 @@
   #playbuttontext {
     position: relative;
     top: 100px;
-    color: white !important;
+
     font-family: 'Noto Serif', serif;
 
   }
 
-  .display-1 {
-    color: white;
-  }
 
 
 }
@@ -201,13 +207,7 @@ p {
   font-family: 'Noto Serif', serif;
 }
 
-@media (max-width: 455px) {
-  #playbuttontext {
-    color: white;
-  }
 
-
-}
 
 
 
