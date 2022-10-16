@@ -2,7 +2,7 @@ class PackagesController < ApplicationController
   before_action :current_user_admin?, only: [:new, :edit, :destroy]
 
   def index 
-    @packages = Package.all 
+    @packages = Package.order(:name) 
   end 
 
   def show 
