@@ -32,7 +32,7 @@
   color: white;
   font-size: 15pt;
   margin-top: 20px;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Barlow', sans-serif;
 }
 
 @media (max-width: 630) {
@@ -140,6 +140,9 @@ a {
   margin-top: 50px;
 }
 
+
+
+
 .text-container {
   vertical-align: top;
 }
@@ -225,8 +228,8 @@ p {
 
 .fs-lg {
   color: $gray-900 !important;
-  font-family: 'Libre Baskerville', serif;
-  font-size: 10.5pt !important;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12pt !important;
   max-width: 500px;
   bottom: 100px !important;
 
@@ -238,16 +241,17 @@ p {
 }
 
 h4 {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13pt;
 }
 
 
 
 .packages {
-  font-family: 'Noto Serif', serif;
+  font-family: "Barlow", sans-serif;
 }
 
 #treelogo {
+  display: inline !important;
   margin-right: 7px;
 }
