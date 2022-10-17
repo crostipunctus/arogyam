@@ -22,12 +22,17 @@
   border: none;
 }
 
+.roundedimages {
+  border-radius: 20px;
+}
+
 
 
 .peacewellness {
   color: white;
   font-size: 15pt;
   margin-top: 20px;
+  font-family: 'Libre Baskerville', serif;
 }
 
 @media (max-width: 630) {
@@ -58,8 +63,8 @@
 .title {
   color: white;
   margin-bottom: 30px;
-  font-family: "Noto Serif", serif;
-  font-size: 25pt;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 30pt;
 }
 
 @media (max-width: 409px) {
@@ -76,6 +81,9 @@
   }
 }
 
+a {
+  text-decoration: none !important;
+}
 
 
 
@@ -121,6 +129,19 @@
 .btn-outline-primary:hover {
   border-color: #448c74;
   color: white !important;
+
+}
+
+#exploreButton {
+  margin-top: 40px;
+}
+
+#mainText {
+  margin-top: 50px;
+}
+
+.text-container {
+  vertical-align: top;
 }
 
 
@@ -129,7 +150,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 1500px) {
@@ -203,17 +224,22 @@ p {
 }
 
 .fs-lg {
-  color: black !important;
-  font-family: 'Noto Serif', serif;
+  color: $gray-900 !important;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 10.5pt !important;
+  max-width: 500px;
+  bottom: 100px !important;
+
 }
-
-
-
-
 
 .logo {
   margin-top: 30;
   margin-bottom: 20px;
+}
+
+h4 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13pt;
 }
 
 

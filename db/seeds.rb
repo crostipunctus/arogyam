@@ -11,7 +11,7 @@ packages = Package.create([{ name: "SwaasthyaM", content: "A basic detoxificatio
   It also includes practice of Asanas and Pranayama, and theory of Yoga and Ayurveda, to make it a deeply-immersive first-hand experience of Ayurveda for the care-seekers.
   ", cost: 45000, duration: 10, eligibility: "-> Anyone between 18 and 65 years of age, with no major ailments or chronic diseases, may participate.
   -> Care-seekers will be requested to do some basic tests. Participation is subject to the approval of the panel of doctors.", note: "-> Treatment won’t be administered to women on their special days.
-    -> This is not a treatment for any illness, but a therapeutic programme."},{ name: "ShantaM - Peace and Calm", content: "Ayurvedic treatment will include
+    -> This is not a treatment for any illness, but a therapeutic programme."},{ name: "ShantaM", content: "Ayurvedic treatment will include
   -> Abhyangam
   -> Shirodhara
   -> Pada Seva
@@ -47,7 +47,7 @@ packages = Package.create([{ name: "SwaasthyaM", content: "A basic detoxificatio
     
     ", cost: 70000, duration: 15, eligibility:  "Anyone between 18 and 75", note: "- Treatment won’t be administered to women on their special days.
 
-    - This is not a treatment for any illness, but a therapeutic programme."}, { name: "VishraM - 3 days of rest and rejuvenation", content: "ĀrogyaM, the Wellness Centre at The Sacred Grove, offers VishraM, 3 days of rest and rejuvenation. You are welcome to experience VishraM whenever you can spare three precious days towards your well-being. The programme includes:
+    - This is not a treatment for any illness, but a therapeutic programme."}, { name: "VishraaM", content: "ĀrogyaM, the Wellness Centre at The Sacred Grove, offers VishraM, 3 days of rest and rejuvenation. You are welcome to experience VishraM whenever you can spare three precious days towards your well-being. The programme includes:
 
     - A detailed Ayurvedic consultation
     
