@@ -25,6 +25,10 @@
       <%= f.label :note %>
       <%= f.rich_text_area :note, class: "form-control" %>
     </div>
+    <div>
+          <%= f.label :package_image %>
+          <%= f.file_field :package_image %>
+      </div>
     <%= f.submit class:"btn btn-primary"%>
   <% end %>
 </div>

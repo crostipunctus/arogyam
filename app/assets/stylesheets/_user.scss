@@ -240,6 +240,27 @@ p {
   margin-bottom: 20px;
 }
 
+.green-logo {
+  display: none;
+}
+
+@media (max-width: 626px) {
+  .logo {
+    display: none;
+  }
+
+  #whitelogo {
+    scale: 70%;
+  }
+
+  .green-logo {
+    display: inline-block;
+    bottom: 100px;
+  }
+}
+
+
+
 h4 {
   font-family: 'Barlow', sans-serif;
   font-size: 13pt;
