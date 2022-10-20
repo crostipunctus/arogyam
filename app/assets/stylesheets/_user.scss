@@ -30,10 +30,29 @@
 
 
 .peacewellness {
-
+  color: white;
+  position: relative;
   font-size: 15pt;
   margin-top: 20px;
   font-family: 'Barlow', sans-serif;
+}
+
+@media (max-width: 600px) {
+  .peacewellness {
+    top: 80px;
+    text-align: center;
+    color: black;
+  }
+
+  #playButton {
+    position: relative;
+    text-align: center;
+    background-color: black;
+  }
+
+  #playbuttontext {
+    color: black;
+  }
 }
 
 
