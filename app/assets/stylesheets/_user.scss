@@ -28,18 +28,15 @@
 
 
 
+
 .peacewellness {
-  color: white;
+
   font-size: 15pt;
   margin-top: 20px;
   font-family: 'Barlow', sans-serif;
 }
 
-@media (max-width: 630) {
-  .peacewellness {
-    color: black;
-  }
-}
+
 
 #playbuttontext {
   color: white;
@@ -154,6 +151,7 @@ a {
   top: 0;
   left: 0;
   margin-bottom: 20px;
+  max-width: 100%;
 }
 
 @media (min-width: 1500px) {
@@ -250,12 +248,26 @@ p {
   }
 
   #whitelogo {
+    position: relative;
+    right: 3%;
     scale: 70%;
   }
 
   .green-logo {
-    display: inline-block;
-    bottom: 100px;
+    position: relative;
+    text-align: center;
+    display: block;
+    top: 80px;
+  }
+
+
+}
+
+@media (max-width: 380) {
+  #whitelogo {
+    text-align: center;
+
+
   }
 }
 
