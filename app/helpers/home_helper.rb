@@ -4,7 +4,7 @@ module HomeHelper
     
     package = Package.find_by(name: name)
  
-    link_to "#{name}", package_path(package)
+    link_to "#{name}", package_path(package.id)
   end
 
 end
