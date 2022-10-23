@@ -1,11 +1,9 @@
 <div class="fs-lg"> We are witnessing a shift in the concept of 
   health away from the primary approach of  diseases and their 
   management and the embracing of wellbeing.
-    At ArogyaM, we explore the concept of wellness through four programs:<br>
-    <b><%= package_link("SwaasthyaM") %></b> (Detoxification regimen)-10 days<br>
-    <b><%= package_link("ShaantaM") %></b> (De-stress)-10 days<br>
-    <b><%= package_link("LanghanM") %></b>-15 days<br>
-    <b><%= package_link("VishraaM") %></b> (Rest and Rejuvenate)-3 days<br>
+    <% @packages.each do |package| %>
+      <%= link_to "#{package.name}", package_path(package), class: "nav-link" %>
+    <% end %>
     Every wellness program integrates Yoga and Ayurveda through 
     traditional treatments and practice of Asanas and Pranayama.
     The study of Ashtanga Yoga and unveiling Ayurveda with the 
