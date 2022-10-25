@@ -3,6 +3,28 @@
 // Use this to write your custom SCSS
 //
 
+
+
+.frame {
+  position: relative;
+  background: url('background.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  top: 75px;
+}
+
+#myimg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  margin: auto;
+}
+
+
 .nav-link:hover {
   color: $terracota !important;
 }
@@ -16,11 +38,6 @@
   background-color: $secondary;
 }
 
-#playButton {
-  position: relative;
-  background-color: white;
-  border: none;
-}
 
 .roundedimages {
   border-radius: 20px;
@@ -37,51 +54,21 @@
   font-family: 'Barlow', sans-serif;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 716px) {
   .peacewellness {
     top: 80px;
     text-align: center;
     color: black;
   }
 
-  #playButton {
-    position: relative;
-    text-align: center;
-    background-color: black;
-  }
-
-  #playbuttontext {
-    color: black;
-  }
 }
 
-
-
-#playbuttontext {
-  color: white;
-}
-
-@media (max-width: 854px) {
-  #playButton {
-    background-color: black;
-  }
-
-  #playbuttontext {
-    color: black;
-  }
-}
 
 
 .nav-item {
   font-size: 13pt;
 }
 
-.title {
-  color: white;
-  margin-bottom: 30px;
-  font-family: 'Libre Baskerville', serif;
-  font-size: 30pt;
-}
 
 @media (max-width: 409px) {
 
@@ -103,44 +90,30 @@ a {
 
 
 
+#whitelogo {
+  margin-top: 100px;
+}
 
-@media (max-width: 602px) {
-  #playButton {
-    position: relative;
-    top: 70px
+@media (max-width: 991px) {
+  #whitelogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  #playbuttontext {
-    position: relative;
-    top: 70px
+  .logo {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .peacewellness {
+    text-align: center;
   }
 }
 
-@media (max-width: 455px) {
-  #playButton {
-    position: relative;
-    top: 100px;
 
-
-  }
-
-  #playbuttontext {
-    position: relative;
-    top: 100px;
-
-    font-family: 'Noto Serif', serif;
-
-  }
-
-
-
-}
-
-@media (max-width: 602px) {
-  #playbuttontext {
-    color: black;
-  }
-}
 
 .btn-outline-primary:hover {
   border-color: #448c74;
@@ -152,17 +125,10 @@ a {
   margin-top: 40px;
 }
 
-#mainText {
-  margin-top: 50px;
+.belowimage {
+  position: relative;
+  margin-top: auto;
 }
-
-
-
-
-.text-container {
-  vertical-align: top;
-}
-
 
 
 .background {
@@ -173,11 +139,10 @@ a {
   max-width: 100%;
 }
 
-@media (min-width: 1500px) {
-  .belowimage {
-    position: relative;
-    top: 200px;
-  }
+.home_text {
+  position: relative;
+  margin-top: auto;
+  top: 40%;
 }
 
 .btn-outline-primary {
@@ -261,6 +226,22 @@ p {
   display: none;
 }
 
+
+
+@media (max-width: 540px) {
+  #whitelogo {
+    bottom: 20px;
+  }
+
+
+}
+
+@media (max-width: 320px) {
+  #whitelogo {
+    top: 20px;
+  }
+}
+
 @media (max-width: 626px) {
   .logo {
     display: none;
@@ -282,14 +263,17 @@ p {
 
 }
 
-@media (max-width: 380) {
-  #whitelogo {
-    text-align: center;
-
-
-  }
+.invisible {
+  position: relative;
+  display: block;
+  height: 320px;
 }
 
+@media (max-width: 991px) {
+  .invisible {
+    display: none;
+  }
+}
 
 
 h4 {

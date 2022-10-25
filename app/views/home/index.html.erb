@@ -1,32 +1,29 @@
 <main class="page-wrapper">
 
-  <div class="mb-auto">
-    <img class="background" src="/assets/IMG_5271.jpg" />
+  <div style="position: relative">
+   <img class="background" src="/assets/background.jpg" />
   </div>
       
   <div  class="container position-relative zindex-2 py-lg-3 py-xl-5 my-3">
     <div class="row pt-md-3 py-xxl-5 my-3">
       <div class="col py-5 mb-md-4 mb-lg-5">
       
-      <%# <div class="title">ArogyaM</div> %>
-      <div id="mainText">
         <%= image_tag("whitelogo.png", width: 400, id:"whitelogo")%>
         <div class="logo"><%= image_tag("white-starcircle.png", width: 50)%></div>
         <div class="green-logo"><%= image_tag("green-starcircle.png", width: 50)%></div>
         <div class="peacewellness mb-5 mb-md-5">Planting the seeds of intentional living.</div>
-      </div>
+     
     </div>
   </div>
      
-  <section class="belowimage container pt-5 mt-md-auto mt-lg-3 mt-xl-4">
-    <div class="row justify-content-center pt-xxl-2">
-      <div class="text-container col-lg-9 col-xl-8">
-        <div id="home_text"><%= render "home_text" %></div>
+    <div class="invisible">
+    </div>
+      <div class="text-container">
+        <div class="home_text"><%= render "home_text" %></div>
         <div id= "exploreButton"><%= link_to "Explore packages", packages_path, class: "btn btn-outline-primary btn-lg", data: {turbo: false} %></div>
       </div>
-    </div>
-
-  </section>
+    
+ 
 
   <div class="belowimage container overflow-hidden py-5 mt-3 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
     <div class="masonry-grid" data-columns="2">
