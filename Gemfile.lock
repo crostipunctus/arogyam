@@ -300,7 +300,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
-  net-ssh (= 7.0.0.beta1)
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)
