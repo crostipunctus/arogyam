@@ -4,6 +4,10 @@ lock "~> 3.17.1"
 set :application, "arogyam"
 set :repo_url, "git@github.com:crostipunctus/arogyam.git"
 
+set :passenger_environment_variables, {
+  'PASSENGER_INSTANCE_REGISTRY_DIR' => '/var/run/passenger-instreg'
+}
+
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
