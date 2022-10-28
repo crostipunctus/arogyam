@@ -288,7 +288,7 @@ DEPENDENCIES
   bootsnap
   bootstrap_form (~> 5.1)
   capistrano (~> 3.17)
-  capistrano-passenger (~> 0.2.1)
+  capistrano-passenger
   capistrano-rails (~> 1.6, >= 1.6.2)
   capistrano-rbenv (~> 2.2)
   capybara
