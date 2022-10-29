@@ -18,7 +18,7 @@ class PackagesController < ApplicationController
     if @package.save
       redirect_to @package 
     else  
-      redirect_to root, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end 
   end 
 
@@ -33,7 +33,7 @@ class PackagesController < ApplicationController
     if @package.save 
       redirect_to @package 
     else  
-      redirect_to root, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
 
   end 

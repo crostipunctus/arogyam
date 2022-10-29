@@ -1,6 +1,7 @@
 
 <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
   <%= form_with(model: @package) do |f|%>
+    <%= @package.errors.full_messages.to_sentence %>
     <div class="mb-3">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
