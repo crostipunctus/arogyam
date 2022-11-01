@@ -4,7 +4,16 @@
 //
 
 
+.hometextContainer {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  background-color: antiquewhite;
+  max-width: 73%;
 
+
+}
 
 .nav-link:hover {
   color: $terracota !important;
@@ -195,6 +204,7 @@ p {
   font-size: 12pt !important;
   max-width: 500px;
   bottom: 100px !important;
+
 
 }
 
