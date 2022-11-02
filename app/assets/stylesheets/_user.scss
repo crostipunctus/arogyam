@@ -2,17 +2,24 @@
 // user.scss
 // Use this to write your custom SCSS
 //
+#hometextImage {
+  min-width: 300px;
+}
+
 
 
 .hometextContainer {
+
+
+  gap: 50px;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px;
-  background-color: antiquewhite;
-  max-width: 73%;
-
-
+  padding: 30px;
+  background-color: #FFEEE1;
+  width: 73%;
+  border-radius: 10px;
+  border: 1px solid #A62E1A;
 }
 
 .nav-link:hover {
@@ -199,14 +206,25 @@ p {
 }
 
 .fs-lg {
+  width: 100%;
   color: $gray-900 !important;
   font-family: 'Barlow', sans-serif;
   font-size: 12pt !important;
-  max-width: 500px;
   bottom: 100px !important;
-
-
 }
+
+.fs-lg:first-child:first-letter {
+  color: #903;
+  float: left;
+  font-family: 'Barlow', sans-serif;
+  font-size: 75px;
+  line-height: 60px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+}
+
+
 
 .logo {
   margin-top: 30;
