@@ -3,8 +3,8 @@
               <div id="treelogo" ><%= logo %></div>
               </span>
           <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
-          <nav class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
+          <nav class="collapse justify-content-center navbar-collapse" id="navbarNav">
+            <ul class="nav  nav-scroll" style="--ar-scroll-height: 520px;">
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
               <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link" %></li> 
               <% if current_user_admin? %>

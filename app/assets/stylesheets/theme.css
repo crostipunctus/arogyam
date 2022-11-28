@@ -4284,7 +4284,7 @@ fieldset:disabled .btn {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center !important;
   padding: var(--ar-navbar-padding-y) var(--ar-navbar-padding-x);
 }
 
