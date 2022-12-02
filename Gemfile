@@ -55,6 +55,8 @@ gem "bootstrap_form", "~> 5.1"
 
 gem 'devise'
 
+gem "aws-sdk-s3"
+
 
 gem 'strscan', '=3.0.1'
 
