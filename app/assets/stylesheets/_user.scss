@@ -39,27 +39,6 @@
 }
 
 
-
-
-.peacewellness {
-  color: white;
-  position: relative;
-  font-size: 15pt;
-  margin-top: 20px;
-  font-family: 'Barlow', sans-serif;
-}
-
-@media (max-width: 716px) {
-  .peacewellness {
-    top: 80px;
-    text-align: center;
-    color: black;
-  }
-
-}
-
-
-
 .nav-item {
   font-size: 13pt;
 }
@@ -85,28 +64,6 @@ a {
 
 
 
-#whitelogo {
-  margin-top: 100px;
-}
-
-@media (max-width: 991px) {
-  #whitelogo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .logo {
-    text-align: center;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .peacewellness {
-    text-align: center;
-  }
-}
 
 
 
@@ -116,9 +73,6 @@ a {
 
 }
 
-#exploreButton {
-  margin-top: 40px;
-}
 
 .belowimage {
   position: relative;
