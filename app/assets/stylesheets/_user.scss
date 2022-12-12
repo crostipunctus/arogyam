@@ -2,7 +2,11 @@
 // user.scss
 // Use this to write your custom SCSS
 //
-
+.newlogo {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
 
 .hometextContainer {
   margin-top: 50px;
