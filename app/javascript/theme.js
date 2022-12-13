@@ -7,21 +7,13 @@
  * @version 3.0.0
 */
 
-import themeModeSwitch from './components/theme-mode-switch';
 
 import animateOnscroll from './components/animation-on-scroll';
 import smoothScroll from './smooth-scroll';
 import scrollTopButton from './components/scroll-top-button';
 import masonryGrid from './components/masonry-grid';
 import passwordVisibilityToggle from './components/password-visibility-toggle';
-import interactiveMap from './components/interactive-map';
 import parallax from './components/parallax';
-import carousel from './components/carousel';
-import gallery from './components/gallery';
-import charts from './components/charts';
-import rangeSlider from './components/range-slider';
-import datePicker from './components/date-picker';
-import calendar from './components/calendar';
 import formValidation from './components/form-validation';
 import inputFormatter from './components/input-formatter';
 import bindedLabel from './components/binded-label';
@@ -34,5 +26,4 @@ import toast from './components/toast';
 
 import priceSwitch from './components/price-switch';
 import checkboxToggle from './components/checkbox-toggle';
-import countdown from './components/countdown';
 import subscriptionForm from './components/subscription-form';

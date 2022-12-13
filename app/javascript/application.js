@@ -13,11 +13,8 @@ import "@rails/actiontext"
 
 import "./theme"
 import "./customizer"
-// import "./lightgallery.js"
 import "./swiper-bundle"
-// import "./postinstall"
-// import "./main.js"
-// import "./locales-all.js"
+
 
 const swiper = new Swiper('.swiper', {
   // Optional parameters
