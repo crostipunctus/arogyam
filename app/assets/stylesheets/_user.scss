@@ -9,12 +9,12 @@
 }
 
 .hometextContainer {
+  display: flex;
+  justify-content: center;
   margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 30px;
   background-color: antiquewhite;
-  max-width: 85%;
+  width: 100%;
 
 
 }
