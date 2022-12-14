@@ -8,9 +8,10 @@
 
 .masonry-grid[data-columns] {
   overflow: hidden;
+
   margin: {
-    right: -($grid-gutter-width * .5);
-    left: -($grid-gutter-width * .5);
+    right: -($grid-gutter-width * .25);
+    left: -($grid-gutter-width * .25);
   }
 
   @include clearfix;
@@ -18,10 +19,11 @@
   .masonry-grid-item {
     width: 100%;
     float: left;
+
     padding: {
-      right: $grid-gutter-width * .5;
-      left: $grid-gutter-width * .5;
-      bottom: $grid-gutter-width;
+      right: $grid-gutter-width * .25;
+      left: $grid-gutter-width * .25;
+      bottom: $grid-gutter-width * .25;
     }
   }
 }
@@ -31,41 +33,62 @@
 }
 
 @include media-breakpoint-up(sm) {
+
   .masonry-grid[data-columns='2'],
   .masonry-grid[data-columns='3'],
   .masonry-grid[data-columns='4'],
   .masonry-grid[data-columns='5'],
   .masonry-grid[data-columns='6'] {
-    .masonry-grid-item { width: 50%; }
+    .masonry-grid-item {
+      width: 50%;
+    }
   }
 }
+
 @include media-breakpoint-up(md) {
+
   .masonry-grid[data-columns='4'],
   .masonry-grid[data-columns='5'],
   .masonry-grid[data-columns='6'] {
-    .masonry-grid-item { width: 33.333%; }
+    .masonry-grid-item {
+      width: 33.333%;
+    }
   }
 }
+
 @include media-breakpoint-up(lg) {
+
   .masonry-grid[data-columns='3'],
   .masonry-grid[data-columns='4'],
   .masonry-grid[data-columns='5'],
   .masonry-grid[data-columns='6'] {
-    .masonry-grid-item { width: 33.333%; }
+    .masonry-grid-item {
+      width: 33.333%;
+    }
   }
 }
+
 @include media-breakpoint-up(xl) {
+
   .masonry-grid[data-columns='4'],
   .masonry-grid[data-columns='5'],
   .masonry-grid[data-columns='6'] {
-    .masonry-grid-item { width: 25%; }
+    .masonry-grid-item {
+      width: 25%;
+    }
   }
 }
+
 @include media-breakpoint-up(xxl) {
   .masonry-grid[data-columns='5'] {
-    .masonry-grid-item { width: 20%; }
+    .masonry-grid-item {
+      width: 20%;
+    }
   }
+
   .masonry-grid[data-columns='6'] {
-    .masonry-grid-item { width: 16.666%; }
+    .masonry-grid-item {
+      width: 16.666%;
+    }
   }
 }
