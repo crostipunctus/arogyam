@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get "test" => "home#test"
 
-  resources :blog
+  resources :blogs
   get "packages/new" => "packages#new" 
   get "packages" => "packages#index"
   get "packages/:id" => "packages#show", as: :package

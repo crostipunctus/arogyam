@@ -1,0 +1,16 @@
+
+<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+  <%= form_with(model: @blog) do |f|%>
+    <%# <%= @blog.errors.full_messages.to_sentence %>
+    <div class="mb-3">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.rich_text_area :content, class: "form-control" %>
+    </div>
+    
+    <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>
