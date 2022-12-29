@@ -1,7 +1,7 @@
 <section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
         <div class="row justify-content-center pt-xxl-2">
           <div class="col-lg-9 col-xl-8">
-            <p class="fs-lg"><strong><%= @blog.title %></strong></p>
+            <p class="fs-lg"><strong><%= @blog.title.capitalize %></strong></p>
             <p class="fs-lg mb-3"> <%= @blog.content %></p>
             <div class="admin">
                     <%= link_to "Edit blog", edit_blog_path(@blog), class: "btn btn-primary btn-sm" %>

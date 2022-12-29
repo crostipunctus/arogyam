@@ -1,5 +1,7 @@
 class BlogsController < ApplicationController
+  
   before_action :authenticate_user!
+  before_action :current_user_admin?, only: [:new, :edit, :destroy]
 
   def index 
     @blogs = Blog.order(created_at: :asc)
