@@ -1,36 +1,12 @@
 
-    <!-- Page wrapper-->
     <main class="page-wrapper">
-      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-      <!-- Page content-->
       <div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
-        <!-- Breadcrumb-->
-        <nav aria-label="breadcrumb">
-          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Blog list no sidebar</li>
-          </ol>
-        </nav>
+       
         <!-- Page title + filters-->
         <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-          <div class="col-lg-5">
-            <h1 class="mb-lg-0">Blog</h1>
-          </div>
-          <div class="col-xl-2 offset-xl-1 col-lg-3 col-sm-5">
-            <select class="form-select">
-              <option>All categories</option>
-              <option>Inspiration</option>
-              <option>Brand strategy</option>
-              <option>Advertisement</option>
-              <option>Ecommerce</option>
-              <option>Travel &amp; Vacation</option>
-            </select>
-          </div>
-          <div class="col-lg-4 col-sm-7">
-            <div class="position-relative"><i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-              <input class="form-control ps-5" type="search" placeholder="Enter keyword">
-            </div>
-          </div>
+            <h1 class="packages text-center">Blog</h1>
+          
+    
         </div>
         <!-- Post-->
         <article class="row g-0 border-0 mb-4"><a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 16rem"></a>
@@ -39,7 +15,6 @@
               <% @blogs.each do |blog| %>
                 <h3><%= link_to blog.title, blog_path(blog) %></h3>
                 <p class="d-sm-none d-md-block"><%= blog.content %></p>
-                <div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">6<i class="ai-share fs-lg ms-1"></i></a><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">12<i class="ai-message fs-lg ms-1"></i></a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">8 hours ago</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge text-nav fs-xs border mt-2" href="#">Business</a></div>
               <% end %>
             </div>
           </div>
@@ -57,9 +32,7 @@
               </select>
             </div>
           </div>
-          <div class="col col-md-4 col-12 order-md-2 order-3 text-center">
-            <button class="btn btn-primary w-md-auto w-100" type="button">Load more posts</button>
-          </div>
+          
           <div class="col col-md-4 col-6 order-md-3 order-2">
             <nav aria-label="Page navigation">
               <ul class="pagination pagination-sm justify-content-end">
