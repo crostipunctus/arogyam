@@ -1,7 +1,7 @@
 <section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
         <div class="row justify-content-center pt-xxl-2">
           <div class="col-lg-9 col-xl-8">
-            <p class="fs-lg"><%= @blog.title %></p>
+            <p class="fs-lg"><strong><%= @blog.title %></strong></p>
             <p class="fs-lg mb-3"> <%= @blog.content %></p>
             <div class="admin">
                     <%= link_to "Edit blog", edit_blog_path(@blog), class: "btn btn-primary btn-sm" %>
@@ -9,33 +9,6 @@
                   <div  class="admin">
                     <%= link_to "Delete blog", blog_path(@blog), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
                   </div>
-            <h2 class="h4 mb-lg-4 pt-3 pt-md-4 pt-xl-5">Dolor laoreet fermentum lectus praesent aenean</h2>
-            <p class="fs-lg pb-4 pb-xl-5">Ut pellentesque bibendum dignissim a molestie. Ultrices diam ut vel neque tincidunt eget. Sed ut quis sit semper nunc at etiam lacinia. Quam laoreet eget id sapien a pharetra, ornare diam dignissim. Lorem amet nisl, enim mi aenean mauris. Porta nisl a ultrices ut libero id. Gravida a mi neque, tristique justo, et pharetra. Laoreet nulla est nulla cras ac arcu sed mattis tristique. Morbi convallis suspendisse enim blandit massa. Cursus augue dui mattis morbi velit.</p>
-            <figure class="figure"><img class="figure-img rounded-5 mb-3" src="assets/img/blog/single/image.jpg" alt="Image">
-              <figcaption class="figure-caption">Image source tristique justo et pharetra</figcaption>
-            </figure>
-            <h2 class="h4 mb-lg-4 pt-3 pt-md-4 pt-xl-5">Cursus augue dui mattis morbi velit</h2>
-            <p class="fs-lg pb-2 pb-lg-0 mb-4 mb-lg-5">Proin non congue sem, sed tristique ante. Donec et sollicitudin tellus. Duis maximus, dui eget egestas mattis, purus ex tempor nulla, quis tempor sapien neque at nisl. Aliquam eu nisi ut nisl ultrices posuere. Praesent dignissim efficitur nisi, a hendrerit ipsum elementum sit amet. Vivamus non ante nisl. Nunc faucibus velit at eros mollis semper. Curabitur aliquam eros tellus, nec facilisis nisl finibus sit amet. Ut et dolor nec lorem gravida elementum.</p>
-            <div class="card border-0 bg-secondary mb-3">
-              <div class="card-body">
-                <figure>
-                  <blockquote class="blockquote">
-                    <p>Ut pellentesque bibendum dignissim a molestie ultrices diam ut vel neque tincidunt eget sed ut quis sit semper nunc at etiam lacinia quam laoreet eget id sapien a pharetra, ornare diam dignissim  neque tincidunt.</p>
-                  </blockquote>
-                  <figcaption class="blockquote-footer">Darlene Robertson</figcaption>
-                </figure>
-              </div>
-            </div>
-            <h2 class="h4 mb-lg-4 pt-3 pt-md-4 pt-xl-5">Lorem ipsum dolor sit amet consectetur</h2>
-            <p class="fs-lg">Ut pellentesque bibendum dignissim a molestie. Ultrices diam ut vel neque tincidunt eget. Sed ut quis sit semper nunc at etiam lacinia. Quam laoreet eget id sapien a pharetra, ornare diam dignissim.</p>
-            <ul>
-              <li class="mb-1">Quam laoreet eget id sapien</li>
-              <li class="mb-1">Morbi convallis suspendisse</li>
-              <li class="mb-1">Vivamus non ante</li>
-              <li class="mb-1">Praesent dignissim efficitur</li>
-              <li class="mb-1">Gravida a mi neque</li>
-            </ul>
-            <p class="fs-lg">Donec diam neque, efficitur vitae ante a, eleifend placerat est. Phasellus dapibus scelerisque diam, eu rhoncus lorem vulputate lobortis. Praesent pulvinar venenatis mauris, eget fringilla sem.</p>
             <!-- Tags-->
             <div class="d-flex flex-wrap pb-5 pt-3 pt-md-4 pt-xl-5 mt-xl-n2">
               <h3 class="h6 py-1 mb-0 me-4">Relevant tags:</h3><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Nature</a><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Books</a><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Travel</a>
