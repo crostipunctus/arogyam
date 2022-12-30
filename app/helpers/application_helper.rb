@@ -9,5 +9,9 @@ module ApplicationHelper
     link_to "#{name}", package_path(package)
   end
 
+  def get_current_url
+    request.original_url
+  end
+
  
 end

@@ -1,7 +1,7 @@
 <section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
         <div class="row justify-content-center pt-xxl-2">
           <div class="col-lg-9 col-xl-8">
-            <p class="fs-lg"><strong><%= @blog.title.capitalize %></strong></p>
+            <h1 class="pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4 mt-5"><%= @blog.title.capitalize %></h1>
             <p class="fs-lg mb-3"> <%= @blog.content %></p>
             <div class="admin">
                     <%= link_to "Edit blog", edit_blog_path(@blog), class: "btn btn-primary btn-sm" %>
@@ -10,20 +10,18 @@
                     <%= link_to "Delete blog", blog_path(@blog), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
                   </div>
             <!-- Tags-->
-            <div class="d-flex flex-wrap pb-5 pt-3 pt-md-4 pt-xl-5 mt-xl-n2">
-              <h3 class="h6 py-1 mb-0 me-4">Relevant tags:</h3><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Nature</a><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Books</a><a class="nav-link fs-sm py-1 px-0 me-3" href="#"><span class="text-primary">#</span>Travel</a>
-            </div>
+            
             <!-- Author widget-->
-            <div class="border-top py-4">
-              <div class="d-flex align-items-start py-2"><img class="d-block rounded-circle mb-3" src="assets/img/avatar/04.jpg" width="56" alt="Author image">
-                <div class="d-md-flex w-100 ps-4">
+            <div class="py-4">
+              <div class="d-flex align-items-start py-2">
+                <div class="d-md-flex w-100">
                   <div style="max-width: 26rem;">
-                    <h3 class="h5 mb-2">Darlene Robertson</h3>
-                    <p class="fs-sm mb-0">Porta nisl a ultrices ut libero id. Gravida mi neque, tristique justo, et pharetra laoreet nulla est nulla cras ac arcu sed mattis tristique convallis suspen enim blandit massa cursus augue dui mattis morbi velit semper nunc at etiam lacinia.</p>
+                    <h3 class="h6 mb-2">Posted by: <%= @user.email %></h3>
                   </div>
                   <div class="pt-4 pt-md-0 ps-md-4 ms-md-auto">
                     <h3 class="h5">Share post:</h3>
-                    <div class="d-flex"><a class="nav-link p-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Instagram"><i class="ai-instagram"></i></a><a class="nav-link p-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Facebook"><i class="ai-facebook"></i></a><a class="nav-link p-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Telegram"><i class="ai-telegram fs-sm"></i></a><a class="nav-link p-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Twitter"><i class="ai-twitter"></i></a></div>
+                    <div class="d-flex"><a class="nav-link p-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Instagram"><i class="bi bi-instagram"></i></a><a class="nav-link p-2 me-2" href="https://www.facebook.com/sharer/sharer.php?u=<%= get_current_url %>" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a class="nav-link p-2 me-2 twitter-share-button" href="https://twitter.com/intent/tweet?text=<%= get_current_url %>" target="_blank"><i class="bi bi-twitter"></i></a>
                   </div>
                 </div>
               </div>
