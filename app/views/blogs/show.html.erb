@@ -1,7 +1,10 @@
 <section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
         <div class="row justify-content-center pt-xxl-2">
           <div class="col-lg-9 col-xl-8">
+                      <%= link_to "< Back to blogs", blogs_path, class: "nav-link", id: "back_to" %>
+
             <h1 class="pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4 mt-5"><%= @blog.title.capitalize %></h1>
+
             <p class="fs-lg mb-3"> <%= @blog.content %></p>
             <div class="admin">
                     <%= link_to "Edit blog", edit_blog_path(@blog), class: "btn btn-primary btn-sm" %>
