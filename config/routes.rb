@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get "test" => "home#test"
 
+  get "testimonials" => "testimonials#index"
+
   resources :blogs
   get "packages/new" => "packages#new" 
   get "packages" => "packages#index"

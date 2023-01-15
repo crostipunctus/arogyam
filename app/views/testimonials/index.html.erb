@@ -1,0 +1,4 @@
+
+<% @testimonials.each do |testimonial| %>
+  <iframe src='https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreen></iframe>
+<% end %>
