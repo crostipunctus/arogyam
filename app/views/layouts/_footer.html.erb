@@ -3,11 +3,17 @@
         <div class=" text-center pb-4"><a class="navbar-brand d-inline-flex text-nav py-0 mb-3 mb-md-4" href="index.html"><span class="text-primary flex-shrink-0 me-2">
                <%= logo %>
           <ul class="nav justify-content-center py-1 pb-sm-2 ">
-            <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="#">Packages</a></li>
-            <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="#">The Sacred Grove</a></li>
-            <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="#">Blog</a></li>
-            <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="#">Contact</a></li>
-            <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="#">About</a></li>
+            <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
+              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link" %></li> 
+              <% if current_user_admin? %>
+                <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
+              <% end %>
+              <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
+              <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
+              <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
+              <% if current_user %>
+                <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
+              <% end %>
           </ul>
         </div>
       </div>

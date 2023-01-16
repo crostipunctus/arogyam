@@ -33,6 +33,7 @@ class PackagesController < ApplicationController
     @package.update(package_params)
 
     if @package.save 
+      flash[:notice] = "Package successfully updated!"
       redirect_to @package 
     else  
       render :edit, status: :unprocessable_entity

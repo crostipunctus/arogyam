@@ -3,7 +3,22 @@
 // Use this to write your custom SCSS
 //
 
+.flash {
+  @extend .alert;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
 
+  &.notice {
+    @extend .alert-success;
+  }
+
+  &.alert {
+    @extend .alert-danger;
+  }
+
+  top: 120px;
+}
 
 .video {
   margin-left: auto;
