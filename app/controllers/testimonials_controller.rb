@@ -15,6 +15,7 @@ class TestimonialsController < ApplicationController
   def create 
     @testimonial = Testimonial.create(testimonial_params)
     if @testimonial.save 
+      flash[:notice] = "Testimonial successfully created!"
       redirect_to testimonials_path 
     else  
       render :new, status: :unprocessable_entity

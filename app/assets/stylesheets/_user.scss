@@ -187,9 +187,7 @@ p {
   color: black !important;
 }
 
-#roundButton {
-  color: black !important;
-}
+
 
 .fs-lg {
   color: $gray-900 !important;
@@ -206,58 +204,6 @@ p {
   margin-bottom: 20px;
 }
 
-.green-logo {
-  display: none;
-}
-
-
-
-@media (max-width: 540px) {
-  #whitelogo {
-    bottom: 20px;
-  }
-
-
-}
-
-@media (max-width: 320px) {
-  #whitelogo {
-    top: 20px;
-  }
-}
-
-@media (max-width: 626px) {
-  .logo {
-    display: none;
-  }
-
-  #whitelogo {
-    position: relative;
-    right: 3%;
-    scale: 70%;
-  }
-
-  .green-logo {
-    position: relative;
-    text-align: center;
-    display: block;
-    top: 80px;
-  }
-
-
-}
-
-.invisible {
-  position: relative;
-  display: block;
-  height: 320px;
-}
-
-@media (max-width: 991px) {
-  .invisible {
-    display: none;
-  }
-}
 
 
 h4 {
