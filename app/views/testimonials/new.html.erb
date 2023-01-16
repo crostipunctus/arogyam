@@ -1,0 +1,16 @@
+
+<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+  <%= form_with(model: @testimonial) do |f|%>
+    <%= @testimonial.errors.full_messages.to_sentence %>
+    <div class="mb-3">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label "Youtube_id", :youtube_id %>
+      <%= f.text_field :youtube_id, class: "form-control" %>
+    </div>
+   
+    <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>
