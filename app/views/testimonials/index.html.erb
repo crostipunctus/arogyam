@@ -1,7 +1,14 @@
+<main class="page-wrapper">
+  <section class="ignore-dark-mode position-relative min-vh-100 py-5">
+    <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
-<% @testimonials.each do |testimonial| %>
-  <div class="youtube-container">
-    <iframe src='https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0&autoplay=' frameborder='0' height="500" width="500" allowfullscreen class="video"></iframe>
-  </div>
-<% end %>
+      <h1 class="packages text-center">Testimonials</h1>
+      <% @testimonials.each do |testimonial| %>
+        <div class="youtube-container">
+          <iframe src='https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0&autoplay=' frameborder='0' height="500" width="500" allowfullscreen class="video"></iframe>
+        </div>
+      <% end %>
+    </section>
+  </section>
+</main>
 

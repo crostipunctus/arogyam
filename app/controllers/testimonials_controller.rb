@@ -30,6 +30,10 @@ class TestimonialsController < ApplicationController
   end 
 
   def destroy 
+    @testimonial = Testimonial.find(params[:id])
+    @testimonial.destroy 
+
+    redirect_to testimonials_path
 
   end 
 
