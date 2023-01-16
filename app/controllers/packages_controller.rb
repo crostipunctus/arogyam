@@ -1,5 +1,7 @@
 class PackagesController < ApplicationController
-  before_action :current_user_admin?, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+
+  before_action :require_admin, only: [:new, :edit, :destroy]
 
   def index 
     @packages = Package.order(:name) 

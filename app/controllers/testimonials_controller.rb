@@ -1,4 +1,9 @@
 class TestimonialsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+
+  before_action :require_admin, only: [:new, :edit, :destroy]
+
+
   def index 
     @testimonials = Testimonial.all
   end 
