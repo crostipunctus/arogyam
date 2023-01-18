@@ -34,6 +34,8 @@
   display: flex;
   justify-content: center;
   padding: 30px;
+  margin-top: 70px;
+  ;
 }
 
 .hometextContainer {
@@ -68,7 +70,8 @@
 
 
 .roundedimages {
-  border-radius: 20px;
+  margin: 10px;
+  border-radius: 10px;
 }
 
 
@@ -115,13 +118,6 @@ a {
 }
 
 
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-bottom: 20px;
-  max-width: 100%;
-}
 
 .home_text {
   position: relative;

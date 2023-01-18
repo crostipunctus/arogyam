@@ -10,8 +10,8 @@
   overflow: hidden;
 
   margin: {
-    right: -($grid-gutter-width * .25);
-    left: -($grid-gutter-width * .25);
+    right: 5px;
+    left: 5px;
   }
 
   @include clearfix;
@@ -21,9 +21,9 @@
     float: left;
 
     padding: {
-      right: $grid-gutter-width * .25;
-      left: $grid-gutter-width * .25;
-      bottom: $grid-gutter-width * .25;
+      right: $grid-gutter-width * .40;
+      left: $grid-gutter-width * .40;
+      bottom: $grid-gutter-width * .40;
     }
   }
 }

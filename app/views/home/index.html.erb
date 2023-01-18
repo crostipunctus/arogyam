@@ -1,78 +1,71 @@
-
-    <section class="ignore-dark-mode position-relative min-vh-100 py-5">
-        <!-- Background image slider-->
-        
-         
-              <div class="swiper-slide-cover bg-position-top-center" style="background-image: url(assets/TSF_5476.jpg);"></div>
-         
-       
-        <!-- Content-->
-        <div class="newlogo position-relative zindex-2 py-lg-3 py-xl-5 my-5">
-              <%= image_tag("Revised-Logo.png", width: 600)%>
-        </div>
-      </section>
-    </div>
-    <div class="hometextContainer">
-      <h2 class="whyArogyam">Why ArogyaM</h2>
-      <%= render "home_text" %>
-    </div>
+<section class="position-relative min-vh-100 py-5">
+    <div class="swiper-slide-cover" style="background-image: url(assets/TSF_5476.jpg);"></div>
+      <div class="newlogo position-relative zindex-2 py-lg-3 py-xl-5 my-5">
+          <%= image_tag("Revised-Logo.png", width: 600)%>
+      </div>
+</section>
+   
+<div class="hometextContainer">
+  <h2 class="whyArogyam">Why ArogyaM</h2>
+  <%= render "home_text" %>
+</div>
         
    
-  <div class="belowimage container overflow-hidden py-5 mt-3 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-    <div class="masonry-grid" data-columns="2">
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative pb-3" style="max-width: 704px;">
-              <div><%= image_tag("TSF_8502.jpeg", width: 600, class: "roundedimages")%></div>
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative  pb-3" style="max-width: 704px;">
-            
-              <div><%= image_tag("hand.jpeg", width: 704, class: "roundedimages")%></div>
-           
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative pb-3" style="max-width: 704px;">
-            
-              <div><%= image_tag("food.jpeg", width: 600, class: "roundedimages")%></div>
-           
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative  pb-3" style="max-width: 704px;">
-              <div><%= image_tag("foot.jpeg", width: 600, class: "roundedimages")%></div>
+<div class="belowimage container overflow-hidden py-5 mt-3 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+  <div class="masonry-grid" data-columns="2">
+      <article class="masonry-grid-item" data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative" style="max-width: 704px;">
+            <div><%= image_tag("TSF_8502.jpeg", width: 600, class: "roundedimages")%></div>
+        </div>
+      </article>
+      <article class="masonry-grid-item" data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative" style="max-width: 704px;">
           
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative  pb-3" style="max-width: 704px;">
-           
-              <div><%= image_tag("reflection.jpeg", width: 600, class: "roundedimages")%></div>
-           
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative  pb-3" style="max-width: 704px;">
-           
-              <div><%= image_tag("flowers.jpeg", width: 600, class: "roundedimages")%></div>
-            
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative pb-3" style="max-width: 704px;">
-      
-              <div><%= image_tag("medicines.jpeg", width: 700, class: "roundedimages")%></div>
-           
-          </div>
-        </article>
-        <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-1" data-groups="[&quot;stationery&quot;]">
-          <div class="position-relative pb-3" style="max-width: 704px;">
-              <div><%= image_tag("yoga.jpeg", width: 650, class: "roundedimages")%></div>
-          </div>
-        </article>
-    </div>
+            <div><%= image_tag("hand.jpeg", width: 600, class: "roundedimages")%></div>
+          
+        </div>
+      </article>
+      <article class="masonry-grid-item" data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative " style="max-width: 704px;">
+          
+            <div><%= image_tag("food.jpeg", width: 600, class: "roundedimages")%></div>
+          
+        </div>
+      </article>
+      <article class="masonry-grid-item" data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative" style="max-width: 704px;">
+            <div><%= image_tag("foot.jpeg", width: 600, class: "roundedimages")%></div>
+        
+        </div>
+      </article>
+      <article class="masonry-grid-item " data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative " style="max-width: 704px;">
+          
+            <div><%= image_tag("reflection.jpeg", width: 600, class: "roundedimages")%></div>
+          
+        </div>
+      </article>
+      <article class="masonry-grid-item " data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative" style="max-width: 704px;">
+          
+            <div><%= image_tag("flowers.jpeg", width: 600, class: "roundedimages")%></div>
+          
+        </div>
+      </article>
+      <article class="masonry-grid-item " data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative" style="max-width: 704px;">
+    
+            <div><%= image_tag("medicines.jpeg", width: 600, class: "roundedimages")%></div>
+          
+        </div>
+      </article>
+      <article class="masonry-grid-item " data-groups="[&quot;stationery&quot;]">
+        <div class="position-relative " style="max-width: 704px;">
+            <div><%= image_tag("yoga.jpeg", width: 600, class: "roundedimages")%></div>
+        </div>
+      </article>
   </div>
+</div>
 
   
   
