@@ -4,6 +4,14 @@
 //
 
 //gallery 
+.aboutContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.aboutText {
+  width: 60%;
+}
 
 div.gallery {
   border: 1px solid #ccc;
