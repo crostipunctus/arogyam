@@ -6,11 +6,35 @@
 //gallery 
 .aboutContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.aboutText {
-  width: 60%;
+
+.aboutImage {
+
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .aboutText {
+    width: 50%;
+  }
+
+  .aboutImage {
+    width: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .aboutText {
+    width: 80%;
+  }
+
+  .aboutImage {
+    width: 80%;
+  }
 }
 
 div.gallery {
@@ -86,6 +110,10 @@ div.desc {
   width: 50%;
   min-width: 73%;
   margin-top: 70px;
+  border: solid #cb6843;
+}
+
+.mapContainer {
   border: solid #cb6843;
 }
 
