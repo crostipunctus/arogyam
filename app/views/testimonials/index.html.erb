@@ -4,7 +4,7 @@
 
       <h1 class="packages text-center">Testimonials</h1>
       <% @testimonials.each do |testimonial| %>
-        <div class="youtube-container">
+        <div class="videoContainer">
           <iframe src='https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0&autoplay=' frameborder='0' height="500" width="500" allowfullscreen class="video"></iframe>
         </div>
       <% end %>

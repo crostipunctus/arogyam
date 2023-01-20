@@ -25,15 +25,23 @@
   .aboutImage {
     width: 50%;
   }
+
+  .video {
+    width: 50%;
+  }
 }
 
 @media (max-width: 767px) {
   .aboutText {
-    width: 80%;
+    width: 90%;
   }
 
   .aboutImage {
-    width: 80%;
+    width: 90%;
+  }
+
+  .video {
+    width: 90%;
   }
 }
 
@@ -103,12 +111,16 @@ div.desc {
   top: 120px;
 }
 
+.videoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
 .video {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  width: 50%;
-  min-width: 73%;
+  width: 80%;
   margin-top: 70px;
   border: solid #cb6843;
 }
