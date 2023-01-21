@@ -230,8 +230,8 @@ a {
 }
 
 .btn-outline-primary {
-  --ar-btn-color: #448c74;
-  --ar-btn-border-color: #448c74;
+  --ar-btn-color: #207a48;
+  --ar-btn-border-color: #207a48;
   --ar-btn-hover-color: #000;
   --ar-btn-hover-bg: #448c74;
   --ar-btn-hover-border-color: none !important;
@@ -246,9 +246,30 @@ a {
   --ar-gradient: none;
 }
 
+.card {
+  background-color: #A2666F !important;
+}
+
+#cardTitle {
+  color: white;
+}
+
+#roundButton {
+  color: white !important;
+}
+
+.rounded-circle {
+
+  border-color: white !important;
+}
+
+.text-muted {
+  color: #2F3E46 !important;
+}
+
 
 .card-hover-secondary:hover {
-  background-color: $gray-500 !important;
+  background-color: $gray-700 !important;
 
 }
 

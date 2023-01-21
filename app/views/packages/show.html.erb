@@ -1,47 +1,35 @@
-
-   
-    <!-- Page wrapper-->
-  
-      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-  
-      <!-- Page content-->
-      <div class="overflow-hidden">
-        <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-          <!-- Breadcrumb-->
+<div class="overflow-hidden">
+  <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+    <%= link_to "<   Back to all packages", packages_path, class: "nav-link", id: "back_to", class: "explorebutton btn btn-outline-primary rounded-0" %>
+    <h1 class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
+    
+    <article class="row align-items-top card-hover pb-5 mb-md-2 mb-lg-3 mb-xl-4" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
+      <div class="col-md-5 offset-xxl-1 mb-4 ">
+        <%= package_image(@package) %></div>
+      <div class="col-md-5 col-xl-4" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
+        <div class="ms-md-2 ms-lg-5 ms-xxl-0" style="max-width: 620px;">
+          <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.content%></p><br>
+          <div class="text-muted mb-2">Eligibility:</div>
+          <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></p><br>
+          <div class="text-muted mb-2">Note:</div>
+          <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></p>
+          <div class="text-muted mb-2">Duration:</div>
+          <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
+          <div class="text-muted mb-2">Cost:</div>
+          <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
           
-          <!-- Page title-->
-          <h1 class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
-          <!-- Item-->
-          
-          <article class="row align-items-top card-hover pb-5 mb-md-2 mb-lg-3 mb-xl-4" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
-            <div class="col-md-5 offset-xxl-1 mb-4 ">
-              <%= link_to "<   Back to all packages", packages_path, class: "nav-link", id: "back_to", class: "explorebutton btn btn-outline-primary rounded-0" %>
-              <%= package_image(@package) %></div>
-            <div class="col-md-5 col-xl-4" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
-              <div class="ms-md-2 ms-lg-5 ms-xxl-0" style="max-width: 620px;">
-                
-                <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.content%></p><br>
-                <div class="text-muted mb-2">Eligibility:</div>
-                <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></p><br>
-                <div class="text-muted mb-2">Note:</div>
-                <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></p>
-                <div class="text-muted mb-2">Duration:</div>
-                <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
-                <div class="text-muted mb-2">Cost:</div>
-                <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
-                
-                <% if current_user_admin? %>
-                  <div class="admin">
-                    <%= link_to "Edit package", edit_package_path(@package), class: "btn btn-primary btn-sm" %>
-                  </div>
-                  <div  class="admin">
-                    <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
-                  </div>
-                <% end %>
-                
-              </div>
+          <% if current_user_admin? %>
+            <div class="admin">
+              <%= link_to "Edit package", edit_package_path(@package), class: "btn btn-primary btn-sm" %>
             </div>
-          </article>
+            <div  class="admin">
+              <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+            </div>
+          <% end %>
           
+        </div>
       </div>
+    </article>
+    
+</div>
 
