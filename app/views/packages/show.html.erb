@@ -11,11 +11,11 @@
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.content%></span><br>
           <div class="text-muted mb-2"><strong>Eligibility:</strong></div>
           <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></p><br>
-          <div class="text-muted mb-2">Note:</div>
+          <div class="text-muted mb-2"><strong>Note:</strong></div>
           <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></p>
-          <div class="text-muted mb-2">Duration:</div>
+          <div class="text-muted mb-2"><strong>Duration:</strong></div>
           <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
-          <div class="text-muted mb-2">Cost:</div>
+          <div class="text-muted mb-2"><strong>Cost:</strong></div>
           <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
           
           <% if current_user_admin? %>
