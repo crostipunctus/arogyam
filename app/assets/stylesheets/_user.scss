@@ -288,8 +288,19 @@ p {
 }
 
 #package {
-  font-family: 'Noto Serif', serif;
+  font-family: 'Noto Serif', serif !important;
   color: black;
+}
+
+
+
+.package-titles {
+  color: black;
+  font-family: 'Noto Sans', sans-serif !important;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+
 }
 
 .admin {

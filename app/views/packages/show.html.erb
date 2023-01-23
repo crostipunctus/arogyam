@@ -8,14 +8,14 @@
         <%= package_image(@package) %></div>
       <div class="col-md-5 col-xl-4">
         <div class="ms-md-2 ms-lg-5 ms-xxl-0" style="max-width: 620px;">
-          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.content%></span><br>
-          <div class="text-muted mb-2"><strong>Eligibility:</strong></div>
-          <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></p><br>
-          <div class="text-muted mb-2"><strong>Note:</strong></div>
-          <p id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></p>
-          <div class="text-muted mb-2"><strong>Duration:</strong></div>
+          <span id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></span><br>
+          <div class="package-titles"><strong>Eligibility:</strong></div>
+          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
+          <div class="package-titles"><strong>Note:</strong></div>
+          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
+          <div class="package-titles"><strong>Duration:</strong></div>
           <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
-          <div class="text-muted mb-2"><strong>Cost:</strong></div>
+          <div class="package-titles"><strong>Cost:</strong></div>
           <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
           
           <% if current_user_admin? %>
