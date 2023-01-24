@@ -1,7 +1,7 @@
 <div class="overflow-hidden">
   <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
     <%= link_to "<   Back to all packages", packages_path, class: "nav-link", id: "back_to", class: "explorebutton btn btn-outline-primary rounded-0" %>
-    <h1 class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
+    <h1 id="packageName" class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
     
     <article class="row align-items-top card-hover pb-5 mb-md-2 mb-lg-3 mb-xl-4">
       <div class="col-md-5 offset-xxl-1 mb-4 ">

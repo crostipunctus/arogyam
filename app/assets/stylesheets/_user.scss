@@ -155,6 +155,7 @@ div.desc {
 
 .whyArogyam {
   margin-right: 20px;
+  font-family: 'Playfair Display', serif;
 }
 
 .nav-link:hover {
@@ -162,7 +163,15 @@ div.desc {
 }
 
 #back_to {
-  margin-bottom: 25px;
+  margin-bottom: 50px !important;
+  display: block;
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+#packageName {
+  font-family: 'Playfair Display', serif;
+
 }
 
 
@@ -328,7 +337,7 @@ p {
 
 .fs-lg {
   color: $gray-900 !important;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 12pt !important;
   max-width: 500px;
   bottom: 100px !important;
