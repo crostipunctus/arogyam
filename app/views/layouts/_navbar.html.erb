@@ -9,7 +9,6 @@
             <ul class="nav nav-scroll" style="--ar-scroll-height: 520px;">
               
               <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
-              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link" %></li> 
               <% if current_user_admin? %>
                 <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
               <% end %>
