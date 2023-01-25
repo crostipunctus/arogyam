@@ -4,7 +4,6 @@
                <%= logo %>
           <ul class="nav justify-content-center py-1 pb-sm-2 ">
             <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
-              <li class="nav-item"><%= link_to "The Sacred Grove", '#', class: "nav-link" %></li> 
               <% if current_user_admin? %>
                 <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
               <% end %>
