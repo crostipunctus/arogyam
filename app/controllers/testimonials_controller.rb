@@ -5,7 +5,7 @@ class TestimonialsController < ApplicationController
 
 
   def index 
-    @testimonials = Testimonial.all
+    @testimonials = Testimonial.order(:name) 
   end 
 
   def new 
