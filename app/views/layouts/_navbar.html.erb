@@ -1,25 +1,25 @@
 <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-ignore-dark-mode ignore-dark-mode">
-        <div class="container">
-          <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
-          <span>
-              <div id="treelogo" ><%= logo %></div>
-              </span>
-          <nav class="collapse justify-content-center navbar-collapse" id="navbarNav">
-            
-            <ul class="nav nav-scroll" style="--ar-scroll-height: 520px;">
-              
-              <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
-              <% if current_user_admin? %>
-                <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
-              <% end %>
-              <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
-              <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
-              <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
-              <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
-              <% end %>
-            </ul>
-          </nav>
-        </div>
+  <div class="container">
+    <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
+    <span>
+        <div id="treelogo" ><%= logo %></div>
+    </span>
+    <nav class="collapse justify-content-center navbar-collapse" id="navbarNav"> 
+      <ul class="nav nav-scroll" style="--ar-scroll-height: 520px;">
+        
+        <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
+        <% if current_user_admin? %>
+          <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
+        <% end %>
+        <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
+        <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
+        <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
+        <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link"%></li>
+        <% if current_user %>
+          <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
 </header>
 
