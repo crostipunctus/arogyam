@@ -154,6 +154,17 @@ div.desc {
   margin-top: 20px;
 }
 
+.bookButton {
+  color: $terracota;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px !important;
+  width: 300px !important;
+  margin: 40px auto 40px;
+
+}
+
 .whyArogyam {
   margin-right: 20px;
   font-family: 'Noto', serif;
