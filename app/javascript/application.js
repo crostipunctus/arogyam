@@ -1,7 +1,8 @@
 // Entry point for the build script in your package.json
 
 //= require swiper
-
+//= require jquery
+//= require fancybox
 
 
 import "@hotwired/turbo-rails"
@@ -17,4 +18,6 @@ import "./theme"
 import "trix"
 import "@rails/actiontext"
 
-
+jQuery(function () {
+  $("a.fancybox").fancybox();
+});
