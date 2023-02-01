@@ -57,6 +57,9 @@ gem 'devise'
 
 gem "aws-sdk-s3"
 
+gem 'jquery-rails'
+gem 'fancybox-rails'
+
 
 gem 'strscan', '=3.0.1'
 
