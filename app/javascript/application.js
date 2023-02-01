@@ -18,6 +18,3 @@ import "./theme"
 import "trix"
 import "@rails/actiontext"
 
-jQuery(function () {
-  $("a.fancybox").fancybox();
-});

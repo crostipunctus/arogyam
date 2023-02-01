@@ -1,28 +1,35 @@
-<header class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-ignore-dark-mode ignore-dark-mode">
-  <div class="container">
-    <button class="navbar-toggler ms-sm-3" id="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i id="hamburger" class="bi bi-list lg" style="font-size: 2rem"></i></button>
+<header class="header navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container-fluid">
     <span>
         <div id="treelogo" ><%= logo %></div>
     </span>
-    <nav class="collapse justify-content-center navbar-collapse" id="navbarNav"> 
-      <ul class="nav nav-scroll" style="--ar-scroll-height: 520px;">
-        
-        <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
-        <% if current_user_admin? %>
-          <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
-        <% end %>
-        <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
-        
-        <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link"%></li>
-        <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
+    <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end " id="primaryMenu">
+      <div class="offcanvas-header">
+        <h5 class="mt-1 mb-0">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body pt-0 justify-content-center">
+        <ul class="navbar-nav p-0" style="--ar-scroll-height: 520px;">
+          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li> 
+          <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
+          <% if current_user_admin? %>
+            <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
+          <% end %>
+          <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
+          
+          <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link"%></li>
+          <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li> 
 
-        <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
-        
-        <% if current_user %>
-          <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
-        <% end %>
-      </ul>
-    </nav>
+          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
+          
+          <% if current_user %>
+            <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
-
