@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user_admin?
   
+  
 
   def require_admin
     unless current_user_admin?
@@ -11,6 +12,7 @@ class ApplicationController < ActionController::Base
   def current_user_admin? 
     current_user && current_user.admin? 
   end 
+ 
  
 
 end

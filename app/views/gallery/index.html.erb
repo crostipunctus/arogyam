@@ -1,0 +1,7 @@
+
+
+<% @galleries.each do |gallery|%>
+  <% gallery.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
+<% end %>
