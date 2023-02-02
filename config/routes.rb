@@ -30,5 +30,5 @@ Rails.application.routes.draw do
   delete "packages/:id" => "packages#destroy", as: :destroy_package
 
   resources :gallery
-  
+  get 'gallery', to: 'gallery/#index', as: :galleries
 end
