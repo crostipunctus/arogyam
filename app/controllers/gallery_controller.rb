@@ -1,7 +1,5 @@
 class GalleryController < ApplicationController 
-  def index 
-    @galleries = Gallery.all 
-  end 
+  
 
   def new 
     @gallery = Gallery.new 

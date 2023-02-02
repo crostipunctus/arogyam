@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user_admin?
-  
+  helper_method :gallery_index
   
 
   def require_admin
@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin? 
   end 
  
+  def gallery_index 
+    @galleries = Gallery.all 
+  end 
  
 
 end
