@@ -15,13 +15,13 @@
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
           
           <div class="package-titles"><strong>Duration:</strong></div>
-          <h2 class="mb-lg-4"><%= "#{@package.duration} days" %></a></h2>
+          <h3 class="mb-lg-4"><%= "#{@package.duration} days" %></h3>
 
           <div class="package-titles"><strong>Dates:</strong></div>
-          <h2 class="mb-lg-4"><%= "#{@package.dates}" %></h2>
+          <h3 class="mb-lg-4"><%= "#{@package.dates}" %></h3>
 
           <div class="package-titles"><strong>Cost:</strong></div>
-          <h2 class="mb-lg-4"><%= cost(@package.cost) %></a></h2>
+          <h3 class="mb-lg-4"><%= cost(@package.cost) %></h3>
           
           <% if current_user_admin? %>
             <div class="admin">
