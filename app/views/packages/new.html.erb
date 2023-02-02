@@ -1,39 +1,45 @@
-
-<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
-  <%= form_with(model: @package) do |f|%>
-    <%= @package.errors.full_messages.to_sentence %>
-    <div class="mb-3">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :content %>
-      <%= f.rich_text_area :content, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :short_description %>
-      <%= f.text_field :short_description, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :cost %>
-      <%= f.number_field :cost, class: "form-control" %>
-    </div>
-     <div class="form-group">
-      <%= f.label :duration %>
-      <%= f.number_field :duration, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :eligibility %>
-      <%= f.rich_text_area :eligibility, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :note %>
-      <%= f.rich_text_area :note, class: "form-control" %>
-    </div>
-    <div>
-          <%= f.label :package_image %>
-          <%= f.file_field :package_image %>
+<div class="packageform">
+  <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+    <%= form_with(model: @package) do |f|%>
+      <%= @package.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
       </div>
-    <%= f.submit class:"btn btn-primary"%>
-  <% end %>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.rich_text_area :content, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :short_description %>
+        <%= f.text_field :short_description, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :cost %>
+        <%= f.number_field :cost, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :duration %>
+        <%= f.number_field :duration, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :dates %>
+        <%= f.text_field :dates, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :eligibility %>
+        <%= f.rich_text_area :eligibility, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :note %>
+        <%= f.rich_text_area :note, class: "form-control" %>
+      </div>
+      <div>
+            <%= f.label :package_image %>
+            <%= f.file_field :package_image %>
+        </div>
+      <%= f.submit class:"btn btn-primary"%>
+    <% end %>
+  </div>
 </div>

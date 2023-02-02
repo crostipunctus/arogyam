@@ -13,10 +13,15 @@
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
           <div class="package-titles"><strong>Note:</strong></div>
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
+          
           <div class="package-titles"><strong>Duration:</strong></div>
-          <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= "#{@package.duration} days" %></a></h2>
+          <h2 class="mb-lg-4"><%= "#{@package.duration} days" %></a></h2>
+
+          <div class="package-titles"><strong>Dates:</strong></div>
+          <h2 class="mb-lg-4"><%= "#{@package.dates}" %></h2>
+
           <div class="package-titles"><strong>Cost:</strong></div>
-          <h2 class="mb-lg-4"><a href="portfolio-single-v1.html"><%= cost(@package.cost) %></a></h2>
+          <h2 class="mb-lg-4"><%= cost(@package.cost) %></a></h2>
           
           <% if current_user_admin? %>
             <div class="admin">
