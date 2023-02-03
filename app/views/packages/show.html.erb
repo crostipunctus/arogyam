@@ -8,6 +8,9 @@
         <%= package_image(@package) %></div>
       <div class="col-md-5 col-xl-4">
         <div class="ms-md-2 ms-lg-5 ms-xxl-0" style="max-width: 620px;">
+        <% if @package.dates %>
+            <h3 class="dates mb-lg-4"><%= "#{@package.dates}" %></h3>
+          <% end %>
           <span id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></span><br>
           <div class="package-titles"><strong>Eligibility:</strong></div>
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
