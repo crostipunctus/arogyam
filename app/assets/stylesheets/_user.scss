@@ -4,6 +4,17 @@
 //
 
 //gallery 
+.accoImage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
+
+}
+
+
 .dates {
   color: #FFAE42;
 }
