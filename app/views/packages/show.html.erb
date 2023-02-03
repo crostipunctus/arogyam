@@ -16,9 +16,10 @@
           
           <div class="package-titles"><strong>Duration:</strong></div>
           <h3 class="mb-lg-4"><%= "#{@package.duration} days" %></h3>
-
-          <div class="package-titles"><strong>Dates:</strong></div>
-          <h3 class="mb-lg-4"><%= "#{@package.dates}" %></h3>
+          <% if @package.dates %>
+            <div class="package-titles"><strong>Dates:</strong></div>
+            <h3 class="mb-lg-4"><%= "#{@package.dates}" %></h3>
+          <% end %>
 
           <div class="package-titles"><strong>Cost:</strong></div>
           <h3 class="mb-lg-4"><%= cost(@package.cost) %></h3>
