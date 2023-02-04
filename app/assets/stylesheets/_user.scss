@@ -14,10 +14,30 @@
 
 }
 
-.accoImage img {
-  padding-right: 10px;
-  padding-bottom: 10px;
+
+@media only screen and (min-width: 768px) {
+  .galleryImages img {
+    padding-right: 10px;
+
+  }
+
+  .accoImage img {
+    padding-right: 10px;
+
+  }
 }
+
+.galleryImages img {
+  padding-bottom: 10px;
+
+}
+
+.accoImage img {
+  padding-bottom: 10px;
+
+}
+
+
 
 .cover {
 
@@ -45,10 +65,6 @@
 
 }
 
-.galleryImages img {
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
 
 
 
