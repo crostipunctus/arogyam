@@ -6,7 +6,7 @@
           <%= package_image(@package) %>
         </div>
         <div class="packageText">
-          <% if @package.dates %>
+          <% if @package.dates.present? %>
               <h3 class="dates mb-lg-4"><span>Dates:</span><%= " #{@package.dates}" %></h3>
           <% end %>
           <div id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></div><br>
