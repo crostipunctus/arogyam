@@ -1,17 +1,15 @@
-<div class="overflow-hidden">
   <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-    <%= link_to "<   Back to all packages", packages_path, class: "nav-link", id: "back_to", class: "explorebutton btn btn-outline-primary rounded-0" %>
+    <%= link_to "<Back to all packages", packages_path, id:"back_to", class: "explorebutton btn btn-outline-primary rounded-0" %>
     <h1 id="packageName" class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
-    
-    <article class="row align-items-top card-hover pb-5 mb-md-2 mb-lg-3 mb-xl-4">
-      <div class="col-md-5 offset-xxl-1 mb-4 ">
-        <%= package_image(@package) %></div>
-      <div class="col-xl-5">
-        <div class="ms-md-0 ms-xxl-0" style="max-width: 620px;">
-        <% if @package.dates %>
-            <h3 class="dates mb-lg-4"><%= "#{@package.dates}" %></h3>
+      <div class="packageShow">
+        <div class="package-image">
+          <%= package_image(@package) %>
+        </div>
+        <div class="packageText">
+          <% if @package.dates %>
+              <h3 class="dates mb-lg-4"><span>Dates:</span><%= " #{@package.dates}" %></h3>
           <% end %>
-          <span id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></span><br>
+          <div id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></div><br>
           <div class="package-titles"><strong>Eligibility:</strong></div>
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
           <div class="package-titles"><strong>Note:</strong></div>
@@ -19,10 +17,7 @@
           
           <div class="package-titles"><strong>Duration:</strong></div>
           <h3 class="mb-lg-4"><%= "#{@package.duration} days" %></h3>
-          <% if @package.dates %>
-            <div class="package-titles"><strong>Dates:</strong></div>
-            <h3 class="mb-lg-4"><%= "#{@package.dates}" %></h3>
-          <% end %>
+          
 
           <div class="package-titles"><strong>Cost:</strong></div>
           <h3 class="mb-lg-4"><%= cost(@package.cost) %></h3>
@@ -35,10 +30,10 @@
               <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
             </div>
           <% end %>
-          
         </div>
       </div>
-    </article>
+  </div>
     
-</div>
+    
+
 
