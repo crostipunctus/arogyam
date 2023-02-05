@@ -3,6 +3,7 @@
 <div class="footercontainer">
   <footer class="py-3">
     <ul class="nav justify-content-center border-bottom pb-3">
+               <div class="footerlogo"><%= logo %></div>
       <li class="nav-item"><%= link_to "Packages", packages_path, class: "nav-link" %></li>                
               <% if current_user_admin? %>
                 <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
