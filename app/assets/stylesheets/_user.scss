@@ -269,6 +269,30 @@ div.desc {
   font-family: 'Noto', serif;
 }
 
+@media (max-width: 767px) {
+  .whyArogyam {
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .hometextContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .whyArogyam {
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .hometextContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .nav-link:hover {
   color: $terracota !important;
 }
