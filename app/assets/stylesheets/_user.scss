@@ -17,9 +17,18 @@
   text-align: center;
   margin-top: 20px;
   margin-bottom: 10px;
+
 }
 
-/* or any other desired height */
+@media only screen and (max-width: 767px) {
+  .nav-item {
+    width: 33.33%;
+    float: left;
+    text-align: center;
+  }
+
+
+}
 
 
 .accoImage {
