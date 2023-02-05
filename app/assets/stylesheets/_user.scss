@@ -4,6 +4,11 @@
 //
 
 //gallery 
+.footercontainer footer {
+  background-color: $gray-300 !important;
+  width: 100% !important;
+}
+
 .accoImage {
   display: flex;
   flex-direction: row;
