@@ -274,15 +274,22 @@ div.desc {
 }
 
 #back_to {
-  margin-top: 3em;
-  margin-bottom: 50px !important;
-  display: block;
-  margin: 0 auto;
-  max-width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+
+.packageBackToButton {
+  width: 200px;
+  margin: 5em auto 0;
 }
 
 #packageName {
-  margin-top: 3em !important;
+  margin-top: 1em !important;
   font-family: 'Noto', serif;
 
 }
