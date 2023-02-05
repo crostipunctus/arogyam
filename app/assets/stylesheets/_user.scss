@@ -75,10 +75,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .galleryImages img {
-    padding-right: 10px;
-
-  }
 
   .accoImage img {
     padding-right: 10px;
@@ -87,10 +83,7 @@
 }
 
 
-.galleryImages img {
-  padding-bottom: 10px;
 
-}
 
 .accoImage img {
   padding-bottom: 10px;
@@ -125,6 +118,11 @@
 
 }
 
+@media only screen and (max-width: 767px) {
+  .galleryImages {
+    width: 100%;
+  }
+}
 
 
 
