@@ -9,6 +9,12 @@
   width: 100% !important;
 }
 
+@media only screen and (max-width: 767px) {
+  .header .navbar-toggler {
+    margin-right: 10px;
+  }
+}
+
 
 .footerlogo {
   width: 100%;
