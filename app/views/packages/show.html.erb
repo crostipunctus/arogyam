@@ -22,7 +22,7 @@
           
 
           <div class="package-titles"><strong>Cost:</strong></div>
-          <h3 class="mb-lg-4"><%= cost(@package.cost) %></h3>
+          <h3 class="mb-lg-4"><%= "Rs. #{@package.cost}" %></h3>
           
           <% if current_user_admin? %>
             <div class="admin">

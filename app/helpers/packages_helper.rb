@@ -1,8 +1,5 @@
 module PackagesHelper
 
-  def cost(cost)
-    "Rs.%.2f" % cost
-  end
 
   def package_image(package)
     if package.package_image.attached?
