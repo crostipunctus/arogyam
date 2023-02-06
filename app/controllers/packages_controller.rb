@@ -52,7 +52,7 @@ class PackagesController < ApplicationController
   private 
 
   def package_params 
-    params.require(:package).permit(:name, :cost, :duration, :content, :eligibility, :note, :package_image, :short_description, :dates)
+    params.require(:package).permit(:name, :cost, :duration, :content, :eligibility, :note, :package_image, :short_description, :dates, :benefits)
   end
 
 
