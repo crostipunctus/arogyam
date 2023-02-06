@@ -39,4 +39,4 @@ amazon:
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: ap-northeast-1
   bucket: arogyam
-  url: https://d1w11gv0j27jrz.cloudfront.net
+ 
