@@ -18,9 +18,14 @@
 
 <div class="galleryImages">
   <% gallery_index.each do |gallery|%>
-  <% gallery.images.each do |image| %>
-    <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+  <% if gallery.images.attached? %>
+    <% gallery.images.each do |image| %>
+      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+    <% end %>
+  <% else %>
+      <%= image_tag("flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
   <% end %>
+
 <% end %>
 </div>
 
