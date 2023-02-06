@@ -10,14 +10,9 @@
 .footercontainer footer {
   background-color: $gray-300 !important;
   width: 100% !important;
-
-  margin: 0 auto;
-  overflow: auto;
 }
 
-.footercontainer footer ul.nav {
-  margin-right: 20px;
-}
+
 
 @media only screen and (max-width: 767px) {
   .header .navbar-toggler {
@@ -40,15 +35,6 @@
 
 }
 
-@media only screen and (max-width: 767px) {
-  .nav-item {
-    width: 33.33%;
-    float: left;
-    text-align: center;
-  }
-
-
-}
 
 
 .accoImage {
