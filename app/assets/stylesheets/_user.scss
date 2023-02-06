@@ -100,6 +100,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .galleryImages {
+    padding-right: 0 !important;
+  }
+}
+
 
 
 .galleryImages img {
