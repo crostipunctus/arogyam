@@ -28,6 +28,12 @@
 }
 
 
+.header {
+  min-width: 200px;
+}
+
+
+
 .footerlogo {
   width: 100%;
   height: 50px;
@@ -313,7 +319,7 @@ div.desc {
   justify-content: center;
   align-items: center;
   height: 50px !important;
-  width: 300px !important;
+  width: 200px !important;
   margin: 40px auto 40px;
 
 }
