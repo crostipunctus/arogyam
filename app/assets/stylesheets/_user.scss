@@ -4,6 +4,13 @@
 //
 
 //gallery 
+
+@media only screen and (min-width: 100px) {
+  body {
+    min-width: 100px;
+  }
+}
+
 .footercontainer footer {
   background-color: $gray-300 !important;
   width: 100% !important;
@@ -85,6 +92,7 @@
 
   }
 }
+
 
 
 .galleryImages img {
