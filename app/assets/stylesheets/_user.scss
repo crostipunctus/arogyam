@@ -5,15 +5,20 @@
 
 //gallery 
 
-@media only screen and (min-width: 100px) {
-  body {
-    min-width: 100px;
-  }
+.modal-class {
+  display: initial;
 }
 
 .footercontainer footer {
   background-color: $gray-300 !important;
   width: 100% !important;
+  min-width: 200px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.footercontainer footer ul.nav {
+  margin-right: 20px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -104,6 +109,8 @@
   padding-bottom: 10px;
 
 }
+
+
 
 
 
