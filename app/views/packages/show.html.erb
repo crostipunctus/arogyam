@@ -1,5 +1,5 @@
   <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-   <%= link_to "<Back to all packages", packages_path, id:"back_to", class: "packageBackToButton btn btn-outline-primary rounded-pill" %>
+   <%= link_to "<  Back to all packages", packages_path, id:"back_to", class: "packageBackToButton btn btn-outline-primary rounded-pill" %>
     <h1 id="packageName" class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4"><%= @package.name %></h1>
       <div class="packageShow">
         <div class="package-image">
@@ -16,11 +16,8 @@
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
           <div class="package-titles"><strong>Note:</strong></div>
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
-          
           <div class="package-titles"><strong>Duration:</strong></div>
           <h3 class="mb-lg-4"><%= "#{@package.duration} days" %></h3>
-          
-
           <div class="package-titles"><strong>Cost:</strong></div>
           <h3 class="mb-lg-4"><%= "Rs. #{@package.cost}" %></h3>
           

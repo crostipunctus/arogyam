@@ -12,6 +12,25 @@ class GalleryController < ApplicationController
     redirect_to root_path
   end 
 
+  def edit 
+    @gallery = Gallery.find(params[:id])
+  end 
+
+  def update 
+    @gallery = Gallery.find(params[:id])
+
+    if @gallery.update(gallery_params)
+      if params[:images]
+        params[:images].each do |image|
+          @gallery.images.attach(image)
+        end 
+      end 
+      redirect_to root_path, notice: 'Gallery was succesfully updates'
+    else  
+      render :edit, status: :unprocessable_entity
+    end 
+  end 
+
   private 
 
     def gallery_params 
