@@ -1,10 +1,8 @@
-  <div class="cover" style="background-image: url(assets/buildings.jpg);">
+  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/buildings.jpg);">
     <div class="newlogo ">
-        <%= image_tag("yellow-logo.png")%>
+        <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/yellow-logo.png")%>
     </div>
   </div>
-
-  <h1>This is production</h1>
    
 <div class="hometextContainer">
   <h2 class="whyArogyam">Why ArogyaM</h2>
@@ -21,7 +19,7 @@
       <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }, src: "https://d1w11gv0j27jrz.cloudfront.net#{rails_blob_path(image, disposition: "attachment", only_path: true)}") %>
     <% end %>
   <% else %>
-      <%= image_tag("flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
+      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
   <% end %>
 
   <% end %>
