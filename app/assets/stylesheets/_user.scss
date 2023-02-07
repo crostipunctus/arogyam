@@ -287,7 +287,7 @@ div.desc {
   z-index: 2;
   padding: 2rem 2rem 2rem;
   text-align: center;
-  top: 15%;
+  top: 11%;
 
 }
 
@@ -298,6 +298,14 @@ div.desc {
 @media (max-width: 1024px) {
   .newlogo img {
     width: 99%;
+  }
+
+
+}
+
+@media (max-width: 767px) {
+  .newlogo {
+    top: 20%;
   }
 }
 
