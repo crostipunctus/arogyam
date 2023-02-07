@@ -1,7 +1,7 @@
 class GalleryController < ApplicationController 
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
-  before_action :require_admin, only: [:new, :create]
+  before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def new 
     @gallery = Gallery.new 
