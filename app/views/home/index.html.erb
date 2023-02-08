@@ -16,7 +16,10 @@
   <% gallery_index.each do |gallery|%>
   <% if gallery.images.attached? %>
     <% gallery.images.each do |image| %>
-      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+      <div class="imageContainer">
+
+        <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+      </div>
     <% end %>
   <% else %>
       <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>

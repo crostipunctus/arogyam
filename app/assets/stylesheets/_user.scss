@@ -383,11 +383,6 @@ div.desc {
   margin: 5em auto 0;
 }
 
-#packageName {
-  margin-top: 1em !important;
-  font-family: 'Noto', serif;
-
-}
 
 
 .bg-success {
@@ -603,4 +598,20 @@ h4 {
 
 .deleteImage {
   margin: 20px;
+}
+
+#packageName {
+  margin-top: 1em !important;
+  font-family: 'Noto', serif;
+
+}
+
+#packageTagline {
+
+  margin-bottom: 2em;
+  text-align: center !important;
+}
+
+img {
+  border-radius: 30px !important;
 }
