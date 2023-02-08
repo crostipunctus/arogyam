@@ -1,7 +1,7 @@
 class GalleryController < ApplicationController 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-  before_action :require_admin, only: [:new, :create, :edit, :update]
+  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def new 
     @gallery = Gallery.new 
@@ -29,6 +29,15 @@ class GalleryController < ApplicationController
     else  
       render :edit, status: :unprocessable_entity
     end 
+  end 
+
+  def destroy 
+    gallery = Gallery.find(params[:id])
+    image = gallery.images.find(params[:param2])
+
+    image.destroy
+
+    redirect_to root_path, notice: 'Image deleted succesfully'
   end 
 
   private 

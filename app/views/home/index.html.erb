@@ -16,7 +16,7 @@
   <% gallery_index.each do |gallery|%>
   <% if gallery.images.attached? %>
     <% gallery.images.each do |image| %>
-      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }, src: "https://d1w11gv0j27jrz.cloudfront.net#{rails_blob_path(image, disposition: "attachment", only_path: true)}") %>
+      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
     <% end %>
   <% else %>
       <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>

@@ -1,7 +1,23 @@
-
-
-<% @galleries.each do |gallery|%>
-  <% gallery.images.each do |image| %>
-    <%= image_tag image %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="galleryImages">
+  <% gallery_index.each do |gallery|%>
+  <% if gallery.images.attached? %>
+    <% gallery.images.each do |image| %>
+      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+      <% if current_user_admin? %>
+        <%= link_to "Delete image", destroy_gallery_path(gallery, param2: "#{image.id}"), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+      <% end %>
+    <% end %>
+  <% else %>
+      <%= image_tag("flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
   <% end %>
-<% end %>
+
+  <% end %>
+</div>
