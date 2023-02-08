@@ -12,7 +12,7 @@
     <% gallery.images.each do |image| %>
       <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
       <% if current_user_admin? %>
-        <%= link_to "Delete image", destroy_gallery_path(gallery, param2: "#{image.id}"), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+        <%= link_to "Delete image", destroy_gallery_path(gallery, param2: "#{image.id}"), class: "deleteImage btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
       <% end %>
     <% end %>
   <% else %>
