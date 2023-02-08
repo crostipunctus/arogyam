@@ -1,7 +1,21 @@
-
-
-<% @galleries.each do |gallery|%>
-  <% gallery.images.each do |image| %>
-    <%= image_tag image %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="galleryImages">
+  <% gallery_index.each do |gallery|%>
+  <% if gallery.images.attached? %>
+    <% gallery.images.each do |image| %>
+      <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
+      <%= link_to "Delete", class: "btn btn-danger btn-sm" %>
+    <% end %>
+  <% else %>
+      <%= image_tag("flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
   <% end %>
-<% end %>
+
+  <% end %>
+</div>
