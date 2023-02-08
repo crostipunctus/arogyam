@@ -11,7 +11,9 @@
   <% if gallery.images.attached? %>
     <% gallery.images.each do |image| %>
       <%= image_tag(image, width: 800, data: {fancybox: 'imageGallery' }) %>
-      <%= link_to "Delete", class: "btn btn-danger btn-sm" %>
+      <% if current_user_admin? %>
+        <%= link_to "Delete image", destroy_gallery_path(gallery, param2: "#{image.id}"), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+      <% end %>
     <% end %>
   <% else %>
       <%= image_tag("flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
