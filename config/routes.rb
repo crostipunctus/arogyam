@@ -34,5 +34,7 @@ Rails.application.routes.draw do
   end
   get "galleries" => "gallery#new"
   post "galleries" => "gallery#create"
+
+  resources :contacts, only: [:new, :create]
   
 end
