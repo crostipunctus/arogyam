@@ -327,8 +327,17 @@ div.desc {
   margin-top: 20px;
 }
 
+@media (max-width: 767px) {
+  .explorebutton {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+}
+
+
 .bookButton {
-  color: $terracota;
+
   display: flex;
   justify-content: center;
   align-items: center;

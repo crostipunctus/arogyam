@@ -4,7 +4,6 @@
     <div id="packageTagline"><%= @package.short_description %></div>
     <div class="durationCostContainer"><div class="packageDuration"><%= "#{@package.duration} days"%></div><div class="packageCost"><%= "Rs. #{@package.cost}" %></div></div>
       <div class="packageShow">
-        
         <div class="packageText">
           <% if @package.dates.present? %>
               <h3 class="dates mb-lg-4"><%= "Dates: #{@package.dates}" %></h3>
