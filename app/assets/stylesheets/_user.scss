@@ -638,11 +638,23 @@ img {
   padding-right: 20px;
 }
 
+@media (max-width: 399px) {
+  .packageCost {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .packageDuration {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 
 
 .durationCostContainer {
   text-align: center;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border: 1px solid $gray-600;
   width: fit-content;
   margin: 0 auto;
