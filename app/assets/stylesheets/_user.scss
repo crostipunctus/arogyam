@@ -603,15 +603,47 @@ h4 {
 #packageName {
   margin-top: 1em !important;
   font-family: 'Noto', serif;
+  margin-bottom: 0 !important;
 
 }
 
 #packageTagline {
-
+  margin-top: 1em;
   margin-bottom: 2em;
   text-align: center !important;
 }
 
 img {
   border-radius: 30px !important;
+}
+
+.packageDuration,
+.packageCost {
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.packageCost {
+  border-left: 1px solid $gray-600;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.packageDuration {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+
+.durationCostContainer {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid $gray-600;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 3em;
+  border-radius: 10px;
+  background-color: $gray-200;
+  color: $gray-600;
 }
