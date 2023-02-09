@@ -63,7 +63,7 @@
 }
 
 .packageText {
-  margin-top: 3em;
+  margin-top: 1em;
   width: 100%;
 }
 
@@ -111,6 +111,9 @@
 
 .dates {
   color: #FFAE42;
+  text-align: center;
+  margin-bottom: 30px;
+
 }
 
 
@@ -532,6 +535,7 @@ p {
 
 .admin {
   display: inline-flex;
+  margin-bottom: 30px;
 }
 
 .trix-content {
@@ -642,7 +646,7 @@ img {
   border: 1px solid $gray-600;
   width: fit-content;
   margin: 0 auto;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   border-radius: 10px;
   background-color: $gray-200;
   color: $gray-600;

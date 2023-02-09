@@ -4,12 +4,10 @@
     <div id="packageTagline"><%= @package.short_description %></div>
     <div class="durationCostContainer"><div class="packageDuration"><%= "#{@package.duration} days"%></div><div class="packageCost"><%= "Rs. #{@package.cost}" %></div></div>
       <div class="packageShow">
-        <div class="package-image">
-          <%= package_image(@package) %>
-        </div> 
+        
         <div class="packageText">
           <% if @package.dates.present? %>
-              <h3 class="dates mb-lg-4"><span>Dates:</span><%= " #{@package.dates}" %></h3>
+              <h3 class="dates mb-lg-4"><%= "Dates: #{@package.dates}" %></h3>
           <% end %>
           <div id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></div><br>
           <div class="package-titles"><strong>Benefits:</strong></div>
@@ -30,6 +28,9 @@
               <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
             </div>
           <% end %>
+          <div class="package-image">
+          <%= package_image(@package) %>
+        </div> 
         </div>
       </div>
   </div>
