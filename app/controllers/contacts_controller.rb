@@ -11,10 +11,11 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     @contact.request = request
     if @contact.deliver
-      flash.now[:notice] = 'Thank you for contacting us. We will get back to you soon.'
+      flash[:notice] = 'Thank you for contacting us. We will get back to you soon.'
+      redirect_to contacts_path
     else
-      flash.now[:error] = 'Could not send message'
-      render :new
+      flash.now[:alert] = 'Could not send message'
+      render :index
     end
   end
 end
