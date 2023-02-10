@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get "packages/:id/edit" => "packages#edit", as: :edit_package
   patch "packages/:id" => "packages#update"
 
-  get "contact" => "contact#index"
+  
   get "about" => "about#index"
   
   post "packages" => "packages#create"
@@ -35,6 +35,6 @@ Rails.application.routes.draw do
   get "galleries" => "gallery#new"
   post "galleries" => "gallery#create"
 
-  resources :contacts, only: [:new, :create]
+  resources :contacts, only: [:index, :new, :create]
   
 end
