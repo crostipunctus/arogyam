@@ -1,33 +1,26 @@
 
+<h3 class="enquiryForm">Enquiry Form</h4>
 <div class="contactForm">
-  <h3 class="howToget">Contact Form</h3>
-  <div class="container">
-    <div class="row d-flex">
-      <div class="col-sm-12 col-md-8 col-lg-6">
-        <%= form_with model: @contact, url: contacts_path do |f| %>
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :message %>
-          <%= f.text_area :message, class: "form-control" %>
-        </div>
-
-        <div>
-          <%= f.submit class:"btn btn-primary" %>
-        </div>
-        <% end %>
-      </div> 
-    </div>
-  </div>
-
-    
+  <div data-turbo="false" class="h-100 d-flex">
   
+    <%= form_with model: @contact, url: contacts_path do |f| %>
+      <div class="mb-3">
+      <%= f.label :name %><br>
+      <%= f.text_field  :name, required: true, class: "form-control" %><br>
+      </div>
+      <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :email, required: true, class: "form-control" %><br>
+      </div>
+      <div class="form-group">
+      <%= f.label :message %><br>
+      <%= f.text_area :message, rows: 8, cols: 40, required: true, class: "form-control", 
+            placeholder: "Send me a message"%><br>
+      </div>
+      <div class="form-group">
+      </div>
+      <%= f.submit 'Send Message', class: 'btn btn-primary' %>
+    
+  <% end %>
+  </div>
 </div>
