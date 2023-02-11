@@ -1,21 +1,25 @@
 class ContactsController < ApplicationController
   def index 
-    @contact = Contact.new 
+    @contact = Contact.new
   end 
-
+  
   def new
     @contact = Contact.new
   end
 
   def create
-    @contact = Contact.new(params[:contact])
-    @contact.request = request
-    if @contact.deliver
-      flash[:notice] = 'Thank you for contacting us. We will get back to you soon.'
-      redirect_to contacts_path
-    else
-      flash.now[:alert] = 'Could not send message'
-      render :index
-    end
+    @contact = Contact.new(contact_params)
+    if @contact.save 
+      ContactMailer.contact_email(@contact).deliver_later
+      redirect_to root_path, notice: "Your message has been sent. We will get back to you soon."
+    else  
+      render :new, alert: "Something went wrong. Try again."
+    end 
   end
+
+  private 
+
+  def contact_params 
+    params.require(:contact).permit(:name, :email, :message)
+  end 
 end
