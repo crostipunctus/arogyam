@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def logo 
-    link_to image_tag('https://d1w11gv0j27jrz.cloudfront.net/symbol.png', width: 20), root_path, data: {turbo: false}
+    link_to image_tag('https://d1w11gv0j27jrz.cloudfront.net/symbol.png', width: 18), root_path, data: {turbo: false}
   end 
 
   def package_link(name)
