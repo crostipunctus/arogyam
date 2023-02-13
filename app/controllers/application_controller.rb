@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user_admin?
   helper_method :gallery_index
-  
+  helper_method :team_index
 
   def require_admin
     unless current_user_admin?
@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
  
   def gallery_index 
     @galleries = Gallery.all 
+  end 
+
+  def team_index 
+    @team = TeamMember.all 
   end 
  
 
