@@ -34,13 +34,21 @@
   <section class="container pb-2 pb-sm-3 pt-5 mt-lg-3 mt-xl-4 mt-xxl-5">
         <h2 class="h1 text-center pt-2 pt-sm-4 pt-lg-5 pb-2 mb-3 mb-lg-4 mt-md-3 mt-lg-0">The Team</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <% team_index.each do |team_member| %>
-          <div class="col text-center pt-2"><a class="card-hover card-lifted d-inline-block text-decoration-none" href="#"><%= image_tag(team_member.avatar, class: "card-lifted d-block rounded-5 mb-3", width: 340) %>
-              <h3 class="h5 mb-1"><%= team_member.name %></h3>
-              <p class="mb-0 text-muted"><%= team_member.role %></p></a>
-              <p class="teamMemberContent"><%= team_member.content %></p>
-          </div>
-        <% end %>
+          <% team_index.each do |team_member| %>
+            <div class="col text-center pt-2"><a class="card-hover card-lifted d-inline-block text-decoration-none" href="#"><%= image_tag(team_member.avatar, class: "card-lifted d-block rounded-5 mb-3", width: 340) %>
+                <h3 class="h5 mb-1"><%= team_member.name %></h3>
+                <p class="mb-0 text-muted"><%= team_member.role %></p></a>
+                <p class="teamMemberContent"><%=  team_member.content %></p> 
+                <% if current_user_admin? %>
+                  <div class="admin">
+                    <%= link_to "Edit team member", edit_team_member_path(team_member), class: "btn btn-primary btn-sm" %>
+                  </div>
+                  <div  class="admin">
+                    <%= link_to "Remove team member", team_member_path(team_member), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+                  </div>
+                <% end %>
+            </div>
+          <% end %>
         </div>
   </section>
 

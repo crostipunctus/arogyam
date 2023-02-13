@@ -1,4 +1,8 @@
 class TeamMembersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
+
+  before_action :require_admin, only: [:index, :new, :create, :edit, :update, :destroy]
+
   def index
     @team = TeamMember.all 
   end
@@ -38,6 +42,9 @@ class TeamMembersController < ApplicationController
   end
 
   def destroy
+    @team_member = TeamMember.find(params[:id])
+    @team_member.destroy
+    redirect_to about_path, status: :see_other
   end
 
   private 
