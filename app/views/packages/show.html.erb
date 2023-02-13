@@ -15,10 +15,6 @@
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
           <div class="package-titles"><strong>Note:</strong></div>
           <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
-          <div class="package-titles"><strong>Duration:</strong></div>
-          <h3 class="mb-lg-4"><%= "#{@package.duration} days" %></h3>
-          <div class="package-titles"><strong>Cost:</strong></div>
-          <h3 class="mb-lg-4"><%= "Rs. #{@package.cost}" %></h3>
           <% if current_user_admin? %>
             <div class="admin">
               <%= link_to "Edit package", edit_package_path(@package), class: "btn btn-primary btn-sm" %>
