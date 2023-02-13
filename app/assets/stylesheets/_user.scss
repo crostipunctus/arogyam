@@ -685,38 +685,6 @@ img {
   border-radius: 0 !important;
 }
 
-.team-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.team-section-header {
-  margin-bottom: 40px;
-}
-
-.team-member {
-  width: 300px;
-  margin: 40px;
-}
-
-.team-member-img {
-  width: 100%;
-  border-radius: 50%;
-}
-
-.team-member-name {
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.team-member-title {
-  font-style: italic;
-  margin-top: 10px;
-}
-
-.team-member-description {
-  margin-top: 20px;
+.teamMemberContent {
+  color: black;
 }

@@ -1,2 +1,22 @@
-<h1>TeamMembers#edit</h1>
-<p>Find me in app/views/team_members/edit.html.erb</p>
+<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+  <%= form_with(model: @team_member) do |f|%>
+    <%= @team_member.errors.full_messages.to_sentence %>
+    <div class="mb-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :content %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :role %>
+      <%= f.text_field :role, class: "form-control" %>
+    </div>
+    <div>
+          <%= f.label :avatar %>
+          <%= f.file_field :avatar %>
+      </div>
+    <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>
