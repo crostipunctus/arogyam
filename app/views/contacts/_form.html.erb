@@ -1,4 +1,5 @@
-
+  <div class="contactform">
+  <h3 class="enquiryForm">Enquiry Form</h3>
   <%= form_with model: @contact, url: contacts_path do |f| %>
     <div class="mb-3">
       <%= f.label :name, class: "form-label" %><br>
@@ -17,4 +18,5 @@
       <%= f.submit 'Send Message', class: 'btn btn-outline-primary rounded-0' %>
     </div>
   <% end %>
+  </div>
 

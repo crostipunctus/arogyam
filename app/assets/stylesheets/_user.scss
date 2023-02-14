@@ -674,8 +674,8 @@ img {
 }
 
 
-.contactForm {
-  margin-bottom: 3em;
+.contactform {
+  margin-top: 4em;
 
 
 
@@ -692,6 +692,9 @@ img {
 
 
 .contactInfo {
+  background-color: beige;
+  padding-left: 10px;
+  padding-right: 20px;
 
   margin-top: 20px;
   padding-bottom: 20px;
@@ -709,4 +712,12 @@ img {
 
     /* set width to 40% for desktop screens */
   }
+}
+
+.enquiryForm {
+  font-family: 'Noto', serif !important;
+}
+
+.gettingThere {
+  margin-top: 100px;
 }
