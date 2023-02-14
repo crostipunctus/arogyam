@@ -636,6 +636,7 @@ img {
 .packageCost {
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
+  color: $gray-700;
 }
 
 .packageCost {
@@ -722,4 +723,23 @@ img {
 
 .gettingThere {
   margin-top: 100px;
+}
+
+.bookProgButton {
+  background-color: white;
+  border: gray 1px solid;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: $gray-700;
+
+}
+
+@media only screen and (min-width: 768px) {
+  .bookProgButton {
+    width: fit-content;
+    margin: 20px;
+
+    /* set width to 40% for desktop screens */
+  }
 }

@@ -2,7 +2,12 @@
    <%= link_to "<  Back to all packages", packages_path, id:"back_to", class: "packageBackToButton btn btn-outline-primary rounded-pill" %>
     <h1 id="packageName" class="text-center"><%= @package.name %></h1>
     <div id="packageTagline"><%= @package.short_description %></div>
-    <div class="durationCostContainer"><div class="packageDuration"><%= "#{@package.duration} days"%></div><div class="packageCost"><%= "Rs. #{@package.cost}" %></div></div>
+    <div class="durationCostContainer">
+      <div class="packageDuration"><%= "#{@package.duration} days"%></div>
+      <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
+      <%= link_to "Book programme", contacts_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %>
+
+    </div>
       <div class="packageShow">
         <div class="packageText">
           <% if @package.dates.present? %>
@@ -27,7 +32,7 @@
           <%= package_image(@package) %>
         </div> 
         </div>
-        <%= link_to "Book this package", contacts_path, class: "bookButton btn btn-outline-primary rounded-0"%>
+        <%= link_to "Book programme", contacts_path, class: "bookButton btn btn-outline-primary rounded-pill"%>
       </div>
   </div>
     
