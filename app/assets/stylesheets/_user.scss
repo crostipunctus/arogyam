@@ -725,6 +725,17 @@ img {
   margin-top: 100px;
 }
 
+.navbarBookButton {
+  background-color: white;
+  border: gray 1px solid;
+  color: $gray-700;
+  margin-left: 20px;
+}
+
+.navbarBookButton:hover {
+  background-color: gray !important;
+}
+
 .bookProgButton {
   background-color: white;
   border: gray 1px solid;
