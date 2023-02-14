@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
+  get 'bookings' => 'bookings#index'
+
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -15,7 +15,6 @@
         <ul class="navbar-nav p-0" style="--ar-scroll-height: 520px;">
           <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
           <li class="nav-item"><%= link_to "Treatments", packages_path, class: "nav-link"%></li>  
-          <li class="nav-item"><%= link_to "Bookings", contacts_path, class: "nav-link"%></li> 
               
           <% if current_user_admin? %>
             <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li>
@@ -24,6 +23,9 @@
           
           <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li>
 
+          <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link"%></li> 
+
+          
           <li class="nav-item"><%= link_to "About", about_path, class: "nav-link"%></li>
           
           <% if current_user %>
