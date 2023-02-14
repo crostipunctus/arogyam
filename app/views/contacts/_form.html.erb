@@ -1,27 +1,20 @@
-<div class="wholeContactform">
-  <h3 class="enquiryForm">Enquiry Form</h4>
-  <div class="contactForm">
-    <div data-turbo="false" class="h-100 d-flex">
-    
-      <%= form_with model: @contact, url: contacts_path do |f| %>
-        <div class="mb-3">
-        <%= f.label :name %><br>
-        <%= f.text_field  :name, required: true, class: "form-control" %><br>
-        </div>
-        <div class="form-group">
-        <%= f.label :email %><br>
-        <%= f.text_field :email, required: true, class: "form-control" %><br>
-        </div>
-        <div class="form-group">
-        <%= f.label :message %><br>
-        <%= f.text_area :message, rows: 8, cols: 40, required: true, class: "form-control", 
-              placeholder: "Send me a message"%><br>
-        </div>
-        <div class="form-group">
-        </div>
-        <%= f.submit 'Send Message', class: 'btn btn-outline-primary rounded-0' %>
-      
-    <% end %>
+
+  <%= form_with model: @contact, url: contacts_path do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label" %><br>
+      <%= f.text_field  :name, class: "form-control", id: "text-input" %><br>
     </div>
-  </div>
-</div>
+    <div>
+      <%= f.label :email, class: "form-label" %><br>
+      <%= f.text_field :email, class: "form-control", id: "email-input" %><br>
+    </div>
+    <div>
+      <%= f.label :message, class: "form-label" %><br>
+      <%= f.text_area :message, class: "form-control", id: "textarea-input", 
+        placeholder: "Send me a message"%><br>
+    </div>
+    <div>
+      <%= f.submit 'Send Message', class: 'btn btn-outline-primary rounded-0' %>
+    </div>
+  <% end %>
+
