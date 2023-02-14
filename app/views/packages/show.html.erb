@@ -23,7 +23,7 @@
               <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
             </div>
           <% end %>
-          <div class="package-image">
+        <div class="package-image">
           <%= package_image(@package) %>
         </div> 
         </div>
