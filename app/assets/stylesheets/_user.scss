@@ -732,6 +732,13 @@ img {
   margin-left: 20px;
 }
 
+@media only screen and (max-width: 768px) {
+  .navbarBookButton {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
 .navbarBookButton:hover {
   background-color: gray !important;
 }
