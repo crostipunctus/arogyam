@@ -758,3 +758,42 @@ img {
 .bookProgButton:hover {
   background-color: gray !important;
 }
+
+@media (min-width: 768px) {
+
+  /* Hide the mobile-footer on screens wider than 767px (i.e. desktops and laptops) */
+  .mobile-footer {
+    display: none;
+  }
+}
+
+/* Style the mobile-footer */
+.mobile-footer {
+  background-color: $gray-700;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  cursor: pointer;
+  height: 60px;
+  display: flex;
+  /* add flexbox layout */
+  align-items: center;
+  /* center child elements vertically */
+  justify-content: center;
+  /* center child elements horizontally */
+
+  /* Add a pointer cursor to indicate that the footer is clickable */
+}
+
+#footerBook {
+  margin-bottom: 0 !important;
+  color: white !important;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  letter-spacing: 1.25px;
+
+}
