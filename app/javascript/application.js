@@ -10,6 +10,7 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
+import './show_footer_on_scroll'
 
 
 import "./theme"
