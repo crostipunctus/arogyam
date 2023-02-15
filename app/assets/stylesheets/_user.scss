@@ -804,3 +804,12 @@ img {
   letter-spacing: 1.25px;
 
 }
+
+.orangeButton {
+  border: 1px $terracota solid;
+  color: $terracota;
+}
+
+.orangeButton:hover {
+  background-color: $terracota !important;
+}
