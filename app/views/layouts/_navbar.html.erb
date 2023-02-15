@@ -1,8 +1,11 @@
 <header class="header navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <span>
-        <div id="treelogo" ><%= logo %></div>
+        <div id="treelogo" class="no-border-radius" ><%= logo %></div>
     </span>
+    <li class="d-lg-none">
+      <%= link_to(image_tag('full-logo.png', width: 150, class: "no-border-radius"), root_path, class: " nav-link") %>
+    </li>
     <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +17,7 @@
       <div class="offcanvas-body pt-0 justify-content-center">
         <ul class="navbar-nav p-0" style="--ar-scroll-height: 520px;">
           <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
-          <li class="nav-item"><%= link_to "Health Programme", packages_path, class: "nav-link", data: {turbo: false}%></li>  
+          <li class="nav-item"><%= link_to "Health Programmes", packages_path, class: "nav-link", data: {turbo: false}%></li>  
           <% if current_user_admin? %>
             <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li>
           <% end %>
@@ -26,6 +29,7 @@
           <% if current_user %>
             <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
           <% end %>
+          
         </ul>
       </div>
     </div>
