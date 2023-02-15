@@ -5,7 +5,9 @@
 
 //gallery 
 
-
+#footer {
+  display: none;
+}
 
 .footercontainer footer {
   background-color: $gray-300 !important;
@@ -786,13 +788,8 @@ img {
   cursor: pointer;
   height: 60px;
   display: flex;
-  /* add flexbox layout */
-  align-items: center;
-  /* center child elements vertically */
-  justify-content: center;
-  /* center child elements horizontally */
-
-  /* Add a pointer cursor to indicate that the footer is clickable */
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 #footerBook {
@@ -839,8 +836,4 @@ img {
 
 .errors li {
   margin-bottom: 6px;
-}
-
-#footer {
-  display: none;
 }

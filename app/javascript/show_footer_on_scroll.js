@@ -6,6 +6,6 @@ const footer = document.querySelector("#footer");
 
 window.addEventListener("scroll", function () {
   if (window.pageYOffset > 0) {
-    footer.style.display = "block";
+    footer.style.display = "flex";
   }
 });
