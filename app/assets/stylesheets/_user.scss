@@ -384,18 +384,14 @@ div.desc {
 }
 
 #back_to {
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-
+  color: $gray-700;
+  border: none;
+  font-size: 30px;
 }
 
 
 .packageBackToButton {
-  width: 200px;
-  margin: 5em auto 0;
+  width: fit-content;
 }
 
 

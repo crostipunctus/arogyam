@@ -1,5 +1,5 @@
   <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-   <%= link_to "<  Back to all packages", packages_path, id:"back_to", class: "packageBackToButton btn btn-outline-primary rounded-pill" %>
+   <%= link_to "<i class='bi bi-arrow-left-circle'></i>".html_safe, packages_path, id:"back_to" %>
     <h1 id="packageName" class="text-center"><%= @package.name %></h1>
     <div id="packageTagline"><%= @package.short_description %></div>
     <div class="durationCostContainer">
