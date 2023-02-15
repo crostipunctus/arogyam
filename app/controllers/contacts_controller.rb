@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
       ContactMailer.contact_email(@contact).deliver_later
       redirect_to root_path, notice: "Your message has been sent. We will get back to you soon."
     else  
-      render :new, alert: "Something went wrong. Try again."
+      render :index, status: :unprocessable_entity
     end 
   end
 

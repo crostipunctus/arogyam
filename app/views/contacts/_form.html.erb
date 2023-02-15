@@ -1,7 +1,7 @@
   <div class="contactform">
   <h3 class="enquiryForm">Contact Form</h3>
   <%= form_with model: @contact, url: contacts_path do |f| %>
-  
+  <%= render "shared/errors", object: @contact %>
     <div class="mb-3">
       <%= f.label :name, class: "form-label" %><br>
       <%= f.text_field  :name, class: "form-control", id: "text-input" %><br>
