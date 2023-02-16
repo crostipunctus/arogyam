@@ -511,10 +511,6 @@ p {
   color: white
 }
 
-.form-control {
-  display: block;
-  width: 500px;
-}
 
 #package {
   font-family: 'Barlow', sans-serif !important;
@@ -704,13 +700,12 @@ h4 {
   /* set width to 90% for mobile and tablet screens */
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .form-control {
-    width: 30%;
-
-    /* set width to 40% for desktop screens */
+    width: 40%;
   }
 }
+
 
 .enquiryForm {
   font-family: 'Noto', serif !important;
@@ -938,4 +933,8 @@ h4 {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
+}
+
+#signinCard {
+  background-color: #8f9779 !important;
 }
