@@ -768,13 +768,22 @@ img {
   background-color: gray !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
 
-  /* Hide the mobile-footer on screens wider than 767px (i.e. desktops and laptops) */
+  /* Show the mobile-footer on screens between 768px and 991px wide (i.e. tablets) */
   .mobile-footer {
-    display: none;
+    display: block !important;
   }
 }
+
+@media (min-width: 992px) {
+
+  /* Hide the mobile-footer on screens wider than 991px (i.e. desktops and laptops) */
+  .mobile-footer {
+    display: none !important;
+  }
+}
+
 
 /* Style the mobile-footer */
 .mobile-footer {
