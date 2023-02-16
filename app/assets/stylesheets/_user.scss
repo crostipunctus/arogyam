@@ -162,7 +162,7 @@
 
 .aboutText {
   padding-top: 50px;
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
 }
 
 .aboutImage {
@@ -315,6 +315,7 @@ div.desc {
 
 .explorebutton {
   margin-top: 20px;
+  width: fit-content;
 }
 
 @media (max-width: 767px) {
@@ -339,7 +340,8 @@ div.desc {
 
 .whyArogyam {
   margin-right: 20px;
-  font-family: 'Noto', serif;
+  font-family: 'Nanum Myeongjo', serif;
+  color: $gray-800 !important;
 }
 
 @media (max-width: 767px) {
@@ -470,14 +472,14 @@ a {
 
 #cardTitle {
   color: white;
-  font-family: 'Noto', serif !important;
+  font-family: 'Nanum Myeongjo', serif !important;
   font-size: 16pt;
 
 }
 
 #card-short {
   color: white !important;
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif;
 }
 
 #roundButton {
@@ -514,7 +516,7 @@ p {
 }
 
 #package {
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   color: black;
 }
 
@@ -540,7 +542,7 @@ p {
 }
 
 .cardHeading {
-  font-family: 'Noto', serif !important;
+  font-family: 'Nanum Myeongjo', serif !important;
 }
 
 
@@ -556,8 +558,8 @@ p {
 
 
 .fs-lg {
-  color: $gray-900 !important;
-  font-family: 'Open Sans', sans-serif;
+  color: $gray-700 !important;
+  font-family: 'Barlow', sans-serif;
   font-size: 12pt !important;
   max-width: 500px;
   bottom: 100px !important;
@@ -579,9 +581,7 @@ h4 {
 
 
 
-.packages {
-  font-family: "Barlow", sans-serif;
-}
+
 
 #treelogo {
   display: inline !important;
@@ -614,7 +614,7 @@ h4 {
 
 #packageName {
   margin-top: 1em !important;
-  font-family: 'Noto', serif;
+  font-family: 'Nanum Myeongjo', serif;
   margin-bottom: 0 !important;
 
 }
@@ -629,7 +629,7 @@ h4 {
 .packageDuration,
 .packageCost {
   display: inline-block;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   color: $gray-700;
 }
 
@@ -798,7 +798,7 @@ h4 {
   margin-bottom: 0 !important;
   color: white !important;
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   text-align: center;
   letter-spacing: 1.25px;
 
@@ -877,7 +877,7 @@ h4 {
   text-align: center;
   margin-top: 10px;
   margin-left: 15px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
 }
 
 .ayurvedicWellness {
@@ -886,14 +886,14 @@ h4 {
   margin-top: 10px;
   margin-left: 15px;
   margin-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
 }
 
 .landingBookButton {
   border: white .5px solid;
   background-color: #555555;
   color: white;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   margin-top: 20px;
 }
 
