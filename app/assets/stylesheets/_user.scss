@@ -99,11 +99,13 @@
 
 .galleryImages img {
   padding-bottom: 10px;
+  cursor: pointer;
 
 }
 
 .accoImage img {
   padding-bottom: 10px;
+  cursor: pointer;
 
 }
 
@@ -595,7 +597,15 @@ h4 {
 }
 
 .card {
-  background-color: #ffc043 !important;
+  background-color: #555555 !important;
+
+
+}
+
+
+
+#roundButton {
+  margin-bottom: 20px !important;
 }
 
 .deleteImage {
@@ -615,9 +625,6 @@ h4 {
   text-align: center !important;
 }
 
-img {
-  border-radius: 30px !important;
-}
 
 .packageDuration,
 .packageCost {
@@ -772,7 +779,8 @@ img {
 
 /* Style the mobile-footer */
 .mobile-footer {
-  background-color: #8ebe71;
+  background-color: #7E6E13;
+  opacity: .92;
   padding: 10px;
   font-size: 14px;
   text-align: center;
@@ -879,4 +887,12 @@ img {
   margin-left: 15px;
   margin-bottom: 10px;
   font-family: 'Open Sans', sans-serif;
+}
+
+.landingBookButton {
+  border: white .5px solid;
+  background-color: #555555;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 20px;
 }
