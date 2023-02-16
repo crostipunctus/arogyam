@@ -960,3 +960,24 @@ header {
 .teamButton {
   margin-top: 20px;
 }
+
+.contactform .form-control {
+  width: 100%;
+  /* default to 100% */
+}
+
+/* For tablet devices with screen width up to 990px */
+@media (max-width: 990px) {
+  .contactform .form-control {
+    width: 100%;
+    /* take up 100% of screen width */
+  }
+}
+
+/* For desktop devices with screen width greater than 990px */
+@media (min-width: 991px) {
+  .contactform .form-control {
+    width: 40%;
+    /* take up 40% of screen width */
+  }
+}
