@@ -69,6 +69,12 @@
 .packageText {
   margin-top: 1em;
   width: 100%;
+  font-size: 12pt;
+
+}
+
+.trix-content {
+  color: $gray-800 !important;
 }
 
 @media (max-width: 768px) {
@@ -521,7 +527,7 @@ p {
 
 .package-titles {
   color: black;
-  font-family: 'Noto', serif !important;
+  font-family: 'Nanum Myeongjo', serif !important;
   margin-top: 10px;
   margin-bottom: 10px;
 
