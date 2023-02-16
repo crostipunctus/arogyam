@@ -847,6 +847,7 @@ h4 {
 
 .centerlogo {
   margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (min-width: 991.98px) {
@@ -937,4 +938,8 @@ h4 {
 
 #signinCard {
   background-color: #8f9779 !important;
+}
+
+header {
+  opacity: .9 !important;
 }
