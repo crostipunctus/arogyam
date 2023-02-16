@@ -289,18 +289,8 @@ div.desc {
 
 }
 
-.newlogo {
-  position: relative;
-  z-index: 2;
-  padding: 2rem 2rem 2rem;
-  text-align: center;
-  top: 11%;
 
-}
 
-.newlogo img {
-  width: 50%;
-}
 
 @media (max-width: 1024px) {
   .newlogo img {
@@ -310,11 +300,6 @@ div.desc {
 
 }
 
-@media (max-width: 767px) {
-  .newlogo {
-    top: 20%;
-  }
-}
 
 
 
@@ -787,7 +772,7 @@ img {
 
 /* Style the mobile-footer */
 .mobile-footer {
-  background-color: #3FA34D;
+  background-color: #8ebe71;
   padding: 10px;
   font-size: 14px;
   text-align: center;
@@ -864,4 +849,34 @@ img {
   .centerlogo {
     display: none;
   }
+}
+
+.newlogo {
+  color: white !important;
+  font-family: 'Noto', serif !important;
+  font-size: 25pt;
+  position: relative;
+  z-index: 2;
+  padding: 2rem 2rem 2rem;
+  text-align: center;
+  top: 35%;
+  line-height: 1.2;
+
+}
+
+.landingpagetext {
+  font-size: 10pt;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ayurvedicWellness {
+  font-size: 10pt;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
 }
