@@ -910,13 +910,24 @@ h4 {
 }
 
 .packageIndex {
+  display: flex;
+  align-items: center;
+  background-color: #6BA292;
 
-  background-color: #DF9A57;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-left: 30px;
   height: 123px;
   border-radius: 10px;
+}
+
+#roundButton {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+@media (max-width: 576px) {
+  .row-cols-1 .col {
+    width: 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
