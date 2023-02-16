@@ -896,3 +896,14 @@ h4 {
   font-family: 'Open Sans', sans-serif;
   margin-top: 20px;
 }
+
+#phoneIcon {
+  font-size: 20px !important;
+
+}
+
+@media only screen and (min-width: 991.98px) {
+  #phoneIcon {
+    margin-left: 10px;
+  }
+}
