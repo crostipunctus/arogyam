@@ -34,7 +34,7 @@ class TeamMembersController < ApplicationController
     @team_member.update(team_member_params)
 
     if @team_member.save 
-      redirect_to team_members_path, notice: "Team member updated"
+      redirect_to about_path, notice: "Team member updated"
     else  
       render :new, status: :unprocessable_entity
     end 

@@ -697,16 +697,18 @@ h4 {
   padding-bottom: 20px;
 }
 
-.form-control {
-  width: 100%;
 
-  /* set width to 90% for mobile and tablet screens */
-}
 
 @media (min-width: 768px) {
   .form-control {
     width: 40%;
   }
+}
+
+.form-control {
+  width: 100%;
+
+  /* set width to 90% for mobile and tablet screens */
 }
 
 
@@ -953,4 +955,8 @@ header {
 
 .packageIndex:hover {
   background-color: #87a59c;
+}
+
+.teamButton {
+  margin-top: 20px;
 }
