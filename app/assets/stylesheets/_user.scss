@@ -946,3 +946,11 @@ h4 {
 header {
   opacity: .9 !important;
 }
+
+.packageIndex:active {
+  background-color: #555555;
+}
+
+.packageIndex:hover {
+  background-color: #87a59c;
+}
