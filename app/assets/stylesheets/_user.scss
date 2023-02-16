@@ -841,3 +841,18 @@ img {
 .no-border-radius {
   border-radius: 0 !important;
 }
+
+.d-lg-none li::marker {
+  display: none !important;
+
+}
+
+.centerlogo {
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 991.98px) {
+  .centerlogo {
+    display: none;
+  }
+}
