@@ -4,23 +4,21 @@
     <h1 class="cardHeading packages text-center">Health Programmes</h1>
     <p class="text-center pb-4 mb-2 mb-lg-3">We provide a range of packages</p>
     <!-- Services grid-->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 pb-sm-3 pb-md-4 pb-xl-5">
-      <!-- Item-->
-      <% @packages.each do |package| %>
-      <div class="col"> <a class="card card-hover-secondary bg-secondary border-0 h-100 text-decoration-none" href="/packages/<%= package.id %>" data-turbo="false">
-          <div class="card-body pb-0">
-            <h3 id="cardTitle" class="h4 card-title mt-0"><%= package.name %></h3>
-            <h6 id="card-short"><%= package.short_description %></h6>
-          </div>
-          <div class="card-footer border-0 py-3 my-3 mb-sm-4">
-            <div id="roundButton" class="btn btn-lg btn-icon btn-outline-primary rounded-circle pe-none"><i class="bi bi-arrow-right"></i>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 pb-sm-3 pb-md-4 pb-xl-5">
+        <% @packages.each do |package| %>
+          <div class="col">
+            <div class="packageIndex">
+              <h3 id="cardTitle" class="h4 card-title mt-0"><%= package.name %></h3>
+              <h6 id="card-short"><%= package.short_description %></h6>
+              <div id="roundButton">
+                <i class="bi bi-arrow-right"></i>
+              </div>
             </div>
           </div>
-        </a>
+        <% end %>
       </div>
-      <% end %>      
     </div>
- 
 </section>
 
 
