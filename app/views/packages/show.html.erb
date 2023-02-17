@@ -2,12 +2,15 @@
    <%= link_to "<i class='bi bi-arrow-left-circle'></i>".html_safe, packages_path, id:"back_to" %>
     <h1 id="packageName" class="text-center"><%= @package.name %></h1>
     <div id="packageTagline"><%= @package.short_description %></div>
+    
     <div class="durationCostContainer">
       <div class="packageDuration"><%= "#{@package.duration} days"%></div>
       <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
       <%= link_to "Book programme", bookings_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %>
-
     </div>
+    <div class="package-image">
+          <%= package_image(@package) %>
+        </div> 
       <div class="packageShow">
         <div class="packageText">
           <% if @package.dates.present? %>
@@ -28,9 +31,7 @@
               <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
             </div>
           <% end %>
-        <div class="package-image">
-          <%= package_image(@package) %>
-        </div> 
+        
         </div>
       </div>
   </div>

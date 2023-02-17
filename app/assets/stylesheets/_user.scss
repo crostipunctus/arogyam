@@ -626,7 +626,7 @@ h4 {
 }
 
 #packageTagline {
-  margin-top: 1em;
+  margin-top: 5px;
   margin-bottom: 2em;
   text-align: center !important;
 }
@@ -667,13 +667,16 @@ h4 {
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid $gray-600;
+  border: none;
   width: fit-content;
   margin: 0 auto;
   margin-bottom: 1em;
-  border-radius: 10px;
+  border-radius: 30px;
   background-color: $gray-200;
   color: $gray-600;
+  box-shadow: 2px 2px 10px rgba(84, 83, 83, 0.4);
+  /* Here, 0 is the horizontal offset, 2px is the vertical offset, 4px is the blur radius, and rgba(0, 0, 0, 0.4) is the color and opacity of the shadow */
+
 }
 
 
@@ -747,7 +750,7 @@ h4 {
 .bookProgButton {
   background-color: white;
   border: gray 1px solid;
-  width: 80%;
+  width: 90%;
   margin-top: 20px;
   margin-bottom: 10px;
   color: $gray-700;
