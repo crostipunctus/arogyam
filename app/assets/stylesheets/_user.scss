@@ -913,10 +913,25 @@ h4 {
   z-index: 2;
   padding: 2rem 2rem 2rem;
   text-align: center;
-  top: 40%;
+
   line-height: 1.2;
 
 }
+
+@media (max-width: 990px) {
+  .newlogo {
+    top: 25%;
+  }
+}
+
+@media (min-width: 990px) {
+  .newlogo {
+    top: 40%;
+  }
+}
+
+
+
 
 .landingpagetext {
   font-size: 10pt;
