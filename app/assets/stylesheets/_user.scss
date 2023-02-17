@@ -963,7 +963,7 @@ h4 {
 }
 
 header {
-  opacity: .9 !important;
+  opacity: .95 !important;
 }
 
 .packageIndex:active {
@@ -1002,4 +1002,10 @@ header {
 .PackImage {
   border-radius: 20px !important;
   box-shadow: 2px 2px 10px rgba(84, 83, 83, 0.4);
+}
+
+.TestimoText {
+  font-family: 'Barlow', sans-serif;
+  width: 80%;
+  margin: auto;
 }
