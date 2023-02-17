@@ -1065,3 +1065,7 @@ header {
   margin: 10px;
   font-family: 'Barlow', sans-serif;
 }
+
+.galleryPagination .active a {
+  color: $terracota;
+}
