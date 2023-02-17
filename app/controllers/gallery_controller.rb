@@ -5,6 +5,7 @@ class GalleryController < ApplicationController
 
   def index 
     @gallery = Gallery.find(2)
+    @images = @gallery.images.page(params[:page]).per(4)
   end 
 
   def new 

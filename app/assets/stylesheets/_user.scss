@@ -1053,3 +1053,15 @@ header {
 .galleryIndex {
   padding-top: 10em !important;
 }
+
+/* Pagination button styles */
+.galleryPagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.galleryPagination a {
+  margin: 10px;
+  font-family: 'Barlow', sans-serif;
+}
