@@ -30,12 +30,13 @@
     </div>
     
   </div>
+  
 
   <section class="container pb-2 pb-sm-3 pt-5 mt-lg-3 mt-xl-4 mt-xxl-5">
         <h2 class="cardHeading h1 text-center pt-2 pt-sm-4 pt-lg-5 pb-2 mb-3 mb-lg-4 mt-md-3 mt-lg-0">The Team</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
+        <div id="team-members" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
           <% team_index.each do |team_member| %>
-            <div class="col text-center pt-2"><%= image_tag(team_member.avatar, class: "card-lifted d-block rounded-5 mb-3", width: 340) %>
+            <div class="col text-center pt-2"><%= image_tag(team_member.avatar, class: "card-lifted d-block rounded-5 mb-3") %>
                 <h3 class="h5 mb-1"><%= team_member.name %></h3>
                 <p class="mb-0 text-muted"><%= team_member.role %></p></a>
                 <p class="teamMemberContent"><%=  team_member.content %></p> 
@@ -52,10 +53,47 @@
         </div>
   </section>
 
+  <div class="aboutContainer">
+      <h2 class="cardHeading h1 text-center pt-2 pt-sm-4 pt-lg-5 pb-2 mb-3 mb-lg-4 mt-md-3 mt-lg-0">Accommodation</h2>
+      <div class="aboutText">  
+        ArogyaM has two wings separated by a central courtyard where Dhanwantri, 
+        the deity of the wellness center, is enshrined under a 40-year-old tamarind tree. 
+        The guest rooms are beautifully designed and tastefully furnished for single, 
+        double, and triple occupancy. 
+        The nine rooms in the guest wing are named after various herbs such as <i>dhatri</i>, <i>japa</i>, <i>abhaya</i>, <i>aparajitha</i>, and so on. 
+        <br>
+        <br>
+        <strong>Guidelines:</strong>
+        <br>
+        <br>
+        In order to benefit most out of the therapies, it is essential that certain Yamas &amp; Niyamas (Rules
+        &amp; Regulations) are observed by all the participants:
+        <ul>
+          <li>The Sacred Grove campus is a non-smoking and non-intoxicant zone. Smoking, drinking, or consuming any intoxicants is strictly prohibited.</li>
+          <li>Follow the physician's advised dos and don'ts strictly.</li>
+          <li>Respect the peaceful atmosphere by avoiding loud music or disruptive group activities.</li>
+          <li>Do not pluck any flowers, fruits, or leaves from the orchards and gardens.</li>
+          <li>Vegetarian meals are served, and individual cooking or bringing outside food is not allowed.</li>
+          <li>Be eco-conscious and use plastics sparingly. If necessary, dispose of plastic waste in designated bins.</li>
+          <li>Dress appropriately to be in harmony with the spirit of the place.</li>
+          <li>Follow the program schedule and its timings for treatments and activities.</li>
+          <li>Keep rooms and surroundings clean at all times. The housekeeping staff will clean the rooms every other day from 9 AM to 11 AM.</li>
+          <li>Dispose of waste in designated bins.</li>
+          <li>We welcome your suggestions and feedback. Please email us at: 
+          <strong><a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a></strong><br></li>
+        </ul>
+    </div>
+  </div>
+    
+</section>
+<div class="accoImage">
+        <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/acco-1.jpeg",  data: {fancybox: 'imageGallery' }, class: "AccomImage") %>
+        <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/acco-2.jpeg", data: {fancybox: 'imageGallery' }, class: "AccomImage") %>
+        <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/acco-4.jpg", data: {fancybox: 'imageGallery' }, class: "AccomImage") %>
+        <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/acco-3.jpg",  data: {fancybox: 'imageGallery' }, class: "AccomImage") %>
+</div>
+
 
 
  
   
-</section>
-<div class="aboutImage">
-</div>

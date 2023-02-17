@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   post "testimonials" => "testimonials#create"
   delete "testimonials/:id" => "testimonials#destroy"
 
-  get "accommodation" => "accommodation#index"
 
   resources :blogs
   get "packages/new" => "packages#new" 
