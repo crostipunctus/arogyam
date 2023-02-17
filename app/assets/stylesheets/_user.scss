@@ -1059,6 +1059,8 @@ header {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  max-width: 90%;
+  flex-wrap: nowrap;
 }
 
 .galleryPagination a {
