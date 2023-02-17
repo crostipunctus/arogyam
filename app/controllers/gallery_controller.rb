@@ -3,6 +3,10 @@ class GalleryController < ApplicationController
 
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
+  def index 
+    @gallery = Gallery.find_by(title: "Gallery gallery")
+  end 
+
   def new 
     @gallery = Gallery.new 
   end 
