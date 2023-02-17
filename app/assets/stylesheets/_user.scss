@@ -907,13 +907,13 @@ h4 {
 
 .newlogo {
   color: white !important;
-  font-family: 'Noto', serif !important;
+  margin-top: 30px;
   font-size: 25pt;
   position: relative;
   z-index: 2;
   padding: 2rem 2rem 2rem;
   text-align: center;
-  top: 35%;
+  top: 40%;
   line-height: 1.2;
 
 }
@@ -1078,4 +1078,22 @@ header {
   font-family: 'Barlow', sans-serif;
   transition: all 0.2s ease-in-out;
   color: $terracota !important;
+}
+
+
+@media (max-width: 990px) {
+  .big-logo {
+    display: none;
+  }
+}
+
+@media (min-width: 990px) {
+  .big-logo {
+    display: block;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
 }
