@@ -4,7 +4,7 @@ class GalleryController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index 
-    @gallery = Gallery.find(2)
+    @gallery = Gallery.find(13)
     @images = @gallery.images.page(params[:page]).per(4)
   end 
 
