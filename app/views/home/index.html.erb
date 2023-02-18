@@ -23,7 +23,6 @@
     <% gallery_index.images.each do |image| %>
       <div class="imageContainer">
         <%= image_tag(image, src: "https://d1w11gv0j27jrz.cloudfront.net#{rails_blob_path(image, disposition: "attachment", only_path: true)}", data: {fancybox: 'imageGallery' }) %>
-
       </div>
     <% end %>
   <% else %>
