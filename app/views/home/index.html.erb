@@ -24,11 +24,15 @@
       <div class="imageContainer">
         <%= image_tag(image, src: "https://d1w11gv0j27jrz.cloudfront.net#{rails_blob_path(image, disposition: "attachment", only_path: true)}", data: {fancybox: 'imageGallery' }) %>
       </div>
+      <% if current_user_admin? %>
+        <%= link_to "Delete image", destroy_gallery_path(gallery_index, param2: "#{image.id}"), class: "deleteImage btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %> 
+      <% end %>
     <% end %>
   <% else %>
       <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
   <% end %>
 </div>
+
 
 
           
