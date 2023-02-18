@@ -900,7 +900,7 @@ h4 {
   z-index: 2;
   padding: 2rem 2rem 2rem;
   text-align: center;
-
+  margin-top: 30px;
   line-height: 1.2;
 
 }
@@ -913,7 +913,7 @@ h4 {
 
 @media (min-width: 990px) {
   .newlogo {
-    top: 40%;
+    top: 50%;
   }
 }
 
@@ -1076,6 +1076,9 @@ h4 {
   color: $terracota !important;
 }
 
+.big-logo {
+  margin-bottom: 60px;
+}
 
 @media (max-width: 990px) {
   .big-logo {
@@ -1087,7 +1090,7 @@ h4 {
   .big-logo {
     display: block;
     position: absolute;
-    top: 25%;
+    top: 23%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
