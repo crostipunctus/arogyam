@@ -26,7 +26,7 @@
           <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link", data: {turbo: false}%></li>
           <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link", data: {turbo: false}%></li> 
           <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
-          <%= link_to "Book programme", bookings_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+          <%= link_to "Book programme", packages_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% if current_user %>
             <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
           <% end %>
