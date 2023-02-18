@@ -3,9 +3,7 @@
     <span>
       <%= link_to "<i class='bi bi-telephone'></i>".html_safe, contacts_path, id:"phoneIcon" %>
     </span>
-    
    <div class="centerLogoCont"> <%= link_to(image_tag('https://d1w11gv0j27jrz.cloudfront.net/full-logo.png', width: 150, class: "centerlogo no-border-radius"), root_path, class: "nav-link") %></div>
-    
     <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,7 +28,6 @@
           <% if current_user %>
             <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
           <% end %>
-          
         </ul>
       </div>
     </div>
