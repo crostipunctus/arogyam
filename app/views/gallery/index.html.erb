@@ -6,7 +6,7 @@
   <div class="galleryImages">
   <% if @images.any? %>
     <% @images.each do |image| %>
-    <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }) %>
+    <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }, alt: 'gallery-image') %>
 
    
     <% if current_user_admin? %>
@@ -15,7 +15,7 @@
     <% end %>
     
   <% else %>
-    <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
+    <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }, alt: 'flowers-placeholder') %>
   <% end %>
   
   </div>

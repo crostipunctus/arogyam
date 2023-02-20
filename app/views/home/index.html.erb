@@ -22,14 +22,14 @@
   <% if gallery_index.images.attached? %>
     <% gallery_index.images.each do |image| %>
       <div class="imageContainer">
-    <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }) %>
+    <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }, alt: 'home-page-gallery') %>
       </div>
       <% if current_user_admin? %>
         <%= link_to "Delete image", destroy_gallery_path(gallery_index, param2: "#{image.id}"), class: "deleteImage btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %> 
       <% end %>
     <% end %>
   <% else %>
-      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }) %>
+      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }, alt: 'placeholder-flower') %>
   <% end %>
 </div>
 
