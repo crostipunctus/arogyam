@@ -41,5 +41,22 @@ Rails.application.routes.draw do
   post "galleries" => "gallery#create"
 
   resources :contacts, only: [:index, :new, :create]
+
+  # config/routes.rb
+  # config/routes.rb
+
+
+  direct :rails_public_blob do |blob|
+    # Preserve the behaviour of `rails_blob_url` inside these environments
+    # where S3 or the CDN might not be configured
+    if Rails.env.development? || Rails.env.test?
+      route_for(:rails_blob, blob)
+    else
+      # Use an environment variable instead of hard-coding the CDN host
+      # You could also use the Rails.configuration to achieve the same
+      File.join(Rails.application.credentials.cloudfront[:host], blob.key)
+    end
+  end
+
   
 end
