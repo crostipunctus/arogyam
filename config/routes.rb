@@ -60,7 +60,9 @@ direct :cdn_image do |model, options|
     filename       = model.blob.filename
 
     route_for(
-      
+      :rails_blob_representation_proxy,
+      signed_blob_id,
+      variation_key,
       filename,
       options.merge(host: Rails.application.credentials.cloudfront[:host])
     )
