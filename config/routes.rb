@@ -43,7 +43,9 @@ Rails.application.routes.draw do
   resources :contacts, only: [:index, :new, :create]
 
   # config/routes.rb
-
+  direct :cdn_storage_proxy do |attachment|
+    route_for(:rails_storage_proxy, attachment.variant(resize: "100x100")).gsub(/https?:\/\/[^\/]+\//, "https://d1w11gv0j27jrz.cloudfront.net")
+  end
 
   
 end
