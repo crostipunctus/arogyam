@@ -14150,7 +14150,7 @@ button:focus {
 [class*=" bi-"] {
   display: inline-block;
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "around-icons" !important;
+
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -15584,7 +15584,7 @@ h6>a:hover,
   left: 0;
   margin: -0.1875rem -0.1875rem 1rem -0.1875rem;
   color: var(--ar-blockquote-mark-color);
-  font-family: "around-icons";
+
   font-size: var(--ar-blockquote-mark-size);
   line-height: 1;
   content: "\ea3f";
@@ -15973,7 +15973,7 @@ label {
 .password-toggle-btn .password-toggle-indicator {
   transition: color 0.2s ease-in-out;
   color: var(--ar-gray-600);
-  font-family: "around-icons";
+
   font-size: 1.25em;
   font-style: normal;
 }
@@ -16568,7 +16568,7 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
   will-change: transform;
   transition: transform 0.2s ease-in-out;
   transform: rotate(180deg);
-  font-family: "around-icons";
+
   font-size: 1.5em;
   content: "\e937";
 }
@@ -17047,7 +17047,7 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 
 .dropdown-toggle::before,
 .dropdown-toggle::after {
-  font-family: "around-icons";
+
   font-size: 1.375em;
   font-weight: normal;
   vertical-align: middle !important;
@@ -18365,7 +18365,7 @@ hr.dropdown-divider {
 
 .breadcrumb-item+.breadcrumb-item::before {
   margin-top: 0.15em;
-  font-family: "around-icons";
+
   font-weight: normal;
   font-size: var(--ar-breadcrumb-divider-font-size);
   line-height: 1;
