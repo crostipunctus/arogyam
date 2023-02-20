@@ -6,10 +6,8 @@
   <div class="galleryImages">
   <% if @images.any? %>
     <% @images.each do |image| %>
-      <%= image_tag cdn_image_url(image) %>
-
-
-      <% if current_user_admin? %>
+    <%= image_tag rails_storage_proxy_path(image)%>      
+    <% if current_user_admin? %>
         <%= link_to "Delete image", destroy_gallery_path(@gallery, param2: "#{image.id}"), class: "deleteImage btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %> 
       <% end %>
     <% end %>

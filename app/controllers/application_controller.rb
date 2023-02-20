@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   helper_method :current_user_admin?
   helper_method :gallery_index
   helper_method :team_index
