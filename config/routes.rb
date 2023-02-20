@@ -44,31 +44,19 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   # config/routes.rb
-direct :cdn_image do |model, options|
-  expires_in = options.delete(:expires_in) { ActiveStorage.urls_expire_in }
 
-  if model.respond_to?(:signed_id)
-    route_for(
-      :rails_service_blob_proxy,
-      model.signed_id(expires_in: expires_in),
-      model.filename,
-      options.merge(host: Rails.application.credentials.cloudfront[:host])
-    )
-  else
-    signed_blob_id = model.blob.signed_id(expires_in: expires_in)
-    variation_key  = model.variation.key
-    filename       = model.blob.filename
 
-    route_for(
-      :rails_blob_representation_proxy,
-      signed_blob_id,
-      variation_key,
-      filename,
-      options.merge(host: Rails.application.credentials.cloudfront[:host])
-    )
+  direct :rails_public_blob do |blob|
+    # Preserve the behaviour of `rails_blob_url` inside these environments
+    # where S3 or the CDN might not be configured
+    if Rails.env.development? || Rails.env.test?
+      route_for(:rails_blob, blob)
+    else
+      # Use an environment variable instead of hard-coding the CDN host
+      # You could also use the Rails.configuration to achieve the same
+      File.join(Rails.application.credentials.cloudfront[:host], blob.key)
+    end
   end
-end
-
 
   
 end
