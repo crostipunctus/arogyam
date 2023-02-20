@@ -6,7 +6,7 @@
   <div class="galleryImages">
   <% if @images.any? %>
     <% @images.each do |image| %>
-    <%= image_tag(rails_public_blob_url(image)) %>
+    <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }) %>
 
    
     <% if current_user_admin? %>
