@@ -10,5 +10,13 @@ module ApplicationHelper
     request.original_url
   end
 
+  def dev_images(image_name)
+    if Rails.env.development? || Rails.env.test?
+      image_name
+    else
+      "#{Rails.application.credentials.cloudfront[:host]}/#{image_name}"
+    end
+  end 
+
  
 end
