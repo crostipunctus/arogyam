@@ -10,9 +10,14 @@
       <%= f.text_field :email, class: "form-control", id: "email-input" %><br>
     </div>
     <div>
-      <%= f.label :message, class: "form-label" %><br>
+    
+      <%= f.label :message, 'Health Programme', class: "form-label" %><br>
+    <% if @name.present? %>
+      <%= f.text_area :message, value: "Health Programme Name: #{@name}", class: "form-control", id: "textarea-input" %><br>
+    <% else %>
       <%= f.text_area :message, class: "form-control", id: "textarea-input", 
-        placeholder: "Send me a message"%><br>
+        placeholder: "Send us a message"%><br>
+    <% end %>
     </div>
     <div>
       <%= f.submit 'Send Message', class: 'orangeButton btn btn-outline-primary rounded-pill' %>

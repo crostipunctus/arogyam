@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'bookings' => 'bookings#index'
+  get 'bookings' => 'bookings#index', as: :bookings
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get "galleries" => "gallery#new"
   post "galleries" => "gallery#create"
 
-  resources :contacts, only: [:index, :new, :create]
+  resources :contacts, only: [:index, :create]
 
   # config/routes.rb
   # config/routes.rb
