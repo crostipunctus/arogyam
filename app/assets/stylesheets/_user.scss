@@ -90,10 +90,7 @@ body {
 }
 
 @media only screen and (min-width: 900px) {
-  .galleryImages img {
-    padding-right: 10px;
 
-  }
 
   .accoImage img {
     padding-right: 10px;
@@ -101,16 +98,10 @@ body {
   }
 }
 
-@media only screen and (max-width: 900px) {
-  .galleryImages {
-    padding-right: 0 !important;
-  }
-}
-
 
 
 .galleryImages img {
-  padding-bottom: 10px;
+
   cursor: pointer;
 
 }
@@ -142,11 +133,6 @@ body {
 
 
 
-@media only screen and (max-width: 767px) {
-  .galleryImages {
-    width: 100%;
-  }
-}
 
 
 
@@ -1107,11 +1093,11 @@ h4 {
 }
 
 .imageContainer {
-  flex: 1 1 500px;
+  flex: 1 1 100px;
   /* This sets the width to 500px, and allows the container to shrink or grow as needed */
-  margin: 5px;
+  margin: 1px;
   height: 0;
-  padding-bottom: 50%;
+  padding-bottom: 20%;
   /* This value should be the aspect ratio of the image (height / width) in percentage */
   position: relative;
 }
