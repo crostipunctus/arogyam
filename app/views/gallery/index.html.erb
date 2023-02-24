@@ -6,7 +6,10 @@
   <div class="galleryImages">
   <% if @images.any? %>
     <% @images.each do |image| %>
+          <div class="GalleryImageContainer">
+
     <%= image_tag(rails_public_blob_url(image), data: {fancybox: 'imageGallery' }, alt: 'gallery-image') %>
+    </div>
     <% if current_user_admin? %>
         <%= link_to "Delete image", destroy_gallery_path(@gallery, param2: "#{image.id}"), class: "deleteImage btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } %> 
       <% end %>
