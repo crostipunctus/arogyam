@@ -1152,3 +1152,50 @@ h4 {
   object-fit: cover;
   /* Use "cover" to fill the container without stretching the image */
 }
+
+#infoCard {
+  background-color: $gray-500;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 10%;
+}
+
+
+
+
+.card-container {
+  margin-top: 30px;
+}
+
+.card-container .card-body {
+  background-color: #6BA292;
+  border-radius: 20px;
+}
+
+.card {
+  flex: 0 0 calc(33.333% - 0.75rem);
+  max-width: calc(33.333% - 0.75rem);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 990px) {
+  .card {
+    flex-basis: calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .card {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.info-card-title {
+  color: white;
+  font-family: 'Barlow', sans-serif;
+}
