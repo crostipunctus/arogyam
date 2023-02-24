@@ -1179,6 +1179,10 @@ h4 {
   margin-bottom: 1.5rem;
 }
 
+.card-body {
+  box-shadow: 4px 4px 5px rgba(84, 83, 83, 0.4);
+}
+
 @media (max-width: 990px) {
   .card {
     flex-basis: calc(50% - 1rem);
@@ -1221,4 +1225,8 @@ h4 {
 
 #signinCard .form-control {
   width: 80%;
+}
+
+#signInCard .card-body {
+  box-shadow: 0 !important;
 }
