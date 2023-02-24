@@ -1165,12 +1165,12 @@ h4 {
 
 
 .card-container {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .card-container .card-body {
   background-color: #6BA292;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .card {
@@ -1198,4 +1198,27 @@ h4 {
 .info-card-title {
   color: white;
   font-family: 'Barlow', sans-serif;
+}
+
+.cardButton {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: white;
+  color: $gray-700;
+  border: none;
+}
+
+.cardButton:hover {
+  background-color: $gray-700 !important;
+}
+
+#signinCard {
+  margin-top: 150px;
+  border-radius: 30px;
+  width: 100%;
+  padding: 30px;
+}
+
+#signinCard .form-control {
+  width: 80%;
 }
