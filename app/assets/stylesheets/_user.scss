@@ -1169,7 +1169,7 @@ h4 {
 }
 
 .card-container .card-body {
-  background-color: #6BA292;
+  background-color: $gray-200;
   border-radius: 30px;
 }
 
@@ -1180,7 +1180,7 @@ h4 {
 }
 
 .card-body {
-  box-shadow: 4px 4px 5px rgba(84, 83, 83, 0.4);
+  border: 1px solid $gray-500;
 }
 
 @media (max-width: 990px) {
@@ -1200,8 +1200,12 @@ h4 {
 }
 
 .info-card-title {
-  color: white;
+  color: #153462;
   font-family: 'Barlow', sans-serif;
+}
+
+.card-text {
+  color: $gray-700;
 }
 
 .cardButton {
@@ -1209,7 +1213,7 @@ h4 {
   padding-bottom: 5px;
   background-color: white;
   color: $gray-700;
-  border: none;
+  border: 1px solid $gray-500;
 }
 
 .cardButton:hover {
