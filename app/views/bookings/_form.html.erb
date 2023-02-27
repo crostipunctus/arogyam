@@ -16,7 +16,7 @@
         <%= f.collection_select :package_id, Package.all, :id, :name, {include_blank: false}, {class: "form-select"} %>
       </div>
       <div>
-        <%= f.label :message, 'Health Programme', class: "form-label" %><br>
+        <%= f.label :message, 'Message (optional)', class: "form-label" %><br>
         <%= f.text_area :message, class: "form-control", id: "textarea-input", 
           placeholder: "Send us a message"%><br>
       </div>
