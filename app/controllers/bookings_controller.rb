@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   def index  
-    @name = params[:name]
+    
     @booking = Booking.new
   end 
 
@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
   private 
 
   def booking_params 
-    params.require(:booking).permit(:name, :email, :message)
+    params.require(:booking).permit(:name, :email, :message, :package_id)
   end 
 
 

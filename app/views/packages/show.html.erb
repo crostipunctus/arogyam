@@ -6,7 +6,7 @@
     <div class="durationCostContainer">
       <div class="packageDuration"><%= "#{@package.duration} days"%></div>
       <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
-      <%= link_to "Book programme", bookings_path(name: @package.name), class: "bookProgButton btn btn-outline-primary rounded-pill" %>
+      <%= link_to "Book programme", bookings_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %>
     </div>
     <div class="package-image">
           <%= package_image(@package) %>
