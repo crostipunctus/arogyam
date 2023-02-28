@@ -6,5 +6,9 @@ module PackagesHelper
       image_tag "flowers.jpg", alt: 'flower-placeholder'
     end
   end
+
+  
+
 end
 
+ 

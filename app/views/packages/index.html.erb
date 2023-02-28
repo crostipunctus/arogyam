@@ -7,22 +7,26 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 pb-sm-3 pb-md-4 pb-xl-5 ">
         <% @packages.each do |package| %>
           <div class="col">
-            <%= link_to package_path(package) do %>
-              <div class="packageIndex">
-                <div class="card-info">
-                  <h3 id="cardTitle" class="h4 card-title mt-0"><%= package.name %></h3>
-                  <h6 id="card-short"><%= package.short_description %></h6>
+              <div class="newpackagecard">
+                <% if package.package_image.attached? %>
+                  <%= image_tag(rails_public_blob_url(package.package_image, width: 100),  class: "card-img-top", alt: "Card image" )%>
+                <% else %>
+                  <%= image_tag('flowers.jpg', class: "card-img-top", alt: "Card image" )%>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= package.name %></h5>
+                  <p class="card-text"><%= package.short_description %></p>
+                  
+                  <%= link_to "Details", package_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
                 </div>
-                <div id="roundButton">
-                  <i class="bi bi-arrow-right"></i>
-                </div>
-              </div>
-            <% end %>
+              </div> 
           </div>
         <% end %>
       </div>
     </div>
 </section>
+
+
 
 
 
