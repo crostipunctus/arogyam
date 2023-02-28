@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   def index  
-    
+    @name = params[:name]
     @booking = Booking.new
   end 
 

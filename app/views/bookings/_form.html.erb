@@ -3,6 +3,16 @@
   <%= form_with model: @booking, url: bookings_path do |f| %>
     <%= render "shared/errors", object: @booking %>
     <div class="form-group">
+      <div>
+        <% if @name.present? %>
+          <h5 id="packageNameSelection">Selected programme: <strong><%= @name %></strong></h5>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :package_id, 'Change your selection:', class: "form-label" %>
+        <%= f.collection_select :package_id, Package.order(Arel.sql("name = '#{@name}' DESC")), :id, :name, {include_blank: false}, {class: "form-select", id: 'packageSelect'}%>
+      </div>
+      <div>
       <div class="mb-3">
         <%= f.label :name, class: "form-label" %><br>
         <%= f.text_field  :name, class: "form-control", id: "text-input" %><br>
@@ -11,11 +21,6 @@
         <%= f.label :email, class: "form-label" %><br>
         <%= f.text_field :email, class: "form-control", id: "email-input" %><br>
       </div>
-      <div>
-        <%= f.label :package_id, 'Which package are you interested in?', class: "form-label" %>
-        <%= f.collection_select :package_id, Package.all, :id, :name, {include_blank: false}, {class: "form-select"} %>
-      </div>
-      <div>
         <%= f.label :message, 'Message (optional)', class: "form-label" %><br>
         <%= f.text_area :message, class: "form-control", id: "textarea-input", 
           placeholder: "Send us a message"%><br>
