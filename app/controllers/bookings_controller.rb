@@ -1,7 +1,16 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: [:bookings_list]
+
+  before_action :require_admin, only: [:bookins_list]
+
+
   def index  
     @name = params[:name]
     @booking = Booking.new
+  end 
+
+  def bookings_list 
+    @bookings = Booking.all
   end 
 
   def create

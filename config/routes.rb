@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'bookings' => 'bookings#index', as: :bookings
   post 'bookings' => 'bookings#create'
+  get 'bookings_list' => 'bookings#bookings_list'
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
