@@ -11,7 +11,7 @@
                 <% if package.package_image.attached? %>
                   <%= image_tag(rails_public_blob_url(package.package_image, width: 100),  class: "card-img-top", alt: "Card image" )%>
                 <% else %>
-                  <%= image_tag('flowers.jpg', class: "card-img-top", alt: "Card image" )%>
+                  <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "Card image" )%>
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title"><%= package.name %></h5>
