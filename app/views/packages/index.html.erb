@@ -16,8 +16,8 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= package.name %></h5>
                   <p class="card-text"><%= package.short_description %></p>
-                  <p class="card-text"><%= package.cost %></p>
-                  <p class="card-text"><%= package.duration %></p>
+                  <p class="card-text"><%= "Rs. #{package.cost}" %></p>
+                  <p class="card-text"><%= "#{package.duration} days"  %></p>
 
                   
                   <%= link_to "Details", package_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
