@@ -12,7 +12,7 @@ import "trix"
 import "@rails/actiontext"
 import './show_footer_on_scroll'
 import './collection_select'
-
+import './swiper'
 
 import "./theme"
 

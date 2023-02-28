@@ -3,29 +3,34 @@
     <!-- Page title-->
     <h1 class="cardHeading packages text-center">Health Programmes</h1> 
     <!-- Services grid-->
-    <div class="packageindexcontainer">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 pb-sm-3 pb-md-4 pb-xl-5 ">
-        <% @packages.each do |package| %>
-          <div class="col">
-              <div class="newpackagecard">
-                <% if package.package_image.attached? %>
-                  <%= image_tag(rails_public_blob_url(package.package_image, width: 100),  class: "card-img-top", alt: "Card image" )%>
-                <% else %>
-                  <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "Card image" )%>
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= package.name %></h5>
-                  <p class="card-text"><%= package.short_description %></p>
-                  <p class="card-text"><%= "Rs. #{package.cost}" %></p>
-                  <p class="card-text"><%= "#{package.duration} days"  %></p>
-
-                  
-                  <%= link_to "Details", package_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+    
+        <div class="swiper">
+          <div class="swiper-wrapper">
+              <% @packages.each do |package| %>
+                <div class="swiper-slide">
+                  <div class="newpackagecard">
+                    <% if package.package_image.attached? %>
+                      <%= image_tag(rails_public_blob_url(package.package_image),  class: "card-img-top", alt: "Card image" )%>
+                    <% else %>
+                      <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "Card image" )%>
+                    <% end %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= package.name %></h5>
+                      <p class="card-text"><%= package.short_description %></p>
+                      <p class="card-text"><%= "Rs. #{package.cost}" %></p>
+                      <p class="card-text"><%= "#{package.duration} days" %></p>                  
+                      <%= link_to "Details", package_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+                    </div>
+                  </div>        
                 </div>
-              </div> 
+              <% end %>
           </div>
-        <% end %>
-      </div>
+        
+       
+      
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-scrollbar"></div>
     </div>
 </section>
 
