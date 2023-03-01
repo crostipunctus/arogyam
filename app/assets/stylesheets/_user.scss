@@ -1177,7 +1177,7 @@ h4 {
 }
 
 .card-container .card-body {
-  background-color: $gray-200;
+  background-color: white;
   border-radius: 30px;
 }
 
@@ -1274,7 +1274,7 @@ h4 {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+
   border-radius: 20px;
 }
 
@@ -1306,25 +1306,22 @@ h4 {
   margin-left: 0;
 }
 
-.swiper-container {
-  width: 100%;
-
+.homeSwiper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 90%;
+  padding: 50px;
 }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+.homeSwiperContainer {
+  background-color: $gray-200;
+  width: 100%;
+}
 
-  /* Center slide text vertically */
-
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+@media (max-width: 990px) {
+  .homeSwiper {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
