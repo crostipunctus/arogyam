@@ -1343,3 +1343,14 @@ h4 {
   margin-bottom: 30px !important;
   font-size: 20pt;
 }
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.newpackagecard {
+  margin: 1rem;
+}
