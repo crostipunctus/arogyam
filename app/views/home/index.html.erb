@@ -13,7 +13,7 @@
    
 <div class="hometextContainer">
   <h2 class="whyArogyam">Why ArogyaM?</h2>
-  <div class="hometext2">
+  <div class="hometext2"> 
     <%= render "home_text" %>
       <%= link_to "Explore programmes", packages_path, class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
   </div>
@@ -33,6 +33,40 @@
       <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }, alt: 'placeholder-flower') %>
   <% end %>
 </div>
+
+<div class="homeSwiperContainer">
+  <h1 class="cardHeading packages text-center">Health Programmes</h1> 
+  <div class="homeSwiper">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+          <% @packages.each do |package| %>
+            <div class="swiper-slide">
+              <div class="newpackagecard">
+                <% if package.package_image.attached? %>
+                  <%= image_tag(rails_public_blob_url(package.package_image),  class: "card-img-top", alt: "Card image" )%>
+                <% else %>
+                  <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "Card image" )%>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= package.name %></h5>
+                  <p class="card-text"><%= package.short_description %></p>
+                  <p class="card-text"><%= "Rs. #{package.cost}" %></p>
+                  <p class="card-text"><%= "#{package.duration} days" %></p>                  
+                  <%= link_to "Details", package_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+                </div>
+              </div>        
+            </div>
+          <% end %>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      
+    </div>
+  </div>
+</div>
+
+
+
 
 <div class="container">
   <div class="card-container d-flex flex-wrap justify-content-between">
