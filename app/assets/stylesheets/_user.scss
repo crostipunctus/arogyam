@@ -776,6 +776,10 @@ h4 {
   background-color: gray !important;
 }
 
+.mobile-footer {
+  z-index: 999;
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
 
   /* Show the mobile-footer on screens between 768px and 991px wide (i.e. tablets) */
@@ -817,6 +821,7 @@ h4 {
   font-family: 'Barlow', sans-serif;
   text-align: center;
   letter-spacing: 1.25px;
+
 
 }
 
