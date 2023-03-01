@@ -1317,6 +1317,7 @@ h4 {
 .homeSwiperContainer {
   background-color: $gray-200;
   width: 100%;
+  padding-top: 50px;
 }
 
 @media (max-width: 990px) {
@@ -1324,4 +1325,8 @@ h4 {
     padding-left: 10px;
     padding-right: 10px;
   }
+}
+
+.swiperHeading {
+  margin-top: 30px !important;
 }
