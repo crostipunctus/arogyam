@@ -1,15 +1,16 @@
 import Swiper from 'swiper/bundle';
 
 const swiper = new Swiper('.swiper', {
-  slidesPerView: 2,
+  slidesPerView: 1,
   spaceBetween: 10,
   breakpoints: {
-    480: {
-      slidesPerView: 4,
-      spaceBetween: 40,
-    },
+
     640: {
-      slidesPerView: 5,
+      slidesPerView: 2,
+      spaceBetween: 50,
+    },
+    855: {
+      slidesPerView: 3,
       spaceBetween: 50,
     }
   },
