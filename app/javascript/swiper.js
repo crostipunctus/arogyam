@@ -3,10 +3,11 @@ import Swiper from 'swiper/bundle';
 const swiper = new Swiper('.swiper', {
 
   breakpoints: {
-
+    slidesPerView: 1,
+    spaceBetween: 70,
     640: {
       slidesPerView: 2,
-      spaceBetween: 50,
+      spaceBetween: 60,
     },
     855: {
       slidesPerView: 3,
