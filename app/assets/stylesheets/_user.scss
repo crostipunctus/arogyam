@@ -1388,11 +1388,12 @@ h4 {
 }
 
 .banner {
+
   background-color: #2A9134;
   color: white;
   text-align: center;
   padding: 10px;
-  position: fixed;
+  position: relative;
   top: 69px;
   width: 100%;
   z-index: 998;

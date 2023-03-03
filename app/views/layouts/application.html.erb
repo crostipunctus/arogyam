@@ -40,7 +40,9 @@
   <body>
     
     <%= render 'layouts/navbar' %>
-    <%= render 'layouts/banner' %>
+    <% if announcements.present? %>
+      <%= render 'layouts/banner' %>
+    <% end %>
     
       <main class="page-wrapper">
       
