@@ -1,7 +1,7 @@
 <% if announcements.present? %>
   <div class="banner">
     <% announcements.each do |announcement|%>
-      <%= announcement.content %>
+      <%= link_to "#{announcement.content}", packages_path %>
     <% end %>
   </div>
 <% end %>
