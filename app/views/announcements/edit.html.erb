@@ -1,0 +1,13 @@
+ <div class="contactform">
+  <h3 class="enquiryForm">Announcement</h3>
+  <%= form_with model: @announcement, url: update_announcement_path do |f| %>
+  <%= render "shared/errors", object: @announcement %>
+    <div class="mb-3">
+      <%= f.label :content, class: "form-label" %><br>
+      <%= f.text_field  :content, class: "form-control", id: "text-input" %><br>
+    </div>
+    
+      <%= f.submit class: 'orangeButton btn btn-outline-primary rounded-pill' %>
+    </div>
+  <% end %>
+  </div>
