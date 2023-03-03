@@ -1392,9 +1392,15 @@ h4 {
   background-color: #2A9134;
   color: white;
   text-align: center;
-  padding: 10px;
-  position: relative;
-  top: 69px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  z-index: 998;
+  height: 30px;
+  z-index: 9999;
+}
+
+.navbar {
+  margin-top: 30px;
 }
