@@ -1,1 +1,6 @@
-<div class="banner">Banner</div>
+<div class="banner">
+  <% announcements.each do |announcement|%>
+    <%= announcement.content %>
+  <% end %>
+
+</div>

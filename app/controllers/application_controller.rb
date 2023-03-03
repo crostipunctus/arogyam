@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_admin?
   helper_method :gallery_index
   helper_method :team_index
+  helper_method :announcements
   
 
   def require_admin
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
 
   def team_index 
     @team = TeamMember.all 
+  end 
+
+  def announcements 
+    @announcement = Announcement.all 
   end 
  
 
