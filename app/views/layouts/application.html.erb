@@ -38,8 +38,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
   <body>
+    
     <%= render 'layouts/navbar' %>
+    <%= render 'layouts/banner' %>
       <main class="page-wrapper">
+      
+      
           <% if flash[:notice] %>
             <div class="flash notice">
               <%= flash[:notice] %>
