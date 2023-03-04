@@ -7,7 +7,7 @@
           <div class="landingpagetext">Arogyam (noun): <strong>Health</strong>. Derived from "<i>aroga</i>" which means absence of disease. "<i>roga</i>": 
               derived from the Sanskrit root "<i>ruk</i>" or pain.
           </div>
-          <%= link_to "Book programme", packages_path, class: "landingBookButton btn btn-outline-primary rounded-pill" %>
+          <%= link_to "See programmes", "#{root_path}#swiperSection", class: "landingBookButton btn btn-outline-primary rounded-pill", data: {turbo: false} %>
       </div>
   </div>
    
@@ -34,9 +34,10 @@
   <% end %>
 </div>
 
-<div class="homeSwiperContainer">
-  <h1 class="swiperHeading cardHeading packages text-center">Health Programmes</h1> 
+<div id="swiperSection" class="homeSwiperContainer">
+  
   <div class="homeSwiper">
+  <h1 class="swiperHeading cardHeading packages text-center">Health Programmes</h1> 
     <div class="swiper">
       <div class="swiper-wrapper">
           <% @packages.each do |package| %>
