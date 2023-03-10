@@ -1,10 +1,4 @@
-<% if announcements.present? %>
-  <div class="banner">
-    <% announcements.each do |announcement|%>
-      <%= link_to "#{announcement.content}", packages_path, class: "glow-link" %>
-    <% end %>
-  </div>
-<% end %>
+
 <header class="header navbar navbar-expand-lg navbar-light bg-light fixed-top">
    
   <div class="container-fluid">
