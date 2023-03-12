@@ -3,10 +3,9 @@
     <!-- Page title-->
     <h1 class="cardHeading packages text-center">Health Programmes</h1> 
     <!-- Services grid-->
-    
+       
             <div class="cardContainer">
               <% @packages.each do |package| %>
-                
                     <div class="newpackagecard" style="width: 18rem;">
                     <% if package.package_image.attached? %>
                       <%= image_tag(rails_public_blob_url(package.package_image),  class: "card-img-top", alt: "Card image" )%>
@@ -24,6 +23,7 @@
                 
               <% end %>
             </div>
+        
           
         
         
