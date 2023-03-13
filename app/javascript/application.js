@@ -20,3 +20,7 @@ import "./theme"
 import "trix"
 import "@rails/actiontext"
 
+
+import "./fancybox"
+
+console.log(Fancybox);

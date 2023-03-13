@@ -4,7 +4,11 @@ class GalleryController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index 
-    @gallery = Gallery.find(2)
+    if Rails.env.development? || Rails.env.test?
+      @gallery = Gallery.find(13)
+    else
+      @gallery = Gallery.find(2)
+    end
     @images = @gallery.images
   end 
 
