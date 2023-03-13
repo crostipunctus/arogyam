@@ -23,4 +23,3 @@ import "@rails/actiontext"
 
 import "./fancybox"
 
-console.log(Fancybox);
