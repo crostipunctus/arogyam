@@ -1307,10 +1307,9 @@ h4 {
 }
 
 #NewPackageCardButton {
-  margin-left: 0;
-  margin-top: 0;
-
-
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
 }
 
 .homeSwiper {
@@ -1349,12 +1348,17 @@ h4 {
 
 .cardContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
+
   justify-content: center;
   grid-gap: 20px;
 
 }
 
+@media (min-width: 490px) {
+  .cardContainer {
+    grid-template-columns: repeat(auto-fill, 300px);
+  }
+}
 
 
 
