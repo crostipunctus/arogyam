@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   patch "announcements/:id" => "announcements#update", as: :update_announcement 
   delete "announcements/:id" => "announcements#destroy", as: :delete_announcement
 
+  get "accommodation" => "accommodation#index"
 
   resources :blogs
   get "packages/new" => "packages#new" 
