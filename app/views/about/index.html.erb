@@ -36,7 +36,7 @@
         <h2 class="cardHeading h1 text-center pt-2 pt-sm-4 pt-lg-5 pb-2 mb-3 mb-lg-4 mt-md-3 mt-lg-0">The Team</h2>
         <div id="team-members" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
           <% team_index.each do |team_member| %>
-            <div class="col text-center pt-2"><%= image_tag(rails_public_blob_url(team_member.avatar), class: "card-lifted d-block rounded-5 mb-3", alt: 'team-member') %>
+            <div class="col text-center pt-2"><%= image_tag(rails_public_blob_url(team_member.avatar), class: "team-photo card-lifted d-block rounded-5 mb-3", alt: 'team-member') %>
                 <h3 class="h5 mb-1"><%= team_member.name %></h3>
                 <p class="mb-0 text-muted"><%= team_member.role %></p></a>
                 <p class="teamMemberContent"><%=  team_member.content %></p> 
