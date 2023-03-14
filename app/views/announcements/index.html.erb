@@ -1,15 +1,14 @@
 
-
 <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
   <% @announcements.each do |announcement|%>
     <ul>
       <li>Name:<%= announcement.content %></li>
       <div class="admin">
-              <%= link_to "Edit announcement", edit_announcement_path(announcement), class: "btn btn-primary btn-sm" %>
-            </div>
-            <div  class="admin">
-              <%= link_to "Delete package", delete_announcement_path(announcement), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
-            </div>
+        <%= link_to "Edit announcement", edit_announcement_path(announcement), class: "btn btn-primary btn-sm" %>
+      </div>
+      <div  class="admin">
+        <%= link_to "Delete package", delete_announcement_path(announcement), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+      </div>
     </ul>
   <% end %>
 </div>
