@@ -943,12 +943,18 @@ h4 {
 
 .landingBookButton {
   border: none;
-  background-color: #666633;
+  background-color: #448c74;
   color: $gray-200;
   font-family: 'Barlow', sans-serif;
   margin-top: 20px;
   box-shadow: 2px 2px 10px rgba(84, 83, 83, 0.4);
 }
+
+.landingBookButton:hover {
+  background-color: #555555 !important;
+}
+
+
 
 #phoneIcon {
   font-size: 20px !important;
