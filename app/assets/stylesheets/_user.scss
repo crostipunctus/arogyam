@@ -954,10 +954,15 @@ h4 {
   background-color: #555555 !important;
 }
 
+#logospan {
+  padding-top: 10px;
+  padding-left: 10px;
+}
 
-
-#phoneIcon {
-  font-size: 20px !important;
+@media only screen and (max-width: 991.98px) {
+  #desktopLogo {
+    display: none;
+  }
 
 }
 
