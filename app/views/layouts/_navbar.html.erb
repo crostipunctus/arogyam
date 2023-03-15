@@ -20,11 +20,12 @@
             <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li>
             <li class="nav-item"><%= link_to "Bookings", bookings_list_path, class: "nav-link"%>
           <% end %>
+          <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li> 
+
           <li class="nav-item"><%= link_to "Gallery", gallery_index_path, class: "nav-link", data: {turbo: false}%></li>
 
           <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link", data: {turbo: false}%></li>
           <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link", data: {turbo: false}%></li> 
-          <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li> 
           <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
           <%= link_to "Book programme", packages_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% if current_user %>
