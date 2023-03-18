@@ -12,13 +12,18 @@
   </div>
    
 <div class="hometextContainer">
-  <h2 class="whyArogyam">Why ArogyaM?</h2>
+  <h2 class="whyArogyam">Why ĀrogyaM?</h2>
   <div class="hometext2"> 
     <%= render "home_text" %>
-      <%= link_to "Explore programmes", packages_path, class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
   </div>
 </div>
-
+<div class='home_buttons center-container'>
+    <%= link_to "Explore programmes", packages_path, class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
+      <%= link_to "Online Consultations", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
+      <%= link_to "Customized programmes", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
+</div>
+      
+<section class="container py-2 mt-2 mb-md-3 mb-lg-4 mb-xxl-5">
 <div class="galleryImages">  
   <% if gallery_index.images.attached? %>
     <% gallery_index.images.each do |image| %>
@@ -33,13 +38,13 @@
       <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery' }, alt: 'placeholder-flower') %>
   <% end %>
 </div>
+</section>
 
 
 
 <div id="swiperSection" class="homeSwiperContainer">
-  
   <div class="homeSwiper">
-  <h1  class="swiperHeading cardHeading packages text-center">Choose Your Programme</h1> 
+    <h1 class="swiperHeading cardHeading packages text-center">Programmes</h1> 
     <div class="swiper">
       <div class="swiper-wrapper">
           <% @packages.each do |package| %>
@@ -59,21 +64,13 @@
                 </div>
               </div>        
             </div>
-            
           <% end %>
-    
-      </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-      
-      
-      
-    </div>
-    
-    
-  </div>
-  
+        </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> 
+  </div> 
 </div>
+
 
 
 

@@ -4,9 +4,7 @@
 //
 
 //gallery 
-body {
-  background-color: #F9F9FB;
-}
+
 
 #footer {
   display: none;
@@ -310,9 +308,11 @@ div.desc {
 .hometextContainer {
   display: flex;
   justify-content: center;
-  padding: 50px 30px;
+  padding: 10px 30px;
   width: 100%;
   background-color: white;
+  margin-top: 30px;
+
 }
 
 .explorebutton {
@@ -1138,7 +1138,7 @@ h4 {
 .imageContainer {
   flex: 1 1 33%;
   /* This sets the width to 500px, and allows the container to shrink or grow as needed */
-  margin: 1px;
+  margin: 5px;
   height: 0;
   padding-bottom: 20%;
   /* This value should be the aspect ratio of the image (height / width) in percentage */
@@ -1341,7 +1341,6 @@ h4 {
 }
 
 .homeSwiperContainer {
-  background-color: $gray-400;
   width: 100%;
   padding-top: 50px;
   margin-top: 30px;
@@ -1358,7 +1357,8 @@ h4 {
 .swiperHeading {
   margin-top: 30px !important;
   margin-bottom: 30px !important;
-  font-size: 20pt;
+  font-size: 30pt;
+  font-family: 'Barlow', sans-serif !important;
 }
 
 .cardContainer {
@@ -1446,4 +1446,21 @@ img {
 
 .team-photo {
   width: 100%;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: white;
+}
+
+.home_buttons {
+  width: 100%;
+  /* This will make the div width only as wide as its content */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+
 }
