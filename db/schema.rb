@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_053930) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_073816) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_053930) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "blogs", force: :cascade do |t|
@@ -98,6 +107,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_053930) do
     t.string "cost"
   end
 
+  create_table "registrations", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "batch_id", null: false
+    t.index ["batch_id"], name: "index_registrations_on_batch_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
+  end
+
   create_table "team_members", force: :cascade do |t|
     t.string "name"
     t.text "content"
@@ -136,4 +157,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_053930) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blogs", "users"
+  add_foreign_key "registrations", "batches"
+  add_foreign_key "registrations", "users"
 end

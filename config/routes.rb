@@ -52,6 +52,11 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:index, :create]
 
+  resources :batches 
+
+  resources :registrations 
+  
+
   # config/routes.rb
   # config/routes.rb
 
