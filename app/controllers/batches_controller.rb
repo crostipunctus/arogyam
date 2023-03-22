@@ -1,10 +1,10 @@
 class BatchesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
-  before_action :require_admin, only: [:new, :edit, :update, :create, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :create, :destroy]
+  before_action :require_admin, only: [:show, :edit, :update, :create, :destroy]
 
   def index 
     @batches = Batch.all 
-    @registrations = Registration.all
+   
   end 
 
   def new 
@@ -12,7 +12,10 @@ class BatchesController < ApplicationController
   end 
 
   def show 
+    @batch = Batch.find(params[:id])
 
+    @students = @batch.users
+    
   end 
 
   def create  

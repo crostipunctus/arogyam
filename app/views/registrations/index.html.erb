@@ -1,0 +1,8 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+  registrations 
+  <% @registrations.each do |reg| %>
+    Batch name: <li><%= reg.batch.name %></li>
+    Registered users: <li><%= reg.user.email %></li>
+  <% end %>
+</section>
