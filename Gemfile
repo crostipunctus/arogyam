@@ -51,7 +51,7 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
-gem 'swiper-rails'
+
 
 gem "bootstrap_form", "~> 5.1"
 
@@ -72,6 +72,8 @@ gem "image_processing", "~> 1.2"
 gem 'mailcatcher'
 
 gem 'kaminari'
+
+gem 'pdfkit'
 
 
 group :development, :test do

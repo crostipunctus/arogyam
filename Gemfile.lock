@@ -232,6 +232,7 @@ GEM
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pdfkit (0.8.7.2)
     pg (1.4.3)
     public_suffix (5.0.0)
     puma (5.6.5)
@@ -381,6 +382,7 @@ DEPENDENCIES
   kaminari
   mail_form
   mailcatcher
+  pdfkit
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)

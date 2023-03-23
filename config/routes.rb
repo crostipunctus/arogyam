@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   resources :registrations 
   
+  get 'pdf' => 'registrations#pdf'
 
   # config/routes.rb
   # config/routes.rb
