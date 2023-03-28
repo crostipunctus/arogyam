@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!, only: [ :edit, :update, :create, :destroy]
-  before_action :require_admin, only: [:index, :show, :edit, :update, :create, :destroy]
+  before_action :require_admin, only: [ :show, :edit, :update, :create, :destroy]
 
   def index 
     @batches = Batch.all 

@@ -2,8 +2,10 @@
 
   batches
   <% @batches.each do |batch|%>
-    <li><%= batch.id %></li>
-    <li><%= batch.name %></li>
+    
+    <li><%= link_to batch.name, batch_path(batch) %></li>
+    <li><%= batch.start_date%></li>
+    <li><%= batch.end_date %></li>
     
     <%= button_to "Register", registrations_path(batch_id: batch.id), class: "btn btn-primary", turbo_method: :post, data: {turbo: false}  %>
     

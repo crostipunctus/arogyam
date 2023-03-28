@@ -65,24 +65,26 @@ class RegistrationsController < ApplicationController
 
   def render_table
     <<-HTML
-      <table>
-        <thead>
-          <tr>
-            <th>Batch</th>
-            <th>User</th>
+    <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <thead>
+        <tr>
+            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Batch</th>
+            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Name</th>
+            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Email</th>
             <!-- Add other column headers here -->
-          </tr>
-        </thead>
-        <tbody>
-          <% @registrations.each do |registration| %>
-            <tr>
-              <td><%= registration.batch.name %></td>
-              <td><%= registration.user.email %></td>
-              <!-- Add other columns here -->
+        </tr>
+    </thead>
+    <tbody>
+        <% @registrations.each do |registration| %>
+            <tr style="background-color: <%= cycle('#f0f0f0', '#ffffff') %>;">
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.batch.name %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.first_name %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
+                <!-- Add other columns here -->
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+        <% end %>
+    </tbody>
+</table>
     HTML
   end
 

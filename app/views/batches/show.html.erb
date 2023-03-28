@@ -3,8 +3,10 @@
   Batch name: <%= @batch.name %>
   
   
-  Students: <% @students.each do |student|%>
-    <li><%= student.email %></li>
+  <h5>Students: </h5>
+  <% @students.each do |student|%>
+    <li>First name: <%= student.first_name %>
+    <li>Email: <%= student.email %></li>
   <% end %>
 
 </section>
