@@ -17,9 +17,10 @@
           <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
           <li class="nav-item"><%= link_to "Health Programmes", packages_path, class: "nav-link", data: {turbo: false}%></li>  
           <% if current_user_admin? %>
-            <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li>
-            <li class="nav-item"><%= link_to "Bookings", bookings_list_path, class: "nav-link"%>
+            <%# <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li> 
+    
           <% end %>
+          <li class="nav-item"><%= link_to "Batches", batches_path, class: "nav-link"%>
           <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li> 
 
           <li class="nav-item"><%= link_to "Gallery", gallery_index_path, class: "nav-link", data: {turbo: false}%></li>

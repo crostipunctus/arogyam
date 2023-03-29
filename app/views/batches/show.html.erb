@@ -1,12 +1,26 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
   
-  Batch name: <%= @batch.name %>
-  
-  
-  <h5>Students: </h5>
-  <% @students.each do |student|%>
-    <li>First name: <%= student.first_name %>
-    <li>Email: <%= student.email %></li>
-  <% end %>
+  <h2><%= @batch.name %></h2>
+
+  <table>
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+            <% @students.each do |student| %>
+                <tr>
+                    <td><%= student.first_name %></td>
+                    <td><%= student.email %></td>
+
+                    <!-- Add other columns here -->
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 
 </section>

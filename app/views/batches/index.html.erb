@@ -3,11 +3,15 @@
   batches
   <% @batches.each do |batch|%>
     
-    <li><%= link_to batch.name, batch_path(batch) %></li>
-    <li><%= batch.start_date%></li>
+    <% if current_user_admin? %>
+      <li><%= link_to batch.name, batch_path(batch) %></li>
+    <% else %>
+      <li><%= batch.name %></li>
+    <% end %>
+    <li><%= batch.start_date %></li>
     <li><%= batch.end_date %></li>
     
-    <%= button_to "Register", registrations_path(batch_id: batch.id), class: "btn btn-primary", turbo_method: :post, data: {turbo: false}  %>
+    <%= button_to "Register", registrations_path(batch_id: batch.id), class: "mt-5 btn btn-outline-primary rounded-pill", turbo_method: :post, data: {turbo: false}  %>
     
   <% end %>
 

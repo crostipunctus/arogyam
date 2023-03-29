@@ -1,10 +1,27 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
-  registrations 
-  <% @registrations.each do |reg| %>
-    Batch name: <li><%= reg.batch.name %></li>
-    Registered users: <li><%= reg.user.email %></li>
-  <% end %>
+  <h1>Registrations</h1>
+  
+    <table>
+        <thead>
+            <tr>
+                <th>Batch</th>
+                <th>Name</th>
+                <th>Email</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+            <% @registrations.each do |registration| %>
+                <tr>
+                    <td><%= registration.batch.name %></td>
+                    <td><%= registration.user.first_name %></td>
+                    <td><%= registration.user.email %></td>
+                    <!-- Add other columns here -->
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+  <%= link_to 'Download pdf', pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
 </section>
 
-<%= link_to 'Download pdf', pdf_path, class: 'btn btn-primary' %>
