@@ -41,9 +41,6 @@ class RegistrationsController < ApplicationController
       disposition: 'attachment'
     )
   end
-   
-
-  
 
   def edit  
 

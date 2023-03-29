@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   
   get 'pdf' => 'registrations#pdf'
 
+  get 'batch/:id' => 'batches#pdf', as: :batch_pdf
+
   # config/routes.rb
   # config/routes.rb
 
