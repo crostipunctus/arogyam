@@ -3,7 +3,7 @@
     <div class="row">
       <% @batches.each do |batch|%>
         <div class="col-md-4 mb-4">
-          <div class="border p-3 rounded <%= is_nearest_batch(batch, @batches) ? 'bg-success' : '' %>">
+          <div class="border p-3 rounded <%= is_nearest_batch(batch, @batches) ? 'nearest_batch' : '' %>">
             <div class="mb-3">
               <% if current_user_admin? %>
                 <h5><%= link_to batch.name, batch_path(batch) %></h5>
