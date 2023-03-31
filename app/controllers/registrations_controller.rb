@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   require 'pdfkit'
-  before_action :authenticate_user!, only: [:create]
+  
   before_action :require_admin, only: [:index, :edit, :update,  :destroy]
   def index 
     @registrations = Registration.all 
