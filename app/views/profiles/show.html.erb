@@ -12,6 +12,11 @@
   <%= @user.last_name %>
 </p>
 
+<p>
+  <% @user.batches.each do |batch| %>
+    <li><%= batch.start_date %></li>
+  <% end %>
+</p>
 <!-- Add other user attributes here as needed -->
   <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete} %>
 
