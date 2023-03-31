@@ -18,7 +18,11 @@
               <li><strong>Start Date:</strong> <%= formatted_date(batch.start_date) %></li>
               <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
             </ul>
-            <%= button_to "Register", registrations_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", turbo_method: :post, data: {turbo: false} %>
+            <% if is_user_registered_for_batch?(current_user, batch)%>
+              <%= button_to "Registered!", "", class: "registered btn btn-danger rounded-pill" %>
+            <% else %>
+              <%= button_to "Register", registrations_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", turbo_method: :post, data: {turbo: false} %>
+            <% end %>
           </div>
         </div>
       <% end %>
