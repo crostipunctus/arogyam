@@ -1,22 +1,23 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+<h1 class="cardHeading packages text-center">Batches for 2023</h1> 
   <div class="container mt-5">
     <div class="row">
       <% @batches.each do |batch|%>
-        <% if batch.start_date >= Date.today %>
+        <% if batch.start_date > Date.today %>
           <div class="col-md-4 mb-4">
             <div class="border p-3 rounded <%= is_nearest_batch(batch, @batches) ? 'nearest_batch' : '' %>">
               <div class="mb-3">
                 <% if current_user_admin? %>
-                  <h5><%= link_to batch.name, batch_path(batch) %></h5>
+                  <h5><%= link_to batch.start_date, batch_path(batch) %></h5>
                 <% else %>
-                  <h5><%= batch.name %></h5>
+                  <h5><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></h5>
                 <% end %>
                 <% if is_nearest_batch(batch, @batches) %>
-                  <h6>Coming up in <%= (batch.start_date - Date.today).to_i %> days</h6>
+                  <h6>Coming up in <%= (batch.start_date - Date.today).to_i %> <%= (batch.start_date - Date.today).to_i == 1 ? "day" : "days" %></h6>
                 <% end %>
               </div>
               <ul class="list-unstyled mb-3">
-                <li><strong>Start Date:</strong> <%= formatted_date(batch.start_date) %></li>
+                
                 <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
               </ul>
               <%= link_to "Register", "https://forms.gle/RBTTGBzJBgbPHSCx7", class: "btn btn-outline-primary rounded-pill", target: "_blank" %>

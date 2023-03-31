@@ -68,10 +68,14 @@
 .package-image {
   display: flex;
   justify-content: center;
-  width: 100%;
+
   margin-bottom: 30px;
   margin-top: 40px;
 
+}
+
+#package-image {
+  max-width: 100% !important;
 }
 
 .packageText {

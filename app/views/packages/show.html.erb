@@ -6,9 +6,13 @@
     <div class="durationCostContainer">
       <div class="packageDuration"><%= "#{@package.duration} days"%></div>
       <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
-      <%= link_to "Book programme", bookings_path(name: @package.name), class: "bookProgButton btn btn-outline-primary rounded-pill", data: {turbo: false} %>
+      <% if @package.name == 'VishraaM'%>
+        <%= link_to "Book programme", "https://forms.gle/VvsjTyC9RSGF33EQ8", class: "bookProgButton btn btn-outline-primary rounded-pill", target: "_blank" %>
+      <% else %>
+        <div class="package-titles"><strong>Please register for a batch to avail this programme: <%= link_to "Batches", batches_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>
+      <% end %>
     </div>
-    <div class="package-image">
+    <div id="package-image" class="package-image">
           <%= package_image(@package) %>
         </div> 
       <div class="packageShow">

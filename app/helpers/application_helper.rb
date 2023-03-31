@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def formatted_date(date)
-    date.strftime("%B #{date.day}#{ordinal_suffix(date.day)}, %Y")
+    date.strftime("%B #{date.day}#{ordinal_suffix(date.day)}")
   end 
   
  
