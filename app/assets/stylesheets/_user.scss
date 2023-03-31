@@ -74,6 +74,12 @@
 
 }
 
+#registerBatch {
+  margin-left: 20px;
+  color: #576071 !important;
+  font-family: 'Barlow', sans-serif !important;
+}
+
 #package-image {
   max-width: 100% !important;
 }
@@ -837,6 +843,8 @@ h4 {
   border: 1px solid $gray-500;
   color: $gray-700;
   padding: 10px 20px !important;
+  margin-right: 20px;
+  margin-right: 20px;
   //box-shadow: 2px 2px 2px rgba(84, 83, 83, 0.4);
 }
 
@@ -1008,7 +1016,7 @@ h4 {
 }
 
 #signinCard {
-  background-color: #8f9779 !important;
+  background-color: #87a59c !important;
 }
 
 
@@ -1461,13 +1469,22 @@ img {
 }
 
 .home_buttons {
-  width: 100%;
-  /* This will make the div width only as wide as its content */
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
-
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
 }
+
+/* This will make the div width only as wide as its content */
+
+@media screen and (max-width: 990px) {
+  .home_buttons {
+    justify-content: center;
+  }
+}
+
+
 
 table {
   width: 100%;
@@ -1497,4 +1514,22 @@ tbody tr:hover {
 
 .nearest_batch {
   background-color: #b9d5cd !important;
+}
+
+.here {
+  color: green !important;
+}
+
+#note {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 80%;
+}
+
+#HowItWorks {
+  margin-top: 30px;
+  color: $gray-700;
+
 }

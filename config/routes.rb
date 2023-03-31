@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'bookings' => 'bookings#index', as: :bookings
+  get 'online_consultations' => 'bookings#index', as: :online_consultations
   post 'bookings' => 'bookings#create'
   get 'bookings_list' => 'bookings#bookings_list'
 

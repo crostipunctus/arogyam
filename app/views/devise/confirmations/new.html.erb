@@ -1,3 +1,6 @@
+
+  <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
 <h2>Resend confirmation instructions</h2>
 
 <div data-turbo="false">
@@ -6,13 +9,15 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+    <%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %>
   </div>
 <% end %>
 </div>
 
 <%= render "devise/shared/links" %>
+
+</section>

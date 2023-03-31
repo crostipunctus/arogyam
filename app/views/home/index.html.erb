@@ -15,12 +15,17 @@
   <h2 class="whyArogyam">Why ĀrogyaM?</h2>
   <div class="hometext2"> 
     <%= render "home_text" %>
+    <div class='home_buttons'>
+      <%= link_to "Batches", batches_path, class: "HomePageButton btn btn-outline-primary rounded-pill"%>
+      <%= link_to "Explore programmes", packages_path, class: "HomePageButton btn btn-outline-primary rounded-pill"%>
+      <%= link_to "Online Consultations", online_consultations_path, class: "HomePageButton  btn btn-outline-primary rounded-pill"%>
+      <%# <%= link_to "Customized programmes", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%> 
+        
+    </div>
   </div>
 </div>
-<div class='home_buttons center-container'>
-    <%= link_to "Explore programmes", packages_path, class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
-      <%= link_to "Online Consultations", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
-      <%= link_to "Customized programmes", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%>
+
+    
 </div>
       
 <section class="container py-2 mt-2 mb-md-3 mb-lg-4 mb-xxl-5">

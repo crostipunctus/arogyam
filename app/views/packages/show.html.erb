@@ -9,7 +9,7 @@
       <% if @package.name == 'VishraaM'%>
         <%= link_to "Book programme", "https://forms.gle/VvsjTyC9RSGF33EQ8", class: "bookProgButton btn btn-outline-primary rounded-pill", target: "_blank" %>
       <% else %>
-        <div class="package-titles"><strong>Please register for a batch to avail this programme: <%= link_to "Batches", batches_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>
+        <div id="registerBatch" class="registerBatch package-titles"><strong>Please register for a batch to avail this programme: <%= link_to "Register", batches_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>
       <% end %>
     </div>
     <div id="package-image" class="package-image">
