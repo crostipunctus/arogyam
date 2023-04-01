@@ -10,9 +10,9 @@
             <div class="border p-3 rounded <%= is_nearest_batch(batch, @batches) ? 'nearest_batch' : '' %>">
               <div class="mb-3">
                 <% if current_user_admin? %>
-                  <h5><%= link_to "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}", batch_path(batch) %></h5>
+                  <h5><%= link_to batch_date_range(batch), batch_path(batch) %></h5>
                 <% else %>
-                  <h5><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></h5>
+                  <h5><%= batch_date_range(batch) %></h5>
                 <% end %>
                 <% if is_nearest_batch(batch, @batches) %>
                   <h6>Coming up in <%= (batch.start_date - Date.today).to_i %> <%= (batch.start_date - Date.today).to_i == 1 ? "day" : "days" %></h6>
@@ -22,7 +22,7 @@
                 
                 <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
               </ul>
-                <%= link_to "Register", "https://forms.gle/RBTTGBzJBgbPHSCx7", class: "btn btn-outline-primary rounded-pill", target: "_blank" %>
+                <%= button_to "Register", registrations_path(batch_id: batch.id ), method: :post, class: "btn btn-outline-primary rounded-pill" %>
               <% if current_user_admin? %>
                 <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-outline-primary rounded-pill" %>
                 <%= link_to "Delete", batch_path(batch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill" %>

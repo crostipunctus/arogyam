@@ -1,6 +1,8 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
   
-  <h2><%= @batch.name %></h2>
+  
+  <h3><%= batch_date_range(@batch) %></h3>
+  <h3>Batch Participants: </h3>
 
   <table>
         <thead>
@@ -14,7 +16,7 @@
         <tbody>
             <% @students.each do |student| %>
                 <tr>
-                    <td><%= student.first_name %></td>
+                    <td><%= user_full_name(student) %></td>
                     <td><%= student.email %></td>
 
                     <!-- Add other columns here -->

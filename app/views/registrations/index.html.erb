@@ -14,8 +14,8 @@
         <tbody>
             <% @registrations.each do |registration| %>
                 <tr>
-                    <td><%= registration.batch.name %></td>
-                    <td><%= registration.user.first_name %></td>
+                    <td><%= batch_date_range(registration.batch) %></td>
+                    <td><%= user_full_name(registration.user) %></td>
                     <td><%= registration.user.email %></td>
                     <!-- Add other columns here -->
                 </tr>

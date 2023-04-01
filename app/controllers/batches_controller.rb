@@ -66,7 +66,8 @@ class BatchesController < ApplicationController
   def render_table
    
     <<-HTML
-    <h1><%= @batch.name %></h1>
+    <h1><%= batch_date_range(@batch) %></h1>
+    <h3>Batch participants</h3>
     <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
         <tr>
@@ -78,7 +79,7 @@ class BatchesController < ApplicationController
     <tbody>
     <% @batch.users.each do |user| %>
             <tr style="background-color: <%= cycle('#ccffd9', '#e6ffec') %>;">
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user.first_name %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(user) %></td>
                 <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user.email %></td>
                 <!-- Add other columns here -->
             </tr>
