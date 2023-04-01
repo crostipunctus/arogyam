@@ -13,6 +13,7 @@
 </p>
 
 <p>
+  <strong>You have registered for the following batches: </strong>
   <% @user.batches.each do |batch| %>
     <li><%= batch.start_date %></li>
   <% end %>
