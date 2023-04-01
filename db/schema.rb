@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_01_064801) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_071835) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -138,6 +138,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_064801) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gender"
+    t.date "date_of_birth"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone_number"
+    t.string "alternate_phone_number"
+    t.string "doctor_contact_details"
+    t.string "nationality"
+    t.string "marital_status"
+    t.string "occupation"
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
