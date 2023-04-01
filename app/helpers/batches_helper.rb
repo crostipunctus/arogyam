@@ -6,4 +6,8 @@ module BatchesHelper
   def is_nearest_batch(batch, batches)
     batch == nearest_batch(batches)
   end
+
+  def is_user_registered_for_batch?(user, batch)
+    user.batches.include?(batch)
+  end
 end

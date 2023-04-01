@@ -1,0 +1,20 @@
+<div class="packageform">
+  <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+    <%= form_with(model: @batch) do |f|%>
+      <%= @batch.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :end_date %>
+        <%= f.date_field :end_date, class: "form-control" %>
+      </div>
+      <%= f.submit class:"btn btn-primary"%>
+    <% end %>
+  </div>
+</div>

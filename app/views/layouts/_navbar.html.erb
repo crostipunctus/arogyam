@@ -26,20 +26,14 @@
 
           <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link", data: {turbo: false}%></li>
           <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link", data: {turbo: false}%></li> 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-turbo="false">
-              About
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to "About", about_path, class: "dropdown-item"%></li>
-              <li><%= link_to "Gallery", gallery_index_path, class: "dropdown-item", data: {turbo: false}%></li>
-            </ul>
-          </li>
+          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link", data: {turbo: false}%></li>
+          <%= link_to "Programmes", packages_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% if current_user %>
+          <%= link_to 'Profile', profile_path, class: "nav-link" %>
             <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
-          <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% end %>
+            <%= link_to "Programmes", packages_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+
         </ul>
       </div>
     </div>

@@ -1,13 +1,22 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!, only: [ :edit, :update, :create, :destroy]
-  before_action :require_admin, only: [ :show, :edit, :update, :create, :destroy]
+  before_action :require_admin, only: [ :new, :show, :edit, :update, :create, :destroy]
 
   def index 
     @batches = Batch.order(start_date: :asc)
   end 
 
-  def new 
+  def new         
+    @batch = Batch.new
 
+  end 
+  def create  
+    @batch = Batch.create(batch_params)
+    if @batch.save 
+      redirect_to batches_path, notice: "Batch created"
+    else  
+      render :new, status: :unprocessable_entity
+    end 
   end 
 
   def show 
@@ -15,9 +24,7 @@ class BatchesController < ApplicationController
     @students = @batch.users
   end 
 
-  def create  
-
-  end 
+  
 
   def edit  
 
@@ -72,7 +79,13 @@ class BatchesController < ApplicationController
     </tbody>
 </table>
     HTML
-     end 
+  end
+
+ def batch_params
+    params.require(:batch).permit(:name, :start_date, :end_date)
+  end  
+
+
         
 
 
