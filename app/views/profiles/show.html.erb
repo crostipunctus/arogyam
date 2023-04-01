@@ -13,9 +13,9 @@
 </p>
 
 <p>
-  <strong>You have registered for the following batches: </strong>
+  <h3>You have registered for the following batches: </h3>
   <% @user.batches.each do |batch| %>
-    <li><%= batch.start_date %></li>
+    <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
   <% end %>
 </p>
 <!-- Add other user attributes here as needed -->

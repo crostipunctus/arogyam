@@ -24,18 +24,25 @@ class BatchesController < ApplicationController
     @students = @batch.users
   end 
 
-  
-
   def edit  
-
+    @batch = Batch.find(params[:id])
   end 
 
   def update 
+    @batch = Batch.find(params[:id])
+    @batch.update(batch_params)
 
+    if @batch.save 
+      redirect_to batches_path, notice: "Batch updated"
+    else  
+      render :edit, status: :unprocessable_entity
+    end
   end 
 
   def destroy 
-
+    @batch = Batch.find(params[:id])
+    @batch.destroy    
+    redirect_to batches_path, notice: "Batch deleted"
   end 
 
   def pdf 
@@ -84,11 +91,6 @@ class BatchesController < ApplicationController
  def batch_params
     params.require(:batch).permit(:name, :start_date, :end_date)
   end  
-
-
-        
-
-
 
 
 end
