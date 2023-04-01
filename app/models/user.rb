@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :registrations, dependent: :destroy 
   has_many :batches, through: :registrations
 
-
+  has_one :user_profile, dependent: :destroy
 
  
 

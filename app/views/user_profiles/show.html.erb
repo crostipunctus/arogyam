@@ -13,10 +13,12 @@
 </p>
 
 <p>
+<% if @user.batches.exists? %>
   <h3>You have registered for the following batches: </h3>
   <% @user.batches.each do |batch| %>
     <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
   <% end %>
+<% end %>
 </p>
 <!-- Add other user attributes here as needed -->
   <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete} %>
