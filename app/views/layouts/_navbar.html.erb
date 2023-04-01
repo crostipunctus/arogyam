@@ -36,10 +36,11 @@
             </ul>
           </li>
           <% if current_user %>
+          <%= link_to 'Profile', profile_path, class: "nav-link" %>
             <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "nav-link",  data: { turbo_method: :delete} %></li>
-          <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% end %>
+            <%= link_to "Programmes", packages_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
+
         </ul>
       </div>
     </div>

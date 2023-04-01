@@ -15,13 +15,12 @@
                 <% if is_nearest_batch(batch, @batches) %>
                   <h6>Coming up in <%= (batch.start_date - Date.today).to_i %> <%= (batch.start_date - Date.today).to_i == 1 ? "day" : "days" %></h6>
                 <% end %>
-              </div>
-              <ul class="list-unstyled mb-3">
-                
-                <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
-              </ul>
-              <%= link_to "Register", "https://forms.gle/RBTTGBzJBgbPHSCx7", class: "btn btn-outline-primary rounded-pill", target: "_blank" %>
             </div>
+            <ul class="list-unstyled mb-3">
+              <li><strong>Start Date:</strong> <%= formatted_date(batch.start_date) %></li>
+              <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
+            </ul>
+            <%= button_to "Register", registrations_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", turbo_method: :post, data: {turbo: false} %>
           </div>
         <% end %>
       <% end %>

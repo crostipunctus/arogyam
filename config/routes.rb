@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
   resources :team_members 
 
   get 'contacts/new'
@@ -59,6 +60,9 @@ Rails.application.routes.draw do
   get 'pdf' => 'registrations#pdf'
 
   get 'batch/:id' => 'batches#pdf', as: :batch_pdf
+
+  resource :profile, only: [:show], controller: 'profiles'
+
 
   # config/routes.rb
   # config/routes.rb
