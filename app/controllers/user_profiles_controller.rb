@@ -23,7 +23,11 @@ class UserProfilesController < ApplicationController
   end 
 
   def new 
-    @profile = UserProfile.new
+    if @user.user_profile.present? 
+      redirect_to user_profile_path(@user), notice: "Your profile is already completed!"
+    else  
+      @profile = UserProfile.new
+    end 
   end 
 
   def create 
