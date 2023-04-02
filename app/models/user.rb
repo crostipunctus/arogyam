@@ -9,6 +9,6 @@ class User < ApplicationRecord
 
   has_one :user_profile, dependent: :destroy
 
- 
+  # check if profile associated with the user has been created. 
 
 end

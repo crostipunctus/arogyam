@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
   resources :users, only: [] do
-    resource :profile, only: [:show, :edit, :update], controller: 'user_profiles'
+    resource :profile, controller: 'user_profiles'
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
