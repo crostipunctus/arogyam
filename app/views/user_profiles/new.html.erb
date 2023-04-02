@@ -1,0 +1,66 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+  <h3>Create your profile</h4>
+
+  <div class="packageform">
+  <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+    <%= form_with(model: @profile, url: user_profile_path) do |f|%>
+      <%= @profile.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :gender %>
+        <%= f.text_field :gender, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_of_birth %>
+        <%= f.date_field :date_of_birth, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :zip %>
+        <%= f.text_field :zip, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :country %>
+        <%= f.text_field :country, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :alternate_phone_number %>
+        <%= f.text_field :alternate_phone_number, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :doctor_contact_details %>
+        <%= f.text_field :doctor_contact_details, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :nationality %>
+        <%= f.text_field :nationality, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :marital_status %>
+        <%= f.text_field :marital_status, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :occupation %>
+        <%= f.text_field :occupation, class: "form-control" %>
+      </div>
+      
+      <%= f.submit class:"btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
+
+
+
+</section>

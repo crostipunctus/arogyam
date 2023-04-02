@@ -19,10 +19,13 @@
                 <% end %>
               </div>
               <ul class="list-unstyled mb-3">
-                
                 <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
               </ul>
+              <% if user_registered_for_batch?(current_user, batch) %>
+                <div id="registeredButton" > REGISTERED! </div>
+              <% else %>
                 <%= button_to "Register", registrations_path(batch_id: batch.id ), method: :post, class: "btn btn-outline-primary rounded-pill" %>
+              <% end %>
               <% if current_user_admin? %>
                 <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-outline-primary rounded-pill" %>
                 <%= link_to "Delete", batch_path(batch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill" %>
