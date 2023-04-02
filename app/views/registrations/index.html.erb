@@ -8,6 +8,7 @@
                 <th>Batch</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Gender</th>
                 <!-- Add other column headers here -->
             </tr>
         </thead>
@@ -15,8 +16,9 @@
             <% @registrations.each do |registration| %>
                 <tr>
                     <td><%= batch_date_range(registration.batch) %></td>
-                    <td><%= user_full_name(registration.user) %></td>
+                    <td><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
                     <td><%= registration.user.email %></td>
+                    <td><%= registration.user.user_profile.gender %>
                     <!-- Add other columns here -->
                 </tr>
             <% end %>

@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update,  :destroy]
   def index 
     @registrations = Registration.all 
-
+    
   end
 
   def new 
@@ -13,17 +13,20 @@ class RegistrationsController < ApplicationController
 
   def create
     @batch = Batch.find(params[:batch_id])
-  
-    if Registration.exists?(user: current_user, batch: @batch)
-      redirect_to batches_path, alert: "You have already registered for this batch"
-    else
-      @registration = current_user.registrations.new(batch: @batch)
-      if @registration.save
-        redirect_to batches_path, notice: "Registered successfully"
+    if current_user.user_profile
+      if Registration.exists?(user: current_user, batch: @batch)
+        redirect_to batches_path, alert: "You have already registered for this batch"
       else
-        redirect_to root_path, status: :unprocessable_entity
+        @registration = current_user.registrations.new(batch: @batch)
+        if @registration.save
+          redirect_to batches_path, notice: "Registered successfully"
+        else
+          redirect_to root_path, status: :unprocessable_entity
+        end
       end
-    end
+    else  
+      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+    end 
   end
   
   def pdf 
