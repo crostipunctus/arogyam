@@ -25,6 +25,10 @@
   <li><%= @profile.date_of_birth %></li>
 
   <li><%= @profile.phone_number %></li>
+
+<% else %>
+  <li>You have not created a profile yet</li>
+  <%= link_to "Create Profile", new_user_profile_path(user_id: @user.id), class: "btn btn-primary" %>
 <% end %>
 </p>
 <!-- Add other user attributes here as needed -->

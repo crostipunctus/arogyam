@@ -17,7 +17,6 @@ class UserProfilesController < ApplicationController
 
   def new 
     @profile = UserProfile.new
-
   end 
 
   def create 
