@@ -7,7 +7,7 @@ class Batch < ApplicationRecord
   private 
 
   def calculate_duration 
-    self.duration = (end_date - start_date).to_i
+    self.duration = ((end_date - start_date) + 1).to_i
   end 
 
 end
