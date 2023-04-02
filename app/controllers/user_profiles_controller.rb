@@ -8,11 +8,18 @@ class UserProfilesController < ApplicationController
   end
 
   def edit 
-
+    @profile = @user.user_profile
   end 
 
   def update 
+    @profile = @user.user_profile
+    @profile.update(profile_params)
 
+    if @profile.save 
+      redirect_to user_profile_path(@user)
+    else  
+      render :edit, status: :unprocessable_entity
+    end
   end 
 
   def new 

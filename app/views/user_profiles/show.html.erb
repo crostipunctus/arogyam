@@ -33,6 +33,7 @@
 </p>
 <!-- Add other user attributes here as needed -->
   <%= link_to 'Change password', edit_user_registration_path,  class: "btn btn-outline-success rounded-pill" %>
+  <%= link_to 'Edit Profile', edit_user_profile_path(user_id: @user.id), class: "btn btn-outline-success rounded-pill" %>
   <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete}, class: "btn btn-outline-danger rounded-pill" %>
 
 </section>
