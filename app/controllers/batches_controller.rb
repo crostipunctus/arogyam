@@ -4,6 +4,7 @@ class BatchesController < ApplicationController
 
   def index 
     @batches = Batch.order(start_date: :asc)
+    
   end 
 
   def new         
