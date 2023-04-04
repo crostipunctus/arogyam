@@ -26,7 +26,6 @@
                 <% @registrations = Registration.where(user_id: current_user.id, batch_id: batch.id)%>
                   <% @registrations.each do |registration| %>
                     <%= button_to "Cancel", registration_path(registration), method: :delete, class: "btn btn-outline-primary rounded-pill" %> 
-
                   <% end %>
               <% else %>
                 <%= button_to "Register", registrations_path(batch_id: batch.id ), method: :post, class: "btn btn-outline-primary rounded-pill" %>
