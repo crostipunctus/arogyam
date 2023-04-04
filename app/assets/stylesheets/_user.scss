@@ -1513,8 +1513,20 @@ tbody tr:hover {
 }
 
 .nearest_batch {
-  background-color: #b9d5cd !important;
+  background: linear-gradient(to bottom right, #FFAA00, rgba(255, 255, 255, 0.5)) !important;
+
 }
+
+.nearest_batch h5 {
+  color: white !important;
+}
+
+.nearest_batch button {
+  border: 1px solid #9B4400;
+  color: #9B4400;
+}
+
+
 
 .here {
   color: green !important;
