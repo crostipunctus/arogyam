@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
   end 
 
   def create
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:batch_id]) 
     if current_user.user_profile
       if Registration.exists?(user: current_user, batch: @batch)
         redirect_to batches_path, alert: "You have already registered for this batch"

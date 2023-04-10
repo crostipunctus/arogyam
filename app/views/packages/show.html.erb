@@ -10,7 +10,7 @@
         <% if current_user %>          
           <%= link_to "Book programme", new_vishraam_registration_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %>
         <% else %>
-          <div id="registerBatch" class="registerBatch package-titles"><strong>Please sign in to register for this batch: <%= link_to "Sign in", new_user_session_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>        <% end %>
+          <div id="registerBatch" class="registerBatch package-titles"><strong>Please sign in to register for this programme: <%= link_to "Sign in", new_user_session_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>        <% end %>
       <% else %>
         <div id="registerBatch" class="registerBatch package-titles"><strong>Please register for a batch to avail this programme: <%= link_to "Register", batches_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>
       <% end %>
