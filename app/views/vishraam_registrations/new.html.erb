@@ -1,0 +1,21 @@
+
+  <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+
+<h1 class="cardHeading packages text-center">Vishraam Registration</h1> 
+<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+   
+  <%= form_with(model: @vishraam_registration) do |f|%>
+    <%= @vishraam_registration.errors.full_messages.to_sentence %>
+    <div class="mb-3">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :duration, "Duration" %>
+      <%= f.select :duration, VishraamRegistration::DURATION_OPTIONS, { prompt: "Select duration" }, { class: "duration form-select",  id: "duration" } %>
+    </div>
+   
+    <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>
+</div>
