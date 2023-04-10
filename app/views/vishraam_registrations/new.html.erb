@@ -2,6 +2,9 @@
   <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
 <h1 class="cardHeading packages text-center">Vishraam Registration</h1> 
+
+<p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
+
 <div class="h-100 d-flex align-items-center justify-content-center">
    
   <%= form_with(model: @vishraam_registration) do |f|%>
@@ -19,7 +22,7 @@
   <% end %>
 </div>
 </div>
-
+ 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     var today = new Date().toISOString().split("T")[0];
