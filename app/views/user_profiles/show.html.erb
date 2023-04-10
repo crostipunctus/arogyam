@@ -21,6 +21,12 @@
     <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
   <% end %>
 <% end %>
+<% if @user.vishraam_registrations.exists? %>
+  <h3>Your Vishraam Registrations are: </h3>
+  <% @user.vishraam_registrations.each do |vishraam| %>
+    <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
+  <% end %>
+<% end %>
 <h3>Profile details</h3>
 <% if @profile %>
   <li><%= @profile.gender %></li>

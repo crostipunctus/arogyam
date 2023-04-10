@@ -15,13 +15,16 @@ class VishraamRegistrationsController < ApplicationController
     if current_user.user_profile
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       @vishraam_registration.user_id = current_user.id
-      if @vishraam_registration.save
-        flash[:success] = "Vishraam registration successful"
-        redirect_to root_path
-      else
-        flash[:error] = "Vishraam registration failed"
-        render 'new'
-      end
+     
+        if @vishraam_registration.save
+          
+
+          redirect_to packages_path, notice: "Vishraam registration successful"
+        else
+          flash[:error] = "Vishraam registration failed"
+          render 'new'
+        end
+      
     else  
       redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
     end 
