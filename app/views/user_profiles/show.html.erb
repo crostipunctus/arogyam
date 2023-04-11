@@ -25,6 +25,7 @@
   <h3>Your Vishraam Registrations are: </h3>
   <% @user.vishraam_registrations.each do |vishraam| %>
     <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
+    <%= button_to "Cancel", vishraam_registration_path(vishraam), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
 <% end %>
 <h3>Profile details</h3>

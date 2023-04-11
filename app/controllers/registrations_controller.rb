@@ -57,6 +57,7 @@ class RegistrationsController < ApplicationController
   def destroy 
     @registration = Registration.find(params[:id])
     @registration.destroy    
+    
     redirect_to batches_path, alert: "Batch registration cancelled"
   end 
 
