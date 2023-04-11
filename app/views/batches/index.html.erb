@@ -41,6 +41,8 @@
           <% end %>
         <% end %>
       </div>
-   
+    <% if current_user_admin? %>
+      <%= link_to "All registrations", registrations_path, class: "btn btn-outline-danger rounded-pill" %>
+    <% end %>
   </div>
 </section>

@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update ]
   def index 
     @registrations = Registration.all 
-    
+    @vishraam_registrations = VishraamRegistration.all
   end
 
   def new 
