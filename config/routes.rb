@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
   resources :team_members 
 
   get 'contacts/new'
@@ -9,6 +10,10 @@ Rails.application.routes.draw do
   get 'bookings_list' => 'bookings#bookings_list'
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
+
+  resources :users, only: [] do
+    resource :profile, controller: 'user_profiles'
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -59,6 +64,10 @@ Rails.application.routes.draw do
   get 'pdf' => 'registrations#pdf'
 
   get 'batch/:id' => 'batches#pdf', as: :batch_pdf
+
+  resources :vishraam_registrations
+
+  get 'vishraam_pdf' => 'vishraam_registrations#pdf'
 
   # config/routes.rb
   # config/routes.rb

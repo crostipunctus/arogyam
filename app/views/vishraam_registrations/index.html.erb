@@ -1,0 +1,30 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+  <h1>Vishraam Registrations</h1>
+  
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Dates</th>
+                <th>Duration</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+            <% @vishraam_registrations.each do |registration| %>
+                <tr>
+                    
+                    <td><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+                    <td><%= registration.user.email %></td>
+                    <td><%= registration.date %></td>
+                    <td><%= registration.duration %></td>
+                    <!-- Add other columns here -->
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+  <%= link_to 'Download pdf', vishraam_pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+</section>
+

@@ -51,9 +51,7 @@
         <%= yield %>
       
       </main>
-      <% if !current_page?(bookings_path)%>
-        <%= render 'layouts/footer-2' %>
-      <% end %>
+      
       <%= render 'layouts/footer' %>
   </body>
 </html>

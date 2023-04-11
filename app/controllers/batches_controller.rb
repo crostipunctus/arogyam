@@ -1,13 +1,23 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!, only: [ :edit, :update, :create, :destroy]
-  before_action :require_admin, only: [ :show, :edit, :update, :create, :destroy]
+  before_action :require_admin, only: [ :new, :show, :edit, :update, :create, :destroy]
 
   def index 
     @batches = Batch.order(start_date: :asc)
+    
   end 
 
-  def new 
+  def new         
+    @batch = Batch.new
 
+  end 
+  def create  
+    @batch = Batch.create(batch_params)
+    if @batch.save 
+      redirect_to batches_path, notice: "Batch created"
+    else  
+      render :new, status: :unprocessable_entity
+    end 
   end 
 
   def show 
@@ -15,20 +25,25 @@ class BatchesController < ApplicationController
     @students = @batch.users
   end 
 
-  def create  
-
-  end 
-
   def edit  
-
+    @batch = Batch.find(params[:id])
   end 
 
   def update 
+    @batch = Batch.find(params[:id])
+    @batch.update(batch_params)
 
+    if @batch.save 
+      redirect_to batches_path, notice: "Batch updated"
+    else  
+      render :edit, status: :unprocessable_entity
+    end
   end 
 
   def destroy 
-
+    @batch = Batch.find(params[:id])
+    @batch.destroy    
+    redirect_to batches_path, notice: "Batch deleted"
   end 
 
   def pdf 
@@ -52,7 +67,8 @@ class BatchesController < ApplicationController
   def render_table
    
     <<-HTML
-    <h1><%= @batch.name %></h1>
+    <h1><%= batch_date_range(@batch) %></h1>
+    <h3>Batch participants</h3>
     <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
         <tr>
@@ -64,7 +80,7 @@ class BatchesController < ApplicationController
     <tbody>
     <% @batch.users.each do |user| %>
             <tr style="background-color: <%= cycle('#ccffd9', '#e6ffec') %>;">
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user.first_name %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(user) %></td>
                 <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user.email %></td>
                 <!-- Add other columns here -->
             </tr>
@@ -72,10 +88,11 @@ class BatchesController < ApplicationController
     </tbody>
 </table>
     HTML
-     end 
-        
+  end
 
-
+ def batch_params
+    params.require(:batch).permit(:name, :start_date, :end_date)
+  end  
 
 
 end

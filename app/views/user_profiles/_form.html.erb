@@ -1,0 +1,60 @@
+<div class="Profileform">
+  <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+    <%= form_with(model: @profile, url: user_profile_path) do |f|%>
+      <%= @profile.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :gender %>
+        <%= f.text_field :gender, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :date_of_birth %>
+        <%= f.date_field :date_of_birth, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :city %>
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :zip %>
+        <%= f.text_field :zip, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :country %>
+        <%= f.text_field :country, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: "form-control" %>
+      </div>
+      
+      <div class="form-group mb-3">
+        <%= f.label :alternate_phone_number %>
+        <%= f.text_field :alternate_phone_number, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :doctor_contact_details %>
+        <%= f.text_field :doctor_contact_details, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :nationality %>
+        <%= f.text_field :nationality, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :marital_status %>
+        <%= f.text_field :marital_status, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.label :occupation %>
+        <%= f.text_field :occupation, class: "form-control" %>
+      </div>
+      
+      <%= f.submit class:"mt-3 btn btn-outline-success rounded-pill"%>
+    <% end %>
+    </div>
+  </div>
+</div>

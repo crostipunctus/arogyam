@@ -1,10 +1,10 @@
 class RegistrationsController < ApplicationController
   require 'pdfkit'
-  
-  before_action :require_admin, only: [:index, :edit, :update,  :destroy]
+  before_action :authenticate_user! 
+  before_action :require_admin, only: [:index, :edit, :update ]
   def index 
     @registrations = Registration.all 
-
+    @vishraam_registrations = VishraamRegistration.all
   end
 
   def new 
@@ -12,18 +12,21 @@ class RegistrationsController < ApplicationController
   end 
 
   def create
-    @batch = Batch.find(params[:batch_id])
-  
-    if Registration.exists?(user: current_user, batch: @batch)
-      redirect_to batches_path, alert: "You have already registered for this batch"
-    else
-      @registration = current_user.registrations.new(batch: @batch)
-      if @registration.save
-        redirect_to batches_path, notice: "Registered successfully"
+    @batch = Batch.find(params[:batch_id]) 
+    if current_user.user_profile
+      if Registration.exists?(user: current_user, batch: @batch)
+        redirect_to batches_path, alert: "You have already registered for this batch"
       else
-        redirect_to root_path, status: :unprocessable_entity
+        @registration = current_user.registrations.new(batch: @batch)
+        if @registration.save
+          redirect_to batches_path, notice: "Registered successfully"
+        else
+          redirect_to root_path, status: :unprocessable_entity
+        end
       end
-    end
+    else  
+      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+    end 
   end
   
   def pdf 
@@ -51,7 +54,9 @@ class RegistrationsController < ApplicationController
   end 
 
   def destroy 
-
+    @registration = Registration.find(params[:id])
+    @registration.destroy    
+    redirect_to batches_path, alert: "Batch registration cancelled"
   end 
 
   private 
@@ -74,8 +79,8 @@ class RegistrationsController < ApplicationController
     <tbody>
         <% @registrations.each do |registration| %>
             <tr style="background-color: <%= cycle('#f0f0f0', '#ffffff') %>;">
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.batch.name %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.first_name %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= batch_date_range(registration.batch) %></td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user)</td>
                 <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
                 <!-- Add other columns here -->
             </tr>
