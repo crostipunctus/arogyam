@@ -19,9 +19,10 @@ class RegistrationsController < ApplicationController
       else
         @registration = current_user.registrations.new(batch: @batch)
         if @registration.save
+          RegistrationMailer.registration_email(@registration).deliver_later
           redirect_to batches_path, notice: "Registered successfully"
         else
-          redirect_to root_path, status: :unprocessable_entity
+          redirect_to root_path, status: :unprocessable_entity 
         end
       end
     else  

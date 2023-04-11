@@ -38,4 +38,7 @@ module ApplicationHelper
     "#{user.first_name} #{user.last_name}"
   end
  
+  def batch_date_range(batch)
+    formatted_date(batch.start_date) + " - " + formatted_date(batch.end_date)
+  end 
 end
