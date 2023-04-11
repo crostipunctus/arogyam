@@ -17,7 +17,7 @@ class VishraamRegistrationsController < ApplicationController
       @vishraam_registration.user_id = current_user.id
      
         if @vishraam_registration.save
-          
+          VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
 
           redirect_to packages_path, notice: "Vishraam registration successful"
         else

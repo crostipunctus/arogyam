@@ -1,6 +1,6 @@
 <h1>New Batch Registration</h1>
 
-<p>Name: <%= @registration.user %></p>
+<p>Name: <%= @registration.user.first_name %></p>
 <p>Email: <%= @registration.user.email %></p>
-<p>Batch: <%= @registration.batch %>
+<p>Batch: <%= @registration.batch.start_date %>
 <p>Message: A new batch registration has been made. Please go to www.arogyam.life/registrations to see the latest batch registrations.</p>
