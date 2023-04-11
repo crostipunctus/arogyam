@@ -11,7 +11,7 @@
 }
 
 .footercontainer footer {
-  background-color: #fbf5ec !important;
+  background: linear-gradient(to bottom right, #FFF176, #FFA726) !important;
   width: 100% !important;
   margin-top: 30px;
 
@@ -704,7 +704,7 @@ h4 {
 
 
 .contactInfo {
-  background-color: $gray-200;
+  background: linear-gradient(to bottom right, rgb(178, 216, 255), rgb(225, 190, 231));
   padding-left: 10px;
   padding-right: 20px;
   border-radius: 10px;
@@ -813,8 +813,7 @@ h4 {
 
 /* Style the mobile-footer */
 .mobile-footer {
-  background-color: #8f9779;
-  opacity: .92;
+  background: linear-gradient(to bottom right, #2196F3, #9C27B0);
   padding: 10px;
   font-size: 14px;
   text-align: center;
@@ -1304,7 +1303,11 @@ h4 {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+
+  background: linear-gradient(to bottom right, rgb(184, 221, 108), rgb(238, 214, 184));
+
+
+
   background-clip: border-box;
   height: 520px;
   border-radius: 20px;
