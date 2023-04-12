@@ -1,7 +1,7 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
   <h2>Change your password</h2>
-  <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+  <div class="h-100 d-flex align-items-center justify-content-center">
     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
