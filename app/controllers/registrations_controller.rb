@@ -82,7 +82,7 @@ class RegistrationsController < ApplicationController
         <% @registrations.each do |registration| %>
             <tr style="background-color: <%= cycle('#f0f0f0', '#ffffff') %>;">
                 <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= batch_date_range(registration.batch) %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user)</td>
+                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
                 <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
                 <!-- Add other columns here -->
             </tr>

@@ -17,7 +17,11 @@ export default class extends Controller {
     const messageContent = this.messageTarget.textContent.toLowerCase();
 
     // Add classes based on the type of notification
-    if (messageContent.includes("success") || messageContent.includes("successfully")) {
+    if (
+      messageContent.includes("success") ||
+      messageContent.includes("successfully") ||
+      messageContent.includes("registration cancelled")
+    ) {
       this.element.classList.add("success");
     } else if (
       messageContent.includes("error") ||
