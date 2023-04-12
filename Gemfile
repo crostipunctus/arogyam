@@ -55,7 +55,9 @@ gem "sassc-rails"
 
 gem "bootstrap_form", "~> 5.1"
 
-gem 'devise'
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
+gem "responders"
 
 gem "aws-sdk-s3"
 

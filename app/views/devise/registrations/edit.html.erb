@@ -1,6 +1,6 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+<div class="h-100 d-flex align-items-center justify-content-center">
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
   <%= form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -39,7 +39,7 @@
   <% end %>
   <h3>Cancel my account</h3>
 
-<h4>Unhappy? <%= button_to "Cancel my account", user_registration_path, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger" %></h4>
+  <h4>Unhappy? <%= button_to "Cancel my account", user_registration_path, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger" %></h4>
 
   <%= link_to "Back", :back, class: "btn btn-primary" %>
   </div>

@@ -12,7 +12,7 @@
             <div >
 
               <h1 class="py-2 pb-lg-3">Sign Up</h1>
-              <div data-turbo="false">
+             
               <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
               <%= render "shared/errors", object: resource %>
                 <div class="pb-3 mb-3">
@@ -51,7 +51,7 @@
                   <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4" %>
                 </div>
               <% end %>
-              </div>
+              
 
               <%= render "devise/shared/links" %>
             </div>
