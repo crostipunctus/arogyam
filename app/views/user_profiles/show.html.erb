@@ -1,51 +1,75 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-<% if current_user == @user %>
-  <h1>Your Profile</h1>
-<% else %>  
-  <h1><%= @user.first_name %>'s Profile</h1>
-<% end %>
-<p>
-  <strong>First Name:</strong>
-  <h5><%= @user.email %></h5>
-</p>
  
-<p>
-  <strong>Last Name:</strong>
-  <%= @user.last_name %>
-</p>
+  <h1 class="text-center mb-5"><%= user_full_name(@user) %></h1>
 
-<p>
-<% if @user.batches.exists? %>
-  <h3>You have registered for the following batches: </h3>
-  <% @user.batches.each do |batch| %>
-    <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
+  
+  <div class="personal-info">
+  <% if @profile %>
+    <h2>Profile</h2>
+    <ul>
+      <li><strong>Email:</strong> <%= @user.email %></li>
+      <li><strong>Created At:</strong> <%= @user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
+      <li><strong>Updated At:</strong> <%= @user.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
+      <li><strong>Gender:</strong> <%= @profile.gender %></li>
+      <li><strong>Date of Birth:</strong> <%= @profile.date_of_birth.strftime('%Y-%m-%d') %></li>
+      <li><strong>Address:</strong> <%= @profile.address %></li>
+      <li><strong>City:</strong> <%= @profile.city %></li>
+      <li><strong>ZIP:</strong> <%= @profile.zip %></li>
+      <li><strong>Country:</strong> <%= @profile.country %></li>
+      <li><strong>Phone Number:</strong> <%= @profile.phone_number %></li>
+      <li><strong>Alternate Phone Number:</strong> <%= @profile.alternate_phone_number %></li>
+      <li><strong>Doctor Contact Details:</strong> <%= @profile.doctor_contact_details %></li>
+      <li><strong>Nationality:</strong> <%= @profile.nationality %></li>
+      <li><strong>Marital Status:</strong> <%= @profile.marital_status %></li>
+      <li><strong>Occupation:</strong> <%= @profile.occupation %></li>
+    </ul>
+    <%= link_to 'Edit Profile', edit_user_profile_path(user_id: @user.id), class: "btn btn-outline-danger rounded-pill" %>
+    <%= link_to 'Change password', edit_user_registration_path,  class: "btn btn-outline-danger rounded-pill" %>
+    <% else %>
+    <h5>You have not created a profile yet</h5>
+    <%= link_to "Create Profile", new_user_profile_path(user_id: @user.id), class: "btn btn-outline-danger rounded-pill" %>
+  <%end %>
+  </div>
+  
+
+
+
+<div class="registrations">
+  <% if @user.batches.exists? %>
+    <h3>You have registered for the following batches:</h3>
+    <ul>
+      <% @user.batches.each do |batch| %>
+      <div class="cancelBatch">
+        <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
+        <%= button_to "Cancel", batch_path(batch), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+      </div>
+      <% end %>
+    </ul>
+  <% else %>
+    <h5 >You have not registered for any batches</h5>
+    <%= link_to "Register", batches_path, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
-<% end %>
-<% if @user.vishraam_registrations.exists? %>
-  <h3>Your Vishraam Registrations are: </h3>
-  <% @user.vishraam_registrations.each do |vishraam| %>
-    <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
-    <%= button_to "Cancel", vishraam_registration_path(vishraam), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill"%>
+</div>
+<div class="registrations">
+  <% if @user.vishraam_registrations.exists? %>
+    <h3>Your Vishraam Registrations are:</h3>
+    <ul>
+      <% @user.vishraam_registrations.each do |vishraam| %>
+      <div class="cancelBatch">
+        <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
+        <%= button_to "Cancel", vishraam_registration_path(vishraam), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+      </div>
+      <% end %>
+    </ul>
+  <% else %>
+    <h5 >You have not registered for Vishraam</h5>
+    <%= link_to "Register", new_vishraam_registration_path, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
-<% end %>
-<h3>Profile details</h3>
-<% if @profile %>
-  <li><%= @profile.gender %></li>
-  <li><%= @profile.date_of_birth %></li>
+</div>
 
-  <li><%= @profile.phone_number %></li>
 
-<% else %>
-  <li>You have not created a profile yet</li>
-  <%= link_to "Create Profile", new_user_profile_path(user_id: @user.id), class: "btn btn-primary" %>
-<% end %>
-</p>
-<!-- Add other user attributes here as needed -->
-<% if current_user == @user %>
-  <%= link_to 'Change password', edit_user_registration_path,  class: "btn btn-outline-success rounded-pill" %>
-<% end %>  
-  <%= link_to 'Edit Profile', edit_user_profile_path(user_id: @user.id), class: "btn btn-outline-success rounded-pill" %>
-  <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete}, class: "btn btn-outline-danger rounded-pill" %>
+
+
 
 
 <% if current_user_admin? %>

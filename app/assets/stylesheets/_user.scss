@@ -249,6 +249,12 @@ div.desc {
   text-align: center;
   margin-top: -1rem;
   margin-bottom: 2rem;
+  position: fixed;
+  top: 10%;
+  width: 100%;
+  /* Add this */
+  z-index: 1000;
+  /* Add this */
 
   &.notice {
     @extend .alert-success;
@@ -258,7 +264,7 @@ div.desc {
     @extend .alert-danger;
   }
 
-  top: 120px;
+
 }
 
 .videoContainer {
@@ -759,8 +765,9 @@ h4 {
 }
 
 .navbarBookButton:hover {
-  background-color: gray !important;
+  background: linear-gradient(to bottom right, #4A90E2, #8B4AE2) !important;
 }
+
 
 .bookProgButton {
   background-color: white;
@@ -1585,4 +1592,77 @@ tbody tr:hover {
   font-size: 20px;
   font-weight: 700;
 
+}
+
+.personal-info {
+  font-family: 'Barlow', sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(to bottom right, rgb(184, 221, 108), rgb(248, 172, 79));
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.personal-info h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.personal-info ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.personal-info ul li {
+  padding: 5px 0;
+}
+
+.personal-info ul li strong {
+  font-weight: bold;
+}
+
+.registrations {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.registrations h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.registrations ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.registrations ul li {
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.registrations .btn {
+  margin-bottom: 5px;
+}
+
+.cancelBatch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancelBatch li {
+  list-style: none;
+  margin-right: 10px;
+  margin-top: 20px;
 }

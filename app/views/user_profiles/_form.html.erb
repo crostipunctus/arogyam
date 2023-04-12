@@ -4,31 +4,31 @@
     <%= form_with(model: @profile, url: user_profile_path) do |f|%>
       <%= @profile.errors.full_messages.to_sentence %>
       <div class="mb-3">
-        <%= f.label :gender %>
+        <%= f.label :gender, "Gender *" %>
         <%= f.text_field :gender, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :date_of_birth %>
+        <%= f.label :date_of_birth, "Date of Birth *" %>
         <%= f.date_field :date_of_birth, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :address %>
+        <%= f.label :address, "Address *" %>
         <%= f.text_field :address, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :city %>
+        <%= f.label :city, "City *" %>
         <%= f.text_field :city, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :zip %>
+        <%= f.label :zip, "Pincode *" %>
         <%= f.text_field :zip, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :country %>
+        <%= f.label :country, "Country *" %>
         <%= f.text_field :country, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :phone_number %>
+        <%= f.label :phone_number, "Phone number *" %>
         <%= f.text_field :phone_number, class: "form-control" %>
       </div>
       
@@ -41,7 +41,7 @@
         <%= f.text_field :doctor_contact_details, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :nationality %>
+        <%= f.label :nationality, "Nationality *" %>
         <%= f.text_field :nationality, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
@@ -49,7 +49,7 @@
         <%= f.text_field :marital_status, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.label :occupation %>
+        <%= f.label :occupation, "Occupation *" %>
         <%= f.text_field :occupation, class: "form-control" %>
       </div>
       

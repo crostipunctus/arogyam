@@ -35,7 +35,7 @@ module ApplicationHelper
   end 
   
   def user_full_name(user)
-    "#{user.first_name} #{user.last_name}"
+    "#{user.first_name.capitalize} #{user.last_name.capitalize}"
   end
  
   def batch_date_range(batch)
