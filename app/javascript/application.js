@@ -4,7 +4,11 @@
 //= require jquery
 //= require fancybox
 
+import { Application } from "@hotwired/stimulus"
+import NotificationController from "./controllers/notification_controller"
 
+window.Stimulus = Application.start()
+Stimulus.register("notification", NotificationController)
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"

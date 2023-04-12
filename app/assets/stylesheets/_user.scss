@@ -1276,7 +1276,7 @@ h4 {
 }
 
 #signinCard .form-control {
-  width: 80%;
+  width: 100%;
 }
 
 #signInCard .card-body {
@@ -1665,4 +1665,41 @@ tbody tr:hover {
   list-style: none;
   margin-right: 10px;
   margin-top: 20px;
+}
+
+/* Container for the notification */
+.notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 9999;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+
+  color: white;
+  font-size: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  text-align: center;
+  /* Add this line */
+}
+
+.notification.visible {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Different types of notifications */
+.notification.success {
+  background: linear-gradient(to bottom right, #4A90E2, #8B4AE2) !important;
+  /* Green */
+}
+
+.notification.error {
+  background: linear-gradient(to bottom right, #e24a4f, #e27d4a) !important;
+  /* Red */
 }

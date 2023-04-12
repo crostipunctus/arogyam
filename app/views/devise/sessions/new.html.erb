@@ -1,43 +1,30 @@
- <main class="page-wrapper">
-  <div class="d-flex flex-column position-relative h-100 pt-5">
-
-    <div class="container mt-auto">
-      <div class="row align-items-center">
-        <div class="col-md-6 mb-5 mb-md-0">
-          <div id="signinCard" class=" border-0 bg-success py-md-3 py-lg-4 px-lg-4 px-xl-5">
-            <div >
-
-              <h1 class="py-2 pb-lg-3">Sign in</h1>
-              
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <div class="pb-3 mb-3">
-                  <div class="position-relative">
-                  
+<main class="page-wrapper d-flex  justify-content-center" style="min-height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div id="signinCard" class="border-0 bg-success py-md-3 py-lg-4 px-lg-4 px-xl-5">
+          <div>
+            <h1 class="py-2 pb-lg-3">Sign in</h1>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="pb-3 mb-3">
+                <div class="position-relative">
                   <%= f.label :email %><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg ps-5" %>
                 </div>
-
                 <div class="field">
                   <%= f.label :password %><br />
                   <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg ps-5" %>
                 </div>
-
-               <br>
-
+                <br>
                 <div class="actions">
                   <%= f.submit "Log in", class: "btn btn-lg btn-light mb-4" %>
                 </div>
               <% end %>
-              
-
               <%= render "devise/shared/links" %>
             </div>
-            
           </div>
         </div>
       </div>
     </div>
-    <br>
-
   </div>
 </main>
