@@ -28,7 +28,8 @@ export default class extends Controller {
       messageContent.includes("error") ||
       messageContent.includes("invalid") ||
       messageContent.includes("sign in") ||
-      messageContent.includes("sign up")
+      messageContent.includes("sign up") ||
+      messageContent.includes("please complete your profile")
     ) {
       this.element.classList.add("error");
     } else {
