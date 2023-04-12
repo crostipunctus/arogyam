@@ -41,7 +41,10 @@
       <% @user.batches.each do |batch| %>
       <div class="cancelBatch">
         <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
-        <%= button_to "Cancel", batch_path(batch), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+        <% @registrations = Registration.where(user_id: current_user.id, batch_id: batch.id)%>
+        <% @registrations.each do |registration| %>
+          <%= button_to "Cancel", registration_path(registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
+        <% end %>
       </div>
       <% end %>
     </ul>
