@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'newsletter_subscriptions/create'
   get 'profiles/show'
   resources :team_members 
 
@@ -68,6 +69,9 @@ Rails.application.routes.draw do
   resources :vishraam_registrations
 
   get 'vishraam_pdf' => 'vishraam_registrations#pdf'
+
+  resources :newsletter_subscriptions, only: [:create]
+
 
   # config/routes.rb
   # config/routes.rb
