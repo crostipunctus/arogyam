@@ -15,10 +15,10 @@
         <tbody>
             <% @registrations.each do |registration| %>
                 <tr>
-                    <td><%= batch_date_range(registration.batch) %></td>
-                    <td><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
-                    <td><%= registration.user.email %></td>
-                    <td><%= registration.user.user_profile.gender %>
+                    <td data-th="Batch Date Range"><%= batch_date_range(registration.batch) %></td>
+                    <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+                    <td data-th="Email"><%= registration.user.email %></td>
+                    <td data-th="Gender"><%= registration.user.user_profile.gender %></td>
                     <!-- Add other columns here -->
                 </tr>
             <% end %>
@@ -41,10 +41,10 @@
         <tbody>
             <% @vishraam_registrations.each do |registration| %>
                 <tr>
-                    <td><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
-                    <td><%= registration.user.email %></td>
-                    <td><%= registration.date %></td>
-                    <td><%= registration.duration %></td>
+                    <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+                    <td data-th="Email"><%= registration.user.email %></td>
+                    <td data-th="Date"><%= registration.date %></td>
+                    <td data-th="Duration"><%= registration.duration %></td>
                     <!-- Add other columns here -->
                 </tr>
             <% end %>
