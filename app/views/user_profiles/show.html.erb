@@ -1,15 +1,15 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
  
-  <h1 class="text-center mb-5"><%= user_full_name(@user) %></h1>
+  <h1 class="text-center mb-3"><%= user_full_name(@user) %></h1>
+  <h5 class="text-center mb-5"><%= @user.email %></h1>
 
   
   <div class="personal-info">
   <% if @profile %>
     <h2>Profile</h2>
     <ul>
-      <li><strong>Email:</strong> <%= @user.email %></li>
-      <li><strong>Created At:</strong> <%= @user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
-      <li><strong>Updated At:</strong> <%= @user.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
+      
+    
       <li><strong>Gender:</strong> <%= @profile.gender %></li>
       <li><strong>Date of Birth:</strong> <%= @profile.date_of_birth.strftime('%Y-%m-%d') %></li>
       <li><strong>Address:</strong> <%= @profile.address %></li>
