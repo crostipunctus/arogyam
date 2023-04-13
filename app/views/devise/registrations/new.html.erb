@@ -32,6 +32,10 @@
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg ps-5" %>
                 </div>
                 <br>
+                  <div class="field">
+                    <%= f.check_box :accepts_privacy_policy, { class: 'form-check-input', value: true } %>
+                    <%= f.label :accepts_privacy_policy, sanitize("I accept the #{link_to 'Privacy Policy', privacy_policy_path}"), class: 'form-check-label' %>
+                  </div>
                 <div class="actions">
                   <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4" %>
                 </div>

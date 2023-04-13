@@ -21,7 +21,8 @@ export default class extends Controller {
       messageContent.includes("success") ||
       messageContent.includes("successfully") ||
       messageContent.includes("registration cancelled") ||
-      messageContent.includes("batch deleted")
+      messageContent.includes("batch deleted") ||
+      messageContent.includes("confirmation link")
     ) {
       this.element.classList.add("success");
     } else if (
