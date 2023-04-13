@@ -37,11 +37,13 @@
   <body>
     <%= render 'layouts/navbar' %>
       <main class="page-wrapper">
+      
         <div data-controller="notification" class="notification">
           <div data-notification-target="message">
             <%= flash[:notice] ? " #{flash[:notice]}" : (flash[:alert] ? " #{flash[:alert]}" : "") %>
           </div>
         </div>
+      
         
         <%= yield %>
       

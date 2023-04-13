@@ -1023,8 +1023,9 @@ h4 {
 }
 
 #signinCard {
-  background-color: #87a59c !important;
+  background-image: linear-gradient(to bottom right, #87a59c, #b3c2b7, #d3d8cc);
 }
+
 
 
 
@@ -1668,11 +1669,17 @@ tbody tr:hover {
 }
 
 /* Container for the notification */
+
+
 .notification {
+
   position: fixed;
-  top: 100px;
-  right: 20px;
   z-index: 9999;
+  top: 100px;
+  /* Added to position the notification near the top */
+  left: 50%;
+  /* Added to horizontally center the notification */
+  transform: translateX(-50%);
   width: 300px;
   padding: 10px;
   border-radius: 5px;
@@ -1706,4 +1713,47 @@ tbody tr:hover {
 
 .form-check-label {
   margin-bottom: 20px;
+
+}
+
+.form-check-label a {
+  color: purple !important;
+}
+
+.gradient-form {
+  display: block !important;
+  background-image: linear-gradient(to bottom right, #87a59c, #b3c2b7, #d3d8cc);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+
+}
+
+.signin-form .field {
+  margin-bottom: 15px;
+}
+
+.signin-form .actions {
+  display: flex;
+
+}
+
+.signin-form .actions .btn {
+  width: 100%;
+  max-width: fit-content;
+}
+
+.custom-label {
+  color: white;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.form-check-input {
+  background-color: white !important;
+}
+
+#signup {
+
+  color: white;
 }

@@ -4,35 +4,35 @@
       <div class="col-md-6">
         <div id="signinCard" class="border-0 bg-success py-md-3 py-lg-4 px-lg-4 px-xl-5">
           <div>
-            <h1 class="py-2 pb-lg-3">Sign Up</h1>
+            <h1 id="signup" class="py-2 pb-lg-3">Sign Up</h1>
             <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
               <%= render "shared/errors", object: resource %>
               <div class="pb-3 mb-3">
-                <div class="position-relative">
-                  <%= f.label :email %><br />
+                <div class="position-relative mb-3">
+                  <%= f.label :email, class: "custom-label" %><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg ps-5" %>
                 </div>
-                <div class="field">
-                  <%= f.label :first_name %><br />
+                <div class="field mb-3">
+                  <%= f.label :first_name, class: "custom-label" %><br />
                   <%= f.text_field :first_name, class: "form-control form-control-lg ps-5" %>
                 </div>
-                <div class="field">
-                  <%= f.label :last_name %><br />
+                <div class="field mb-3">
+                  <%= f.label :last_name, class: "custom-label" %><br />
                   <%= f.text_field :last_name, class: "form-control form-control-lg ps-5" %>
                 </div>
-                <div class="field">
-                  <%= f.label :password %><br />
+                <div class="field mb-3">
+                  <%= f.label :password, class: "custom-label" %><br />
                   <% if @minimum_password_length %>
                     <em>(<%= @minimum_password_length %> characters minimum)</em>
                   <% end %><br />
                   <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg ps-5" %>
                 </div>
-                <div class="field">
-                  <%= f.label :password_confirmation %><br />
+                <div class="field mb-3">
+                  <%= f.label :password_confirmation, class: "custom-label" %><br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg ps-5" %>
                 </div>
                 <br>
-                  <div class="field">
+                  <div class="field mb-3">
                     <%= f.check_box :accepts_privacy_policy, { class: 'form-check-input', value: true } %>
                     <%= f.label :accepts_privacy_policy, sanitize("I accept the #{link_to 'Privacy Policy', privacy_policy_path}"), class: 'form-check-label' %>
                   </div>
