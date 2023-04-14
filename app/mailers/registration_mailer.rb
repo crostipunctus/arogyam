@@ -5,7 +5,7 @@ class RegistrationMailer < ApplicationMailer
   def registration_email(registration)
     @registration = registration
     from = Email.new(email: 'ArogyaM@arogyam.life')
-    email_address = Rails.env.production? ? "arogyamtesting@gmail.com" : "rshan.ali@gmail.com"
+    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     to = Email.new(email: email_address)
     subject = 'New Batch Registration'
     html_content = render_to_string(template: 'registration_mailer/registration_email')
@@ -18,7 +18,7 @@ class RegistrationMailer < ApplicationMailer
   def registration_cancel_email(registration_data)
     @registration_data = registration_data
     from = Email.new(email: 'ArogyaM@arogyam.life')
-    email_address = Rails.env.production? ? "arogyamtesting@gmail.com" : "rshan.ali@gmail.com"
+    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     to = Email.new(email: email_address)
     subject = 'Batch Registration Cancelled'
     html_content = render_to_string(template: 'registration_mailer/registration_cancel_email')
