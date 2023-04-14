@@ -8,7 +8,6 @@ class WelcomeMailer < ApplicationMailer
     to = Email.new(email: user.email)
     subject = 'Welcome to ArogyaM'
     html_content = render_to_string(template: 'welcome_mailer/welcome_email')
-
     content = Content.new(type: 'text/html', value: html_content)
     mail = Mail.new(from, subject, to, content)
     sg = SendGrid::API.new(api_key: SENDGRID_API_KEY)
