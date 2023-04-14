@@ -9,3 +9,4 @@ class VishraamRegistrationMailer < ApplicationMailer
     mail(to: "arogyamtesting@gmail.com", subject: "New Vishraam Cancellation")
   end
 end
+
