@@ -22,7 +22,10 @@ export default class extends Controller {
       messageContent.includes("successfully") ||
       messageContent.includes("registration cancelled") ||
       messageContent.includes("batch deleted") ||
-      messageContent.includes("confirmation link")
+      messageContent.includes("confirmation link") ||
+      messageContent.includes("password reset") ||
+      messageContent.includes("password changed") ||
+      messageContent.includes("message has been sent")
     ) {
       this.element.classList.add("success");
     } else if (
