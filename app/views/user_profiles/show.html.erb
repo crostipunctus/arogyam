@@ -1,7 +1,9 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
  
-  <h1 class="text-center mb-5"><%= user_full_name(@user) %></h1>
-
+  <h1 class="text-center mb-3"><%= user_full_name(@user) %></h1>
+  <% if @user.admin == true %>
+    <h5 class="text-center mb-5">*ADMIN ACCOUNT*</h5>
+  <% end %>
   
   <div class="personal-info">
   <% if @profile %>
