@@ -281,6 +281,7 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    ruby_http_client (3.5.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -295,6 +296,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sendgrid-ruby (6.6.2)
+      ruby_http_client (~> 3.4)
     sinatra (3.0.5)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -390,6 +393,7 @@ DEPENDENCIES
   responders
   sassc-rails
   selenium-webdriver
+  sendgrid-ruby
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
