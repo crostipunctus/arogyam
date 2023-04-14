@@ -1794,6 +1794,12 @@ tbody tr:hover {
   background-color: white !important;
 }
 
+.form-check-input:checked {
+  background-color: #007bff !important;
+  border-color: #007bff;
+}
+
+
 #signup {
 
   color: white;
