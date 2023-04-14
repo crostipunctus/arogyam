@@ -20,7 +20,6 @@ class RegistrationsController < ApplicationController
         @registration = current_user.registrations.new(batch: @batch)
         if @registration.save
           RegistrationMailer.registration_email(@registration).deliver_later
-          WelcomeMailer.welcome_email(current_user).deliver_later
           redirect_to batches_path, notice: "Registered successfully"
         else
           redirect_to root_path, status: :unprocessable_entity 
