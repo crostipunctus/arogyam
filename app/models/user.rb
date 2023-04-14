@@ -15,4 +15,18 @@ class User < ApplicationRecord
 
   # check if profile associated with the user has been created. 
 
+  def confirm(*args, &block)
+    previously_confirmed = confirmed?
+
+    # Call Devise's original confirm method
+    result = super(*args, &block)
+
+    # If the user was not confirmed before and is confirmed now, send the welcome email
+    unless previously_confirmed || !confirmed?
+      WelcomeMailer.welcome_email(self).deliver_later
+    end
+
+    result
+  end
+
 end
