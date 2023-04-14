@@ -1798,3 +1798,33 @@ tbody tr:hover {
 
   color: white;
 }
+
+.welcome-email-body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.welcome-email-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.welcome-email-text {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.welcome-email-link {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.welcome-email-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}

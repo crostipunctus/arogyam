@@ -17,6 +17,7 @@ module ApplicationHelper
       "#{Rails.application.credentials.cloudfront[:host]}/#{image_name}"
     end
   end 
+  
   def ordinal_suffix(day)
     if (11..13).include?(day % 100)
       "th"
