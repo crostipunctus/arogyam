@@ -1,4 +1,4 @@
-    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo') %>
+    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
     <h1 class="welcome-email-title">
       Thank you for signing up, <%= @user.first_name %>!
     </h1>

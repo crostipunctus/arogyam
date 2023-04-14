@@ -1804,10 +1804,12 @@ tbody tr:hover {
   color: #333;
   text-align: center;
   line-height: 1.6;
+  max-width: 500px;
   padding: 20px;
 }
 
 .welcome-email-title {
+  color: purple;
   font-size: 32px;
   margin-bottom: 20px;
 }
@@ -1827,4 +1829,6 @@ tbody tr:hover {
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+  display: block;
+  margin: 0 auto;
 }
