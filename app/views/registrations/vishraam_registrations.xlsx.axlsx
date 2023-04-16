@@ -15,7 +15,7 @@ headers = [
   'Country',
   'Zip/Postal code',
   'Occupation',
-  'Education'
+  'Marital Status'
 ]
 
 data = @vishraam_registrations.map do |registration|

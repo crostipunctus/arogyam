@@ -14,7 +14,7 @@ headers = [
   'Country',
   'Zip/Postal code',
   'Occupation',
-  'Education'
+  'Marital Status'
 ]
 
 data = @registrations.map do |registration|
