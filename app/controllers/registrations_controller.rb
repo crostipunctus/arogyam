@@ -5,6 +5,23 @@ class RegistrationsController < ApplicationController
   def index 
     @registrations = Registration.all 
     @vishraam_registrations = VishraamRegistration.all
+    
+  end
+
+  def export_batch
+    @registrations = Registration.includes(user: :user_profile).all
+
+    respond_to do |format|
+      format.xlsx { render xlsx: 'registrations', filename: 'registrations.xlsx' }
+    end
+  end
+
+  def export_vishraam
+    @vishraam_registrations = VishraamRegistration.includes(user: :user_profile).all
+
+    respond_to do |format|
+      format.xlsx { render xlsx: 'vishraam_registrations', filename: 'vishraam_registrations.xlsx' }
+    end
   end
 
   def show 

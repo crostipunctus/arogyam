@@ -1,0 +1,44 @@
+
+wb = xlsx_package.workbook
+
+headers = [
+  'Registered on',
+  'Full name',
+  'Selected date',
+  'Selected duration',
+  'Email',
+  'Gender',
+  'Date of Birth',
+  'Phone',
+  'Address',
+  'City',
+  'Country',
+  'Zip/Postal code',
+  'Occupation',
+  'Education'
+]
+
+data = @vishraam_registrations.map do |registration|
+  user_profile = registration.user.user_profile
+  [
+    formatted_created_at_date(registration.created_at.to_s),
+    user_full_name(registration.user),
+    formatted_date_with_year(registration.date.to_s),
+    "#{registration.duration} days",
+    registration.user.email,
+    user_profile.gender,
+    formatted_date_of_birth(user_profile.date_of_birth.to_s),
+    user_profile.phone_number,
+    user_profile.address,
+    user_profile.city,
+    user_profile.country,
+    user_profile.zip,
+    user_profile.occupation,
+    user_profile.marital_status
+  ]
+end
+
+wb.add_worksheet(name: 'Vishraam Registrations') do |sheet|
+  sheet.add_row headers
+  data.each { |row| sheet.add_row row }
+end

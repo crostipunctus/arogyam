@@ -60,7 +60,14 @@ Rails.application.routes.draw do
 
   resources :batches 
 
-  resources :registrations 
+  
+
+  resources :registrations do
+    collection do
+      get :export_batch
+      get :export_vishraam
+    end
+  end
   
   get 'pdf' => 'registrations#pdf'
 

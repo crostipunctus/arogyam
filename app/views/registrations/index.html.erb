@@ -28,7 +28,8 @@
             <% end %>
         </tbody>
     </table>
-  <%= link_to 'Download pdf', pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <%= link_to 'Download pdf', pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
 
   <h1 class="vishraam_reg_heading">Vishraam Registrations</h1>
   
@@ -58,6 +59,9 @@
             <% end %>
         </tbody>
     </table>
-  <%= link_to 'Download pdf', vishraam_pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <%= link_to 'Download pdf', vishraam_pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <%= link_to 'Download Vishraam Registrations Excel', export_vishraam_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
 </section>
 
+
+<!-- app/views/registrations/index.html.erb -->
