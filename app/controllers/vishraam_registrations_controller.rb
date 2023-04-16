@@ -7,6 +7,10 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registrations = VishraamRegistration.all
   end 
 
+  def show 
+    @vishraam_registration = VishraamRegistration.find(params[:id])
+  end 
+
   def new 
     @vishraam_registration = VishraamRegistration.new
   end 

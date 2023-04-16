@@ -42,4 +42,10 @@ module ApplicationHelper
   def batch_date_range(batch)
     formatted_date(batch.start_date) + " - " + formatted_date(batch.end_date)
   end 
+
+  def formatted_created_at_date(date)
+    date = DateTime.parse(date)
+    date_ist = date.in_time_zone('Asia/Kolkata')
+    date_ist.strftime('%-dth %B, %Y %H:%M %p IST')
+  end
 end

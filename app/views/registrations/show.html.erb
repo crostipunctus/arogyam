@@ -1,0 +1,26 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  <h1 class="text-center mb-3">Registration no: <%= @registration.id %> </h1>
+  <ul>
+    <li>Batch date:<%= formatted_date(@registration.batch.start_date) %></li>
+    <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
+    <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
+    <li>Email: <%= @registration.user.email %></li>
+    <li>Gender: <%= @registration.user.user_profile.gender %></li>
+    <li>Age: <%= @registration.user.user_profile.date_of_birth %></li>
+    <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
+    <li>Address: <%= @registration.user.user_profile.address %></li>
+    <li>City: <%= @registration.user.user_profile.city %></li>
+    <li>Country: <%= @registration.user.user_profile.country %></li>
+    <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
+    <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
+    <li>Education: <%= @registration.user.user_profile.marital_status %></li>
+
+    <%= link_to 'Back', registrations_path, class: "btn btn-outline-success" %>
+
+    
+
+
+    
+  </ul>
+
+</section>
