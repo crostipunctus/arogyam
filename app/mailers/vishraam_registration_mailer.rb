@@ -6,7 +6,7 @@ class VishraamRegistrationMailer < ApplicationMailer
   def vishraam_registration_email(vishraam_registration)
     @vishraam_registration = vishraam_registration
     from = Email.new(email: 'ArogyaM@arogyam.life')
-    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "arogyamtesting@gmail.com"
+    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     to = Email.new(email: email_address)
     subject = 'New VishraM Registration'
     html_content = render_to_string(template: 'vishraam_registration_mailer/vishraam_registration_email')
@@ -19,7 +19,7 @@ class VishraamRegistrationMailer < ApplicationMailer
   def vishraam_registration_cancel_email(vishraam_registration_data)
     @vishraam_registration_data = vishraam_registration_data
     from = Email.new(email: 'ArogyaM@arogyam.life')
-    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "arogyamtesting@gmail.com"
+    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     to = Email.new(email: email_address)
     subject = 'VishraM Registration Cancelled'
     html_content = render_to_string(template: 'vishraam_registration_mailer/vishraam_registration_cancel_email')
