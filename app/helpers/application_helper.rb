@@ -48,4 +48,14 @@ module ApplicationHelper
     date_ist = date.in_time_zone('Asia/Kolkata')
     date_ist.strftime('%-dth %B, %Y %H:%M %p IST')
   end
+
+  def formatted_date_with_year(date)
+    date = DateTime.parse(date)
+    date.strftime('%B %-dth, %Y')
+  end
+
+  def formatted_date_of_birth(date)
+    date = DateTime.parse(date)
+    date.strftime('%d-%m-%Y')
+  end
 end
