@@ -5,6 +5,8 @@ class Registration < ApplicationRecord
 
   before_destroy :send_cancel_email
 
+  validates :lifestyle, :substances, :health_conditions, :medication, presence: true
+
   private 
 
   def send_cancel_email 

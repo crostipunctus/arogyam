@@ -1,6 +1,7 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
   <h1 class="text-center mb-3">Registration no: <%= @registration.id %> </h1>
   <ul>
+    <li>Package selected: <%= @registration.package.name %></li>
     <li>Batch date:<%= formatted_date_with_year(@registration.batch.start_date.to_s) %></li>
     <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
     <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
@@ -14,7 +15,12 @@
     <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
     <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
     <li>Education: <%= @registration.user.user_profile.marital_status %></li>
-    <li>Package selected: <%= @registration.package.name %></li>
+    <li>Substance use: <%= @registration.substances %></li>
+    <li>Medical conditions: <%= @registration.health_conditions %></li>
+    <li>Lifestyle: <%= @registration.lifestyle %></li>
+    <li>Medication: <%= @registration.medication %></li>
+
+    
 
     <%= link_to 'Back', registrations_path, class: "btn btn-outline-success" %>
 

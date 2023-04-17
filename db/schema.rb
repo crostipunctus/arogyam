@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_124219) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_041446) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -122,6 +122,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_124219) do
     t.integer "user_id", null: false
     t.integer "batch_id", null: false
     t.integer "package_id"
+    t.text "substances"
+    t.text "lifestyle"
+    t.text "health_conditions"
+    t.text "medication"
     t.index ["batch_id"], name: "index_registrations_on_batch_id"
     t.index ["package_id"], name: "index_registrations_on_package_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
