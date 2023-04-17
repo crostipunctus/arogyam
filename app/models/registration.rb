@@ -2,11 +2,15 @@ class Registration < ApplicationRecord
   belongs_to :user 
   belongs_to :batch 
   belongs_to :package
+  attr_accessor :agreement
+
 
   before_destroy :send_cancel_email
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
-
+  validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
+  
+  
   private 
 
   def send_cancel_email 

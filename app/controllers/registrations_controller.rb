@@ -51,7 +51,7 @@ class RegistrationsController < ApplicationController
           
           redirect_to batches_path, notice: "Registered successfully"
         else
-          flash[:alert] = "You registration could not be saved"
+       
           render :new, status: :unprocessable_entity 
         end
       end
@@ -94,7 +94,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle)
+    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle, :agreement)
   end 
 
   def render_table
