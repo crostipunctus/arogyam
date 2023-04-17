@@ -3,6 +3,7 @@
 <div class="Profileform">
   <div class="h-100 d-flex align-items-center justify-content-center">
      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+     <h5>Please fill in the following details to complete your registration. All fields marked with * are mandatory.</h5>
     <%= form_with(model: @registration) do |f|%>
       <%= render 'shared/errors', object: @registration %> 
      <%= f.hidden_field :batch_id %>
@@ -31,7 +32,14 @@
           <div class="mb-3">
             <%= f.check_box :agreement, class: "form-check-input" %>  
 
-            <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above. *", class: "form-check-label" %>
+            <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above.", class: "form-check-label" %>
+          </div>
+
+          <h5>By submitting this application, I confirm that the facts stated in it are true and complete. I understand that if I am accepted as a candidate, any false statements, omissions, or other misrepresentations made by me on this application may result in the immediate withdrawal of my application and legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. I confirm that I have no health issues which may stop me from participating in the course. I understand that fees paid for this program is non-refundable. I also declare that ArogyaM and The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.</h5>
+          <div class="mb-3">
+            <%= f.check_box :terms, class: "form-check-input" %>  
+
+            <%= f.label :terms, "I have read the self-declaration and agree to abide by the terms and conditions contained in it.", class: "form-check-label" %>
           </div>
 
       
