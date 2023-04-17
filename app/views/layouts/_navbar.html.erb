@@ -14,20 +14,20 @@
       </div>
       <div class="offcanvas-body pt-0 justify-content-center">
         <ul class="navbar-nav p-0" style="--ar-scroll-height: 520px;">
-          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
-          <li class="nav-item"><%= link_to "Health Programmes", packages_path, class: "nav-link", data: {turbo: false}%></li>  
+          <li id="homeMenuItem" class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
+          <li class="nav-item"><%= link_to "Health Programmes", packages_path, class: "nav-link"%></li>  
           <% if current_user_admin? %>
             <%# <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li> 
           <% end %>
           
-          <li class="nav-item"><%= link_to "Batches", batches_path, class: "nav-link", data: {turbo: false}%>
-          <li class="nav-item"><%= link_to "Online Consultations", online_consultations_path, class: "nav-link", data: {turbo: false}%></li>
+          <li class="nav-item"><%= link_to "Batches", batches_path, class: "nav-link"%>
+          <li class="nav-item"><%= link_to "Online Consultations", online_consultations_path, class: "nav-link"%></li>
           <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li> 
 
-          <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link", data: {turbo: false}%></li>
-          <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link", data: {turbo: false}%></li> 
+          <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
+          <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link"%></li> 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-turbo="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
               About
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,8 +36,15 @@
             </ul>
           </li>
           <% if current_user %>
-            <li class="nav-item"><%= link_to current_user.first_name, user_profile_path(user_id: current_user.id), class: "nav-link"%></li>
-            <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, class: "navbarBookButton btn btn-outline-primary rounded-pill",  data: { turbo_method: :delete} %></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+              <%= current_user.first_name %>
+            </a>
+             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to 'Profile', user_profile_path(user_id: current_user.id), class: "dropdown-item"%></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item",  data: { turbo_method: :delete} %></li>
+            </ul>
+          </li>
           <% else %>
             <%= link_to "Sign in", new_user_session_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
           <% end %>

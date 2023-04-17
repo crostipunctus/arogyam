@@ -1842,3 +1842,15 @@ tbody tr:hover {
 .field_with_errors {
   display: inline;
 }
+
+#homeMenuItem {
+  display: none;
+}
+
+/* Show the element on screens below 990px */
+@media (max-width: 990px) {
+  #homeMenuItem {
+    display: flex;
+    /* or 'inline', 'inline-block', 'flex', etc., depending on your desired layout */
+  }
+}
