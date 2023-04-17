@@ -6,7 +6,7 @@
     <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
     <li>Email: <%= @registration.user.email %></li>
     <li>Gender: <%= @registration.user.user_profile.gender %></li>
-    <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth).to_s %></li>
+    <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></li>
     <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
     <li>Address: <%= @registration.user.user_profile.address %></li>
     <li>City: <%= @registration.user.user_profile.city %></li>
@@ -14,6 +14,7 @@
     <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
     <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
     <li>Education: <%= @registration.user.user_profile.marital_status %></li>
+    <li>Package selected: <%= @registration.package.name %></li>
 
     <%= link_to 'Back', registrations_path, class: "btn btn-outline-success" %>
 

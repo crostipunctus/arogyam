@@ -1,0 +1,20 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+<div class="Profileform">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+    <%= form_with(model: @registration) do |f|%>
+      <%= @registration.errors.full_messages.to_sentence %>
+      <%= f.hidden_field :batch_id %>
+       <div class="mb-3">
+          <%= f.label :package_id, "Programme *" %>
+          <%= f.collection_select :package_id, Package.all, :id, :name, { prompt: "Select a package" }, class: "form-control" %>
+        </div>
+      
+      
+      <%= f.submit class:"mt-3 btn btn-outline-success rounded-pill"%>
+    <% end %>
+    </div>
+  </div>
+</div>
+</section>

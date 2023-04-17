@@ -29,21 +29,29 @@ class RegistrationsController < ApplicationController
   end
 
   def new 
+    puts "Params in new action: #{params.inspect}"
+    @registration = Registration.new(batch_id: params[:batch_id])
 
   end 
 
   def create
-    @batch = Batch.find(params[:batch_id]) 
+    puts "Params in reg action: #{params.inspect}"
     if current_user.user_profile
-      if Registration.exists?(user: current_user, batch: @batch)
+      if Registration.exists?(user: current_user, batch_id: params[:batch_id])
         redirect_to batches_path, alert: "You have already registered for this batch"
       else
-        @registration = current_user.registrations.new(batch: @batch)
+        puts "Batch ID before find: #{params[:batch_id]}"
+        @batch = Batch.find(params[:registration][:batch_id])
+        puts @batch
+        @registration = Registration.new(registration_params)
+        @registration.user = current_user
+        @registration.batch = @batch
         if @registration.save
           RegistrationMailer.registration_email(@registration).deliver_later
           
           redirect_to batches_path, notice: "Registered successfully"
         else
+          puts @registration.errors.full_messages
           redirect_to root_path, status: :unprocessable_entity 
         end
       end
@@ -86,7 +94,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:batch_id, :user_id)
+    params.require(:registration).permit(:batch_id, :package_id, :user_id)
   end 
 
   def render_table

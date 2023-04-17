@@ -1,6 +1,7 @@
 class Registration < ApplicationRecord
   belongs_to :user 
   belongs_to :batch 
+  belongs_to :package
 
   before_destroy :send_cancel_email
 

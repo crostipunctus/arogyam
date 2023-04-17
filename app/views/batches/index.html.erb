@@ -30,7 +30,7 @@
                       <%= button_to "Cancel", registration_path(registration), method: :delete, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %> 
                     <% end %>
                 <% else %>
-                  <%= button_to "Register", registrations_path(batch_id: batch.id ), method: :post, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
+                  <%= link_to "Register", new_registration_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
                 <% end %>
                 <% if current_user_admin? %>
                   <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
