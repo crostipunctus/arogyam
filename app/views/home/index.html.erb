@@ -25,8 +25,29 @@
   </div>
 </div>
 
+<section class="container py-2 mt-2 mb-md-3 mb-lg-4 mb-xxl-5">
+  <div class="form-container py-5">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-center">
+        <h2 class="newsletterHeading mb-0">SUBSCRIBE TO OUR NEWSLETTER</h2>
+      </div>
+      <div class="col-md-6">
+        <%= form_with(model: NewsletterSubscription.new, url: newsletter_subscriptions_path, local: true) do |form| %>
+          <div class="form-group">
+            <%= form.label :email, "Email", class: "custom-label mb-2" %>
+            <%= form.email_field :email, class: "form-control", placeholder: "Enter your email address", id: "newsletter" %>
+          </div>
+          <%= form.submit "Subscribe", class: "btn btn-outline rounded-pill mt-3", id: "newsletterSubmit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
     
-</div>
+
       
 <section class="container py-2 mt-2 mb-md-3 mb-lg-4 mb-xxl-5">
 <div class="galleryImages">  

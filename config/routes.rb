@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'privacy_policy/index'
+  get 'newsletter_subscriptions/create'
   get 'profiles/show'
   resources :team_members 
 
@@ -78,6 +79,9 @@ Rails.application.routes.draw do
   get 'vishraam_pdf' => 'vishraam_registrations#pdf'
 
   get 'privacy_policy', to: 'privacy_policy#index', as: :privacy_policy
+
+  resources :newsletter_subscriptions, only: [:create]
+
 
   # config/routes.rb
   # config/routes.rb

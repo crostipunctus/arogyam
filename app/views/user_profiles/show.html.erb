@@ -9,9 +9,8 @@
   <% if @profile %>
     <h2>Profile</h2>
     <ul>
-      <li><strong>Email:</strong> <%= @user.email %></li>
-      <li><strong>Created At:</strong> <%= @user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
-      <li><strong>Updated At:</strong> <%= @user.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
+      
+    
       <li><strong>Gender:</strong> <%= @profile.gender %></li>
       <li><strong>Date of Birth:</strong> <%= @profile.date_of_birth.strftime('%Y-%m-%d') %></li>
       <li><strong>Address:</strong> <%= @profile.address %></li>

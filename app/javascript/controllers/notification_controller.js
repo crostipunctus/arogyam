@@ -25,7 +25,8 @@ export default class extends Controller {
       messageContent.includes("confirmation link") ||
       messageContent.includes("password reset") ||
       messageContent.includes("password changed") ||
-      messageContent.includes("message has been sent")
+      messageContent.includes("message has been sent") ||
+      messageContent.includes("subscribed!")
     ) {
       this.element.classList.add("success");
     } else if (
@@ -34,6 +35,7 @@ export default class extends Controller {
       messageContent.includes("sign in") ||
       messageContent.includes("sign up") ||
       messageContent.includes("please complete your profile")
+
     ) {
       this.element.classList.add("error");
     } else {
