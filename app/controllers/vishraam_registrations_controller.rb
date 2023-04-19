@@ -26,7 +26,7 @@ class VishraamRegistrationsController < ApplicationController
           redirect_to packages_path, notice: "Vishraam registration successful"
         else
           flash[:error] = "Vishraam registration failed"
-          render 'new'
+          render :new, status: :unprocessable_entity 
         end
       
     else  

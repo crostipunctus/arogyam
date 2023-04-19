@@ -7,7 +7,7 @@
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
         <p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
         <%= form_with(model: @vishraam_registration) do |f|%>
-          <%= @vishraam_registration.errors.full_messages.to_sentence %>
+          <%= render 'shared/errors', object: @vishraam_registration %> 
           <div class="mb-3">
             <%= f.label :date %>
             <%= f.date_field :date, class: "form-control", id: "date_input" %>
