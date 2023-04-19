@@ -1,28 +1,59 @@
 
-  <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+<div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
-<h1 class="cardHeading packages text-center">Vishraam Registration</h1> 
+  <h1 class="cardHeading packages text-center">Vishraam Registration</h1> 
+  <div class="Profileform">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
+        <%= form_with(model: @vishraam_registration) do |f|%>
+          <%= @vishraam_registration.errors.full_messages.to_sentence %>
+          <div class="mb-3">
+            <%= f.label :date %>
+            <%= f.date_field :date, class: "form-control", id: "date_input" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :duration, "Duration" %>
+            <%= f.select :duration, VishraamRegistration::DURATION_OPTIONS, { prompt: "Select duration" }, { class: "duration form-select",  id: "duration" } %>
+          </div>
+          <div class="mb-3">
+                <%= f.label :subtances, "Do you currently or in the past have used tobacco, alcohol, recreational drugs, or illicit substances? If yes, please list substance and frequency of use: *" %>
+                <%= f.text_area :substances, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :lifestyle, "Please describe your lifestyle in brief: *" %>
+                <%= f.text_area :lifestyle, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :health_conditions, "Please describe all your health conditions in detail.  Please note: We need this information to be able to guide you better. *" %>
+                <%= f.text_area :health_conditions, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :medication, "Are you currently on any regular Allopathic/Ayurvedic/Homeopathic or any other medicine? If yes please give us details  *" %>
+                <%= f.text_area :medication, class: "form-control" %>
+              </div>
+          <h5>By receiving your application, we assume that you are physically and mentally fit and not pregnant. If any of the health information supplied by you is found to be false then we reserve the right to cancel your registration from the course.</h5>
+                <div class="mb-3">
+                  <%= f.check_box :agreement, class: "form-check-input" %>  
 
-<p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
+                  <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above.", class: "form-check-label" %>
+                </div>
 
-<div class="h-100 d-flex align-items-center justify-content-center">
-   
-  <%= form_with(model: @vishraam_registration) do |f|%>
-    <%= @vishraam_registration.errors.full_messages.to_sentence %>
-    <div class="mb-3">
-      <%= f.label :date %>
-      <%= f.date_field :date, class: "form-control", id: "date_input" %>
+                <h5>By submitting this application, I confirm that the facts stated in it are true and complete. I understand that if I am accepted as a candidate, any false statements, omissions, or other misrepresentations made by me on this application may result in the immediate withdrawal of my application and legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. I confirm that I have no health issues which may stop me from participating in the course. I understand that fees paid for this program is non-refundable. I also declare that ArogyaM and The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.</h5>
+                <div class="mb-3">
+                  <%= f.check_box :terms, class: "form-check-input" %>  
+
+                  <%= f.label :terms, "I have read the self-declaration and agree to abide by the terms and conditions contained in it.", class: "form-check-label" %>
+                </div>
+
+        
+          <%= f.submit class:"btn btn-primary"%>
+        <% end %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :duration, "Duration" %>
-      <%= f.select :duration, VishraamRegistration::DURATION_OPTIONS, { prompt: "Select duration" }, { class: "duration form-select",  id: "duration" } %>
-    </div>
-   
-    <%= f.submit class:"btn btn-primary"%>
-  <% end %>
+  </div>
 </div>
-</div>
- 
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     var today = new Date().toISOString().split("T")[0];
