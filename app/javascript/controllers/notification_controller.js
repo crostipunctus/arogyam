@@ -21,7 +21,8 @@ export default class extends Controller {
       messageContent.includes("success") ||
       messageContent.includes("successfully") ||
       messageContent.includes("registration cancelled") ||
-      messageContent.includes("batch deleted")
+      messageContent.includes("batch deleted") ||
+      messageContent.includes("subscribed!")
     ) {
       this.element.classList.add("success");
     } else if (
@@ -30,6 +31,7 @@ export default class extends Controller {
       messageContent.includes("sign in") ||
       messageContent.includes("sign up") ||
       messageContent.includes("please complete your profile")
+
     ) {
       this.element.classList.add("error");
     } else {
