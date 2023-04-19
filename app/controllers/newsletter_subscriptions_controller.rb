@@ -13,20 +13,20 @@ class NewsletterSubscriptionsController < ApplicationController
   
       begin
         # Subscribe the user to the list
-        gibbon.lists(list_id).members.create(
+        response = gibbon.lists(list_id).members.create(
           body: {
             email_address: email,
             status: "subscribed"
           }
         )
-  
+        puts response
         flash[:notice] = "You have been successfully subscribed to the newsletter."
       rescue Gibbon::MailChimpError => e
         if e.status_code == 400 && e.title == "Member Exists"
           flash[:notice] = "You have already subscribed!"
         else
-         
-          flash[:alert] = "There was an error subscribing you to the newsletter"
+          puts e.message
+          flash[:alert] = "There was an error subscribing you to the newsletter: #{e.message}"
         end      
       end
       redirect_to root_path
