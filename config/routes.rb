@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get "announcements" => "announcements#index"
   get "announcements/new" => "announcements#new"
   post "announcements" => "announcements#create"
-  get "packages/:id/edit" => "announcements#edit", as: :edit_announcement
+  
   patch "announcements/:id" => "announcements#update", as: :update_announcement 
   delete "announcements/:id" => "announcements#destroy", as: :delete_announcement
 

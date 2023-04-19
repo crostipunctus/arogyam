@@ -23,9 +23,9 @@ class VishraamRegistrationsController < ApplicationController
         if @vishraam_registration.save
           VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
 
-          redirect_to packages_path, notice: "Vishraam registration successful"
+          redirect_to packages_path, notice: "Vishram registration successful"
         else
-          flash[:error] = "Vishraam registration failed"
+          flash[:error] = "Vishram registration failed"
           render :new, status: :unprocessable_entity 
         end
       
@@ -46,7 +46,7 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registration = VishraamRegistration.find(params[:id])
     @vishraam_registration.destroy
 
-    redirect_to user_profile_path(current_user), notice: "Vishraam registration cancelled"
+    redirect_to user_profile_path(current_user), notice: "Vishram registration cancelled"
   end
 
   def pdf 
@@ -55,11 +55,11 @@ class VishraamRegistrationsController < ApplicationController
     html = render_to_string(inline: render_table)
 
     kit = PDFKit.new(html)
-    file = kit.to_file('vishraam_registrations_table.pdf')
+    file = kit.to_file('vishram_registrations_table.pdf')
 
     send_file(
       file.path,
-      filename: 'vishraam_registrations_table.pdf',
+      filename: 'vishram_registrations_table.pdf',
       type: 'application/pdf',
       disposition: 'attachment'
     )
@@ -73,7 +73,7 @@ class VishraamRegistrationsController < ApplicationController
 
   def render_table
     <<-HTML
-    <h1>Vishraam Registrations</h1>
+    <h1>Vishram Registrations</h1>
     <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
         <tr>

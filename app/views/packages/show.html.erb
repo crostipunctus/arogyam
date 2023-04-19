@@ -6,7 +6,7 @@
     <div class="durationCostContainer">
       <div class="packageDuration"><%= "#{@package.duration} days"%></div>
       <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
-      <% if @package.name == 'VishraaM'%>
+      <% if @package.name == 'VishraM'%>
         <% if current_user %>          
           <%= link_to "Book programme", new_vishraam_registration_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %>
         <% else %>
