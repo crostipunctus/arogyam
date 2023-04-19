@@ -1,7 +1,7 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
   <h1>Batch Registrations</h1>
-  
+  <% if @registrations.exists? %>
     <table>
         <thead>
             <tr>
@@ -28,38 +28,47 @@
             <% end %>
         </tbody>
     </table>
-    <%= link_to 'Download pdf', pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
-    <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+        <%= link_to 'Download pdf', pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+        <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <% else %>  
+        <h4>No registrations found</h4>
+    <% end %>
 
-  <h1 class="vishraam_reg_heading">Vishraam Registrations</h1>
-  
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Dates</th>
-                <th>Duration</th>
-                <th>Actions</th>
-                <!-- Add other column headers here -->
-            </tr>
-        </thead>
-        <tbody>
-            <% @vishraam_registrations.each do |registration| %>
+
+    <h1 class="vishraam_reg_heading">Vishraam Registrations</h1>
+    
+    <% if @vishraam_registrations.exists? %>
+        <table>
+            <thead>
                 <tr>
-                    <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
-                    <td data-th="Email"><%= registration.user.email %></td>
-                    <td data-th="Date"><%= registration.date %></td>
-                    <td data-th="Duration"><%= registration.duration %></td>
-                    <td data-th="Actions">
-                        <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Dates</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+                    <!-- Add other column headers here -->
                 </tr>
-            <% end %>
-        </tbody>
-    </table>
-    <%= link_to 'Download pdf', vishraam_pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
-    <%= link_to 'Download Vishraam Registrations Excel', export_vishraam_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+            </thead>
+            <tbody>
+                <% @vishraam_registrations.each do |registration| %>
+                    <tr>
+                        <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+                        <td data-th="Email"><%= registration.user.email %></td>
+                        <td data-th="Date"><%= registration.date %></td>
+                        <td data-th="Duration"><%= registration.duration %></td>
+                        <td data-th="Actions">
+                            <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= link_to 'Download pdf', vishraam_pdf_path, class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+        <%= link_to 'Download Vishraam Registrations Excel', export_vishraam_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <% else %>
+
+        <h4>No registrations found</h4>
+    <% end %>
 </section>
 
 
