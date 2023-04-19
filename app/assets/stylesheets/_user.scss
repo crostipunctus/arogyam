@@ -1738,6 +1738,7 @@ tbody tr:hover {
   color: white;
   font-weight: 700;
   font-size: 30px;
+  margin-bottom: 30px !important;
 
 }
 
@@ -1749,6 +1750,7 @@ tbody tr:hover {
 @media (min-width: 768px) {
   .newsletterHeading {
     font-size: 40px;
+    margin-bottom: 0 !important;
   }
 
   .form-container {
@@ -1759,6 +1761,7 @@ tbody tr:hover {
 
 #newsletter {
   color: white;
+
 }
 
 /* Space out the form elements */
