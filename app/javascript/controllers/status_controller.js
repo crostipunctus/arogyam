@@ -23,6 +23,7 @@ export default class extends Controller {
         textarea = document.createElement("textarea");
         textarea.id = textareaId;
         textarea.classList.add("form-control");
+        textarea.classList.add("textarea-bottom-margin");
         textarea.value = this.statusTarget.textContent.trim();
         this.statusTarget.insertAdjacentElement("afterend", textarea);
       }

@@ -54,7 +54,7 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registration = VishraamRegistration.find(params[:id])
     @vishraam_registration.destroy
 
-    redirect_to user_profile_path(current_user), notice: "Vishram registration cancelled"
+    redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
   end
 
   def pdf 
