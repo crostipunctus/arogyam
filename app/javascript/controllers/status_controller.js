@@ -1,8 +1,8 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["edit", "status"];
-  static values = { editing: Boolean };
+  static values = { editing: Boolean, id: Number };
 
   connect() {
     this.editingValue = false;
@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   updateView() {
-    const textareaId = `status-textarea-${this.element.dataset.editStatusIdValue}`;
+    const textareaId = `status-textarea-${this.idValue}`;
     let textarea = document.getElementById(textareaId);
 
     if (this.editingValue) {
@@ -33,9 +33,26 @@ export default class extends Controller {
       if (textarea) {
         this.statusTarget.textContent = textarea.value;
         textarea.style.display = "none";
+        this.saveStatus(textarea.value); // Save the updated status value to the database
       }
       this.statusTarget.style.display = "inline";
       this.editTarget.textContent = "Edit";
+    }
+  }
+
+  async saveStatus(status) {
+    const csrfToken = document.querySelector("[name=csrf-token]").content;
+    const response = await fetch(`/vishraam_registrations/${this.idValue}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
+      },
+      body: JSON.stringify({ vishraam_registration: { status } }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to update status:", response);
     }
   }
 }
