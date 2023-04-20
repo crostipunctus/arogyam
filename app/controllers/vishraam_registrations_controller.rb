@@ -68,7 +68,7 @@ class VishraamRegistrationsController < ApplicationController
   private 
 
   def vishraam_registration_params 
-    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms)
+    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
   end 
 
   def render_table

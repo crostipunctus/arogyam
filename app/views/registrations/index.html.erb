@@ -8,7 +8,7 @@
                 <th>Batch</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Gender</th>
+                <th>Status</th>
                 <th>Actions</th>
                 <!-- Add other column headers here -->
             </tr>
@@ -19,7 +19,7 @@
                     <td data-th="Batch Date Range"><%= batch_date_range(registration.batch) %></td>
                     <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
                     <td data-th="Email"><%= registration.user.email %></td>
-                    <td data-th="Gender"><%= registration.user.user_profile.gender %></td>
+                    <td data-th="Gender"><%= registration.status %></td>
                     <!-- Add other columns here -->
                     <td data-th="Actions">
                         <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
@@ -46,6 +46,7 @@
                     <th>Dates</th>
                     <th>Duration</th>
                     <th>Actions</th>
+                    <th>Status</th>
                     <!-- Add other column headers here -->
                 </tr>
             </thead>
@@ -56,9 +57,13 @@
                         <td data-th="Email"><%= registration.user.email %></td>
                         <td data-th="Date"><%= registration.date %></td>
                         <td data-th="Duration"><%= registration.duration %></td>
-                        <td data-th="Actions">
+                        <td data-th="Actions" data-controller="status">
                             <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
                         </td>
+                        <td data-th="Status" data-controller="status" data-status-id="<%= registration.id %>">
+                            <%= link_to 'Edit', " ", class: 'btn btn-outline-success btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
+                            <span data-status-target="status"><%= registration.status %>   </span>
+                        </td>                   
                     </tr>
                 <% end %>
             </tbody>
