@@ -43,13 +43,15 @@ export default class extends Controller {
 
   async saveStatus(status) {
     const csrfToken = document.querySelector("[name=csrf-token]").content;
-    const response = await fetch(`/vishraam_registrations/${this.idValue}`, {
+    const endpoint = this.element.dataset.endpoint;
+
+    const response = await fetch(endpoint, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": csrfToken,
       },
-      body: JSON.stringify({ vishraam_registration: { status } }),
+      body: JSON.stringify({ registration: { status } }),
     });
 
     if (!response.ok) {
