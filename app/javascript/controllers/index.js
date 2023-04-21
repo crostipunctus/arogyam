@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
+
+import StatusController from "./status_controller"
+application.register("status", StatusController)

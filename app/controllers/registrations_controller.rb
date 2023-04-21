@@ -81,7 +81,15 @@ class RegistrationsController < ApplicationController
   end 
 
   def update 
-
+    @registration = Registration.find(params[:id])
+    respond_to do |format|
+      if @registration.update_column(:status, registration_params[:status])
+        format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
+      else
+        Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
+        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @registration.errors.full_messages } }
+      end
+    end
   end 
 
   def destroy 
@@ -94,7 +102,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms)
+    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
   end 
 
   def render_table

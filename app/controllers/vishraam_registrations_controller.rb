@@ -38,15 +38,23 @@ class VishraamRegistrationsController < ApplicationController
 
   end 
 
-  def update 
-
-  end 
-
+  def update
+    @vishraam_registration = VishraamRegistration.find(params[:id])
+    respond_to do |format|
+      if @vishraam_registration.update_column(:status, vishraam_registration_params[:status])
+        format.json { render json: { status: :ok, message: "Vishraam registration was successfully updated." } }
+      else
+        Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@vishraam_registration.errors.full_messages}"
+        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @vishraam_registration.errors.full_messages } }
+      end
+    end
+  end
+  
   def destroy 
     @vishraam_registration = VishraamRegistration.find(params[:id])
     @vishraam_registration.destroy
 
-    redirect_to user_profile_path(current_user), notice: "Vishram registration cancelled"
+    redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
   end
 
   def pdf 
@@ -68,7 +76,7 @@ class VishraamRegistrationsController < ApplicationController
   private 
 
   def vishraam_registration_params 
-    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms)
+    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
   end 
 
   def render_table

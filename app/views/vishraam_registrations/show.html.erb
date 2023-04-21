@@ -14,9 +14,9 @@
     <li>Country: <%= @vishraam_registration.user.user_profile.country %></li>
     <li>Zip/Postal code: <%= @vishraam_registration.user.user_profile.zip %></li>
     <li>Occupation: <%= @vishraam_registration.user.user_profile.occupation %></li>
-    <li>Education: <%= @vishraam_registration.user.user_profile.marital_status %></li>
-
-    <%= link_to 'Back', registrations_path, class: "btn btn-outline-success" %>
+    <li>Marital Status: <%= @vishraam_registration.user.user_profile.marital_status %></li>
+    <li>Status: <%= @vishraam_registration.status %></li>
+    <%= link_to 'Back', registrations_path, class: "btn btn-outline-success", id: "registrationButton" %>
 
 
     

@@ -7,8 +7,12 @@
 import { Application } from "@hotwired/stimulus"
 import NotificationController from "./controllers/notification_controller"
 
+
 window.Stimulus = Application.start()
+
 Stimulus.register("notification", NotificationController)
+Stimulus.register("status", StatusController)
+
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
@@ -19,6 +23,7 @@ import './collection_select'
 import './swiper'
 import './date_picker'
 import "./theme"
+
 
 
 import "trix"
