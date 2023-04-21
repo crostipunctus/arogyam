@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_20_011657) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -71,16 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_011657) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
-  end
-
-  create_table "bookings", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "package_id"
-    t.index ["package_id"], name: "index_bookings_on_package_id"
   end
 
   create_table "contacts", force: :cascade do |t|

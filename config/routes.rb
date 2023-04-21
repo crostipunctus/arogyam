@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'online_consultations' => 'bookings#index', as: :online_consultations
-  post 'bookings' => 'bookings#create'
-  get 'bookings_list' => 'bookings#bookings_list'
+  get 'online_consultations' => 'online_consultations#index', as: :online_consultations
+  
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
