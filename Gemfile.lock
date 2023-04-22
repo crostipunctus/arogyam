@@ -51,6 +51,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.4)
       activesupport (= 7.0.4)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.4)
       activemodel (= 7.0.4)
       activesupport (= 7.0.4)
@@ -226,6 +230,7 @@ GEM
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
+    nested_form (0.3.2)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -279,6 +284,12 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails_admin (3.1.2)
+      activemodel-serializers-xml (>= 1.0)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rails (>= 6.0, < 8)
+      turbo-rails (~> 1.0)
     railties (7.0.4)
       actionpack (= 7.0.4)
       activesupport (= 7.0.4)
@@ -409,6 +420,7 @@ DEPENDENCIES
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)
+  rails_admin (~> 3.0)
   redis (~> 4.0)
   responders
   sassc-rails

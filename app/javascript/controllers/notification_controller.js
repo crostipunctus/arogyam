@@ -34,7 +34,8 @@ export default class extends Controller {
       messageContent.includes("invalid") ||
       messageContent.includes("sign in") ||
       messageContent.includes("sign up") ||
-      messageContent.includes("please complete your profile")
+      messageContent.includes("please complete your profile") ||
+      messageContent.includes("not authorized")
 
     ) {
       this.element.classList.add("error");

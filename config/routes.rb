@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
   get 'newsletter_subscriptions/create'
   get 'profiles/show'
