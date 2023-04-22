@@ -1,8 +1,7 @@
 class NewsletterSubscriptionsController < ApplicationController
  
     def create
-      puts params
-
+     
       email = params[:newsletter_subscription][:email]
   
       # Initialize Gibbon with your Mailchimp API key
