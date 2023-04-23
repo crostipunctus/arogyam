@@ -58,4 +58,10 @@ module ApplicationHelper
     date = DateTime.parse(date)
     date.strftime('%d-%m-%Y')
   end
+
+  def vishram
+    vishram = Package.find_by(name: 'VishraM')
+    package_path(vishram)
+
+  end 
 end
