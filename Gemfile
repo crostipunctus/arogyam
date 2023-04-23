@@ -51,7 +51,7 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
-
+gem "recaptcha"
 
 gem "bootstrap_form", "~> 5.1"
 
@@ -124,4 +124,4 @@ gem 'dotenv-rails', groups: [:development, :test]
   gem 'capistrano-rbenv', '~> 2.2'
   gem 'ed25519', '~> 1.3'
   gem 'bcrypt_pbkdf', '~> 1.1'
-gem "sassc-rails"
+

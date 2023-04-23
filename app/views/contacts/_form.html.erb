@@ -1,6 +1,27 @@
+  <script>
+    function submitForm(e) {
+      e.preventDefault();
+      const form = document.getElementById("contact_form");
+
+      grecaptcha.ready(function() {
+        grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'contact'}).then(function(token) {
+          // Add a hidden field with the generated token to the form
+          const input = document.createElement("input");
+          input.setAttribute("type", "hidden");
+          input.setAttribute("name", "recaptcha_token");
+          input.setAttribute("value", token);
+          form.appendChild(input);
+
+          // Submit the form
+          form.submit();
+        });
+      });
+    }
+  </script>
+  
   <div class="contactform">
     <h3 class="enquiryForm">Contact Form</h3>
-    <%= form_with model: @contact, url: contacts_path do |f| %>
+    <%= form_with(model: @contact, local: true, id: "contact_form") do |f| %>
     <%= render "shared/errors", object: @contact %>
       <div class="mb-3">
         <%= f.label :name, class: "form-label" %><br>
@@ -15,9 +36,11 @@
         <%= f.text_area :message, class: "form-control", id: "textarea-input", 
           placeholder: "Send us a message"%><br>
       </div>
+      
       <div>
-        <%= f.submit 'Send Message', class: 'orangeButton btn btn-outline-primary rounded-pill' %>
+        <%= f.submit 'Send Message', class: 'orangeButton btn btn-outline-primary rounded-pill', onclick: 'submitForm(event)' %>
       </div>
     <% end %>
   </div>
+
 

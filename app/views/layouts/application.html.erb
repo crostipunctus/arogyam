@@ -23,6 +23,9 @@
       gtag('js', new Date());
       gtag('config', 'G-JLQGEBVGRW');
     </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key]%>"></script>
+
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
