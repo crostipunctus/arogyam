@@ -64,4 +64,29 @@ module ApplicationHelper
     package_path(vishram)
 
   end 
+
+  def page_title(title = nil)
+    if title.present?
+      content_for(:title) { title }
+    else
+      content_for?(:title) ? content_for(:title) : generate_title_from_url
+    end
+  end
+
+  def generate_title_from_url
+    controller_name = controller.controller_name
+    action_name = controller.action_name
+
+    if action_name == "index"
+      title = controller_name.humanize
+    else
+      title = "#{action_name.humanize} - #{controller_name.humanize}"
+    end
+
+    title
+  end
+
+  def default_title
+    "ArogyaM - The Wellness Center"
+  end
 end
