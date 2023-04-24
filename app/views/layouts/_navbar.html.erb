@@ -1,7 +1,7 @@
 <header class="header navbar navbar-expand-lg navbar-light bg-light fixed-top"> 
   <div class="container-fluid">
     <span id="logospan">
-      <%= link_to image_tag(dev_images("full-logo.png"), width: 150), root_path, id:"desktopLogo" %>
+      <%= link_to image_tag(dev_images("full-logo.png"), width: 150), root_path, id:"desktopLogo", data: {turbo: false} %>
     </span>
    <div class="centerLogoCont"> <%= link_to(image_tag('https://d1w11gv0j27jrz.cloudfront.net/full-logo.png', width: 150, class: "centerlogo no-border-radius", alt: 'Logo'), root_path, class: "nav-link", data: {turbo: false}) %></div>
     <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
