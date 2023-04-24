@@ -282,9 +282,6 @@ div.desc {
   box-shadow: 2px 2px 10px rgba(84, 83, 83, 0.4);
 }
 
-.mapContainer {
-  border: solid #cb6843;
-}
 
 
 .cover {
@@ -1858,7 +1855,7 @@ tbody tr:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  border-radius: 20px;
   background: linear-gradient(to bottom right, rgb(111, 111, 247), rgb(163, 46, 163));
 }
 
