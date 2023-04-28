@@ -6,5 +6,48 @@
         <br>
         <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
     </div>
+
+  <%= form_with url: online_consultations_path, method: :get do |form| %>
+    <%= form.label :slot_duration, "Slot Duration:" %>
+    <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration" %>
+    <%= form.submit "Update" %>
+  <% end %>
+
+  <%= hidden_field_tag :slot_duration, params[:slot_duration].to_i, id: "hidden_slot_duration" %>
+
+
+  
+ 
+  <table>
+    <thead>
+      <tr>
+        <% @slots.group_by(&:date).each do |date, slots| %>
+          <th><%= date.strftime('%A') %><br><%= date %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @slots.group_by(&:date).each do |date, slots| %>
+          <td>
+            <ul>
+              <% slots.each do |slot| %>
+                <li>
+                  <%= slot.start_time %>
+                  <% if slot.available %>
+                    <%= button_to "Book", online_consultations_path(booking_id: slot.id, slot_duration: params[:slot_duration].to_i), method: :post %>
+                  <% else %>
+                    <div class="badge bg-danger">Booked</div>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+</table>
+
   
 </section>
+

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'online_consultations' => 'online_consultations#index', as: :online_consultations
+  resources :online_consultations
+  resources :booking_dates
   
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
@@ -81,6 +82,8 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'privacy_policy#index', as: :privacy_policy
 
   resources :newsletter_subscriptions, only: [:create]
+
+
 
 
   # config/routes.rb
