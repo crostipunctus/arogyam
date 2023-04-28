@@ -1,0 +1,3 @@
+class OnlineConsultation < ApplicationRecord
+
+end 
