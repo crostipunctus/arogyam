@@ -1,10 +1,12 @@
 class OnlineConsultationsController < ApplicationController 
   def index 
+    @online_consultations = current_user.online_consultations
     @slots = if params[:slot_duration].to_i == 60
       BookingDate.where(start_time: ["14:00", "15:00"])
     else
       BookingDate.all
     end
+  
   end 
 
   def new
@@ -19,6 +21,7 @@ class OnlineConsultationsController < ApplicationController
     puts "online_booking_id: #{booking_id}"
     @booking = BookingDate.find(booking_id)
     start_time = @booking.start_time
+    puts "start_time: #{start_time}"
     end_time = @booking.end_time
     date = @booking.date
     
@@ -34,7 +37,8 @@ class OnlineConsultationsController < ApplicationController
         redirect_to online_consultations_path, status: :unprocessable_entity
       end
     elsif  duration == "60"
-      end_time = @booking.end_time.to_i + 30.minutes 
+      end_time = (Time.parse(start_time) + 60.minutes).strftime("%H:%M") 
+      puts "end_time: #{end_time}"
       @online_consultation2 = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id)
       next_slot = (Time.parse(start_time) + 30.minutes).strftime("%H:%M")
       puts "next_slot: #{next_slot}"
@@ -43,9 +47,10 @@ class OnlineConsultationsController < ApplicationController
       if @online_consultation2.save 
         @booking2.update(available: false)
         @booking.update(available: false)
+        flash[:notice] = "Your booking has been confirmed"
         redirect_to online_consultations_path
       else  
-        redirect_to online_consultations_path, status: :unprocessable_entity
+        redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
       end 
 
     else 

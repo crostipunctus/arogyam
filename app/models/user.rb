@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_one :user_profile, dependent: :destroy
 
+  has_many :online_consultations, dependent: :destroy
+
   attr_accessor :accepts_privacy_policy
   validates :accepts_privacy_policy, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
 
@@ -27,6 +29,10 @@ class User < ApplicationRecord
     end
 
     result
+  end
+
+  def has_online_consultations?
+    online_consultations.exists?
   end
 
 end
