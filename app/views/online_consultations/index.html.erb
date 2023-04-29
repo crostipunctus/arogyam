@@ -16,9 +16,8 @@
       </li>
     <% end %>
   </ul>
-  <% end %>
-
-  <%= form_with url: online_consultations_path, method: :get do |form| %>
+  <% else %>
+    <%= form_with url: online_consultations_path, method: :get do |form| %>
     <%= form.label :slot_duration, "Slot Duration:" %>
     <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration" %>
     <%= form.submit "Update" %>
@@ -60,6 +59,9 @@
       <%= form.submit "Confirm" %>
     <% end %>
   <% end %>
+  <% end %>
+
+  
 
 
 
