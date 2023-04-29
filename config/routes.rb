@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'case_sheets/show'
+  get 'case_sheets/new'
+  get 'case_sheets/create'
+  get 'case_sheets/edit'
+  get 'case_sheets/update'
+  get 'case_sheets/destroy'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
   get 'newsletter_subscriptions/create'

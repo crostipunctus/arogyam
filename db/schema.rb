@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_023709) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_29_051514) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -80,6 +80,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_023709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "available"
+  end
+
+  create_table "case_sheets", force: :cascade do |t|
+    t.boolean "vegetarian"
+    t.string "height"
+    t.string "weight"
+    t.string "blood_group"
+    t.string "appetite"
+    t.string "sleep"
+    t.string "motion"
+    t.string "energy_level"
+    t.text "hereditary_mother"
+    t.text "hereditary_father"
+    t.text "surgeries"
+    t.string "normal_deliveries"
+    t.string "caesarian_deliveries"
+    t.text "exercise_routine"
+    t.text "past_ailments"
+    t.text "present_complaints"
+    t.integer "online_consultation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["online_consultation_id"], name: "index_case_sheets_on_online_consultation_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -212,6 +235,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_023709) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blogs", "users"
+  add_foreign_key "case_sheets", "online_consultations"
   add_foreign_key "online_consultations", "users"
   add_foreign_key "registrations", "batches"
   add_foreign_key "registrations", "packages"
