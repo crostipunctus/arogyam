@@ -5,7 +5,7 @@
   <div class="h-100 d-flex align-items-center justify-content-center">
   
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-        <h5 class="text-center mt-5 mb-5">Please fill in your case sheet. All fields are mandatory.</h5>
+        <h5 class="text-center mt-5 mb-5">Please fill in your case sheet to confirm your appointment. All fields are mandatory.</h5>
 
     <%= form_with(model: @case_sheet, url: online_consultation_case_sheet_path) do |f|%>
       <%= @case_sheet.errors.full_messages.to_sentence %>
@@ -43,11 +43,11 @@
       </div>
       
       <div class="mb-3">
-        <%= f.label :hereditary_mother %>
+        <%= f.label :hereditary_mother, "Hereditary diseases (maternal side)" %>
         <%= f.text_area :hereditary_mother, class: "form-control" %>
       </div>
       <div class="mb-3">
-        <%= f.label :hereditary_father %>
+        <%= f.label :hereditary_mother, "Hereditary diseases (paternal side)" %>
         <%= f.text_area :hereditary_father, class: "form-control" %>
       </div>
       <div class="mb-3">

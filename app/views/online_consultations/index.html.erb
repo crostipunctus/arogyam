@@ -14,7 +14,7 @@
       <li>
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
          <% if consultation.confirmed? %> 
-           <%= link_to 'Your online consultation', online_consultation_path(consultation), class: "btn btn-outline-success btn-sm" %> 
+           <%= link_to 'View', online_consultation_path(consultation), class: "btn btn-outline-success btn-sm" %> 
             
          <% else %> 
           <span class="badge bg-danger fs-sm">Unconfirmed!</span>
