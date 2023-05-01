@@ -65,7 +65,7 @@
                             <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
                             <span><%= button_to 'Delete', vishraam_registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
                         </td>
-                        <td data-th="Status" data-controller="status" data-status-id-value="<%= registration.id %>">
+                        <td data-th="Status" data-controller="status" data-status-id-value="<%= registration.id %>" data-endpoint="<%= vishraam_registration_path(registration) %>">
                             <span data-status-target="status"><%= registration.status %></span>
                             <%= link_to 'Edit', edit_vishraam_registration_path(registration), class: 'btn btn-outline-danger btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
                         </td>
