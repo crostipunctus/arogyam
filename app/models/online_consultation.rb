@@ -3,7 +3,7 @@ class OnlineConsultation < ApplicationRecord
   has_one :case_sheet, dependent: :destroy
 
   def confirmed? 
-    confirmed
+    status == "confirmed"
   end 
 
 

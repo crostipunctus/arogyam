@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_090645) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_094214) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -132,9 +132,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_090645) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "confirmed", default: false
     t.string "duration"
-    t.string "status"
+    t.string "status", default: "case sheet pending"
     t.index ["user_id"], name: "index_online_consultations_on_user_id"
   end
 
