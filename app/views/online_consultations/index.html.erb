@@ -7,12 +7,17 @@
         <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
     </div>
 
-  <% if @online_consultations.exists? %>
+  <% if current_user && @online_consultations.exists? %>
     <h2>Your Online Consultations:</h2>
   <ul>
     <% @online_consultations.each do |consultation| %>
       <li>
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+         <% if consultation.confirmed? %> 
+           <%= link_to 'Your online consultation', online_consultation_path(consultation), class: "btn btn-outline-success btn-sm" %> 
+         <% else %> 
+          <%= link_to "Fill Case Sheet", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success btn-sm"  %>
+         <% end %> 
       </li>
     <% end %>
   </ul>

@@ -1,12 +1,28 @@
 class OnlineConsultationsController < ApplicationController 
-  def index 
-    @online_consultations = current_user.online_consultations
-    @slots = if params[:slot_duration].to_i == 60
-      BookingDate.where(start_time: ["14:00", "15:00"])
-    else
-      BookingDate.all
-    end
+  before_action :authenticate_user!, except: [:index] 
+  before_action :verify_user, only: [:show]
   
+  def index 
+    if current_user 
+      @online_consultations = current_user.online_consultations
+      @slots = if params[:slot_duration].to_i == 60
+        BookingDate.where(start_time: ["14:00", "15:00"])
+      else
+        BookingDate.all
+      end
+    else  
+      @slots = if params[:slot_duration].to_i == 60
+        BookingDate.where(start_time: ["14:00", "15:00"])
+      else
+        BookingDate.all
+      end
+    end 
+  
+  end 
+
+  def show 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @case_sheet = @online_consultation.case_sheet
   end 
 
   def new
@@ -48,7 +64,7 @@ class OnlineConsultationsController < ApplicationController
         @booking2.update(available: false)
         @booking.update(available: false)
         flash[:notice] = "Your booking has been confirmed"
-        redirect_to online_consultations_path
+        redirect_to new_online_consultation_case_sheet_path(online_consultation_id: @online_consultation2.id)
       else  
         redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
       end 
@@ -60,5 +76,14 @@ class OnlineConsultationsController < ApplicationController
 
   def destroy
 
+  end
+
+  private  
+
+  def verify_user 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    if @online_consultation.user != current_user
+      redirect_to root_path, alert: "You are not authorized to access this page."
+    end
   end
 end 

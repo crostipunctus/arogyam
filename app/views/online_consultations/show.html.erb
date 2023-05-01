@@ -1,0 +1,33 @@
+<section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
+
+  
+
+  <div class="registrations">
+    <h2 class="text-center">Your Online Consultation</h2>
+    <h4>Date and time:</h4>
+      <li><%= formatted_date(@online_consultation.date) %></li>
+      <li><%= @online_consultation.start_time %> to <%= @online_consultation.end_time %></li>
+    <h4>Case Sheet:</h4>
+  <ul>
+    <li>Vegetarian: <%= @online_consultation.case_sheet.vegetarian ? "Yes" : "No" %></li>
+    <li>Height: <%= @online_consultation.case_sheet.height %></li>
+    <li>Weight: <%= @online_consultation.case_sheet.weight %></li>
+    <li>Blood Group: <%= @online_consultation.case_sheet.blood_group %></li>
+    <li>Appetite: <%= @online_consultation.case_sheet.appetite %></li>
+    <li>Sleep: <%= @online_consultation.case_sheet.sleep %></li>
+    <li>Motion: <%= @online_consultation.case_sheet.motion %></li>
+    <li>Energy Level: <%= @online_consultation.case_sheet.energy_level %></li>
+    <li>Hereditary Mother: <%= @online_consultation.case_sheet.hereditary_mother %></li>
+    <li>Hereditary Father: <%= @online_consultation.case_sheet.hereditary_father %></li>
+    <li>Surgeries: <%= @online_consultation.case_sheet.surgeries %></li>
+    <li>Normal Deliveries: <%= @online_consultation.case_sheet.normal_deliveries %></li>
+    <li>Caesarian Deliveries: <%= @online_consultation.case_sheet.caesarian_deliveries %></li>
+    <li>Exercise Routine: <%= @online_consultation.case_sheet.exercise_routine %></li>
+    <li>Past Ailments: <%= @online_consultation.case_sheet.past_ailments %></li>
+    <li>Present Complaints: <%= @online_consultation.case_sheet.present_complaints %></li>
+</ul>
+    
+
+  
+</div>
+</section>

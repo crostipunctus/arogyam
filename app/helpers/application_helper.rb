@@ -89,4 +89,6 @@ module ApplicationHelper
   def default_title
     "ArogyaM - The Wellness Center"
   end
+
+  
 end
