@@ -26,6 +26,7 @@
     <li>Past Ailments: <%= @online_consultation.case_sheet.past_ailments %></li>
     <li>Present Complaints: <%= @online_consultation.case_sheet.present_complaints %></li>
 </ul>
+<%= link_to "Edit case sheet", edit_online_consultation_case_sheet_path(@online_consultation), class: "btn btn-outline-success" %> 
     
 
   

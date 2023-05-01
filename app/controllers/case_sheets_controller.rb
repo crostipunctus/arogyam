@@ -21,12 +21,25 @@ class CaseSheetsController < ApplicationController
   end
 
   def edit
+    Rails.logger.info "params: #{params.inspect}"
+    @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
+    @case_sheet = @online_consultation.case_sheet
   end
 
   def update
+    @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
+    @case_sheet = @online_consultation.case_sheet
+    if @case_sheet.update(case_sheet_params)
+      redirect_to online_consultation_path(@case_sheet.online_consultation), notice: "Case sheet updated successfully"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @case_sheet = CaseSheet.find(params[:id])
+    @case_sheet.destroy
+    redirect_to online_consultation_path(@case_sheet.online_consultation), notice: "Case sheet deleted successfully"
   end
 
   private
