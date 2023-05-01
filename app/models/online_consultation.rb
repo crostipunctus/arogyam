@@ -5,4 +5,6 @@ class OnlineConsultation < ApplicationRecord
   def confirmed? 
     confirmed
   end 
+
+
 end 

@@ -67,9 +67,7 @@ class OnlineConsultationsController < ApplicationController
         redirect_to new_online_consultation_case_sheet_path(online_consultation_id: @online_consultation2.id)
       else  
         redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
-      end 
-
-    else 
+      end  
 
     end 
   end 
