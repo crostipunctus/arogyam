@@ -30,14 +30,10 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def create  
-    
     duration = params[:slot_duration]
-    puts "duration: #{duration}"
     booking_id = params[:booking_id]
-    puts "online_booking_id: #{booking_id}"
     @booking = BookingDate.find(booking_id)
     start_time = @booking.start_time
-    puts "start_time: #{start_time}"
     end_time = @booking.end_time
     date = @booking.date
     
