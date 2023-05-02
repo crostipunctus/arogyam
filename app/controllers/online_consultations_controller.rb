@@ -70,7 +70,6 @@ class OnlineConsultationsController < ApplicationController
   def destroy
     @online_consultation = OnlineConsultation.find(params[:id])
       if @online_consultation.duration == "30"
-      
         @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
         @booking.update(available: true)
       else  
