@@ -78,6 +78,7 @@ class OnlineConsultationsController < ApplicationController
         @booking2.update(available: true)
       end 
     @online_consultation.update(status: "cancelled" ) 
+    OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
     redirect_to online_consultations_path
   end
 

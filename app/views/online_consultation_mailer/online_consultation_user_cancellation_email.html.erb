@@ -1,0 +1,18 @@
+    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
+    <h1 class="welcome-email-title">
+       <%= @user.first_name %>, you cancelled your online consultation. 
+    </h1>
+    <p class="welcome-email-text">
+      Book another consultation at:
+      <a href="https://www.arogyam.life/" class="welcome-email-link">
+        arogyam.life
+      </a>
+      . Please feel free to contact us at
+      <a
+        href="mailto:wellnesscenter@satsang-foundation.org"
+        class="welcome-email-link"
+      >
+        wellnesscenter@satsang-foundation.org
+      </a>
+      if you have any doubts or questions.
+    </p>
