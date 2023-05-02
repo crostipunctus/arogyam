@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource :case_sheet, only: [:show, :new, :create, :edit, :update]
   end
   
-  
+  get 'all_online_consultations' => 'online_consultations#all'
   resources :booking_dates
   
 

@@ -74,25 +74,27 @@
 
 <div class="registrations">
   <% if @user.online_consultations.exists? %>
-    <h3>Online Consultations:</h3>
-    <ul>
-      <% @user.online_consultations.each do |consultation| %>
-      <div class="cancelBatch">
-        
-        <% if consultation.status == 'cancelled' %>
-          <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
-          <span class="badge bg-danger fs-sm">Cancelled</span>
-        <% elsif consultation.status == 'case sheet pending'%>
-          <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
-          <span class="badge bg-warning fs-sm">Unconfirmed!</span>
-        <% else %>
-          <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
-          <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>
-          <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
-        <% end %>
-      </div>
-      <% end %>
-    </ul>
+    <h3>Confirmed Consultations</h3>
+<% @confirmed_consultations.each do |consultation| %>
+  <div class="cancelBatch">
+    <% if consultation.status == 'case sheet pending' %>
+      <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
+      <span class="badge bg-warning fs-sm">Unconfirmed!</span>
+    <% else %>
+      <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
+      <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>
+      <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+    <% end %>
+  </div>
+<% end %>
+
+<h3 class="mt-5">Cancelled Consultations</h3>
+<% @cancelled_consultations.each do |consultation| %>
+  <div class="cancelBatch">
+    <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
+    <span class="badge bg-danger fs-sm">Cancelled</span>
+  </div>
+<% end %>
   <% else %>
     <h5 >No online consultations</h5>
     <%= link_to "Register", online_consultations_path, class: "btn btn-outline-danger rounded-pill"%>

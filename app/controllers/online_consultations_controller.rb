@@ -1,6 +1,7 @@
 class OnlineConsultationsController < ApplicationController 
   before_action :authenticate_user!, except: [:index] 
   before_action :verify_user, only: [:show]
+  before_action :require_admin, only: [:all ]
   
   def index 
     if current_user 
@@ -19,6 +20,7 @@ class OnlineConsultationsController < ApplicationController
     end 
   
   end 
+
 
   def show 
     @online_consultation = OnlineConsultation.find(params[:id])
@@ -67,12 +69,27 @@ class OnlineConsultationsController < ApplicationController
     end 
   end 
 
+  def update 
+    puts "params: #{params}"
+    @online_consultation = OnlineConsultation.find(params[:id])
+    respond_to do |format|
+      if @online_consultation.update(status: params[:online_consultation][:status])
+        format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
+      else
+        Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@online_consultation.errors.full_messages}"
+        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @online_consultation.errors.full_messages } }
+      end
+    end
+  end 
+
   def destroy
     @online_consultation = OnlineConsultation.find(params[:id])
       if @online_consultation.duration == "30"
         @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
         @booking.update(available: true)
-      else  
+      elsif @online_consultation.duration == "60"  
+        @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
+        @booking.update(available: true)
         next_slot = (Time.parse(@online_consultation.start_time) + 30.minutes).strftime("%H:%M")
         @booking2 = BookingDate.find_by(start_time: next_slot, date: @online_consultation.date)
         @booking2.update(available: true)

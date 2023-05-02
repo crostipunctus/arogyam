@@ -49,6 +49,8 @@ export default class extends Controller {
 
     if (endpoint.includes("vishraam_registration")) {
       body = { vishraam_registration: { status } };
+    } else if (endpoint.includes("online_consultation")) {
+      body = { online_consultation: { status } };
     } else {
       body = { registration: { status } };
     }

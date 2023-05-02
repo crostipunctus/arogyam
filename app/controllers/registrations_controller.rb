@@ -5,6 +5,7 @@ class RegistrationsController < ApplicationController
   def index 
     @registrations = Registration.all 
     @vishraam_registrations = VishraamRegistration.all
+    @online_consultations = OnlineConsultation.all
     
   end
 

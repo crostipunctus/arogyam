@@ -5,6 +5,8 @@ class UserProfilesController < ApplicationController
 
   def show
     @profile = @user.user_profile
+    @confirmed_consultations = @user.online_consultations.select { |consultation| consultation.status != 'cancelled' }.sort_by { |consultation| -consultation.created_at.to_i }
+    @cancelled_consultations = @user.online_consultations.select { |consultation| consultation.status == 'cancelled' }.sort_by { |consultation| -consultation.created_at.to_i }
   end
 
   def edit 

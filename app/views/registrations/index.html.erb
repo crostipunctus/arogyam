@@ -79,6 +79,50 @@
 
         <h4>No registrations found</h4>
     <% end %>
+
+    <h1 class="mt-5 mb-5">Online Consultations</h1>
+  <% if @online_consultations.exists? %>
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+  <% @online_consultations.each do |consultation| %>
+    <tr>
+      
+      <td data-th="Full Name"><%= link_to user_full_name(consultation.user), user_profile_path(user_id: consultation.user.id), class: "nav-link" %></td>
+      <td data-th="Email"><%= consultation.user.email %></td>
+        <td data-th="Date"><%= consultation.date %></td>
+        <td data-th="Time"><%= consultation.start_time %></td>
+      <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
+        <span data-status-target="status"><%= consultation.status %></span>
+        <%= link_to 'Edit', "#", class: 'btn btn-outline-success btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
+      </td>
+      <!-- Add other columns here -->
+      <td data-th="Actions">
+        <%= link_to 'View', online_consultation_path(consultation), class: 'btn btn-outline-success btn-sm' %>
+        <span><%= button_to 'Delete', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+
+    </table>
+        <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <% else %>  
+        <h4>No online consultations</h4>
+    <% end %>
+
+
 </section>
 
 
