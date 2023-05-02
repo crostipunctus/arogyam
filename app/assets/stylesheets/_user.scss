@@ -1921,3 +1921,29 @@ tbody tr:hover {
 #registrationButton {
   margin-top: 20px;
 }
+
+#confirmed {
+  background-color: #36af21 !important;
+  color: white !important;
+}
+
+.online-consultation-card {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.online-consultation-card h4 {
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.online-consultation-container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.consultation_link {
+  color: #007bff;
+}

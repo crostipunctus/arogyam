@@ -1,10 +1,76 @@
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
   <h1 class="cardHeading packages text-center">Online Consultations</h1>
-    <div class="pb-sm-3 pt-4">
+  <% if current_user && @online_consultations.exists? %>
+    <h2>Your Online Consultations:</h2>
+  <ul>
+    <% @online_consultations.each do |consultation| %>  
+         <% if consultation.confirmed? %> 
+           <%= link_to "#{formatted_date(consultation.date)}, #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %> 
+         <% else %>
+          <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+          <span class="badge bg-warning fs-sm">Unconfirmed!</span>
+          <h4 class="mt-3">Important! Please fill the case sheet to confirm your appointment</h4>
+          <%= link_to "Fill Case Sheet", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success btn-sm"  %>
+         <% end %> 
+      
+    <% end %>
+  </ul>
+  <% else %>
+  <div class="pb-sm-3 pt-4">
       <p class="fs-lg fw-medium pb-3 mb-3"><strong>Please call +91 8340932384 or email 
         <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
         <br>
         <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
     </div>
+    <h3>Book an online consultation</h3>
+    <%= form_with url: online_consultations_path, method: :get do |form| %>
+      <%= form.label :slot_duration, "Slot Duration:" %>
+      <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration" %>
+      <%= form.submit "Show slots", class: 'btn btn-outline-success btn-sm' %>
+  <% end %>
+
+
+  <% if params[:slot_duration].present? %>
+    <%= form_with url: online_consultations_path, method: :post do |form| %>
+      <table>
+        <thead>
+          <tr>
+            <% @slots.group_by(&:date).each do |date, slots| %>
+              <th><%= date.strftime('%A') %><br><%= date %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @slots.group_by(&:date).each do |date, slots| %>
+              <td>
+                <ul>
+                  <% slots.each do |slot| %>
+                    <li>
+                      <%= slot.start_time %>
+                      <% if slot.available %>
+                        <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                      <% else %>
+                        <div class="badge bg-danger">Booked</div>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+      <%= hidden_field_tag :slot_duration, params[:slot_duration].to_i %>
+      <%= form.submit "Confirm" %>
+    <% end %>
+  <% end %>
+  <% end %>
+
+  
+
+
+
   
 </section>
+

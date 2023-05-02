@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
   get 'newsletter_subscriptions/create'
@@ -8,7 +9,12 @@ Rails.application.routes.draw do
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'online_consultations' => 'online_consultations#index', as: :online_consultations
+  resources :online_consultations do
+    resource :case_sheet, only: [:show, :new, :create, :edit, :update]
+  end
+  
+  
+  resources :booking_dates
   
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
@@ -81,6 +87,8 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'privacy_policy#index', as: :privacy_policy
 
   resources :newsletter_subscriptions, only: [:create]
+
+
 
 
   # config/routes.rb
