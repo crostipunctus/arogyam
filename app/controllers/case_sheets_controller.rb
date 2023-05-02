@@ -10,7 +10,6 @@ class CaseSheetsController < ApplicationController
   end
 
   def create
-    
     online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = CaseSheet.new(case_sheet_params)
     @case_sheet.online_consultation_id = online_consultation.id
