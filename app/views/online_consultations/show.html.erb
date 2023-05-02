@@ -25,10 +25,12 @@
     <li>Exercise Routine: <%= @online_consultation.case_sheet.exercise_routine %></li>
     <li>Past Ailments: <%= @online_consultation.case_sheet.past_ailments %></li>
     <li>Present Complaints: <%= @online_consultation.case_sheet.present_complaints %></li>
+    <li>Status: <%= @online_consultation.status %></li>
 </ul>
 <%= link_to "Edit case sheet", edit_online_consultation_case_sheet_path(@online_consultation), class: "btn btn-outline-success" %> 
+<%= button_to "Cancel appointment", online_consultation_path(@online_consultation), method: :delete, class: "btn btn-outline-danger", form: { data: { 'turbo-confirm': 'Are you sure?' } } %> 
     
 
-  
+
 </div>
 </section>

@@ -6,10 +6,12 @@ class CaseSheetsController < ApplicationController
 
   def new
     @case_sheet = CaseSheet.new
+    @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
   end
 
   def create
-    online_consultation = current_user.online_consultations.first
+    
+    online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = CaseSheet.new(case_sheet_params)
     @case_sheet.online_consultation_id = online_consultation.id
     if @case_sheet.save

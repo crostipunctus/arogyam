@@ -4,7 +4,7 @@ class OnlineConsultationsController < ApplicationController
   
   def index 
     if current_user 
-      @online_consultations = current_user.online_consultations
+      @online_consultations = current_user.online_consultations.where.not(status: "cancelled")
       @slots = if params[:slot_duration].to_i == 60
         BookingDate.where(start_time: ["14:00", "15:00"])
       else
@@ -44,6 +44,7 @@ class OnlineConsultationsController < ApplicationController
         OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
 
         @booking.update(available: false)
+       
         redirect_to online_consultations_path
       else 
         redirect_to online_consultations_path, status: :unprocessable_entity
@@ -58,7 +59,7 @@ class OnlineConsultationsController < ApplicationController
         @booking2.update(available: false)
         @booking.update(available: false)
         flash[:notice] = "Your booking has been confirmed"
-        redirect_to new_online_consultation_case_sheet_path(online_consultation_id: @online_consultation2.id)
+        redirect_to online_consultations_path
       else  
         redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
       end  
@@ -67,7 +68,9 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def destroy
-
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @online_consultation.update(status: "cancelled" ) 
+    redirect_to online_consultations_path
   end
 
   private  

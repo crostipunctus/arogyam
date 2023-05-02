@@ -72,6 +72,24 @@
   <% end %>
 </div>
 
+<div class="registrations">
+  <% if @user.online_consultations.exists? %>
+    <h3>Online Consultations:</h3>
+    <ul>
+      <% @user.online_consultations.each do |consultation| %>
+      <div class="cancelBatch">
+        <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
+        <li><%= consultation.status %>
+        <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+      </div>
+      <% end %>
+    </ul>
+  <% else %>
+    <h5 >No online consultations</h5>
+    <%= link_to "Register", online_consultations_path, class: "btn btn-outline-danger rounded-pill"%>
+  <% end %>
+</div>
+
 
 
 
