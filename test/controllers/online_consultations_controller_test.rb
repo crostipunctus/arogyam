@@ -6,7 +6,6 @@ class OnlineConsultationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create(email: "user@example.com", password: "password", password_confirmation: "password")
     @user.confirm
-    # puts @user.inspect # Add this line to print the user
     @admin = User.create(email: "admin@example.com", password: "password", password_confirmation: "password", admin: true)
     @admin.confirm
     @online_consultation = OnlineConsultation.create(start_time: "10:00", end_time: "10:30", date: Date.today, user_id: @user.id, duration: "30")
@@ -30,7 +29,6 @@ class OnlineConsultationsControllerTest < ActionDispatch::IntegrationTest
       online_consultation_id: @online_consultation.id
     )
     @booking_date = BookingDate.create(start_time: "10:00", end_time: "10:30", date: Date.today, available: true)
-    
     @online_consultation.update(user: @user)
     
   end
@@ -64,6 +62,67 @@ class OnlineConsultationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_equal "You are not authorized to access this page.", flash[:alert]
   end
+
+  
+  test "should create online consultation with 30 minute duration" do
+    sign_in @user
+    booking_id = @booking_date.id
+    assert_difference('OnlineConsultation.count') do
+      post online_consultations_url, params: { slot_duration: "30", booking_id: booking_id }
+    end
+    assert_redirected_to online_consultations_url
+    assert_equal false, BookingDate.find(booking_id).available
+  end
+
+  test "should create online consultation with 60 minute duration" do
+    sign_in @user
+    booking_id = @booking_date.id
+    booking2 = BookingDate.create(start_time: "10:30", end_time: "11:00", date: Date.today, available: true)
+
+    assert_difference('OnlineConsultation.count') do
+      post online_consultations_url, params: { slot_duration: "60", booking_id: booking_id }
+    end
+    assert_redirected_to online_consultations_url
+    assert_equal false, BookingDate.find(booking_id).available
+    assert_equal false, BookingDate.find(booking2.id).available
+  end
+  test "should not create online consultation with invalid duration" do
+    sign_in @user
+    booking_id = @booking_date.id
+
+    assert_no_difference('OnlineConsultation.count') do
+      post online_consultations_url, params: { slot_duration: "45", booking_id: booking_id }
+    end
+    assert_response :unprocessable_entity
+  end
+
+  test "should cancel online consultation with 30 minute duration" do
+    sign_in @user
+    online_consultation = OnlineConsultation.create(start_time: "10:00", end_time: "10:30", date: Date.today, user_id: @user.id, duration: "30")
+    booking_id = @booking_date.id
+
+    delete online_consultation_url(online_consultation)
+
+    assert_redirected_to online_consultations_url
+    assert_equal "cancelled", online_consultation.reload.status
+    assert_equal true, BookingDate.find(booking_id).available
+  end
+
+  test "should cancel online consultation with 60 minute duration" do
+    sign_in @user
+    online_consultation = OnlineConsultation.create(start_time: "10:00", end_time: "11:00", date: Date.today, user_id: @user.id, duration: "60")
+    booking_id = @booking_date.id
+    booking2 = BookingDate.create(start_time: "10:30", end_time: "11:00", date: Date.today, available: false)
+
+    delete online_consultation_url(online_consultation)
+
+    assert_redirected_to online_consultations_url
+    assert_equal "cancelled", online_consultation.reload.status
+    assert_equal true, BookingDate.find(booking_id).available
+    assert_equal true, BookingDate.find(booking2.id).available
+  end
+
+
 
   # Add tests for other actions (new, create, update, destroy)
 end

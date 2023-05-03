@@ -3,10 +3,6 @@ class OnlineConsultationsController < ApplicationController
   before_action :set_online_consultation, only: [:show, :update, :destroy]
   before_action :verify_user, only: [:show]
   
-
-  
-
-  
   def index 
     if current_user 
       @online_consultations = current_user.online_consultations.where.not(status: "cancelled")
@@ -42,7 +38,7 @@ class OnlineConsultationsController < ApplicationController
     start_time = @booking.start_time
     end_time = @booking.end_time
     date = @booking.date
-    
+
     if duration == "30" 
       
       @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, duration: "30")
@@ -68,19 +64,19 @@ class OnlineConsultationsController < ApplicationController
         redirect_to online_consultations_path
       else  
         redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
-      end  
-
+      end 
+    else   
+      redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
     end 
   end 
 
   def update 
-    puts "params: #{params}"
     
     respond_to do |format|
       if @online_consultation.update(status: params[:online_consultation][:status])
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
-        Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@online_consultation.errors.full_messages}"
+        
         format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @online_consultation.errors.full_messages } }
       end
     end
