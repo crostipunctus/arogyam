@@ -1,7 +1,11 @@
 class OnlineConsultationsController < ApplicationController 
   before_action :authenticate_user!, except: [:index] 
+  before_action :set_online_consultation, only: [:show, :update, :destroy]
   before_action :verify_user, only: [:show]
-  before_action :require_admin, only: [:all ]
+  
+
+  
+
   
   def index 
     if current_user 
@@ -71,7 +75,7 @@ class OnlineConsultationsController < ApplicationController
 
   def update 
     puts "params: #{params}"
-    @online_consultation = OnlineConsultation.find(params[:id])
+    
     respond_to do |format|
       if @online_consultation.update(status: params[:online_consultation][:status])
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
@@ -83,7 +87,7 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def destroy
-    @online_consultation = OnlineConsultation.find(params[:id])
+    
       if @online_consultation.duration == "30"
         @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
         @booking.update(available: true)
@@ -100,11 +104,18 @@ class OnlineConsultationsController < ApplicationController
   end
 
   private  
+  
+
+  def set_online_consultation
+    @online_consultation = OnlineConsultation.find(params[:id])
+  end
 
   def verify_user 
-    @online_consultation = OnlineConsultation.find(params[:id])
+    
     if @online_consultation.user != current_user
       redirect_to root_path, alert: "You are not authorized to access this page."
+    else  
+      true 
     end
   end
 end 
