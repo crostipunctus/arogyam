@@ -55,14 +55,15 @@ class OnlineConsultationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should redirect to root_path for non-owner" do
-  #   other_user = User.create(email: "other@example.com", password: "password", password_confirmation: "password")
-  #   sign_in other_user
+  test "should redirect to root_path for non-owner" do
+    other_user = User.create(email: "other@example.com", password: "password", password_confirmation: "password")
+    other_user.confirm
+    sign_in other_user
 
-  #   get online_consultation_url(@online_consultation)
-  #   assert_redirected_to root_path
-  #   assert_equal "You are not authorized to access this page.", flash[:alert]
-  # end
+    get online_consultation_url(@online_consultation)
+    assert_redirected_to root_path
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
 
   # Add tests for other actions (new, create, update, destroy)
 end
