@@ -8,7 +8,7 @@ module BatchesHelper
   end
 
   def user_registered_for_batch?(user, batch)
-    user.batches.include?(batch)
+    Registration.exists?(user: user, batch: batch)
   end
 
   def batch_date_range(batch)

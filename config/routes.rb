@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'contacts/create'
 
   resources :online_consultations do
-    resource :case_sheet, only: [:show, :new, :create, :edit, :update]
+    resource :case_sheet, only: [:show, :new, :create, :edit, :update, :destroy]
   end
   
   get 'all_online_consultations' => 'online_consultations#all'

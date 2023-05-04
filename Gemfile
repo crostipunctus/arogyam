@@ -112,6 +112,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'byebug'
 end
 
 gem 'dotenv-rails', groups: [:development, :test]

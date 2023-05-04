@@ -2,11 +2,11 @@ class RegistrationsController < ApplicationController
   require 'pdfkit'
   before_action :authenticate_user! 
   before_action :require_admin, only: [:index, :edit, :update ]
+  
   def index 
     @registrations = Registration.all 
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all
-    
   end
 
   def export_batch
@@ -30,35 +30,36 @@ class RegistrationsController < ApplicationController
   end
 
   def new 
-    
-    @registration = Registration.new(batch_id: params[:batch_id])
-
+    if current_user.user_profile
+      @registration = Registration.new(batch_id: params[:batch_id])
+    else
+      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+    end
   end 
 
   def create
+  
+    @batch = Batch.find(params[:registration][:batch_id])
     
-    if current_user.user_profile
-      if Registration.exists?(user: current_user, batch_id: params[:batch_id])
-        redirect_to batches_path, alert: "You have already registered for this batch"
+    if Registration.exists?(user: current_user, batch_id: @batch.id)
+      registration = Registration.find_by(user: current_user, batch_id: @batch.id)
+     
+      redirect_to batches_path, alert: "You have already registered for this batch"
+    else
+      @batch = Batch.find(params[:registration][:batch_id])
+      @package = Package.find(params[:registration][:package_id])
+      @registration = Registration.new(registration_params)
+      @registration.user = current_user
+      @registration.batch = @batch
+      @registration.package = @package
+      if @registration.save
+        RegistrationMailer.registration_email(@registration).deliver_later
+        redirect_to batches_path, notice: "Registered successfully"
       else
-      
-        @batch = Batch.find(params[:registration][:batch_id])
-      
-        @registration = Registration.new(registration_params)
-        @registration.user = current_user
-        @registration.batch = @batch
-        if @registration.save
-          RegistrationMailer.registration_email(@registration).deliver_later
-          
-          redirect_to batches_path, notice: "Registered successfully"
-        else
-       
-          render :new, status: :unprocessable_entity 
-        end
+        render :new, status: :unprocessable_entity 
       end
-    else  
-      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
-    end 
+    end
+    
   end
   
   def pdf 
@@ -103,7 +104,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
   end 
 
   def render_table

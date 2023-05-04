@@ -40,9 +40,10 @@ class CaseSheetsController < ApplicationController
   end
 
   def destroy
-    @case_sheet = CaseSheet.find(params[:id])
+    @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
+    @case_sheet = @online_consultation.case_sheet
     @case_sheet.destroy
-    redirect_to online_consultation_path(@case_sheet.online_consultation), notice: "Case sheet deleted successfully"
+    redirect_to online_consultations_path, notice: "Case sheet deleted successfully"
   end
 
   private
