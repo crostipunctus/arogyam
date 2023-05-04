@@ -7,6 +7,7 @@ class RegistrationsController < ApplicationController
     @registrations = Registration.all 
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all
+    @batches = Batch.all
   end
 
   def export_batch
@@ -41,7 +42,7 @@ class RegistrationsController < ApplicationController
   
     @batch = Batch.find(params[:registration][:batch_id])
     
-    if Registration.exists?(user: current_user, batch_id: @batch.id)
+    if Registration.exists?(user: current_user, batch_id: @batch.id, status: "Registered")
       registration = Registration.find_by(user: current_user, batch_id: @batch.id)
      
       redirect_to batches_path, alert: "You have already registered for this batch"
@@ -54,6 +55,7 @@ class RegistrationsController < ApplicationController
       @registration.package = @package
       if @registration.save
         RegistrationMailer.registration_email(@registration).deliver_later
+        @registration.update(status: "Registered")
         redirect_to batches_path, notice: "Registered successfully"
       else
         render :new, status: :unprocessable_entity 
@@ -96,7 +98,12 @@ class RegistrationsController < ApplicationController
 
   def destroy 
     @registration = Registration.find(params[:id])
-    @registration.destroy    
+    @batch = @registration.batch
+  
+    if @registration.update(status: "Cancelled")
+      @batch.registrations.delete(@registration)
+      @batch.save
+    end
     
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
   end 

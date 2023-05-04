@@ -31,8 +31,7 @@
                   <%= link_to "Register", new_registration_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
                 <% end %>
                 <% if current_user_admin? %>
-                  <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
-                  <%= link_to "Delete", batch_path(batch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
+                  <%= link_to "Edit batch", edit_batch_path(batch), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
                 <% end %>
               </div>
             </div>
