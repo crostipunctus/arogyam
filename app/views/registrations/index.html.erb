@@ -104,8 +104,9 @@
         <td data-th="Date"><%= consultation.date %></td>
         <td data-th="Time"><%= consultation.start_time %></td>
       <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
-        <span data-status-target="status"><%= consultation.status %></span>
-        <%= link_to 'Edit', "#", class: 'btn btn-outline-success btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
+        <%= tag.span class: "badge #{consultation.status == 'confirmed' ? 'bg-success' : consultation.status == 'cancelled' ? 'bg-danger' : consultation.status == 'case sheet pending' ? 'bg-warning' : ''}" do %>
+          <%= consultation.status %>
+        <% end %>      
       </td>
       <!-- Add other columns here -->
       <td data-th="Actions">
