@@ -18,6 +18,12 @@
         <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
         <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
         <li>Education: <%= @registration.user.user_profile.marital_status %></li>
+        <li>Status: <%= @registration.status %></li>
+        <% if @registration.completed == true %>
+        <li>Completed</li>
+        <% else %>
+        <li>Not completed</li>
+        <% end %>
       </ul>
         <h2>Health Information</h2>
       <ul>
@@ -25,7 +31,7 @@
         <li>Medical conditions: <%= @registration.health_conditions %></li>
         <li>Lifestyle: <%= @registration.lifestyle %></li>
         <li>Medication: <%= @registration.medication %></li>
-        <li>Status: <%= @registration.status %></li>
+        
       </ul>
     
 

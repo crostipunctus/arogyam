@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_084038) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_110443) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -158,6 +158,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_084038) do
     t.text "health_conditions"
     t.text "medication"
     t.string "status"
+    t.boolean "completed", default: false
+    t.text "comments"
+    t.boolean "cancelled"
     t.index ["batch_id"], name: "index_registrations_on_batch_id"
     t.index ["package_id"], name: "index_registrations_on_package_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
@@ -228,6 +231,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_084038) do
     t.text "health_conditions"
     t.text "medication"
     t.string "status"
+    t.text "comments"
+    t.boolean "cancelled", default: false
+    t.boolean "completed", default: false
     t.index ["user_id"], name: "index_vishraam_registrations_on_user_id"
   end
 

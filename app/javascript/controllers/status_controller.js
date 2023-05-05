@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["edit", "status", "editMode", "statusSelect"];
-  static values = { id: Number };
+  static values = { id: Number, endpoint: String };
 
   connect() { }
 
@@ -15,10 +15,20 @@ export default class extends Controller {
     event.preventDefault();
 
     const csrfToken = document.querySelector("[name=csrf-token]").content;
-    const endpoint = this.element.dataset.endpoint;
+    const endpoint = this.endpointValue;
 
     const formData = new FormData();
-    formData.append("registration[status]", this.statusSelectTarget.value);
+
+    let statusParamName;
+    if (endpoint.includes("vishraam_registration")) {
+      statusParamName = "vishraam_registration[status]";
+    } else if (endpoint.includes("online_consultation")) {
+      statusParamName = "online_consultation[status]";
+    } else {
+      statusParamName = "registration[status]";
+    }
+
+    formData.append(statusParamName, this.statusSelectTarget.value);
 
     const response = await fetch(endpoint, {
       method: "PUT",

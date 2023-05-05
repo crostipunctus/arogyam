@@ -76,6 +76,8 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       if @registration.update_column(:status, registration_params[:status])
         puts "Registration status updated to #{registration_params[:status]}"
+        @registration.update_column(:comments, registration_params[:comments])
+        @registration.update(completed: true) if registration_params[:status] == "Completed"
         
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
@@ -90,6 +92,7 @@ class RegistrationsController < ApplicationController
     @batch = @registration.batch
   
     if @registration.update(status: "Cancelled")
+      @registration.update(cancelled: true)
       @batch.registrations.delete(@registration)
       @batch.save
      
@@ -101,7 +104,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
   end 
 
  

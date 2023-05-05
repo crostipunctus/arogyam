@@ -7,8 +7,13 @@ module BatchesHelper
     batch == nearest_batch(batches)
   end
 
-  def user_registered_for_batch?(user, batch)
-    Registration.exists?(user: user, batch: batch, status: "Registered")
+  def show_registered?(user, batch)
+    registration = Registration.find_by(user: user, batch: batch)
+    if registration.present? && registration.status == "Registered" || registration.present? && registration.completed == false
+      return true
+    else
+      false
+    end
   end
 
   def batch_date_range(batch)

@@ -42,6 +42,8 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registration = VishraamRegistration.find(params[:id])
     respond_to do |format|
       if @vishraam_registration.update_column(:status, vishraam_registration_params[:status])
+        @vishraam_registration.update_column(:comments, vishraam_registration_params[:comments])
+        @vishraam_registration.update(completed: true) if vishraam_registration_params[:status] == "Completed"
         format.json { render json: { status: :ok, message: "Vishraam registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@vishraam_registration.errors.full_messages}"
@@ -52,7 +54,9 @@ class VishraamRegistrationsController < ApplicationController
   
   def destroy 
     @vishraam_registration = VishraamRegistration.find(params[:id])
-    @vishraam_registration.update(status: "Cancelled")
+    if @vishraam_registration.update(status: "Cancelled")
+      @vishraam_registration.update(cancelled: true)
+    end
 
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
   end
@@ -62,7 +66,7 @@ class VishraamRegistrationsController < ApplicationController
   private 
 
   def vishraam_registration_params 
-    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
+    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
   end 
 
   
