@@ -1,71 +1,43 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["edit", "status"];
-  static values = { editing: Boolean, id: Number };
+  static targets = ["edit", "status", "editMode", "statusSelect"];
+  static values = { id: Number };
 
-  connect() {
-    this.editingValue = false;
-  }
+  connect() { }
 
   toggleEditMode(event) {
     event.preventDefault();
-    this.editingValue = !this.editingValue;
-    this.updateView();
+    this.editModeTarget.style.display = this.editModeTarget.style.display === "none" ? "block" : "none";
   }
 
-  updateView() {
-    const textareaId = `status-textarea-${this.idValue}`;
-    let textarea = document.getElementById(textareaId);
+  async save(event) {
+    event.preventDefault();
 
-    if (this.editingValue) {
-      if (!textarea) {
-        textarea = document.createElement("textarea");
-        textarea.id = textareaId;
-        textarea.classList.add("form-control");
-        textarea.classList.add("textarea-bottom-margin");
-        textarea.value = this.statusTarget.textContent.trim();
-        this.statusTarget.insertAdjacentElement("afterend", textarea);
-      }
-      this.statusTarget.style.display = "none";
-      textarea.style.display = "block";
-      this.editTarget.textContent = "Save";
-    } else {
-      if (textarea) {
-        this.statusTarget.textContent = textarea.value;
-        textarea.style.display = "none";
-        this.saveStatus(textarea.value); // Save the updated status value to the database
-      }
-      this.statusTarget.style.display = "inline";
-      this.editTarget.textContent = "Edit";
-    }
-  }
-
-  async saveStatus(status) {
     const csrfToken = document.querySelector("[name=csrf-token]").content;
     const endpoint = this.element.dataset.endpoint;
 
-    let body = {};
-
-    if (endpoint.includes("vishraam_registration")) {
-      body = { vishraam_registration: { status } };
-    } else if (endpoint.includes("online_consultation")) {
-      body = { online_consultation: { status } };
-    } else {
-      body = { registration: { status } };
-    }
+    const formData = new FormData();
+    formData.append("registration[status]", this.statusSelectTarget.value);
 
     const response = await fetch(endpoint, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         "X-CSRF-Token": csrfToken,
       },
-      body: JSON.stringify(body),
+      body: formData,
     });
 
     if (!response.ok) {
       console.error("Failed to update status:", response);
+    } else {
+      this.statusTarget.textContent = this.statusSelectTarget.value;
+      this.toggleEditMode(event);
     }
+  }
+
+  cancel(event) {
+    event.preventDefault();
+    this.toggleEditMode(event);
   }
 }

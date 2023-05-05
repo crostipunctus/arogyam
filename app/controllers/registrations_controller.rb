@@ -72,8 +72,11 @@ class RegistrationsController < ApplicationController
 
   def update 
     @registration = Registration.find(params[:id])
+    @batch = @registration.batch
     respond_to do |format|
       if @registration.update_column(:status, registration_params[:status])
+        puts "Registration status updated to #{registration_params[:status]}"
+        
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
