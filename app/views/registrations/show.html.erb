@@ -20,10 +20,10 @@
         <li>Education: <%= @registration.user.user_profile.marital_status %></li>
         <li>Status: <%= @registration.status %></li>
         <% if @registration.cancelled == true %>
-        <li>cancelled</li>
-        <% else %>
-        <li>Not cancelled</li>
+          <li>Cancelled: Yes</li>
         <% end %>
+
+        
       </ul>
         <h2>Health Information</h2>
       <ul>

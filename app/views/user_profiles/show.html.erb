@@ -38,23 +38,22 @@
 
 
 <div class="registrations">
-  <% if @user.batches.exists? %>
-    <h3>You have registered for the following batches:</h3>
-    <ul>
-      <% @user.batches.each do |batch| %>
-      <div class="cancelBatch">
-        <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
-        <% @registrations = Registration.where(user_id: @user.id, batch_id: batch.id)%>
-        <% @registrations.each do |registration| %>
-          <%= button_to "Cancel", registration_path(registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
-        <% end %>
-      </div>
-      <% end %>
-    </ul>
+  <% @user.batches.uniq { |batch| batch.id }.each do |batch|%>
+  <h4>Batch <%= batch.id %>:</h4>
+  <% latest_non_cancelled_registration = batch.registrations.reject(&:cancelled).sort_by(&:created_at).last %>
+  <% if latest_non_cancelled_registration %>
+    <%= latest_non_cancelled_registration.status %>
+              <%= button_to "Cancel", registration_path(latest_non_cancelled_registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
+
   <% else %>
-    <h5 >You have not registered for any batches</h5>
     <%= link_to "Register", batches_path, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
+<% end %>
+
+
+
+
+ 
 </div>
 <div class="registrations">
   <% if @user.vishraam_registrations.exists? %>
