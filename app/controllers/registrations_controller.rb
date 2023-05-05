@@ -91,12 +91,7 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
     @batch = @registration.batch
   
-    if @registration.update(status: "Cancelled")
-      @registration.update(cancelled: true)
-      @batch.registrations.delete(@registration)
-      @batch.save
-     
-    end
+    @registration.update(cancelled: true, status: "Cancelled")
     
     redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
   end 

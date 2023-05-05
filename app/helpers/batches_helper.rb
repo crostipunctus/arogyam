@@ -7,13 +7,9 @@ module BatchesHelper
     batch == nearest_batch(batches)
   end
 
-  def show_registered?(user, batch)
-    registration = Registration.find_by(user: user, batch: batch)
-    if registration.present? && registration.status == "Registered" || registration.present? && registration.completed == false
-      return true
-    else
-      false
-    end
+  def registrations(user, batch)
+    registration = Registration.find_by(user_id: user.id, batch_id: batch.id, cancelled: false)
+    registration
   end
 
   def batch_date_range(batch)

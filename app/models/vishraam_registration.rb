@@ -7,6 +7,7 @@ class VishraamRegistration < ApplicationRecord
   attr_accessor :terms
 
   before_destroy :send_cancel_email
+  after_create :registered
   
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
@@ -27,6 +28,10 @@ class VishraamRegistration < ApplicationRecord
     '3 days' => 3,
     '5 days' => 5
   }
+
+  def registered 
+    self.status = "Registered"
+  end 
 
 
 end 

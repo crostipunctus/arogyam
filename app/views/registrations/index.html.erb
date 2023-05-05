@@ -18,12 +18,12 @@
         <tr>
           <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
           <td data-th="Email"><%= registration.user.email %></td>
-          <td data-th="Status" data-controller="status" data-status-id-value="<%= registration.id %>" data-endpoint="<%= registration_path(registration) %>">
+            <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">            
             <span data-status-target="status"><%= registration.status %></span>
             <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
             <div data-status-target="editMode" style="display:none;">
               <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
-                <%= f.select :status, [ ['Registered'], ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
+                <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
                 <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
               <% end %>
               <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>

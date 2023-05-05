@@ -6,6 +6,7 @@ class Registration < ApplicationRecord
   attr_accessor :terms
 
   after_create :registered
+  after_create :cancelled
   before_destroy :send_cancel_email
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
@@ -25,6 +26,10 @@ class Registration < ApplicationRecord
 
   def registered 
     self.status = "Registered"
+  end 
+
+  def cancelled 
+    self.cancelled = false 
   end 
   
 end

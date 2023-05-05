@@ -23,10 +23,11 @@
                 <ul class="list-unstyled mb-3">
                   <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
                 </ul>
-                <% if current_user && show_registered?(current_user, batch) %>
-                  <div id="registeredButton" > REGISTERED! </div>
-                  <% @registration = Registration.find_by(user_id: current_user.id, batch_id: batch.id)%>
-                      <%= button_to "Cancel", registration_path(@registration), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %> 
+                <% if current_user && registration = Registration.find_by(user_id: current_user.id, batch_id: batch.id, cancelled: false) %>
+                     <div id="registeredButton"> Status: <%= registration.status %></div>
+                     <% if registration.status != "Completed" %>
+                      <%= button_to "Cancel", registration_path(registration), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %> 
+                    <% end %>
                 <% else %>
                   <%= link_to "Register", new_registration_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
                 <% end %>

@@ -19,10 +19,10 @@
         <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
         <li>Education: <%= @registration.user.user_profile.marital_status %></li>
         <li>Status: <%= @registration.status %></li>
-        <% if @registration.completed == true %>
-        <li>Completed</li>
+        <% if @registration.cancelled == true %>
+        <li>cancelled</li>
         <% else %>
-        <li>Not completed</li>
+        <li>Not cancelled</li>
         <% end %>
       </ul>
         <h2>Health Information</h2>
