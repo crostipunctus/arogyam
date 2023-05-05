@@ -1,8 +1,6 @@
-
 wb = xlsx_package.workbook
 
 headers = [
-  'Batch date',
   'Registered on',
   'Full name',
   'Email',
@@ -18,27 +16,39 @@ headers = [
   'Status'
 ]
 
-data = @registrations.map do |registration|
-  user_profile = registration.user.user_profile
-  [
-    formatted_date_with_year(registration.batch.start_date.to_s),
-    formatted_created_at_date(registration.created_at.to_s),
-    user_full_name(registration.user),
-    registration.user.email,
-    user_profile.gender,
-    formatted_date_of_birth(user_profile.date_of_birth.to_s),
-    user_profile.phone_number,
-    user_profile.address,
-    user_profile.city,
-    user_profile.country,
-    user_profile.zip,
-    user_profile.occupation,
-    user_profile.marital_status,
-    registration.status
-  ]
-end
-
 wb.add_worksheet(name: 'Registrations') do |sheet|
-  sheet.add_row headers
-  data.each { |row| sheet.add_row row }
+  @batches.each do |batch|
+    # Add batch header row
+    batch_header = [
+      "Batch date: #{formatted_date_with_year(batch.start_date.to_s)}"
+    ]
+    sheet.add_row(batch_header + Array.new(headers.length - 1, ''))
+
+    # Add column headers
+    sheet.add_row headers
+
+    # Add registrations data for the batch
+    batch.registrations.each do |registration|
+      user_profile = registration.user.user_profile
+      data_row = [
+        formatted_created_at_date(registration.created_at.to_s),
+        user_full_name(registration.user),
+        registration.user.email,
+        user_profile.gender,
+        formatted_date_of_birth(user_profile.date_of_birth.to_s),
+        user_profile.phone_number,
+        user_profile.address,
+        user_profile.city,
+        user_profile.country,
+        user_profile.zip,
+        user_profile.occupation,
+        user_profile.marital_status,
+        registration.status
+      ]
+      sheet.add_row data_row
+    end
+
+    # Add an empty row to separate batches
+    sheet.add_row(Array.new(headers.length, ''))
+  end
 end

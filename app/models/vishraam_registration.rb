@@ -7,6 +7,7 @@ class VishraamRegistration < ApplicationRecord
   attr_accessor :terms
 
   before_destroy :send_cancel_email
+  
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
   validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
@@ -26,4 +27,6 @@ class VishraamRegistration < ApplicationRecord
     '3 days' => 3,
     '5 days' => 5
   }
-end
+
+
+end 

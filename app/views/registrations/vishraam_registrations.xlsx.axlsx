@@ -15,7 +15,9 @@ headers = [
   'Country',
   'Zip/Postal code',
   'Occupation',
-  'Marital Status'
+  'Marital Status',
+  'Status'
+
 ]
 
 data = @vishraam_registrations.map do |registration|
@@ -34,7 +36,8 @@ data = @vishraam_registrations.map do |registration|
     user_profile.country,
     user_profile.zip,
     user_profile.occupation,
-    user_profile.marital_status
+    user_profile.marital_status,
+    registration.status
   ]
 end
 
