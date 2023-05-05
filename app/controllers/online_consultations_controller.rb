@@ -96,7 +96,7 @@ class OnlineConsultationsController < ApplicationController
       end 
     @online_consultation.update(status: "cancelled" ) 
     OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
-    redirect_to online_consultations_path
+    redirect_to online_consultations_path, notice: "Your booking has been cancelled"
   end
 
   private  

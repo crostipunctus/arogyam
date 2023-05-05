@@ -26,7 +26,8 @@ export default class extends Controller {
       messageContent.includes("password reset") ||
       messageContent.includes("password changed") ||
       messageContent.includes("message has been sent") ||
-      messageContent.includes("subscribed!")
+      messageContent.includes("subscribed!") ||
+      messageContent.includes("has been cancelled")
     ) {
       this.element.classList.add("success");
     } else if (

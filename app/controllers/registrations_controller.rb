@@ -89,9 +89,10 @@ class RegistrationsController < ApplicationController
     if @registration.update(status: "Cancelled")
       @batch.registrations.delete(@registration)
       @batch.save
+     
     end
     
-    redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
+    redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
   end 
 
   private 
