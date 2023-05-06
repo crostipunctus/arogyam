@@ -37,7 +37,7 @@
         <br>
         <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
     </div>
-    <h3>Book an online consultation</h3>
+    <h3 class="mb-5 text-center">BOOK AN ONLINE CONSULTATION</h3>
     <%= form_with url: online_consultations_path, method: :get do |form| %>
       <%= form.label :slot_duration, "Slot Duration:" %>
       <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration" %>
@@ -47,18 +47,19 @@
 
   <% if params[:slot_duration].present? %>
     <%= form_with url: online_consultations_path, method: :post do |form| %>
-      <table>
+    <div class="mt-5 table-responsive">
+      <table class="online-table">
         <thead>
           <tr>
             <% @slots.group_by(&:date).each do |date, slots| %>
-              <th><%= date.strftime('%A') %><br><%= date %></th>
+              <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
             <% end %>
           </tr>
         </thead>
         <tbody>
           <tr>
             <% @slots.group_by(&:date).each do |date, slots| %>
-              <td>
+              <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
                 <ul>
                   <% slots.each do |slot| %>
                     <li>
@@ -76,6 +77,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
       <%= hidden_field_tag :slot_duration, params[:slot_duration].to_i %>
       <%= form.submit "Confirm" %>
     <% end %>

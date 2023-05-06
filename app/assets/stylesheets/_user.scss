@@ -1987,3 +1987,17 @@ li {
   background-color: #9b23ea !important;
   color: white !important;
 }
+
+@media (max-width: 768px) {
+  .online-table th {
+    display: none;
+  }
+
+  .online-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: inline-block;
+    width: 6.5em;
+    white-space: pre;
+  }
+}
