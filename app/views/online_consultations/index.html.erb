@@ -5,7 +5,7 @@
   
     <% @online_consultations.each do |consultation| %>  
   <div class="consultation-card my-3 p-3 bg-light border rounded">
-    <h5 class="mb-2">
+    <h5 class="mb-2 text-center">
       <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
       <% if consultation.confirmed? %> 
         <%= link_to online_consultation_path(consultation), class: "consultation_link" do %>
