@@ -5,7 +5,7 @@ class BookingDate < ApplicationRecord
     end_hour = 16 # 4 PM
     slot_duration_minutes = 30
 
-    (0..6).each do |days_from_now|
+    (0..29).each do |days_from_now|
       date = Date.current + days_from_now.days
       next if date.sunday?
 
