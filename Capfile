@@ -1,6 +1,8 @@
 # Load DSL and set up stages
 require "capistrano/setup"
 
+require 'capistrano/sidekiq'
+
 # Include default deployment tasks
 require "capistrano/deploy"
 
