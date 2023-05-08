@@ -1,0 +1,31 @@
+<table class="calendar-table">
+  <% @calendar_start.upto(@calendar_end) do |date| %>
+    <% date_booking_dates = @booking_dates.select { |bd| bd.date == date } %>
+
+    <% if date_booking_dates.any? %>
+      <% if date.wday == 1 %>
+        <tr>
+      <% end %>
+
+      <td>
+        <div class="calendar-date"><%= date %></div>
+        <ul>
+          <% date_booking_dates.each do |booking_date| %>
+            <li>
+              <span class="calendar-slot">
+                <%= booking_date.start_time %> - <%= booking_date.end_time %>
+                <% if booking_date.available == false %>
+                  <span class="calendar-unavailable">(Booked)</span>
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </td>
+
+      <% if date.wday == 0 %>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>

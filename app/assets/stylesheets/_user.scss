@@ -2001,3 +2001,28 @@ li {
     white-space: pre;
   }
 }
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.calendar-date {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.calendar-slot {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.calendar-unavailable {
+  color: red;
+}
