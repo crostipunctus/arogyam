@@ -17,6 +17,7 @@ class CaseSheetsController < ApplicationController
       OnlineConsultationMailer.online_consultation_confirmation_email(online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_user_confirmation_email(online_consultation).deliver_later
       online_consultation.update(status: "confirmed")
+      online_consultation.update(confirmed: true)
       redirect_to online_consultation_path(online_consultation), notice: "Online consultation is confirmed!"
     else
       render :new, status: :unprocessable_entity

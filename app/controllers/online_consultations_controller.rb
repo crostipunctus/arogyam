@@ -5,10 +5,10 @@ class OnlineConsultationsController < ApplicationController
   
   def index 
     start_date = params.fetch(:start_date, Date.today.strftime("%Y-%m-%d")).to_date rescue Date.today
-  @booking_dates = BookingDate.where(date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).order(:date, :start_time)
+    @booking_dates = BookingDate.where(date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).order(:date, :start_time)
 
-  @calendar_start = start_date.beginning_of_month.beginning_of_week
-  @calendar_end = start_date.end_of_month.end_of_week
+    @calendar_start = start_date.beginning_of_month.beginning_of_week
+    @calendar_end = start_date.end_of_month.end_of_week
 
     if current_user 
       @online_consultations = current_user.online_consultations.where.not(status: "cancelled")

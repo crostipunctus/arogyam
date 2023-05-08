@@ -35,7 +35,7 @@ gem "redis", "~> 4.0"
 
 gem 'swiper-rails'
 
-
+gem "simple_calendar", "~> 2.4"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
