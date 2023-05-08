@@ -7,15 +7,17 @@
         <tr>
       <% end %>
 
-      <td>
-        <div class="calendar-date"><%= date %></div>
+      <td class="<%= 'calendar-current-date' if date == Date.today %>">
+        <div class="calendar-date"><%= formatted_date(date) %></div>
         <ul>
           <% date_booking_dates.each do |booking_date| %>
             <li>
               <span class="calendar-slot">
                 <%= booking_date.start_time %> - <%= booking_date.end_time %>
                 <% if booking_date.available == false %>
-                  <span class="calendar-unavailable">(Booked)</span>
+                  <span class="badge bg-danger">(Booked)</span>
+                <% else %>
+                  <span><%= button_to "Block Slot", booking_date_path(booking_date), method: :patch, class: "btn btn-outline-danger btn-sm" %></span>
                 <% end %>
               </span>
             </li>

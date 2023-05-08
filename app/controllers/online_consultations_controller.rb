@@ -77,19 +77,16 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def update 
-    
     respond_to do |format|
       if @online_consultation.update(status: params[:online_consultation][:status])
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
-        
         format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @online_consultation.errors.full_messages } }
       end
     end
   end 
 
   def destroy
-    
       if @online_consultation.duration == "30"
         @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
         @booking.update(available: true)
