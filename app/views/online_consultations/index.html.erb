@@ -13,7 +13,6 @@
             <span class="badge bg-warning">Unconfirmed!</span>
           <% end %>
         </h5>
-
         <% unless consultation.confirmed? %>
   <div class="alert alert-info">
     <h4 class="mb-3 text-center">Important! Please fill the case sheet to confirm your appointment</h4>
@@ -41,51 +40,57 @@
         <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
     </div>
     <h3 class="mb-5 text-center">BOOK AN ONLINE CONSULTATION</h3>
-    <%= form_with url: online_consultations_path, method: :get do |form| %>
-      <%= form.label :slot_duration, "Slot Duration:" %>
-      <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration" %>
-      <%= form.submit "Show slots", class: 'btn btn-outline-success btn-sm' %>
-  <% end %>
-
-
-  <% if params[:slot_duration].present? %>
-    <%= form_with url: online_consultations_path, method: :post do |form| %>
-    <div class="mt-5 table-responsive">
-      <table class="online-table">
-        <thead>
-          <tr>
-            <% @slots.group_by(&:date).each do |date, slots| %>
-              <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <% @slots.group_by(&:date).each do |date, slots| %>
-              <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
-                <ul>
-                  <% slots.each do |slot| %>
-                    <li>
-                      <%= slot.start_time %>
-                      <% if slot.available %>
-                        <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
-                      <% else %>
-                        <div class="badge bg-danger">Booked</div>
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
+    <div class="d-flex justify-content-center">
+  <%= form_with url: online_consultations_path, method: :get do |form| %>
+    <div class="form-inline">
+      <%= form.label :slot_duration, "Slot Duration:", class: "mr-2" %>
+      <%= form.select :slot_duration, options_for_select([['Please select a duration', nil], ['30 minutes', 30], ['60 minutes', 60]], selected: params[:slot_duration].to_i), id: "slot_duration", class: "mr-2" %>
     </div>
-      <%= hidden_field_tag :slot_duration, params[:slot_duration].to_i %>
-      <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+    <div class="mt-2 text-center">
+      <%= form.submit "Show slots", class: 'btn btn-outline-success btn-sm' %>
+    </div>
+  <% end %>
+  </div>
+    <% if params[:slot_duration].present? %>
+      <%= form_with url: online_consultations_path, method: :post do |form| %>
+      <div class="mt-5 table-responsive">
+        <table class="online-table">
+          <thead>
+            <tr>
+              <% @slots.group_by(&:date).each do |date, slots| %>
+                <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% @slots.group_by(&:date).each do |date, slots| %>
+                <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
+                  <ul>
+                    <% slots.each do |slot| %>
+                      <li>
+                        <%= slot.start_time %>
+                        <% if slot.available %>
+                          <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                        <% else %>
+                          <div class="badge bg-danger">Booked</div>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+        <%= hidden_field_tag :slot_duration, params[:slot_duration].to_i %>
+      <div class="mt-3 text-center">
+          <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+      </div>    
     <% end %>
   <% end %>
-  <% end %>
+<% end %>
 
  
   <% if current_user_admin? %>
