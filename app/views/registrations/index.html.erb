@@ -120,7 +120,7 @@
         <td data-th="Date"><%= consultation.date %></td>
         <td data-th="Time"><%= consultation.start_time %></td>
       <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
-        <%= tag.span class: "badge #{consultation.status == 'confirmed' ? 'bg-success' : consultation.status == 'cancelled' ? 'bg-danger' : consultation.status == 'case sheet pending' ? 'bg-warning' : ''}" do %>
+        <%= tag.span class: "badge #{consultation.status == 'confirmed' ? 'bg-success' : consultation.status == 'cancelled' ? 'bg-danger' : consultation.status == 'unconfirmed' ? 'bg-warning' : ''}" do %>
           <%= consultation.status %>
         <% end %>      
       </td>
