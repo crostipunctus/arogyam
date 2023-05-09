@@ -15,7 +15,13 @@
               <span class="calendar-slot">
                 <%= booking_date.start_time %> - <%= booking_date.end_time %>
                 <% if booking_date.available == false %>
-                  <span class="badge bg-danger">(Booked)</span>
+                  <% if booking_date.status == "confirmed"%>
+                    <span class="badge bg-success"><%= booking_date.status %></span>
+                  <% elsif booking_date.status == "unconfirmed" %>
+                    <span class="badge bg-warning"><%= booking_date.status %></span>
+                  <% else %>
+                    <span class="badge bg-danger"><%= booking_date.status %></span>
+                  <% end %>
                 <% else %>
                   <span><%= button_to "Block Slot", booking_date_path(booking_date), method: :patch, class: "btn btn-outline-danger btn-sm" %></span>
                 <% end %>

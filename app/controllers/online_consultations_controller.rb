@@ -51,7 +51,8 @@ class OnlineConsultationsController < ApplicationController
       if @online_consultation.save 
         OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
 
-        @booking.update(available: false)
+        @booking.update(available: false, status: "unconfirmed")
+       
        
         redirect_to online_consultations_path
       else 
@@ -64,9 +65,9 @@ class OnlineConsultationsController < ApplicationController
       @booking2 = BookingDate.find_by(start_time: next_slot, date: date)
       if @online_consultation2.save 
         OnlineConsultationMailer.online_consultation_email(@online_consultation2).deliver_later
-        @booking2.update(available: false)
-        @booking.update(available: false)
-        flash[:notice] = "Your booking has been confirmed"
+        @booking2.update(available: false, status: "unconfirmed")
+        @booking.update(available: false, status: "unconfirmed")
+        flash[:notice] = "Your booking has been made."
         redirect_to online_consultations_path
       else  
         redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"

@@ -18,6 +18,8 @@ class CaseSheetsController < ApplicationController
       OnlineConsultationMailer.online_consultation_user_confirmation_email(online_consultation).deliver_later
       online_consultation.update(status: "confirmed")
       online_consultation.update(confirmed: true)
+      booking_date = BookingDate.find_by(date: online_consultation.date, start_time: online_consultation.start_time)
+      booking_date.update(status: "confirmed")
       redirect_to online_consultation_path(online_consultation), notice: "Online consultation is confirmed!"
     else
       render :new, status: :unprocessable_entity
