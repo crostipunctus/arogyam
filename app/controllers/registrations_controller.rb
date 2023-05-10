@@ -55,6 +55,8 @@ class RegistrationsController < ApplicationController
       @registration.package = @package
       if @registration.save
         RegistrationMailer.registration_email(@registration).deliver_later
+        RegistrationMailer.registration_user_email(@registration).deliver_later
+
         @registration.update(status: "Registered")
         redirect_to batches_path, notice: "Registered successfully"
       else
@@ -90,7 +92,9 @@ class RegistrationsController < ApplicationController
   def destroy 
     @registration = Registration.find(params[:id])
     @batch = @registration.batch
-  
+    RegistrationMailer.registration_cancel_user_email(@registration).deliver_later
+    RegistrationMailer.registration_cancel_email(@registration).deliver_later
+
     @registration.update(cancelled: true, status: "Cancelled")
     
     redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
