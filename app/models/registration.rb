@@ -16,13 +16,7 @@ class Registration < ApplicationRecord
   
   private 
 
-  def send_cancel_email 
-    registration_data = {
-      batch: self.batch.start_date,
-      email: self.user.email
-    }
-    RegistrationMailer.registration_cancel_email(registration_data).deliver_later
-  end 
+  
 
   def registered 
     self.status = "Registered"
