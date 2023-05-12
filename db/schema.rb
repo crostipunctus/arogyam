@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_09_051439) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_095245) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -136,6 +136,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_051439) do
     t.string "duration"
     t.string "status", default: "unconfirmed"
     t.boolean "confirmed", default: false
+    t.integer "booking_date_id", null: false
+    t.boolean "cancelled"
+    t.index ["booking_date_id"], name: "index_online_consultations_on_booking_date_id"
     t.index ["user_id"], name: "index_online_consultations_on_user_id"
   end
 
@@ -243,6 +246,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_051439) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blogs", "users"
   add_foreign_key "case_sheets", "online_consultations"
+  add_foreign_key "online_consultations", "booking_dates"
   add_foreign_key "online_consultations", "users"
   add_foreign_key "registrations", "batches"
   add_foreign_key "registrations", "packages"

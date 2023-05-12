@@ -44,7 +44,7 @@ class OnlineConsultationsController < ApplicationController
 
     
       
-      @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id)
+      @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
       if @online_consultation.save 
         OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
 
@@ -75,6 +75,7 @@ class OnlineConsultationsController < ApplicationController
     @booking.update(available: true)
       
     @online_consultation.update(status: "cancelled" ) 
+    @online_consultation.update(confirmed: false)
     OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
     redirect_to online_consultations_path, notice: "Your booking has been cancelled"
   end

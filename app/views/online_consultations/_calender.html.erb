@@ -17,6 +17,8 @@
                 <% if booking_date.available == false %>
                   <% if booking_date.status == "confirmed"%>
                     <span class="badge bg-success"><%= booking_date.status %></span>
+                    <% online_consultation = booking_date.online_consultations.where(confirmed: true)%>
+                    <span><%= button_to "Cancel", online_consultation_path(online_consultation.first), method: :delete, class: "badge bg-danger" %></span>
                   <% elsif booking_date.status == "unconfirmed" %>
                     <span class="badge bg-warning"><%= booking_date.status %></span>
                   <% else %>
