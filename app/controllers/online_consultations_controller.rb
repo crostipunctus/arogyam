@@ -44,29 +44,28 @@ class OnlineConsultationsController < ApplicationController
 
     
       
-      @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
-      if @online_consultation.save 
-        OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
+    @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
+    if @online_consultation.save 
+      OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
 
-        @booking.update(available: false, status: "unconfirmed")
-       
-       
-        redirect_to online_consultations_path
-      else 
-        redirect_to online_consultations_path, status: :unprocessable_entity
-      end
-    
+      @booking.update(available: false, status: "unconfirmed")
+      
+      
+      redirect_to online_consultations_path
+    else 
+      redirect_to online_consultations_path, status: :unprocessable_entity
+    end
+  
     
   end 
 
   def update 
-    respond_to do |format|
-      if @online_consultation.update(status: params[:online_consultation][:status])
-        format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
-      else
-        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @online_consultation.errors.full_messages } }
-      end
-    end
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @online_consultation.update(completed: true, status: "completed", confirmed: false )
+    @online_consultation.booking_date.update(available: true)
+
+    # ADD OnlineConsultationMailer.online_consultation_completed_email(@online_consultation).deliver_later
+    redirect_to registrations_path, notice: "Your booking has been completed"
   end 
 
   def destroy

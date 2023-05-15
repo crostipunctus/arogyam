@@ -9,11 +9,13 @@
             <%= link_to online_consultation_path(consultation), class: "consultation_link" do %>
               <i class="fas fa-check-circle text-success"></i> Confirmed
             <% end %> 
+          <% elsif consultation.completed?  %>
+            <span class="badge bg-warning">Completed!</span>
           <% else %>
             <span class="badge bg-warning">Unconfirmed!</span>
           <% end %>
         </h5>
-        <% unless consultation.confirmed? %>
+    <% unless consultation.confirmed? || consultation.completed? %>
     <div class="alert alert-info">
       <h4 class="mb-3 text-center">Important! Please fill the case sheet to confirm your appointment</h4>
       <div class="d-flex justify-content-center">
