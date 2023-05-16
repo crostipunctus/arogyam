@@ -1,5 +1,9 @@
 class BookingDate < ApplicationRecord
   has_many :online_consultations, dependent: :destroy
+  has_many :users, through: :online_consultations
+  
+  
+  
   def self.generate_default_slots 
     (0..29).each do |days_from_now|
       date = Date.current + days_from_now.days

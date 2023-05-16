@@ -49,7 +49,10 @@ class OnlineConsultationsController < ApplicationController
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
 
       @booking.update(available: false, status: "unconfirmed")
-      
+      if current_user.case_sheets.exists? 
+        current_user.update(first_time: false)
+      end
+  
       
       redirect_to online_consultations_path
     else 
@@ -61,11 +64,18 @@ class OnlineConsultationsController < ApplicationController
 
   def update 
     @online_consultation = OnlineConsultation.find(params[:id])
-    @online_consultation.update(completed: true, status: "completed", confirmed: false )
-    @online_consultation.booking_date.update(available: true)
+    if @online_consultation.confirmed == true 
+      @online_consultation.update(completed: true, status: "completed", confirmed: false )
+      @online_consultation.booking_date.update(available: true)
+      redirect_to registrations_path, notice: "Your booking has been completed"
+    else
+      @online_consultation.update(confirmed: true, status: "confirmed")
+      @online_consultation.case_sheet = CaseSheet.where(user_id: current_user.id).order(created_at: :desc).first
+      @online_consultation.booking_date.update(status: "confirmed")
+      redirect_to online_consultations_path, notice: "Your booking has been confirmed"
+    end
 
     # ADD OnlineConsultationMailer.online_consultation_completed_email(@online_consultation).deliver_later
-    redirect_to registrations_path, notice: "Your booking has been completed"
   end 
 
   def destroy

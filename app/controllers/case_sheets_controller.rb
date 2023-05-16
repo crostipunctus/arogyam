@@ -13,6 +13,7 @@ class CaseSheetsController < ApplicationController
     online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = CaseSheet.new(case_sheet_params)
     @case_sheet.online_consultation_id = online_consultation.id
+    @case_sheet.user_id = current_user.id
     if @case_sheet.save
       OnlineConsultationMailer.online_consultation_confirmation_email(online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_user_confirmation_email(online_consultation).deliver_later

@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_one :user_profile, dependent: :destroy
 
   has_many :online_consultations, dependent: :destroy
+  has_many :booking_dates, through: :online_consultations
+
+  has_many :case_sheets, dependent: :destroy
+
 
   attr_accessor :accepts_privacy_policy
   validates :accepts_privacy_policy, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
