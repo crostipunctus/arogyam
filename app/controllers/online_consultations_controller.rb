@@ -11,9 +11,11 @@ class OnlineConsultationsController < ApplicationController
     @calendar_end = start_date.end_of_month.end_of_week
 
     if current_user 
-      @online_consultations = current_user.online_consultations.where.not(status: "cancelled")
-     
-        @slots =BookingDate.all
+      @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
+      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed")
+      @completed_online_consultations = current_user.online_consultations.where(completed: true)
+      @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
+      @slots =BookingDate.all
       
     else  
       @slots = BookingDate.all
@@ -47,7 +49,6 @@ class OnlineConsultationsController < ApplicationController
     @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
     if @online_consultation.save 
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
-
       @booking.update(available: false, status: "unconfirmed")
       if current_user.case_sheets.exists? 
         current_user.update(first_time: false)
@@ -70,7 +71,7 @@ class OnlineConsultationsController < ApplicationController
       redirect_to registrations_path, notice: "Your booking has been completed"
     else
       @online_consultation.update(confirmed: true, status: "confirmed")
-      @online_consultation.case_sheet = CaseSheet.where(user_id: current_user.id).order(created_at: :desc).first
+      @online_consultation.case_sheet = CaseSheet.where(user_id: current_user.id).last
       @online_consultation.booking_date.update(status: "confirmed")
       redirect_to online_consultations_path, notice: "Your booking has been confirmed"
     end

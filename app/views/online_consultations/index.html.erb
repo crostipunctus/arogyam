@@ -1,117 +1,98 @@
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
   <h1 class="cardHeading packages text-center">Online Consultations</h1>
-  <% if current_user && @online_consultations.exists? %>
-    <% @online_consultations.each do |consultation| %>  
+  <% if current_user %>
+     
+    <% @confirmed_online_consultations.each do |consultation| %> 
       <div class="consultation-card my-3 p-3 bg-light border rounded">
         <h5 class="mb-2 text-center">
-          <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
-          <% if consultation.confirmed? %> 
-            <%= link_to online_consultation_path(consultation), class: "consultation_link" do %>
-              <i class="fas fa-check-circle text-success"></i> Confirmed
-            <% end %> 
-          <% elsif consultation.completed?  %>
-            <span class="badge bg-warning">Completed!</span>
-          <% else %>
-            <span class="badge bg-warning">Unconfirmed!</span>
-          <% end %>
-        </h5>
-    <% unless consultation.confirmed? || consultation.completed? %>
-      <% if current_user.first_time == true %>
-        <div class="alert alert-info">
-          <h4 class="mb-3 text-center">Important! Since this is your first consultation, you will need to fill a case sheet to confirm your appointment</h4>
-          <div class="d-flex justify-content-center">
-            <%= link_to "Fill Case Sheet", new_online_consultation_case_sheet_path(consultation), class: "btn btn-success"  %>
-          </div>
-        </div>
+        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+        <span class="badge bg-success">Completed!</span>
+      </div>
+    <% end%>
+    <% @unconfirmed_online_consultations.each do |consultation| %> 
+      <div class="consultation-card my-3 p-3 bg-light border rounded">
+        <h5 class="mb-2 text-center">
+        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+        <span class="badge bg-warning">Unconfirmed!</span>
+      </div>
+    <% end%>
+    <% @completed_online_consultations.each do |consultation| %> 
+      <div class="consultation-card my-3 p-3 bg-light border rounded">
+        <h5 class="mb-2 text-center">
+        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+        <span class="badge bg-warning">Completed!</span>
+      </div>
+    <% end%>
+    <% @cancelled_online_consultations.each do |consultation| %> 
+      <div class="consultation-card my-3 p-3 bg-light border rounded">
+        <h5 class="mb-2 text-center">Cancelled Consultation</h5>
+        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+        <span class="badge bg-danger">Cancelled!</span>
+      </div>
+    <% end%>
 
-        <div class="mt-3">
-          <h4 class="text-center">Want to cancel your consultation instead?</h4>
-          <div class="d-flex justify-content-center">
-            <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"  %>
-          </div>
-        </div>
-      <% else %>
-        <div class="alert alert-info">
-          <h4 class="mb-3 text-center">Important! You have already filled a case sheet. Do you want to edit this case sheet or use it again?</h4>
-          <div class="d-flex justify-content-center">
-            <%= button_to "Use existing case sheet", online_consultation_path(consultation), method: :patch, class: "btn btn-success"  %>
-            <%= link_to "Edit", edit_online_consultation_case_sheet_path(consultation), class: "btn btn-warning"  %>
-          </div>
-        </div>
-      <% end %>
-  <% end %>
+    <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
 
+    
+    <%= form_with url: online_consultations_path, method: :post do |form| %>
+    <div class="mt-5 table-responsive">
+      <table class="online-table">
+        <thead>
+          <tr>
+            <% @slots.group_by(&:date).each do |date, slots| %>
+              <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @slots.group_by(&:date).each do |date, slots| %>
+              <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
+                <ul>
+                  <% slots.each do |slot| %>
+                    <li>
+                      <%= slot.start_time %>
+                      <% if slot.available %>
+                        <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                      <% else %>
+                        <div class="badge bg-danger">Booked</div>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
       
-  <% end %>
+    <div class="mt-3 text-center">
+        <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+    </div>    
   
+    
+    <% end %>
+
+
+      <%# online consultations where cancelled == true %>
+    
+
+
   <% else %>
     <div class="d-flex justify-content-center text-center pb-sm-3 pt-4">
       <p class="fs-lg fw-medium pb-3 mb-3"><strong>Please call +91 8340932384 or email 
-        <a class=" emailLink  nav-link fs-lg p-0 d-flex justify-content-center" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
-        <br>
-        <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
+      <a class=" emailLink  nav-link fs-lg p-0 d-flex justify-content-center" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
+      <br>
+      <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. Review consultation eligibility is determined in the following way: <br> 
+      <br> 1. Within 1 month of the previous completed consultation with same complaint: Rs. 350 for residents of India and Rs. 750 for non-residents for 30 minutes. <br>
+      <br> 2. Within 1 months of the previous completed consultation but with different complaint: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      <br> 3. After 1 month of the previous completed consultation: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      </p>
     </div>
     <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
     <div class="d-flex justify-content-center">
-    <% if !current_user %>
       <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
-    <% end %>
-    </div>
-    <div class="d-flex justify-content-center">
-  
-  </div>
-     <% if current_user %>
-      <%= form_with url: online_consultations_path, method: :post do |form| %>
-      <div class="mt-5 table-responsive">
-        <table class="online-table">
-          <thead>
-            <tr>
-              <% @slots.group_by(&:date).each do |date, slots| %>
-                <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <% @slots.group_by(&:date).each do |date, slots| %>
-                <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
-                  <ul>
-                    <% slots.each do |slot| %>
-                      <li>
-                        <%= slot.start_time %>
-                        <% if slot.available %>
-                          <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
-                        <% else %>
-                          <div class="badge bg-danger">Booked</div>
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </ul>
-                </td>
-              <% end %>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-       
-      <div class="mt-3 text-center">
-          <%= form.submit "Confirm", class: "btn btn-outline-success" %>
-      </div>    
-    
-  <% end %>
-  <% end %>
-<% end %>
-
- 
-  <% if current_user_admin? %>
-    <div class="calenderDiv mt-5">
-      <h3 class="text-center mb-5 calenderheading">Calender</h3>
-      <%= render 'calender' %>
     </div>
   <% end %>
-  
-
-
-  
 </section>
-

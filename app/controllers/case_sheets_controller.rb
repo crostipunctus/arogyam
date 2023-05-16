@@ -23,6 +23,7 @@ class CaseSheetsController < ApplicationController
       booking_date.update(status: "confirmed")
       redirect_to online_consultation_path(online_consultation), notice: "Online consultation is confirmed!"
     else
+      puts @case_sheet.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,6 +38,7 @@ class CaseSheetsController < ApplicationController
     @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = @online_consultation.case_sheet
     if @case_sheet.update(case_sheet_params)
+      @online_consultation.update(confirmed: true, status: "confirmed")
       redirect_to online_consultation_path(@case_sheet.online_consultation), notice: "Case sheet updated successfully"
     else
       render :edit, status: :unprocessable_entity
