@@ -6,23 +6,25 @@
       <div class="consultation-card my-3 p-3 bg-light border rounded">
         <h5 class="mb-2 text-center">
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
-        <span class="badge bg-success">Completed!</span>
+        <span class="badge bg-success">Confirmed!</span>
       </div>
-    <% end%>
+    <% end%> 
     <% @unconfirmed_online_consultations.each do |consultation| %> 
       <div class="consultation-card my-3 p-3 bg-light border rounded">
         <h5 class="mb-2 text-center">
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
         <span class="badge bg-warning">Unconfirmed!</span>
+        <% if last_consultation_within_a_month?(current_user)%>
+          <div>If you dont have a new complaint you can proceed with a review consultation. 
+            If you have a new complaint please fill a new case sheet. 
+          </div>
+          <%= button_to "Proceed with a review consultation", online_consultation_path(consultation), method: :patch, class: "btn btn-outline-success" %>
+        <% else %>
+          Please fill a new case sheet. 
+        <% end %>
       </div>
     <% end%>
-    <% @completed_online_consultations.each do |consultation| %> 
-      <div class="consultation-card my-3 p-3 bg-light border rounded">
-        <h5 class="mb-2 text-center">
-        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
-        <span class="badge bg-warning">Completed!</span>
-      </div>
-    <% end%>
+    
     <% @cancelled_online_consultations.each do |consultation| %> 
       <div class="consultation-card my-3 p-3 bg-light border rounded">
         <h5 class="mb-2 text-center">Cancelled Consultation</h5>
@@ -31,7 +33,7 @@
       </div>
     <% end%>
 
-    <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
+    <h3 class="mt-5 mb-2 text-center">BOOK NOW</h3>
 
     
     <%= form_with url: online_consultations_path, method: :post do |form| %>

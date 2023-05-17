@@ -93,6 +93,10 @@
     <% if consultation.status == 'case sheet pending' %>
       <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
       <span class="badge bg-warning fs-sm">Unconfirmed!</span>
+    <% elsif consultation.completed %>
+          <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
+
+      <span id="confirmed" class="badge bg-success fs-lg">Completed!</span>
     <% else %>
       <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
       <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>

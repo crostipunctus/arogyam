@@ -13,9 +13,8 @@ class OnlineConsultationsController < ApplicationController
     if current_user 
       @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
       @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed")
-      @completed_online_consultations = current_user.online_consultations.where(completed: true)
       @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
-      @slots =BookingDate.all
+      @slots = BookingDate.all
       
     else  
       @slots = BookingDate.all
@@ -37,30 +36,24 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def create  
-    
     booking_id = params[:booking_id]
     @booking = BookingDate.find(booking_id)
     start_time = @booking.start_time
     end_time = @booking.end_time
     date = @booking.date
 
-    
-      
     @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
     if @online_consultation.save 
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
       @booking.update(available: false, status: "unconfirmed")
-      if current_user.case_sheets.exists? 
-        current_user.update(first_time: false)
-      end
-  
-      
+      if !current_user.case_sheets.exists? 
+        redirect_to new_online_consultation_case_sheet_path(@online_consultation)
+      else 
       redirect_to online_consultations_path
+      end
     else 
       redirect_to online_consultations_path, status: :unprocessable_entity
     end
-  
-    
   end 
 
   def update 
@@ -71,7 +64,10 @@ class OnlineConsultationsController < ApplicationController
       redirect_to registrations_path, notice: "Your booking has been completed"
     else
       @online_consultation.update(confirmed: true, status: "confirmed")
-      @online_consultation.case_sheet = CaseSheet.where(user_id: current_user.id).last
+      last_case_sheet = CaseSheet.where(user_id: current_user.id).last
+      new_case_sheet = last_case_sheet.dup
+      new_case_sheet.save
+      @online_consultation.case_sheet = new_case_sheet
       @online_consultation.booking_date.update(status: "confirmed")
       redirect_to online_consultations_path, notice: "Your booking has been confirmed"
     end

@@ -5,7 +5,7 @@
   <div class="h-100 d-flex align-items-center justify-content-center">
   
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-        <h5 class="text-center mt-5 mb-5">Please fill in your case sheet to confirm your appointment. All fields are mandatory.</h5>
+        <h5 class="text-center mt-5 mb-5">Since this is your first consultation you will need to fill the case sheet to confirm your appointment. All fields are mandatory.</h5>
 
     <%= form_with(model: @case_sheet, url: online_consultation_case_sheet_path) do |f|%>
       <%= @case_sheet.errors.full_messages.to_sentence %>
