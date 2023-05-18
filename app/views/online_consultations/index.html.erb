@@ -14,7 +14,7 @@
         <h5 class="mb-2 text-center">
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
         <span class="badge bg-warning">Unconfirmed!</span>
-        <% if last_consultation_within_a_month?(current_user)%>
+        <% if !last_consultation_within_a_month?(current_user)%>
           <div>If you dont have a new complaint you can proceed with a review consultation which will be charged at Rs. 350(Indian residents) and Rs. 750(non-residents).
             If you have a new complaint please fill a new case sheet. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents).
           </div>
@@ -25,6 +25,8 @@
           <div>Your last consultation was more than a 
           month back. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). 
           Please fill a new case sheet to confirm your consultation.
+          <%= link_to "Proceed with new booking", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
+
           </div>
           
         <% end %>

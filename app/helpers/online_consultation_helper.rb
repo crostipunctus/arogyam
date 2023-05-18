@@ -1,7 +1,9 @@
 module OnlineConsultationHelper
 
   def last_consultation_within_a_month?(user)
-    user.online_consultations.where(completed: true).where('date > ?', 1.month.ago).exists?
+    last_consultation = user.online_consultations.where(completed: true).last
+    puts last_consultation.date
+    last_consultation && last_consultation.date < 1.month.ago
   end
   
 
