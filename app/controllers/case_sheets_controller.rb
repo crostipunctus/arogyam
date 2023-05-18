@@ -2,7 +2,7 @@ class CaseSheetsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-  end
+  end 
 
   def new
     @case_sheet = CaseSheet.new

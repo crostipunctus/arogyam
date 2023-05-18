@@ -12,7 +12,7 @@ class OnlineConsultationsController < ApplicationController
 
     if current_user 
       @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
-      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed")
+      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", confirmed: false)
       @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
       @slots = BookingDate.all
       
@@ -28,7 +28,7 @@ class OnlineConsultationsController < ApplicationController
 
   def show 
     @online_consultation = OnlineConsultation.find(params[:id])
-    @case_sheet = @online_consultation.case_sheet
+    @case_sheet = @online_consultation.case_sheets.last
   end 
 
   def new
@@ -46,7 +46,8 @@ class OnlineConsultationsController < ApplicationController
     if @online_consultation.save 
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
       @booking.update(available: false, status: "unconfirmed")
-      if !current_user.case_sheets.exists? 
+      @online_consultation.update(status: "unconfirmed")
+      if !current_user.case_sheets.exists? || params[:first_time] == "new case sheet"
         redirect_to new_online_consultation_case_sheet_path(@online_consultation)
       else 
       redirect_to online_consultations_path
@@ -65,10 +66,9 @@ class OnlineConsultationsController < ApplicationController
     else
       @online_consultation.update(confirmed: true, status: "confirmed")
       last_case_sheet = CaseSheet.where(user_id: current_user.id).last
-      new_case_sheet = last_case_sheet.dup
-      new_case_sheet.save
-      @online_consultation.case_sheet = new_case_sheet
-      @online_consultation.booking_date.update(status: "confirmed")
+      
+      last_case_sheet.update(online_consultation_id: @online_consultation.id)
+      
       redirect_to online_consultations_path, notice: "Your booking has been confirmed"
     end
 

@@ -15,12 +15,18 @@
         <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
         <span class="badge bg-warning">Unconfirmed!</span>
         <% if last_consultation_within_a_month?(current_user)%>
-          <div>If you dont have a new complaint you can proceed with a review consultation. 
-            If you have a new complaint please fill a new case sheet. 
+          <div>If you dont have a new complaint you can proceed with a review consultation which will be charged at Rs. 350(Indian residents) and Rs. 750(non-residents).
+            If you have a new complaint please fill a new case sheet. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents).
           </div>
           <%= button_to "Proceed with a review consultation", online_consultation_path(consultation), method: :patch, class: "btn btn-outline-success" %>
+          <%= link_to "Fill a new case sheet", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
+          <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger" %>
         <% else %>
-          Please fill a new case sheet. 
+          <div>Your last consultation was more than a 
+          month back. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). 
+          Please fill a new case sheet to confirm your consultation.
+          </div>
+          
         <% end %>
       </div>
     <% end%>
@@ -33,45 +39,48 @@
       </div>
     <% end%>
 
+    <% if !current_user.online_consultations.where(confirmed: true).exists? && !current_user.online_consultations.where(status: "unconfirmed").exists? %>
     <h3 class="mt-5 mb-2 text-center">BOOK NOW</h3>
 
     
-    <%= form_with url: online_consultations_path, method: :post do |form| %>
-    <div class="mt-5 table-responsive">
-      <table class="online-table">
-        <thead>
-          <tr>
-            <% @slots.group_by(&:date).each do |date, slots| %>
-              <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <% @slots.group_by(&:date).each do |date, slots| %>
-              <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
-                <ul>
-                  <% slots.each do |slot| %>
-                    <li>
-                      <%= slot.start_time %>
-                      <% if slot.available %>
-                        <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
-                      <% else %>
-                        <div class="badge bg-danger">Booked</div>
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <%= form_with url: online_consultations_path, method: :post do |form| %>
+      <div class="mt-5 table-responsive">
+        <table class="online-table">
+          <thead>
+            <tr>
+              <% @slots.group_by(&:date).each do |date, slots| %>
+                <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% @slots.group_by(&:date).each do |date, slots| %>
+                <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
+                  <ul>
+                    <% slots.each do |slot| %>
+                      <li>
+                        <%= slot.start_time %>
+                        <% if slot.available %>
+                          <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                        <% else %>
+                          <div class="badge bg-danger">Booked</div>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
       
-    <div class="mt-3 text-center">
-        <%= form.submit "Confirm", class: "btn btn-outline-success" %>
-    </div>    
+      <div class="mt-3 text-center">
+          <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+      </div>   
+    <% end %> 
   
     
     <% end %>

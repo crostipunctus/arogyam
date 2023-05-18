@@ -1,7 +1,7 @@
 class OnlineConsultation < ApplicationRecord
   belongs_to :user
   belongs_to :booking_date
-  has_one :case_sheet
+  has_many :case_sheets
 
   def confirmed? 
     status == "confirmed"
