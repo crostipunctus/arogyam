@@ -33,15 +33,9 @@
       </div>
     <% end%>
     
-    <% @cancelled_online_consultations.each do |consultation| %> 
-      <div class="consultation-card my-3 p-3 bg-light border rounded">
-        <h5 class="mb-2 text-center">Cancelled Consultation</h5>
-        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
-        <span class="badge bg-danger">Cancelled!</span>
-      </div>
-    <% end%>
+   
 
-    <% if !current_user.online_consultations.where(confirmed: true).exists? && !current_user.online_consultations.where(status: "unconfirmed").exists? %>
+    <% if !current_user.online_consultations.where(confirmed: true).exists? && !current_user.online_consultations.where(status: "unconfirmed", cancelled: true).exists? %>
     <h3 class="mt-5 mb-2 text-center">BOOK NOW</h3>
 
     

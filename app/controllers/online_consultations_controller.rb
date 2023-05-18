@@ -12,7 +12,7 @@ class OnlineConsultationsController < ApplicationController
 
     if current_user 
       @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
-      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", confirmed: false)
+      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", completed: false, cancelled: false)
       @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
       @slots = BookingDate.all
       
@@ -47,7 +47,7 @@ class OnlineConsultationsController < ApplicationController
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
       @booking.update(available: false, status: "unconfirmed")
       @online_consultation.update(status: "unconfirmed")
-      if !current_user.case_sheets.exists? || params[:first_time] == "new case sheet"
+      if !current_user.case_sheets.exists?
         redirect_to new_online_consultation_case_sheet_path(@online_consultation)
       else 
       redirect_to online_consultations_path
@@ -77,10 +77,10 @@ class OnlineConsultationsController < ApplicationController
 
   def destroy
       
-    @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
+    @booking = @online_consultation.booking_date
     @booking.update(available: true)
       
-    @online_consultation.update(status: "cancelled" ) 
+    @online_consultation.update(cancelled: true, status: "cancelled" ) 
     @online_consultation.update(confirmed: false)
     OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
     redirect_to online_consultations_path, notice: "Your booking has been cancelled"
