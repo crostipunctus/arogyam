@@ -68,7 +68,8 @@ class OnlineConsultationsController < ApplicationController
       last_case_sheet = CaseSheet.where(user_id: current_user.id).last
       
       last_case_sheet.update(online_consultation_id: @online_consultation.id)
-      
+      OnlineConsultationMailer.review_consultation_email(@online_consultation).deliver_later
+
       redirect_to online_consultations_path, notice: "Your booking has been confirmed"
     end
 

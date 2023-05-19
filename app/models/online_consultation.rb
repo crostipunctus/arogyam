@@ -7,5 +7,9 @@ class OnlineConsultation < ApplicationRecord
     status == "confirmed"
   end 
 
+  def review_consultation(online_consultation)
+    
+  end
+
 
 end 
