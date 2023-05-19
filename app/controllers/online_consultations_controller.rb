@@ -80,8 +80,9 @@ class OnlineConsultationsController < ApplicationController
     @booking = @online_consultation.booking_date
     @booking.update(available: true)
       
-    @online_consultation.update(cancelled: true, status: "cancelled" ) 
-    @online_consultation.update(confirmed: false)
+    @online_consultation.update(cancelled: true, status: "cancelled", confirmed: false, completed: false ) 
+    
+
     OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
     redirect_to online_consultations_path, notice: "Your booking has been cancelled"
   end

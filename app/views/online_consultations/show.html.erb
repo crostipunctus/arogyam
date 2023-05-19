@@ -43,11 +43,10 @@
       </div>
     </div>
 
-    <div class=" mt-5">
-      
-        <%= link_to "Edit case sheet", edit_online_consultation_case_sheet_path(@online_consultation), class: "btn btn-outline-primary me-2" %>
-        <%= button_to "Cancel appointment", online_consultation_path(@online_consultation), method: :delete, class: "btn btn-outline-danger", form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
-      
-    </div>
+    <% if @online_consultation.completed == false %>
+      <div class=" mt-5">
+          <%= button_to "Cancel appointment", online_consultation_path(@online_consultation), method: :delete, class: "btn btn-outline-danger", form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
+      </div>
+    <% end %>
   </div>
 </section>
