@@ -9,11 +9,20 @@
         <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger mt-3" %>
       </div>
      <div class="d-flex flex-column align-items-center text-center">
-  <strong>Important!: </strong> 
+  <strong>Important: </strong> 
   <span>Please make your payment and send the payment details to</span>
   <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
   <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
-</div>
+  <span class="mt-5"><strong>Account details:</strong> </span>
+  <div>The Satsang Foundation - The Sacred Grove,<br>
+    A/c. No: 7120649312,<br>
+    Current Account,<br>
+    Indian Bank,<br>
+    IFSC : IDIB000C174,<br>
+    Branch: Chowdepalli (00C174)<br>
+    
+    UPI ID: 7120649312@indianbk
+  </div>
 
 
     <% end%> 
