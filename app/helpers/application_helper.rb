@@ -96,5 +96,10 @@ module ApplicationHelper
     
   end
 
+  def payment_complete?(online_consultation)
+    online_consultation.payment_complete == true
+  end
+  
+
   
 end

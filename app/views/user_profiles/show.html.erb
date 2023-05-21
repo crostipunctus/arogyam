@@ -100,6 +100,11 @@
     <% elsif consultation.confirmed == true %>
       <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
       <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>
+      <% if payment_complete?(consultation) %>
+          <span class="badge bg-success fs-lg">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning fs-lg">Payment pending</span>
+        <% end %>
       <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
     <% end %>
   </div>

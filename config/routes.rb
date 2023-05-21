@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'profiles/show'
   resources :team_members 
 
+  patch 'payment_complete/:id' => 'online_consultations#payment_complete', as: :payment_complete
+
+
   get 'contacts/new'
   get 'contacts/create'
 
@@ -18,6 +21,7 @@ Rails.application.routes.draw do
     resource :case_sheet, only: [:show, :new, :create, :edit, :update, :destroy]
   end
   
+
   get 'all_online_consultations' => 'online_consultations#all'
   resources :booking_dates
   

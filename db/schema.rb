@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_071713) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_055501) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -141,6 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_071713) do
     t.integer "booking_date_id", null: false
     t.boolean "cancelled", default: false
     t.boolean "completed", default: false
+    t.boolean "payment_complete", default: false
     t.index ["booking_date_id"], name: "index_online_consultations_on_booking_date_id"
     t.index ["user_id"], name: "index_online_consultations_on_user_id"
   end

@@ -5,7 +5,8 @@ module OnlineConsultationHelper
     
     last_consultation && last_consultation.date > 1.month.ago
   end
-  
+
+
 
 
 end

@@ -66,7 +66,6 @@ class OnlineConsultationsController < ApplicationController
     else
       @online_consultation.update(confirmed: true, status: "confirmed")
       last_case_sheet = CaseSheet.where(user_id: current_user.id).last
-      
       last_case_sheet.update(online_consultation_id: @online_consultation.id)
       OnlineConsultationMailer.review_consultation_email(@online_consultation).deliver_later
 
@@ -74,6 +73,16 @@ class OnlineConsultationsController < ApplicationController
     end
 
     # ADD OnlineConsultationMailer.online_consultation_completed_email(@online_consultation).deliver_later
+  end 
+
+  def payment_complete 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    if @online_consultation.payment_complete == true
+      @online_consultation.update(payment_complete: false)
+    else
+      @online_consultation.update(payment_complete: true)
+    end
+    redirect_to registrations_path, notice: "Your booking has been confirmed"
   end 
 
   def destroy

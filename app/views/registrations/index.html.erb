@@ -107,6 +107,7 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
+                <th>Payment Status</th>
                 <th>Actions</th>
                 <!-- Add other column headers here -->
             </tr>
@@ -120,16 +121,27 @@
         <td data-th="Date"><%= consultation.date %></td>
         <td data-th="Time"><%= consultation.start_time %></td>
       <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
-      <%= tag.span class: "badge #{consultation_status_class(consultation)}" do %>
+          <%= tag.span class: "badge #{consultation_status_class(consultation)}" do %>
           <%= consultation.status %>
         <% end %>      
       </td>
+      <td data-th="Payment Status">
+        <% if payment_complete?(consultation) %>
+          <span class="badge bg-success fs-lg">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning fs-lg">Payment pending</span>
+        <% end %>
       <!-- Add other columns here -->
       <td data-th="Actions">
         <%= link_to 'View', online_consultation_path(consultation), class: 'btn btn-outline-success btn-sm' %>
         <span><%= button_to 'Delete', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
         <% if consultation.confirmed == true && consultation.completed == false %>
           <%= button_to "Mark completed", online_consultation_path(consultation), method: :patch, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-warning btn-sm'%>
+        <% end %>
+        <% if payment_complete?(consultation)%>
+          <%= button_to 'Mark payment pending', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>
+        <% else %>
+          <%= button_to 'Mark payment complete', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>      
         <% end %>
       </td>
     </tr>
