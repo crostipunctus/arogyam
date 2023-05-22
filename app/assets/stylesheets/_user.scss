@@ -2048,3 +2048,28 @@ li {
   font-size: 30px;
   margin-bottom: 30px !important;
 }
+
+.important {
+  font-weight: bold;
+  color: red;
+}
+
+.welcome-email-title {
+  color: #000;
+  font-size: 24px;
+}
+
+.welcome-email-text,
+.welcome-email-link {
+  color: #333;
+  font-size: 16px;
+}
+
+.welcome-email-image {
+  border-radius: 5px;
+}
+
+.confirmation-email {
+  margin-top: 100px;
+  margin-left: 100px;
+}

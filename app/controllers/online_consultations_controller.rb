@@ -45,6 +45,7 @@ class OnlineConsultationsController < ApplicationController
     @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
     if @online_consultation.save 
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
+      OnlineConsultationMailer.online_consultation_user_confirmation_email(@online_consultation).deliver_later
       @booking.update(available: false, status: "unconfirmed")
       @online_consultation.update(status: "unconfirmed")
       if !current_user.case_sheets.exists?

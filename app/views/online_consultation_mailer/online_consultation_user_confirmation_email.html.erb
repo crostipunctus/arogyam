@@ -1,26 +1,35 @@
-    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
-    <h1 class="welcome-email-title">
-       <%= @user.first_name.capitalize %>,thanks for booking an online consultation. 
-    </h1>
-    <p class="welcome-email-text">
-      Find the details of your booking below:
-    </p>
-    Consultation date: <%= @online_consultation.date %>
-    <br>
-    Consultation time: <%= @online_consultation.start_time %>
-    <br>
-    Consultation duration: <%= @online_consultation.duration %> minutes
-    <br>
-      You can all your bookings at: 
-      <a href="https://www.arogyam.life/" class="welcome-email-link">
-        arogyam.life
-      </a>
-      . Please feel free to contact us at
-      <a
-        href="mailto:wellnesscenter@satsang-foundation.org"
-        class="welcome-email-link"
-      >
-        wellnesscenter@satsang-foundation.org
-      </a>
-      if you have any doubts or questions.
-    </p>
+
+ 
+ <body style="background-color: #f4f4f4; margin: 0; padding: 0;">
+  <table width="100%" height="100%" style="width:100%; height:100%; padding:30px; text-align: center;">
+    <tr>
+      <td>
+        <div style="width: 600px; max-width: 90%; margin: 0 auto; background-color: #fff; border-radius: 10px; overflow: hidden; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);">
+  <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', style: style="width: 200px; display: block; margin: 0 auto;", width: 200) %> 
+          <h1 style="color: #000; font-size: 24px;">
+            <%= @user.first_name.capitalize %>, thanks for booking an online consultation. 
+          </h1>
+          <p style="color: #333; font-size: 16px;">
+            Find the details of your booking below:
+          </p>
+          <p style="color: #333; font-size: 16px;">Consultation date: <%= @online_consultation.date %></p>
+          <p style="color: #333; font-size: 16px;">Consultation time: <%= @online_consultation.start_time %></p>
+          <p style="color: #333; font-size: 16px;">Consultation duration: <%= @online_consultation.duration %> minutes</p>
+          <p style="font-weight: bold; color: red; font-size: 16px;">
+            Please note that payment has to be made 48 hours before the consultation or the booking will be cancelled automatically. 
+          </p>
+          <p style="color: #333; font-size: 16px;">
+            You can see all your bookings at: 
+            <a href="https://www.arogyam.life/" style="color: #333; text-decoration: none;">arogyam.life</a>.
+          </p>
+          <p style="color: #333; font-size: 16px;">
+            Please feel free to contact us at
+            <a href="mailto:wellnesscenter@satsang-foundation.org" style="color: #333; text-decoration: none;">wellnesscenter@satsang-foundation.org</a>
+            if you have any doubts or questions.
+          </p>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+
