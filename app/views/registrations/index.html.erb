@@ -59,7 +59,7 @@
                     <tr>
                         <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
                         <td data-th="Email"><%= registration.user.email %></td>
-                        <td data-th="Date"><%= registration.date %></td>
+                        <td data-th="Date"><%= formatted_date(registration.date) %></td>
                         <td data-th="Duration"><%= registration.duration %></td>
                         <td data-th="Actions" data-controller="status">
                             <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
