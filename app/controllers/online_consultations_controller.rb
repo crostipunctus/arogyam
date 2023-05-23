@@ -14,10 +14,10 @@ class OnlineConsultationsController < ApplicationController
       @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
       @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", completed: false, cancelled: false)
       @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
-      @slots = BookingDate.all
+      @slots = BookingDate.where(date: start_date..(start_date + 1.month))
       
     else  
-      @slots = BookingDate.all
+      @slots = BookingDate.where(date: start_date..(start_date + 1.month))
         
         
       
@@ -82,6 +82,8 @@ class OnlineConsultationsController < ApplicationController
       @online_consultation.update(payment_complete: false)
     else
       @online_consultation.update(payment_complete: true)
+      OnlineConsultationMailer.online_consultation_payment_confirmation_email(@online_consultation).deliver_later
+      OnlineConsultationMailer.online_consultation_payment_user_confirmation_email(@online_consultation).deliver_later
     end
     redirect_to registrations_path, notice: "Your booking has been confirmed"
   end 
