@@ -2,7 +2,7 @@ class CaseSheetsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-  end
+  end 
 
   def new
     @case_sheet = CaseSheet.new
@@ -13,6 +13,7 @@ class CaseSheetsController < ApplicationController
     online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = CaseSheet.new(case_sheet_params)
     @case_sheet.online_consultation_id = online_consultation.id
+    @case_sheet.user_id = current_user.id
     if @case_sheet.save
       OnlineConsultationMailer.online_consultation_confirmation_email(online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_user_confirmation_email(online_consultation).deliver_later
@@ -22,6 +23,7 @@ class CaseSheetsController < ApplicationController
       booking_date.update(status: "confirmed")
       redirect_to online_consultation_path(online_consultation), notice: "Online consultation is confirmed!"
     else
+      puts @case_sheet.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -36,6 +38,7 @@ class CaseSheetsController < ApplicationController
     @online_consultation = OnlineConsultation.find(params[:online_consultation_id])
     @case_sheet = @online_consultation.case_sheet
     if @case_sheet.update(case_sheet_params)
+      @online_consultation.update(confirmed: true, status: "confirmed")
       redirect_to online_consultation_path(@case_sheet.online_consultation), notice: "Case sheet updated successfully"
     else
       render :edit, status: :unprocessable_entity

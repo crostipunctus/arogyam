@@ -11,18 +11,16 @@ class OnlineConsultationsController < ApplicationController
     @calendar_end = start_date.end_of_month.end_of_week
 
     if current_user 
-      @online_consultations = current_user.online_consultations.where.not(status: "cancelled")
-      @slots = if params[:slot_duration].to_i == 60
-        BookingDate.where(start_time: ["14:00", "15:00"])
-      else
-        BookingDate.all
-      end
+      @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
+      @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", completed: false, cancelled: false)
+      @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
+      @slots = BookingDate.where(date: start_date..(start_date + 1.month))
+      
     else  
-      @slots = if params[:slot_duration].to_i == 60
-        BookingDate.where(start_time: ["14:00", "15:00"])
-      else
-        BookingDate.all
-      end
+      @slots = BookingDate.where(date: start_date..(start_date + 1.month))
+        
+        
+      
     end 
   
   end 
@@ -30,7 +28,7 @@ class OnlineConsultationsController < ApplicationController
 
   def show 
     @online_consultation = OnlineConsultation.find(params[:id])
-    @case_sheet = @online_consultation.case_sheet
+    @case_sheet = @online_consultation.case_sheets.last
   end 
 
   def new
@@ -38,67 +36,66 @@ class OnlineConsultationsController < ApplicationController
   end 
 
   def create  
-    duration = params[:slot_duration]
     booking_id = params[:booking_id]
     @booking = BookingDate.find(booking_id)
     start_time = @booking.start_time
     end_time = @booking.end_time
     date = @booking.date
 
-    if duration == "30" 
-      
-      @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, duration: "30")
-      if @online_consultation.save 
-        OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
-
-        @booking.update(available: false, status: "unconfirmed")
-       
-       
-        redirect_to online_consultations_path
+    @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
+    if @online_consultation.save 
+      OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
+      OnlineConsultationMailer.online_consultation_user_confirmation_email(@online_consultation).deliver_later
+      @booking.update(available: false, status: "unconfirmed")
+      @online_consultation.update(status: "unconfirmed")
+      if !current_user.case_sheets.exists?
+        redirect_to new_online_consultation_case_sheet_path(@online_consultation)
       else 
-        redirect_to online_consultations_path, status: :unprocessable_entity
+      redirect_to online_consultations_path
       end
-    elsif  duration == "60"
-      end_time = (Time.parse(start_time) + 60.minutes).strftime("%H:%M") 
-      @online_consultation2 = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, duration: "60")
-      next_slot = (Time.parse(start_time) + 30.minutes).strftime("%H:%M")
-      @booking2 = BookingDate.find_by(start_time: next_slot, date: date)
-      if @online_consultation2.save 
-        OnlineConsultationMailer.online_consultation_email(@online_consultation2).deliver_later
-        @booking2.update(available: false, status: "unconfirmed")
-        @booking.update(available: false, status: "unconfirmed")
-        flash[:notice] = "Your booking has been made."
-        redirect_to online_consultations_path
-      else  
-        redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
-      end 
-    else   
-      redirect_to online_consultations_path, status: :unprocessable_entity, notice: "Something went wrong"
-    end 
-  end 
-
-  def update 
-    respond_to do |format|
-      if @online_consultation.update(status: params[:online_consultation][:status])
-        format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
-      else
-        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @online_consultation.errors.full_messages } }
-      end
+    else 
+      redirect_to online_consultations_path, status: :unprocessable_entity
     end
   end 
 
+  def update 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    if @online_consultation.confirmed == true 
+      @online_consultation.update(completed: true, status: "completed", confirmed: false )
+      @online_consultation.booking_date.update(available: true)
+      redirect_to registrations_path, notice: "Your booking has been completed"
+    else
+      @online_consultation.update(confirmed: true, status: "confirmed")
+      last_case_sheet = CaseSheet.where(user_id: current_user.id).last
+      last_case_sheet.update(online_consultation_id: @online_consultation.id)
+      OnlineConsultationMailer.review_consultation_email(@online_consultation).deliver_later
+
+      redirect_to online_consultations_path, notice: "Your booking has been confirmed"
+    end
+
+    # ADD OnlineConsultationMailer.online_consultation_completed_email(@online_consultation).deliver_later
+  end 
+
+  def payment_complete 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    if @online_consultation.payment_complete == true
+      @online_consultation.update(payment_complete: false)
+    else
+      @online_consultation.update(payment_complete: true)
+      OnlineConsultationMailer.online_consultation_payment_confirmation_email(@online_consultation).deliver_later
+      OnlineConsultationMailer.online_consultation_payment_user_confirmation_email(@online_consultation).deliver_later
+    end
+    redirect_to registrations_path, notice: "Your booking has been confirmed"
+  end 
+
   def destroy
-      if @online_consultation.duration == "30"
-        @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
-        @booking.update(available: true)
-      elsif @online_consultation.duration == "60"  
-        @booking = BookingDate.find_by(date: @online_consultation.date, start_time: @online_consultation.start_time)
-        @booking.update(available: true)
-        next_slot = (Time.parse(@online_consultation.start_time) + 30.minutes).strftime("%H:%M")
-        @booking2 = BookingDate.find_by(start_time: next_slot, date: @online_consultation.date)
-        @booking2.update(available: true)
-      end 
-    @online_consultation.update(status: "cancelled" ) 
+      
+    @booking = @online_consultation.booking_date
+    @booking.update(available: true)
+      
+    @online_consultation.update(cancelled: true, status: "cancelled", confirmed: false, completed: false ) 
+    
+
     OnlineConsultationMailer.online_consultation_user_cancellation_email(@online_consultation).deliver_later
     redirect_to online_consultations_path, notice: "Your booking has been cancelled"
   end

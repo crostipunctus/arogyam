@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
  
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
   get 'newsletter_subscriptions/create'
   get 'profiles/show'
   resources :team_members 
+
+  patch 'payment_complete/:id' => 'online_consultations#payment_complete', as: :payment_complete
+
 
   get 'contacts/new'
   get 'contacts/create'
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
     resource :case_sheet, only: [:show, :new, :create, :edit, :update, :destroy]
   end
   
+
   get 'all_online_consultations' => 'online_consultations#all'
   resources :booking_dates
   

@@ -15,11 +15,13 @@
               <span class="calendar-slot">
                 <%= booking_date.start_time %> - <%= booking_date.end_time %>
                 <% if booking_date.available == false %>
-                  <% if booking_date.status == "confirmed"%>
-                    <span class="badge bg-success"><%= booking_date.status %></span>
-                  <% elsif booking_date.status == "unconfirmed" %>
+                  <% if online_consultation = booking_date.online_consultations.find_by(confirmed: true) %>
+                    <span class="badge bg-success"><%= online_consultation.status %></span>
+                      <span><%= button_to "Cancel", online_consultation_path(online_consultation), method: :delete, class: "badge bg-danger" %></span>
+                  <% end %>
+                  <% if booking_date.status == "unconfirmed" %>
                     <span class="badge bg-warning"><%= booking_date.status %></span>
-                  <% else %>
+                  <% elsif booking_date.status == "BLOCKED"%>
                     <span class="badge bg-danger"><%= booking_date.status %></span>
                   <% end %>
                 <% else %>

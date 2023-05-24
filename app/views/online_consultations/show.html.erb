@@ -20,22 +20,22 @@
           <h4>Case Sheet:</h4>
           <ul class="list-unstyled">
             <%# Add the remaining case sheet items here, following the same format as below %>
-            <li><strong>Vegetarian:</strong> <%= @online_consultation.case_sheet.vegetarian ? "Yes" : "No" %></li>
-            <li><strong>Height:</strong> <%= @online_consultation.case_sheet.height %></li>
-            <li><strong>Weight:</strong> <%= @online_consultation.case_sheet.weight %></li>
-            <li>Blood Group: <%= @online_consultation.case_sheet.blood_group %></li>
-            <li>Appetite: <%= @online_consultation.case_sheet.appetite %></li>
-            <li>Sleep: <%= @online_consultation.case_sheet.sleep %></li>
-            <li>Motion: <%= @online_consultation.case_sheet.motion %></li>
-            <li>Energy Level: <%= @online_consultation.case_sheet.energy_level %></li>
-            <li>Hereditary Mother: <%= @online_consultation.case_sheet.hereditary_mother %></li>
-            <li>Hereditary Father: <%= @online_consultation.case_sheet.hereditary_father %></li>
-            <li>Surgeries: <%= @online_consultation.case_sheet.surgeries %></li>
-            <li>Normal Deliveries: <%= @online_consultation.case_sheet.normal_deliveries %></li>
-            <li>Caesarian Deliveries: <%= @online_consultation.case_sheet.caesarian_deliveries %></li>
-            <li>Exercise Routine: <%= @online_consultation.case_sheet.exercise_routine %></li>
-            <li>Past Ailments: <%= @online_consultation.case_sheet.past_ailments %></li>
-            <li>Present Complaints: <%= @online_consultation.case_sheet.present_complaints %></li>
+            <li><strong>Vegetarian:</strong> <%= @case_sheet.vegetarian ? "Yes" : "No" %></li>
+            <li><strong>Height:</strong> <%= @case_sheet.height %></li>
+            <li><strong>Weight:</strong> <%= @case_sheet.weight %></li>
+            <li>Blood Group: <%= @case_sheet.blood_group %></li>
+            <li>Appetite: <%= @case_sheet.appetite %></li>
+            <li>Sleep: <%= @case_sheet.sleep %></li>
+            <li>Motion: <%= @case_sheet.motion %></li>
+            <li>Energy Level: <%= @case_sheet.energy_level %></li>
+            <li>Hereditary Mother: <%= @case_sheet.hereditary_mother %></li>
+            <li>Hereditary Father: <%= @case_sheet.hereditary_father %></li>
+            <li>Surgeries: <%= @case_sheet.surgeries %></li>
+            <li>Normal Deliveries: <%= @case_sheet.normal_deliveries %></li>
+            <li>Caesarian Deliveries: <%= @case_sheet.caesarian_deliveries %></li>
+            <li>Exercise Routine: <%= @case_sheet.exercise_routine %></li>
+            <li>Past Ailments: <%= @case_sheet.past_ailments %></li>
+            <li>Present Complaints: <%= @case_sheet.present_complaints %></li>
             <li>Status: <%= @online_consultation.status %></li>
             <%# ... %>
           </ul>
@@ -43,11 +43,10 @@
       </div>
     </div>
 
-    <div class=" mt-5">
-      
-        <%= link_to "Edit case sheet", edit_online_consultation_case_sheet_path(@online_consultation), class: "btn btn-outline-primary me-2" %>
-        <%= button_to "Cancel appointment", online_consultation_path(@online_consultation), method: :delete, class: "btn btn-outline-danger", form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
-      
-    </div>
+    <% if @online_consultation.completed == false %>
+      <div class=" mt-5">
+          <%= button_to "Cancel appointment", online_consultation_path(@online_consultation), method: :delete, class: "btn btn-outline-danger", form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
+      </div>
+    <% end %>
   </div>
 </section>

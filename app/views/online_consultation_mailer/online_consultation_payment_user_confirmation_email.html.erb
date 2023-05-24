@@ -9,7 +9,7 @@
           <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', style: "width: 200px; display: block; margin: 0 auto;", width: 200) %>
         <% end %>
           <h1 style="color: #000; font-size: 24px; margin-top: 50px; margin-bottom: 30px;">
-            <%= @user.first_name.capitalize %>, thanks for booking an online consultation. 
+            <%= @user.first_name.capitalize %>, thanks for making the payment! Your consultation is now confirmed. 
           </h1>
           <p style="color: #333; font-size: 16px;">
             Find the details of your booking below:
@@ -17,12 +17,9 @@
 <p style="color: #333; font-size: 16px;">Date: <%= @online_consultation.date.strftime("%d-%m-%Y") %></p>
           <p style="color: #333; font-size: 16px;">Slot: <%= @online_consultation.start_time %> - <%= @online_consultation.end_time %></p>
           
-          <p style="font-weight: bold; color: red; font-size: 16px;">
-            Please note that payment has to be made 48 hours before the consultation or the booking will be cancelled automatically. 
-          </p>
           <p style="color: #333; font-size: 16px;">
             You can see all your bookings at 
-            <a href="https://www.arogyam.life/" style="color: #15c; text-decoration: none;">arogyam.life</a>.
+            <a href="https://www.arogyam.life" style="color: #15c; text-decoration: none;">arogyam.life</a>.
           </p>
           <p style="color: #333; font-size: 16px;">
             Please feel free to contact us at

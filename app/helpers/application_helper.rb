@@ -90,5 +90,16 @@ module ApplicationHelper
     "ArogyaM - The Wellness Center"
   end
 
+  def find_consultation(user)
+    
+    user.case_sheets.last.online_consultation
+    
+  end
+
+  def payment_complete?(online_consultation)
+    online_consultation.payment_complete == true
+  end
+  
+
   
 end

@@ -90,12 +90,21 @@
     <h3>Confirmed Consultations</h3>
 <% @confirmed_consultations.each do |consultation| %>
   <div class="cancelBatch">
-    <% if consultation.status == 'case sheet pending' %>
+    <% if consultation.status == 'unconfirmed' %>
       <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
       <span class="badge bg-warning fs-sm">Unconfirmed!</span>
-    <% else %>
+    <% elsif consultation.completed %>
+          <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
+
+      <span id="confirmed" class="badge bg-success fs-lg">Completed!</span>
+    <% elsif consultation.confirmed == true %>
       <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
       <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>
+      <% if payment_complete?(consultation) %>
+          <span class="badge bg-success fs-lg">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning fs-lg">Payment pending</span>
+        <% end %>
       <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
     <% end %>
   </div>
@@ -110,7 +119,7 @@
 <% end %>
   <% else %>
     <h5 >No online consultations</h5>
-    <%= link_to "Register", online_consultations_path, class: "btn btn-outline-danger rounded-pill"%>
+    <%= link_to "Book", online_consultations_path, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
 </div>
 
