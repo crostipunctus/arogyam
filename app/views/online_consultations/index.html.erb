@@ -117,4 +117,12 @@
       <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
     </div>
   <% end %>
+
+
+  <% if current_user_admin? %>
+    <div class="calenderDiv mt-5">
+      <h3 class="text-center mb-5 calenderheading">Calender</h3>
+      <%= render 'calender' %>
+    </div>
+  <% end %>
 </section>
