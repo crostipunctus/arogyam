@@ -20,7 +20,11 @@ class BookingDate < ApplicationRecord
         )
       end
     end
-  end
+
+    AddDayWorker.perform_in(24.hours) unless already_queued? 
+   end
+  
+ 
   
 
   def self.generate_day_slots(date)
@@ -39,6 +43,11 @@ class BookingDate < ApplicationRecord
       )
     end
   end
-  
+
+  private 
+
+  def self.already_queued?
+    Sidekiq::Queue.new.any? { |job| job.klass == 'AddDayWorker' }
+  end
 
 end
