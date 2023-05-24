@@ -99,6 +99,11 @@ module ApplicationHelper
   def payment_complete?(online_consultation)
     online_consultation.payment_complete == true
   end
+
+  def find_online_consultation(booking_date)
+    @online_consultation = OnlineConsultation.find_by(date: booking_date.date, start_time: booking_date.start_time)
+    
+  end
   
 
   
