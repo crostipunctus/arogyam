@@ -1,7 +1,7 @@
 # Load DSL and set up stages
 require "capistrano/setup"
 
-require 'capistrano/sidekiq'
+
 
 # Include default deployment tasks
 require "capistrano/deploy"
@@ -16,6 +16,7 @@ require "capistrano/deploy"
 # or
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
+
 
 # Include tasks from other gems included in your Gemfile
 #
@@ -42,6 +43,12 @@ Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
+
+require 'capistrano/sidekiq'
+install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
+# Then select your service manager
+install_plugin Capistrano::Sidekiq::Systemd
+
 
 set :rbenv_type, :user
 set :rbenv_ruby, '3.1.2'
