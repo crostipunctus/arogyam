@@ -21,14 +21,6 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 
-set :sidekiq_options, "-C config/sidekiq.yml"
-
-set :rails_env, 'production'
-
-set :sidekiq_roles, :worker
-set :sidekiq_default_hooks, true
-set :sidekiq_env, fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
-set :sidekiq_config_files, ['config/sidekiq.yml']
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
