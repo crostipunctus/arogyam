@@ -19,7 +19,7 @@ class OnlineConsultationsController < ApplicationController
       @slots = BookingDate.where(date: start_date..(start_date + 1.month))
       
     else  
-      @slots = BookingDate.where(date: start_date..(start_date + 1.month))
+      @slots = BookingDate.where(date: start_date..(start_date + 1.month)) 
         
         
       
