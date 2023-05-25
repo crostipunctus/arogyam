@@ -1,0 +1,84 @@
+
+  <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+<div class="Profileform">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+  
+  <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <h5 class="text-center mt-5 mb-5">Since this is your first consultation you will need to fill the case sheet to confirm your appointment. All fields are mandatory.</h5>
+
+    <%= form_with(model: @case_sheet, url: online_consultation_case_sheet_path) do |f|%>
+      <%= @case_sheet.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :vegetarian %>
+        <%= f.select :vegetarian, [["Yes", true], ["No", false]], {}, {class: "form-control"} %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :height %>
+        <%= f.text_field :height, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :weight %>
+        <%= f.text_field :weight, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :blood_group %>
+        <%= f.text_field :blood_group, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :appetite %>
+        <%= f.select :appetite, [["Poor"], ["Good"], ["Excellent"]], {}, {class: "form-control"} %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :sleep %>
+        <%= f.select :sleep, [["Poor"], ["Good"], ["Excellent"]], {}, {class: "form-control"} %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :motion %>
+       <%= f.select :motion, [["Normal"], ["Loose"], ["Constipated"]], {}, {class: "form-control"} %>
+      </div>
+      <div class="mb-3">
+         <%= f.label :energy_level %>
+       <%= f.select :energy_level, [["Poor"], ["Good"], ["Excellent"]], {}, {class: "form-control"} %>
+      </div>
+      
+      <div class="mb-3">
+        <%= f.label :hereditary_mother, "Hereditary diseases (maternal side)" %>
+        <%= f.text_area :hereditary_mother, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :hereditary_mother, "Hereditary diseases (paternal side)" %>
+        <%= f.text_area :hereditary_father, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :surgeries %>
+        <%= f.text_area :surgeries, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :normal_deliveries %>
+        <%= f.text_field :normal_deliveries, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :caesarian_deliveries %>
+        <%= f.text_field :caesarian_deliveries, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :exercise_routine %>
+        <%= f.text_area :exercise_routine, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :past_ailments %>
+        <%= f.text_area :past_ailments, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :present_complaints %>
+        <%= f.text_area :present_complaints, class: "form-control" %>
+      </div>
+      
+      <%= f.submit 'Submit case sheet', class:"btn btn-primary"%>
+    <% end %>
+  </div>
+  </div>
+</div>
+
+  </section>

@@ -2,8 +2,10 @@
   <%= page_title 'Profile' %>
   <h1 class="text-center mb-3"><%= user_full_name(@user) %></h1>
   <% if @user.admin == true %>
-    <h5 class="text-center mb-5">*ADMIN ACCOUNT*</h5>
+    <h5 class="text-center mb-3">*ADMIN ACCOUNT*</h5>
   <% end %>
+    <h6 class="text-center mb-5">  <%= @user.email %></h6>
+  
   
   <div class="personal-info">
   <% if @profile %>
@@ -36,38 +38,88 @@
 
 
 <div class="registrations">
-  <% if @user.batches.exists? %>
-    <h3>You have registered for the following batches:</h3>
-    <ul>
-      <% @user.batches.each do |batch| %>
-      <div class="cancelBatch">
-        <li><%= "#{formatted_date(batch.start_date)} - #{formatted_date(batch.end_date)}" %></li>
-        <% @registrations = Registration.where(user_id: @user.id, batch_id: batch.id)%>
-        <% @registrations.each do |registration| %>
-          <%= button_to "Cancel", registration_path(registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
-        <% end %>
-      </div>
-      <% end %>
-    </ul>
-  <% else %>
-    <h5 >You have not registered for any batches</h5>
-    <%= link_to "Register", batches_path, class: "btn btn-outline-danger rounded-pill"%>
+<h3>Batch Registrations:</h3>
+<% registrations_found = false %>
+<% @user.batches.uniq { |batch| batch.id }.each do |batch|%>
+  <% latest_non_cancelled_registration = batch.registrations.reject(&:cancelled).sort_by(&:created_at).last %>
+  <% if latest_non_cancelled_registration %>
+    <% registrations_found = true %>
+    <h4>Batch: <%= batch_date_range(latest_non_cancelled_registration.batch) %>:</h4>
+    <%= button_to "Cancel", registration_path(latest_non_cancelled_registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
   <% end %>
+<% end %>
+
+<% unless registrations_found %>
+  <h4>No registrations found.</h4>
+  <%= link_to "Register", batches_path, class: "btn btn-outline-danger rounded-pill" %>
+<% end %>
+
+  
+
+
+
+
+
+
+
+ 
 </div>
 <div class="registrations">
   <% if @user.vishraam_registrations.exists? %>
-    <h3>Your Vishram Registrations are:</h3>
-    <ul>
-      <% @user.vishraam_registrations.each do |vishraam| %>
-      <div class="cancelBatch">
-        <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
+  <h3>Your Vishram Registrations are:</h3>
+  <ul>
+    <% @user.vishraam_registrations.each do |vishraam| %>
+    <div class="cancelBatch">
+      <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
+      <% if vishraam.cancelled %>
+        <span class="badge bg-danger fs-sm">Cancelled</span>
+      <% else %>
         <%= button_to "Cancel", vishraam_registration_path(vishraam), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
-      </div>
       <% end %>
-    </ul>
+    </div>
+    <% end %>
+  </ul>
+<% else %>
+  <h5>You have not registered for Vishraam</h5>
+  <%= link_to "Register", new_vishraam_registration_path, class: "btn btn-outline-danger rounded-pill" %>
+<% end %>
+</div>
+
+<div class="registrations">
+  <% if @user.online_consultations.exists? %>
+    <h3>Confirmed Consultations</h3>
+<% @confirmed_consultations.each do |consultation| %>
+  <div class="cancelBatch">
+    <% if consultation.status == 'unconfirmed' %>
+      <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
+      <span class="badge bg-warning fs-sm">Unconfirmed!</span>
+    <% elsif consultation.completed %>
+          <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
+
+      <span id="confirmed" class="badge bg-success fs-lg">Completed!</span>
+    <% elsif consultation.confirmed == true %>
+      <li><%= link_to "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}", online_consultation_path(consultation), class: "consultation_link" %></li>
+      <span id="confirmed" class="badge bg-success fs-lg">Confirmed!</span>
+      <% if payment_complete?(consultation) %>
+          <span class="badge bg-success fs-lg">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning fs-lg">Payment pending</span>
+        <% end %>
+      <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+    <% end %>
+  </div>
+<% end %>
+
+<h3 class="mt-5">Cancelled Consultations</h3>
+<% @cancelled_consultations.each do |consultation| %>
+  <div class="cancelBatch">
+    <li><%= "#{formatted_date(consultation.date)} from #{consultation.start_time} to #{consultation.end_time}" %></li>
+    <span class="badge bg-danger fs-sm">Cancelled</span>
+  </div>
+<% end %>
   <% else %>
-    <h5 >You have not registered for Vishraam</h5>
-    <%= link_to "Register", new_vishraam_registration_path, class: "btn btn-outline-danger rounded-pill"%>
+    <h5 >No online consultations</h5>
+    <%= link_to "Book", online_consultations_path, class: "btn btn-outline-danger rounded-pill"%>
   <% end %>
 </div>
 

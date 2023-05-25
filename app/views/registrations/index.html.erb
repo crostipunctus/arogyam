@@ -1,38 +1,46 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
   <h1>Batch Registrations</h1>
-  <% if @registrations.exists? %>
-    <table>
-        <thead>
-            <tr>
-                <th>Batch</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Actions</th>
-                <!-- Add other column headers here -->
-            </tr>
-        </thead>
-        <tbody>
-  <% @registrations.each do |registration| %>
-    <tr>
-      <td data-th="Batch Date Range"><%= batch_date_range(registration.batch) %></td>
-      <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
-      <td data-th="Email"><%= registration.user.email %></td>
-      <td data-th="Status" data-controller="status" data-status-id-value="<%= registration.id %>" data-endpoint="<%= registration_path(registration) %>">
-        <span data-status-target="status"><%= registration.status %></span>
-        <%= link_to 'Edit', "#", class: 'btn btn-outline-success btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
-      </td>
-      <!-- Add other columns here -->
-      <td data-th="Actions">
-        <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
-        <span><%= button_to 'Delete', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
+  <% if @batches.exists? %>
+   <% @batches.each do |batch| %>
+  <h4 class="mt-5 mb-2">Batch Dates: <%= batch_date_range(batch) %></h4>
+  <table class="registration-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% batch.registrations.each do |registration| %>
+        <tr>
+          <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
+          <td data-th="Email"><%= registration.user.email %></td>
+            <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">            
+            <span data-status-target="status"><%= registration.status %></span>
+            <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
+            <div data-status-target="editMode" style="display:none;">
+              <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
+                <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
+                <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
+              <% end %>
+              <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
+            </div>
+          </td>
 
-    </table>
+          <td data-th="Actions">
+            <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
+            <% if registration.completed = false %>
+              <span><%= button_to 'Cancel appointment', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
         <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
     <% else %>  
         <h4>No registrations found</h4>
@@ -42,43 +50,113 @@
     <h1 class="vishraam_reg_heading">Vishram Registrations</h1>
     
     <% if @vishraam_registrations.exists? %>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Dates</th>
-                    <th>Duration</th>
-                    <th>Actions</th>
-                    <th>Status</th>
-                    <!-- Add other column headers here -->
-                </tr>
-            </thead>
-            <tbody>
-                <% @vishraam_registrations.each do |registration| %>
-                    <tr>
-                        <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
-                        <td data-th="Email"><%= registration.user.email %></td>
-                        <td data-th="Date"><%= formatted_date(registration.date) %></td>
-                        <td data-th="Duration"><%= registration.duration %></td>
-                        <td data-th="Actions" data-controller="status">
-                            <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
-                            <span><%= button_to 'Delete', vishraam_registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
-                        </td>
-                        <td data-th="Status" data-controller="status" data-status-id-value="<%= registration.id %>" data-endpoint="<%= vishraam_registration_path(registration) %>">
-                            <span data-status-target="status"><%= registration.status %></span>
-                            <%= link_to 'Edit', edit_vishraam_registration_path(registration), class: 'btn btn-outline-danger btn-sm', data: {action: "click->status#toggleEditMode", status_target: "edit"} %>
-                        </td>
-              
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Dates</th>
+            <th>Duration</th>
+            <th>Actions</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @vishraam_registrations.each do |registration| %>
+            <tr>
+              <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+              <td data-th="Email"><%= registration.user.email %></td>
+              <td data-th="Date"><%= formatted_date(registration.date) %></td>
+              <td data-th="Duration"><%= registration.duration %></td>
+              <td data-th="Actions" data-controller="status">
+                <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
+                <span><%= button_to 'Cancel registration', vishraam_registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+              </td>
+              <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= vishraam_registration_path(registration) %>">
+                <span data-status-target="status"><%= registration.status %></span>
+                <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
+
+                <div data-status-target="editMode" style="display:none;">
+                  <%= form_with url: vishraam_registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
+                    <%= f.select :status, [['Cancelled'], ['Registered'], ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
+                    <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
+                  <% end %>
+
+                  <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
         <%= link_to 'Download Vishraam Registrations Excel', export_vishraam_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
     <% else %>
 
         <h4>No registrations found</h4>
     <% end %>
+
+    <h1 class="mt-5 mb-5">Online Consultations</h1>
+  <% if @online_consultations.exists? %>
+    <table>
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Payment Status</th>
+                <th>Actions</th>
+                <!-- Add other column headers here -->
+            </tr>
+        </thead>
+        <tbody>
+  <% @online_consultations.each do |consultation| %>
+    <tr>
+      
+      <td data-th="Full Name"><%= link_to user_full_name(consultation.user), user_profile_path(user_id: consultation.user.id), class: "nav-link" %></td>
+      <td data-th="Email"><%= consultation.user.email %></td>
+        <td data-th="Date"><%= consultation.date %></td>
+        <td data-th="Time"><%= consultation.start_time %></td>
+      <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
+          <%= tag.span class: "badge #{consultation_status_class(consultation)}" do %>
+          <%= consultation.status %>
+        <% end %>      
+      </td>
+      <td data-th="Payment Status">
+        <% if payment_complete?(consultation) %>
+          <span class="badge bg-success fs-lg">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning fs-lg">Payment pending</span>
+        <% end %>
+      <!-- Add other columns here -->
+      <td data-th="Actions">
+        <%= link_to 'View', online_consultation_path(consultation), class: 'btn btn-outline-success btn-sm' %>
+        <span><%= button_to 'Delete', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+        <% if consultation.confirmed == true && consultation.completed == false %>
+        <% end %>
+        <% if payment_complete?(consultation)%>
+            <% if !consultation.completed? %>
+                <%= button_to 'Mark payment pending', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>
+                <%= button_to "Mark completed", online_consultation_path(consultation), method: :patch, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-warning btn-sm'%>
+            <% end %>    
+        <% else %>
+          <%= button_to 'Mark payment complete', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>      
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+
+    </table>
+        <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    <% else %>  
+        <h4>No online consultations</h4>
+    <% end %>
+
+
 </section>
 
 

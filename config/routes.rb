@@ -1,14 +1,29 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+ 
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
   get 'newsletter_subscriptions/create'
   get 'profiles/show'
   resources :team_members 
 
+  patch 'payment_complete/:id' => 'online_consultations#payment_complete', as: :payment_complete
+
+
   get 'contacts/new'
   get 'contacts/create'
 
-  get 'online_consultations' => 'online_consultations#index', as: :online_consultations
+  resources :online_consultations do
+    resource :case_sheet, only: [:show, :new, :create, :edit, :update, :destroy]
+  end
+  
+
+  get 'all_online_consultations' => 'online_consultations#all'
+  resources :booking_dates
   
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
@@ -81,6 +96,8 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'privacy_policy#index', as: :privacy_policy
 
   resources :newsletter_subscriptions, only: [:create]
+
+
 
 
   # config/routes.rb

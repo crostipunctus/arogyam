@@ -1,10 +1,128 @@
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
   <h1 class="cardHeading packages text-center">Online Consultations</h1>
-    <div class="pb-sm-3 pt-4">
-      <p class="fs-lg fw-medium pb-3 mb-3"><strong>Please call +91 8340932384 or email 
-        <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
-        <br>
-        <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes.</p>
+  <% if current_user %>
+    <% @confirmed_online_consultations.each do |consultation| %> 
+      <div class="consultation-card my-3 p-3 bg-light border rounded">
+        <h5 class="mb-2 text-center">
+        <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+        <span class="badge bg-success">Confirmed!</span>
+        <% if payment_complete?(consultation) %>
+          <span class="badge bg-success">Payment complete</span>
+        <% else %>
+          <span class="badge bg-warning">Payment pending</span>
+        <% end %>
+        <span>
+        <span>
+        <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger mt-3" %>
+      </div>
+     <div class="d-flex flex-column align-items-center text-center">
+  <% if !payment_complete?(consultation) %>
+    <strong>Important: </strong> 
+    <span>Please make your payment and send the payment details to</span>
+    <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
+    <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
+    <span class="mt-5"><strong>Account details:</strong> </span>
+    <div>The Satsang Foundation - The Sacred Grove,<br>
+      A/c. No: 7120649312,<br>
+      Current Account,<br>
+      Indian Bank,<br>
+      IFSC : IDIB000C174,<br>
+      Branch: Chowdepalli (00C174)<br>
+      
+      UPI ID: 7120649312@indianbk
     </div>
-  
+  <% end %>
+
+
+    <% end%> 
+    <% @unconfirmed_online_consultations.each do |consultation| %>
+      <div class="consultation-card my-3 p-3 bg-light border rounded text-center d-flex flex-column align-items-center justify-content-center">
+        <h5 class="mb-2">
+          <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+          <span class="badge bg-warning">Unconfirmed!</span>
+        </h5>
+        <% if last_consultation_within_a_month?(current_user)%>
+          <div class="mb-3">
+            <div>Your last completed consultation was less than one month back - if you don't have any new complaints you can proceed with a review consultation which will be charged at Rs. 350 (Indian residents) and Rs. 750 (non-residents).
+              If you have a new complaint please fill a new case sheet. This will be treated as a fresh consultation and will be charged at Rs. 750 (Indian residents) and Rs. 1500 (non-residents).
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mb-3 gap-2">
+            <%= button_to "Proceed with a review consultation", online_consultation_path(consultation), method: :patch, class: "btn btn-outline-success" %>
+            <%= link_to "Fill a new case sheet", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
+            <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger" %>
+          </div>
+        <% else %>
+          <div class="mb-3">
+            Your last consultation was more than a month back or you cancelled a consultation before it was completed. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). Please fill a new case sheet to confirm your consultation.
+          </div>
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <%= link_to "Proceed with new booking", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if !current_user.online_consultations.where(confirmed: true).exists? && !current_user.online_consultations.where(status: "unconfirmed").exists? %>
+      <h3 class="mt-5 mb-2 text-center">BOOK NOW</h3>
+      <%= form_with url: online_consultations_path, method: :post do |form| %>
+        <div class="mt-5 table-responsive">
+          <table class="online-table">
+            <thead>
+              <tr>
+                <% @slots.group_by(&:date).each do |date, slots| %>
+                  <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% @slots.group_by(&:date).each do |date, slots| %>
+                  <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
+                    <ul>
+                      <% slots.each do |slot| %>
+                        <li>
+                          <%= slot.start_time %>
+                          <% if slot.available %>
+                            <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                          <% else %>
+                            <div class="badge bg-danger">Booked</div>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 text-center">
+          <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+        </div>   
+      <% end %> 
+    <% end %>
+  <% else %>
+    <div class="d-flex justify-content-center text-center pb-sm-3 pt-4">
+      <p class="fs-lg fw-medium pb-3 mb-3"><strong>Please call +91 8340932384 or email 
+      <a class=" emailLink  nav-link fs-lg p-0 d-flex justify-content-center" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
+      <br>
+      <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. Review consultation eligibility is determined in the following way: <br> 
+      <br> 1. Within 1 month of the previous completed consultation with same complaint: Rs. 350 for residents of India and Rs. 750 for non-residents for 30 minutes. <br>
+      <br> 2. Within 1 months of the previous completed consultation but with different complaint: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      <br> 3. After 1 month of the previous completed consultation: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      </p>
+    </div>
+    <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
+    <div class="d-flex justify-content-center">
+      <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
+    </div>
+  <% end %>
+
+
+  <% if current_user_admin? %>
+    <div class="calenderDiv mt-5">
+      <h3 class="text-center mb-5 calenderheading">Calender</h3>
+      <%= render 'calender' %>
+    </div>
+  <% end %> 
 </section>

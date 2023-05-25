@@ -5,7 +5,8 @@ class Registration < ApplicationRecord
   attr_accessor :agreement
   attr_accessor :terms
 
-
+  after_create :registered
+  after_create :not_cancelled
   before_destroy :send_cancel_email
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
@@ -15,12 +16,14 @@ class Registration < ApplicationRecord
   
   private 
 
-  def send_cancel_email 
-    registration_data = {
-      batch: self.batch.start_date,
-      email: self.user.email
-    }
-    RegistrationMailer.registration_cancel_email(registration_data).deliver_later
+  
+
+  def registered 
+    self.status = "Registered"
+  end 
+
+  def not_cancelled 
+    self.cancelled = false 
   end 
   
 end

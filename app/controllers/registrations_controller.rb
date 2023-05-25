@@ -1,16 +1,18 @@
 class RegistrationsController < ApplicationController
-  require 'pdfkit'
+ 
   before_action :authenticate_user! 
   before_action :require_admin, only: [:index, :edit, :update ]
+  
   def index 
     @registrations = Registration.all 
     @vishraam_registrations = VishraamRegistration.all
-    
+    @online_consultations = OnlineConsultation.all
+    @batches = Batch.all
   end
 
   def export_batch
-    @registrations = Registration.includes(user: :user_profile).all
-
+    @batches = Batch.includes(registrations: { user: :user_profile }).all
+  
     respond_to do |format|
       format.xlsx { render xlsx: 'registrations', filename: 'registrations.xlsx' }
     end
@@ -29,52 +31,42 @@ class RegistrationsController < ApplicationController
   end
 
   def new 
-    
-    @registration = Registration.new(batch_id: params[:batch_id])
-
+    if current_user.user_profile
+      @registration = Registration.new(batch_id: params[:batch_id])
+    else
+      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+    end
   end 
 
   def create
+  
+    @batch = Batch.find(params[:registration][:batch_id])
     
-    if current_user.user_profile
-      if Registration.exists?(user: current_user, batch_id: params[:batch_id])
-        redirect_to batches_path, alert: "You have already registered for this batch"
+    if Registration.exists?(user: current_user, batch_id: @batch.id, status: "Registered")
+      registration = Registration.find_by(user: current_user, batch_id: @batch.id)
+     
+      redirect_to batches_path, alert: "You have already registered for this batch"
+    else
+      @batch = Batch.find(params[:registration][:batch_id])
+      @package = Package.find(params[:registration][:package_id])
+      @registration = Registration.new(registration_params)
+      @registration.user = current_user
+      @registration.batch = @batch
+      @registration.package = @package
+      if @registration.save
+        RegistrationMailer.registration_email(@registration).deliver_later
+        RegistrationMailer.registration_user_email(@registration).deliver_later
+
+        @registration.update(status: "Registered")
+        redirect_to batches_path, notice: "Registered successfully"
       else
-      
-        @batch = Batch.find(params[:registration][:batch_id])
-      
-        @registration = Registration.new(registration_params)
-        @registration.user = current_user
-        @registration.batch = @batch
-        if @registration.save
-          RegistrationMailer.registration_email(@registration).deliver_later
-          
-          redirect_to batches_path, notice: "Registered successfully"
-        else
-       
-          render :new, status: :unprocessable_entity 
-        end
+        render :new, status: :unprocessable_entity 
       end
-    else  
-      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
-    end 
+    end
+    
   end
   
-  def pdf 
-    @registrations = Registration.all
-
-    html = render_to_string(inline: render_table)
-
-    kit = PDFKit.new(html)
-    file = kit.to_file('registrations_table.pdf')
-
-    send_file(
-      file.path,
-      filename: 'registrations_table.pdf',
-      type: 'application/pdf',
-      disposition: 'attachment'
-    )
-  end
+  
 
   def edit  
 
@@ -82,8 +74,13 @@ class RegistrationsController < ApplicationController
 
   def update 
     @registration = Registration.find(params[:id])
+    @batch = @registration.batch
     respond_to do |format|
       if @registration.update_column(:status, registration_params[:status])
+        puts "Registration status updated to #{registration_params[:status]}"
+        @registration.update_column(:comments, registration_params[:comments])
+        @registration.update(completed: true) if registration_params[:status] == "Completed"
+        
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
@@ -94,41 +91,22 @@ class RegistrationsController < ApplicationController
 
   def destroy 
     @registration = Registration.find(params[:id])
-    @registration.destroy    
+    @batch = @registration.batch
+    RegistrationMailer.registration_cancel_user_email(@registration).deliver_later
+    RegistrationMailer.registration_cancel_email(@registration).deliver_later
+
+    @registration.update(cancelled: true, status: "Cancelled")
     
-    redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
+    redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
   end 
 
   private 
 
   def registration_params
-    params.require(:registration).permit(:batch_id, :package_id, :user_id, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
   end 
 
-  def render_table
-    <<-HTML
-    <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
-    <thead>
-        <tr>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Batch</th>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Name</th>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Email</th>
-            <!-- Add other column headers here -->
-        </tr>
-    </thead>
-    <tbody>
-        <% @registrations.each do |registration| %>
-            <tr style="background-color: <%= cycle('#f0f0f0', '#ffffff') %>;">
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= batch_date_range(registration.batch) %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
-                <!-- Add other columns here -->
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-    HTML
-  end
+ 
 
 
 end

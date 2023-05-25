@@ -7,9 +7,7 @@ module BatchesHelper
     batch == nearest_batch(batches)
   end
 
-  def user_registered_for_batch?(user, batch)
-    user.batches.include?(batch)
-  end
+ 
 
   def batch_date_range(batch)
     formatted_date(batch.start_date) + " - " + formatted_date(batch.end_date)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_055501) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -73,6 +73,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
+  create_table "booking_dates", force: :cascade do |t|
+    t.date "date"
+    t.string "start_time"
+    t.string "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "available"
+    t.string "status"
+  end
+
+  create_table "case_sheets", force: :cascade do |t|
+    t.boolean "vegetarian"
+    t.string "height"
+    t.string "weight"
+    t.string "blood_group"
+    t.string "appetite"
+    t.string "sleep"
+    t.string "motion"
+    t.string "energy_level"
+    t.text "hereditary_mother"
+    t.text "hereditary_father"
+    t.text "surgeries"
+    t.string "normal_deliveries"
+    t.string "caesarian_deliveries"
+    t.text "exercise_routine"
+    t.text "past_ailments"
+    t.text "present_complaints"
+    t.integer "online_consultation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["online_consultation_id"], name: "index_case_sheets_on_online_consultation_id"
+    t.index ["user_id"], name: "index_case_sheets_on_user_id"
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -93,6 +128,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "online_consultations", force: :cascade do |t|
+    t.date "date"
+    t.string "start_time"
+    t.string "end_time"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "duration"
+    t.string "status", default: "unconfirmed"
+    t.boolean "confirmed", default: false
+    t.integer "booking_date_id", null: false
+    t.boolean "cancelled", default: false
+    t.boolean "completed", default: false
+    t.boolean "payment_complete", default: false
+    t.index ["booking_date_id"], name: "index_online_consultations_on_booking_date_id"
+    t.index ["user_id"], name: "index_online_consultations_on_user_id"
+  end
+
   create_table "packages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -104,9 +157,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
   end
 
   create_table "registrations", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
@@ -117,6 +167,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
     t.text "health_conditions"
     t.text "medication"
     t.string "status"
+    t.boolean "completed", default: false
+    t.text "comments"
+    t.boolean "cancelled"
     t.index ["batch_id"], name: "index_registrations_on_batch_id"
     t.index ["package_id"], name: "index_registrations_on_package_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
@@ -171,6 +224,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
     t.string "unconfirmed_email"
     t.string "first_name"
     t.string "last_name"
+    t.boolean "first_time", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -187,12 +241,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_054525) do
     t.text "health_conditions"
     t.text "medication"
     t.string "status"
+    t.text "comments"
+    t.boolean "cancelled", default: false
+    t.boolean "completed", default: false
     t.index ["user_id"], name: "index_vishraam_registrations_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blogs", "users"
+  add_foreign_key "case_sheets", "online_consultations"
+  add_foreign_key "case_sheets", "users"
+  add_foreign_key "online_consultations", "booking_dates"
+  add_foreign_key "online_consultations", "users"
   add_foreign_key "registrations", "batches"
   add_foreign_key "registrations", "packages"
   add_foreign_key "registrations", "users"

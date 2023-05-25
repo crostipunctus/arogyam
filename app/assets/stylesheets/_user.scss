@@ -403,7 +403,7 @@ div.desc {
 
 .bg-success {
   --ar-bg-opacity: 1;
-  background-color: #e78774 !important;
+
 }
 
 .bg-footer {
@@ -557,7 +557,7 @@ p {
   font-family: 'Nanum Myeongjo', serif !important;
   color: $gray-800;
   margin-top: 50px;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 
 
@@ -1510,7 +1510,7 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #d0f6ea;
   font-weight: bold;
 }
 
@@ -1720,7 +1720,7 @@ tbody tr:hover {
   transform: translateX(-50%);
   width: 300px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   color: white;
   font-size: 16px;
   opacity: 0;
@@ -1920,4 +1920,168 @@ tbody tr:hover {
 
 #registrationButton {
   margin-top: 20px;
+}
+
+#confirmed {
+  background-color: #36af21 !important;
+  color: white !important;
+}
+
+.online-consultation-card {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.online-consultation-card h4 {
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.online-consultation-container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.consultation_link {
+  color: #007bff;
+}
+
+.registration-table {
+  margin-bottom: 20px;
+}
+
+.custom-gradient-bg {
+  background-image: linear-gradient(135deg, #5f72bd, #9b23ea);
+}
+
+.registration-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+  color: #5f72bd;
+  font-weight: bold;
+}
+
+h2 {
+  color: #9b23ea;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.btn-outline-custom {
+  border-color: #9b23ea;
+  color: #9b23ea;
+}
+
+.btn-outline-custom:hover {
+  background-color: #9b23ea !important;
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .online-table th {
+    display: none;
+  }
+
+  .online-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: inline-block;
+    width: 6.5em;
+    white-space: pre;
+  }
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  border-radius: 20px !important;
+
+}
+
+.calendar-table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  vertical-align: top;
+  background-color: #7ca7e6;
+}
+
+.calendar-date {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.calendar-slot {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.calendar-unavailable {
+  color: rgb(255, 25, 0);
+}
+
+.calendar-current-date {
+  background-color: #ebda1e !important;
+  color: black;
+}
+
+.calenderDiv {
+  border-radius: 20px;
+  padding: 20px;
+  background: linear-gradient(to bottom right, rgb(111, 111, 247), rgb(163, 46, 163));
+}
+
+.calenderheading {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px !important;
+}
+
+.important {
+  font-weight: bold;
+  color: red;
+}
+
+.welcome-email-title {
+  color: #000;
+  font-size: 24px;
+}
+
+.welcome-email-text,
+.welcome-email-link {
+  color: #333;
+  font-size: 16px;
+}
+
+.welcome-email-image {
+  border-radius: 5px;
+}
+
+.confirmation-email {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #ff0000;
+  /* Change this color as needed */
+}
+
+.sunday {
+  font-size: large;
+  color: #ff0000;
+  /* Change this color as needed */
 }

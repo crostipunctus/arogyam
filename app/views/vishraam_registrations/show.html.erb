@@ -1,29 +1,34 @@
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <h1 class="text-center mb-3">Registration no: <%= @vishraam_registration.id %> </h1>
-  <ul>
-    <li>Registered on: <%= formatted_created_at_date(@vishraam_registration.created_at.to_s) %> </li>
-    <li>Full name: <%= link_to user_full_name(@vishraam_registration.user), user_profile_path(user_id: @vishraam_registration.user.id) %></li>
-    <li>Selected date: <%= formatted_date_with_year(@vishraam_registration.date.to_s) %></li>
-    <li>Selected duration: <%= "#{@vishraam_registration.duration} days" %></li>
-    <li>Email: <%= @vishraam_registration.user.email %></li>
-    <li>Gender: <%= @vishraam_registration.user.user_profile.gender %></li>
-    <li>Date of Birth: <%= formatted_date_of_birth(@vishraam_registration.user.user_profile.date_of_birth.to_s) %></li>
-    <li>Phone: <%= @vishraam_registration.user.user_profile.phone_number %></li>
-    <li>Address: <%= @vishraam_registration.user.user_profile.address %></li>
-    <li>City: <%= @vishraam_registration.user.user_profile.city %></li>
-    <li>Country: <%= @vishraam_registration.user.user_profile.country %></li>
-    <li>Zip/Postal code: <%= @vishraam_registration.user.user_profile.zip %></li>
-    <li>Occupation: <%= @vishraam_registration.user.user_profile.occupation %></li>
-    <li>Marital Status: <%= @vishraam_registration.user.user_profile.marital_status %></li>
-    <li>Status: <%= @vishraam_registration.status %></li>
-    <li>Lifestyle: <%= @vishraam_registration.lifestyle %></li>
-    <li>Health Conditions: <%= @vishraam_registration.health_conditions %></li>
-    <li>Substances: <%= @vishraam_registration.substances %></li>
-    <li>Medication: <%= @vishraam_registration.medication %></li>
-    <%= link_to 'Back', registrations_path, class: "btn btn-outline-success", id: "registrationButton" %>
-
-
-    
-  </ul>
-
-</section>
+<div class="custom-gradient-bg">
+  <section class="container py-5 mt-5">
+    <div class="registration-container">
+      <h1 class="text-center mb-3">Vishram Registration no: <%= @vishraam_registration.id %> </h1>
+      <h2>Basic Information</h2>
+      <ul>
+        <li>Registered on: <%= formatted_created_at_date(@vishraam_registration.created_at.to_s) %> </li>
+        <li>Full name: <%= link_to user_full_name(@vishraam_registration.user), user_profile_path(user_id: @vishraam_registration.user.id) %></li>
+        <li>Selected date: <%= formatted_date_with_year(@vishraam_registration.date.to_s) %></li>
+        <li>Selected duration: <%= "#{@vishraam_registration.duration} days" %></li>
+        <li>Email: <%= @vishraam_registration.user.email %></li>
+        <li>Gender: <%= @vishraam_registration.user.user_profile.gender %></li>
+        <li>Date of Birth: <%= formatted_date_of_birth(@vishraam_registration.user.user_profile.date_of_birth.to_s) %></li>
+        <li>Phone: <%= @vishraam_registration.user.user_profile.phone_number %></li>
+        <li>Address: <%= @vishraam_registration.user.user_profile.address %></li>
+        <li>City: <%= @vishraam_registration.user.user_profile.city %></li>
+        <li>Country: <%= @vishraam_registration.user.user_profile.country %></li>
+        <li>Zip/Postal code: <%= @vishraam_registration.user.user_profile.zip %></li>
+        <li>Occupation: <%= @vishraam_registration.user.user_profile.occupation %></li>
+        <li>Marital Status: <%= @vishraam_registration.user.user_profile.marital_status %></li>
+        <li>Status: <%= @vishraam_registration.status %></li>
+      </ul>
+      
+      <h2>Health Information</h2>
+      <ul>
+        <li>Lifestyle: <%= @vishraam_registration.lifestyle %></li>
+        <li>Health Conditions: <%= @vishraam_registration.health_conditions %></li>
+        <li>Substances: <%= @vishraam_registration.substances %></li>
+        <li>Medication: <%= @vishraam_registration.medication %></li>
+        <%= link_to 'Back', registrations_path, class: "btn btn-outline-success", id: "registrationButton" %>
+      </ul>
+    </div>    
+  </section>
+</div>

@@ -35,6 +35,7 @@ gem "redis", "~> 4.0"
 
 gem 'swiper-rails'
 
+gem "simple_calendar", "~> 2.4"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -73,11 +74,13 @@ gem 'gibbon'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-gem 'mailcatcher'
 
-gem 'kaminari'
 
-gem 'pdfkit'
+gem 'sidekiq'
+
+
+
+
 
 gem 'sendgrid-ruby'
 
@@ -99,6 +102,13 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'capistrano', '~> 3.17'
+  gem 'capistrano-rails', '~> 1.6', '>= 1.6.2'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'ed25519', '~> 1.3'
+  gem 'bcrypt_pbkdf', '~> 1.1'
+ 
  
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -112,16 +122,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'byebug'
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
 
 
 
- gem 'capistrano', '~> 3.17'
-  gem 'capistrano-rails', '~> 1.6', '>= 1.6.2'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rbenv', '~> 2.2'
-  gem 'ed25519', '~> 1.3'
-  gem 'bcrypt_pbkdf', '~> 1.1'
+
 

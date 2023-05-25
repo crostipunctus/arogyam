@@ -1,0 +1,46 @@
+<table class="calendar-table">
+  <% @calendar_start.upto(@calendar_end) do |date| %>
+    <% date_booking_dates = @booking_dates.select { |bd| bd.date == date } %>
+
+    
+      <% if date.wday == 1 %>
+        <tr>
+      <% end %>
+      
+      <td class="<%= 'calendar-current-date' if date == Date.today %>">
+        <div class="calendar-date"><%= formatted_date(date) %></div>
+        <% if date.wday == 0 %>
+          <span class="sunday"><%= date.strftime('%A') %></span>
+        <% end %>
+        <ul>
+          <% date_booking_dates.each do |booking_date| %>
+          <li class="<%= 'strikethrough' if booking_date.status == 'BLOCKED' %>">
+            <span class="calendar-slot">
+              <%= booking_date.start_time %> - <%= booking_date.end_time %>
+              <% if booking_date.available == false %>
+                <% online_consultation = find_online_consultation(booking_date) %>
+                <% if online_consultation && online_consultation.status == 'unconfirmed' %>
+                  <div class="badge bg-warning">Unconfirmed!</div>
+                <% elsif online_consultation && online_consultation.confirmed == true %>
+                  <div class="badge bg-success">Confirmed!</div>
+                  <% if online_consultation.payment_complete? %>
+                    <div class="badge bg-success">Payment Complete!</div>
+                  <% else %>
+                    <div class="badge bg-warning">Payment Pending!</div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= button_to "Block", booking_date_path(booking_date), method: :patch, class: "badge bg-danger" %>
+              <% end %>
+            </span>
+          </li>
+        <% end %>
+        </ul>
+      </td>
+
+      <% if date.wday == 0 %>
+        </tr>
+      <% end %>
+    
+  <% end %>
+</table>

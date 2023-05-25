@@ -19,10 +19,10 @@ class VishraamRegistrationsController < ApplicationController
     if current_user.user_profile
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       @vishraam_registration.user_id = current_user.id
-     
+      
         if @vishraam_registration.save
           VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
-
+          @vishraam_registration.update(status: "Registered")
           redirect_to packages_path, notice: "Vishram registration successful"
         else
           flash[:error] = "Vishram registration failed"
@@ -42,6 +42,8 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registration = VishraamRegistration.find(params[:id])
     respond_to do |format|
       if @vishraam_registration.update_column(:status, vishraam_registration_params[:status])
+        @vishraam_registration.update_column(:comments, vishraam_registration_params[:comments])
+        @vishraam_registration.update(completed: true) if vishraam_registration_params[:status] == "Completed"
         format.json { render json: { status: :ok, message: "Vishraam registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@vishraam_registration.errors.full_messages}"
@@ -52,60 +54,21 @@ class VishraamRegistrationsController < ApplicationController
   
   def destroy 
     @vishraam_registration = VishraamRegistration.find(params[:id])
-    @vishraam_registration.destroy
+    if @vishraam_registration.update(status: "Cancelled")
+      @vishraam_registration.update(cancelled: true)
+    end
 
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
   end
 
-  def pdf 
-    @vishraam_registrations = VishraamRegistration.all
-
-    html = render_to_string(inline: render_table)
-
-    kit = PDFKit.new(html)
-    file = kit.to_file('vishram_registrations_table.pdf')
-
-    send_file(
-      file.path,
-      filename: 'vishram_registrations_table.pdf',
-      type: 'application/pdf',
-      disposition: 'attachment'
-    )
-  end
+  
 
   private 
 
   def vishraam_registration_params 
-    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status)
+    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
   end 
 
-  def render_table
-    <<-HTML
-    <h1>Vishram Registrations</h1>
-    <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
-    <thead>
-        <tr>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Name</th>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Date</th>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Duration</th>
-            <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Email</th>
-            <!-- Add other column headers here -->
-        </tr>
-    </thead>
-    <tbody>
-        <% @vishraam_registrations.each do |registration| %>
-            <tr style="background-color: <%= cycle('#f0f0f0', '#ffffff') %>;">
-            <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.date %></td>
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.duration %></td>
-
-                <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
-                <!-- Add other columns here -->
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-    HTML
-  end
+  
 
 end

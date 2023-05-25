@@ -1,0 +1,18 @@
+    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
+    <h1 class="welcome-email-title">
+       <%= @registration.user.first_name %>, you registered for a batch!
+    </h1>
+    <p class="welcome-email-text">
+      Your batch is from <%= @registration.batch.start_date %> to <%= @registration.batch.end_date %> Please visit
+      <a href="https://www.arogyam.life" class="welcome-email-link">
+        arogyam.life to cancel your registration or edit your user profile. 
+      </a>
+      . Please feel free to contact us at
+      <a
+        href="mailto:wellnesscenter@satsang-foundation.org"
+        class="welcome-email-link"
+      >
+        wellnesscenter@satsang-foundation.org
+      </a>
+      if you have any doubts or questions.
+    </p>

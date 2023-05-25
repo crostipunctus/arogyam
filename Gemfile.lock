@@ -99,6 +99,7 @@ GEM
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     builder (3.2.4)
+    byebug (11.1.3)
     capistrano (3.17.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -133,10 +134,10 @@ GEM
       caxlsx (>= 3.0)
     childprocess (4.1.0)
     concurrent-ruby (1.1.10)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
       railties (>= 6.0.0)
-    daemons (1.4.1)
     debug (1.6.2)
       irb (>= 1.3.6)
       reline (>= 0.3.1)
@@ -153,7 +154,6 @@ GEM
       railties (>= 3.2)
     ed25519 (1.3.0)
     erubi (1.11.0)
-    eventmachine (1.2.7)
     fancybox-rails (0.3.1)
       railties (>= 3.1.0)
     faraday (2.7.4)
@@ -166,10 +166,6 @@ GEM
       multi_json (>= 1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    haml (6.1.1)
-      temple (>= 0.8.2)
-      thor
-      tilt
     htmlentities (4.3.4)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -189,7 +185,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
-    json (2.6.3)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -210,16 +205,6 @@ GEM
     mail_form (1.10.0)
       actionmailer (>= 5.2)
       activemodel (>= 5.2)
-    mailcatcher (0.2.4)
-      eventmachine
-      haml
-      i18n
-      json
-      mail
-      sinatra
-      skinny (>= 0.1.2)
-      sqlite3-ruby
-      thin
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -228,8 +213,6 @@ GEM
     minitest (5.16.3)
     msgpack (1.5.6)
     multi_json (1.15.0)
-    mustermann (3.0.0)
-      ruby2_keywords (~> 0.0.1)
     nested_form (0.3.2)
     net-imap (0.2.3)
       digest
@@ -254,15 +237,12 @@ GEM
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pdfkit (0.8.7.2)
     pg (1.4.3)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
-    rack-protection (3.0.5)
-      rack
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.4)
@@ -300,6 +280,8 @@ GEM
     rake (13.0.6)
     recaptcha (5.14.0)
     redis (4.8.0)
+    redis-client (0.14.1)
+      connection_pool
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -327,14 +309,13 @@ GEM
       websocket (~> 1.0)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sinatra (3.0.5)
-      mustermann (~> 3.0)
-      rack (~> 2.2, >= 2.2.4)
-      rack-protection (= 3.0.5)
-      tilt (~> 2.0)
-    skinny (0.2.2)
-      eventmachine (~> 1.0)
-      thin
+    sidekiq (7.1.1)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
+    simple_calendar (2.4.3)
+      rails (>= 3.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -344,8 +325,6 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.5.0-x86_64-darwin)
     sqlite3 (1.5.0-x86_64-linux)
-    sqlite3-ruby (1.3.3)
-      sqlite3 (>= 1.3.3)
     sshkit (1.21.3)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -354,11 +333,6 @@ GEM
     strscan (3.0.1)
     swiper-rails (1.0.4)
       rails (>= 3.1)
-    temple (0.10.0)
-    thin (1.8.1)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.0)
@@ -396,6 +370,7 @@ DEPENDENCIES
   bcrypt_pbkdf (~> 1.1)
   bootsnap
   bootstrap_form (~> 5.1)
+  byebug
   capistrano (~> 3.17)
   capistrano-passenger
   capistrano-rails (~> 1.6, >= 1.6.2)
@@ -414,10 +389,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jsbundling-rails
-  kaminari
   mail_form
-  mailcatcher
-  pdfkit
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)
@@ -428,6 +400,8 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   sendgrid-ruby
+  sidekiq
+  simple_calendar (~> 2.4)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
