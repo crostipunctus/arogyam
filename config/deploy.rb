@@ -11,9 +11,6 @@ set :passenger_environment_variables, {
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
-set :user, 'deploy'
-set :group, 'www-data'
-
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # Only keep the last 5 releases to save disk space
@@ -24,6 +21,9 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 
+set :sidekiq_options, "-C config/sidekiq.yml"
+
+set :rails_env, 'production'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -53,13 +53,3 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # set :ssh_options, verify_host_key: :secure
 
 set :passenger_restart_with_touch, true
-
-# config/deploy.rb
-
-# Set Sidekiq options for Capistrano
-set :sidekiq_config, -> { File.join(shared_path, 'config', 'sidekiq.yml') }
-set :sidekiq_pid, -> { File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid') }
-set :sidekiq_env, fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
-set :sidekiq_log, -> { File.join(shared_path, 'log', 'sidekiq.log') }
-set :sidekiq_role, :app
-set :pty, true
