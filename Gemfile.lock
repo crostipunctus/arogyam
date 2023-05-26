@@ -134,7 +134,6 @@ GEM
       caxlsx (>= 3.0)
     childprocess (4.1.0)
     concurrent-ruby (1.1.10)
-    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
       railties (>= 6.0.0)
@@ -280,8 +279,6 @@ GEM
     rake (13.0.6)
     recaptcha (5.14.0)
     redis (4.8.0)
-    redis-client (0.14.1)
-      connection_pool
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -309,11 +306,6 @@ GEM
       websocket (~> 1.0)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sidekiq (7.1.1)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
     simple_calendar (2.4.3)
       rails (>= 3.0)
     sprockets (4.1.1)
@@ -400,7 +392,6 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   sendgrid-ruby
-  sidekiq
   simple_calendar (~> 2.4)
   sprockets-rails
   sqlite3 (~> 1.4)
