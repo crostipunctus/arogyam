@@ -21,16 +21,14 @@ class BookingDate < ApplicationRecord
       end
     end
 
-    AddDayWorker.perform_in(24.hours) unless already_queued? 
+    AddDayWorker.perform_async unless already_queued? 
    end
   
  
   
 
   def self.generate_day_slots(date)
-    if date.sunday?
-      return
-    end
+    return if date.sunday?  
   
     slot_times = [["14:00", "14:30"], ["15:00", "15:30"]] # 2 PM to 2:30 PM and 3 PM to 3:30 PM
   
