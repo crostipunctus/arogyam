@@ -44,7 +44,7 @@ require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
-require 'capistrano/sidekiq'
+# require 'capistrano/sidekiq'
 # install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
 # Then select your service manager
 # install_plugin Capistrano::Sidekiq::Systemd
