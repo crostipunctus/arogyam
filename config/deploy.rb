@@ -21,7 +21,12 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 
-set :sidekiq_options, "-C config/sidekiq.yml"
+set :sidekiq_roles, :worker
+set :sidekiq_default_hooks, true
+set :sidekiq_env, fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
+
+# for a single config
+set :sidekiq_config_files, ['config/sidekiq.yml']
 
 
 
