@@ -14,7 +14,7 @@ class BookingDate < ApplicationRecord
       slot_times.each do |slot|
         BookingDate.create!(
           date: date,
-          start_time: slot[0],
+          start_time: slot[0], 
           end_time: slot[1],
           available: true
         )

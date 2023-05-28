@@ -6,6 +6,6 @@ class AddDayWorker
     BookingDate.generate_day_slots(Date.current + 30.days)
 
     # Schedule this worker to run again in 24 hours
-    AddDayWorker.perform_in(24.hours) unless BookingDate.already_queued?
+    AddDayWorker.perform_in(1.minute) unless BookingDate.already_queued?
   end
 end
