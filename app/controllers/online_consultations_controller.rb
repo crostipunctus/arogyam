@@ -67,8 +67,14 @@ class OnlineConsultationsController < ApplicationController
 
     @online_consultation.update(start_time: start_time, end_time: end_time, date: date, booking_date_id: @booking.id)
     @old_booking_date.update(available: true)
-    @booking.update(available: false)
-    redirect_to online_consultations_path, notice: "Consultation rescheduled succesfully"
+    if @booking.update(available: false)
+      OnlineConsultationMailer.online_consultation_reschedule_email(@online_consultation).deliver_later
+      OnlineConsultationMailer.online_consultation_reschedule_user_email(@online_consultation).deliver_later
+
+      redirect_to online_consultations_path, notice: "Consultation rescheduled succesfully"
+    else
+      redirect_to online_consultations_path, notice: "Something went wrong", status: :unprocessable_entity
+    end
   end 
 
   def update 

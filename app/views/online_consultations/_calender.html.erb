@@ -11,30 +11,29 @@
         <% end %>
         <ul>
           <% date_booking_dates.each do |booking_date| %>
-          <li class="<%= 'strikethrough' if booking_date.status == 'BLOCKED' %>"> 
-            <span class="calendar-slot">
-              <% if booking_date.available == false && booking_date.status != "BLOCKED"%>
-                
-                <% online_consultation = find_online_consultation(booking_date) %>
-                <%= link_to "#{booking_date.start_time} - #{booking_date.end_time}", online_consultation_path(online_consultation) %>
-                <%= link_to "Reschedule", edit_online_consultation_path(online_consultation), class: "badge bg-danger" %>
-                <% if online_consultation && online_consultation.status == 'unconfirmed' %>
-                  <div class="badge bg-warning">Unconfirmed!</div>
-                <% elsif online_consultation && online_consultation.confirmed == true %>
-                  <div class="badge bg-success">Confirmed!</div>
-                  <% if online_consultation.payment_complete? %>
-                    <div class="badge bg-success">Payment Complete!</div>
-                  <% else %>
-                    <div class="badge bg-warning">Payment Pending!</div>
-                  <% end %>
-                <% end %>
-              <% else %>
+            <li class="<%= 'strikethrough' if booking_date.status == 'BLOCKED' %>"> 
+              <span class="calendar-slot">
                 <%= booking_date.start_time %> - <%= booking_date.end_time %>
-                <%= button_to "Block", booking_date_path(booking_date), method: :patch, class: "badge bg-danger" %>
-              <% end %>
-            </span>
-          </li>
-        <% end %>
+                <% if booking_date.available == false && booking_date.status != "BLOCKED" %>
+                  <% online_consultation = find_online_consultation(booking_date) %>
+                  <%= link_to "Reschedule", edit_online_consultation_path(online_consultation), class: "badge bg-danger" %>
+                  <% if  online_consultation.status == 'unconfirmed' %>
+                    <div class="badge bg-warning">Unconfirmed!</div>
+                  <% elsif online_consultation.confirmed? %>
+                    <div class="badge bg-success">Confirmed!</div>
+                    <% if online_consultation.payment_complete? %>
+                      <div class="badge bg-success">Payment Complete!</div>
+                    <% else %>
+                      <div class="badge bg-warning">Payment Pending!</div>
+                    <% end %>
+                  <% end %>
+                <% elsif booking_date.status != 'BLOCKED' %>
+                  <%= button_to "Block", booking_date_path(booking_date), method: :patch, class: "badge bg-danger" %>
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+
         </ul>
       </td>
       <% if date.wday == 0 %>
