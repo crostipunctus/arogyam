@@ -5,26 +5,17 @@ class OnlineConsultationsController < ApplicationController
   
   def index 
     start_date = params.fetch(:start_date, Date.today.strftime("%Y-%m-%d")).to_date rescue Date.today
-
     @calendar_start = start_date
     @calendar_end = start_date + 30.days
-
     @booking_dates = BookingDate.where(date: @calendar_start..@calendar_end)
-
-
     if current_user 
       @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
       @unconfirmed_online_consultations = current_user.online_consultations.where(status: "unconfirmed", completed: false, cancelled: false)
       @cancelled_online_consultations = current_user.online_consultations.where(cancelled: true)
       @slots = BookingDate.where(date: start_date..(start_date + 1.month))
-      
     else  
       @slots = BookingDate.where(date: start_date..(start_date + 1.month)) 
-        
-        
-      
     end 
-  
   end 
 
 
@@ -60,6 +51,26 @@ class OnlineConsultationsController < ApplicationController
     end
   end 
 
+  def edit 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @slots = BookingDate.where(available: true)
+  end 
+
+  def reschedule 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @old_booking_date = @online_consultation.booking_date
+    booking_id = params[:booking_id]
+    @booking = BookingDate.find(booking_id)
+    start_time = @booking.start_time
+    end_time = @booking.end_time
+    date = @booking.date
+
+    @online_consultation.update(start_time: start_time, end_time: end_time, date: date, booking_date_id: @booking.id)
+    @old_booking_date.update(available: true)
+    @booking.update(available: false)
+    redirect_to online_consultations_path, notice: "Consultation rescheduled succesfully"
+  end 
+
   def update 
     @online_consultation = OnlineConsultation.find(params[:id])
     if @online_consultation.confirmed == true 
@@ -77,6 +88,8 @@ class OnlineConsultationsController < ApplicationController
 
     # ADD OnlineConsultationMailer.online_consultation_completed_email(@online_consultation).deliver_later
   end 
+
+
 
   def payment_complete 
     @online_consultation = OnlineConsultation.find(params[:id])
@@ -103,18 +116,24 @@ class OnlineConsultationsController < ApplicationController
   end
 
   private  
+
+  def online_consultation_params 
+    params.require(:online_consultation).permit(:start_time, :end_time, :date, :user_id, :booking_date_id, :status, :confirmed, :completed, :cancelled, :payment_complete)
+  end 
   
 
   def set_online_consultation
     @online_consultation = OnlineConsultation.find(params[:id])
   end
 
-  def verify_user 
-    
-    if @online_consultation.user != current_user
+  def verify_user
+    if current_user.admin?
+      true
+    elsif @online_consultation.user != current_user
       redirect_to root_path, alert: "You are not authorized to access this page."
     else  
       true 
     end
   end
+  
 end 

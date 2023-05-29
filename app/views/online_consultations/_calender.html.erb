@@ -1,12 +1,9 @@
 <table class="calendar-table">
   <% @calendar_start.upto(@calendar_end) do |date| %>
     <% date_booking_dates = @booking_dates.select { |bd| bd.date == date } %>
-
-    
       <% if date.wday == 1 %>
         <tr>
       <% end %>
-      
       <td class="<%= 'calendar-current-date' if date == Date.today %>">
         <div class="calendar-date"><%= formatted_date(date) %></div>
         <% if date.wday == 0 %>
@@ -14,11 +11,13 @@
         <% end %>
         <ul>
           <% date_booking_dates.each do |booking_date| %>
-          <li class="<%= 'strikethrough' if booking_date.status == 'BLOCKED' %>">
+          <li class="<%= 'strikethrough' if booking_date.status == 'BLOCKED' %>"> 
             <span class="calendar-slot">
-              <%= booking_date.start_time %> - <%= booking_date.end_time %>
-              <% if booking_date.available == false %>
+              <% if booking_date.available == false && booking_date.status != "BLOCKED"%>
+                
                 <% online_consultation = find_online_consultation(booking_date) %>
+                <%= link_to "#{booking_date.start_time} - #{booking_date.end_time}", online_consultation_path(online_consultation) %>
+                <%= link_to "Reschedule", edit_online_consultation_path(online_consultation), class: "badge bg-danger" %>
                 <% if online_consultation && online_consultation.status == 'unconfirmed' %>
                   <div class="badge bg-warning">Unconfirmed!</div>
                 <% elsif online_consultation && online_consultation.confirmed == true %>
@@ -30,6 +29,7 @@
                   <% end %>
                 <% end %>
               <% else %>
+                <%= booking_date.start_time %> - <%= booking_date.end_time %>
                 <%= button_to "Block", booking_date_path(booking_date), method: :patch, class: "badge bg-danger" %>
               <% end %>
             </span>
@@ -37,10 +37,8 @@
         <% end %>
         </ul>
       </td>
-
       <% if date.wday == 0 %>
         </tr>
       <% end %>
-    
   <% end %>
 </table>
