@@ -1,0 +1,49 @@
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="h2 text-center mb-4">Reschedule Online Consultation</h2>
+      <h4>You are rescheduling the following consultation: </h4>
+      <div><%= user_full_name(@online_consultation.user) %>
+        <br><%= formatted_date(@online_consultation.date)%>
+        <br><%= @online_consultation.start_time %> - <%= @online_consultation.end_time %>
+    </div>
+  </div>
+  
+  <%= form_with url: reschedule_online_consultation_path, method: :post do |form| %>
+        <div class="mt-5 table-responsive">
+          <table class="online-table">
+            <thead>
+              <tr>
+                <% @slots.group_by(&:date).each do |date, slots| %>
+                  <th><%= date.strftime('%A') %><br><%= formatted_date(date) %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% @slots.group_by(&:date).each do |date, slots| %>
+                  <td data-label="<%= date.strftime('%A') %> <%= formatted_date(date) %>">
+                    <ul>
+                      <% slots.each do |slot| %>
+                        <li>
+                          <%= slot.start_time %>
+                          <% if slot.available %>
+                            <%= form.radio_button :booking_id, slot.id, id: "booking_id_#{slot.id}" %>
+                          <% else %>
+                            <div class="badge bg-danger">Booked</div>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 text-center">
+          <%= form.submit "Confirm", class: "btn btn-outline-success" %>
+        </div>   
+      <% end %> 
+</section>
