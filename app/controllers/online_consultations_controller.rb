@@ -4,6 +4,22 @@ class OnlineConsultationsController < ApplicationController
   before_action :verify_user, only: [:show]
   
   def index 
+    case params[:filter]
+    when 'all'
+      @online_consultations = OnlineConsultation.all
+    when 'confirmed'
+      @online_consultations = OnlineConsultation.where(confirmed: true, completed: false)
+    when 'unconfirmed'
+      @online_consultations = OnlineConsultation.where(status: 'unconfirmed')
+    when 'completed'
+      @online_consultations = OnlineConsultation.where(completed: true)
+    when 'payment_complete'
+      @online_consultations = OnlineConsultation.where(payment_complete: true)
+    when 'cancelled'
+      @online_consultations = OnlineConsultation.where(cancelled: true)
+    else
+      @online_consultations = OnlineConsultation.all
+    end
     start_date = params.fetch(:start_date, Date.today.strftime("%Y-%m-%d")).to_date rescue Date.today
     @calendar_start = start_date
     @calendar_end = start_date + 30.days

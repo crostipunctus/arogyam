@@ -16,22 +16,22 @@
         <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger mt-3" %>
       </div>
      <div class="d-flex flex-column align-items-center text-center">
-  <% if !payment_complete?(consultation) %>
-    <strong>Important: </strong> 
-    <span>Please make your payment and send the payment details to</span>
-    <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
-    <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
-    <span class="mt-5"><strong>Account details:</strong> </span>
-    <div>The Satsang Foundation - The Sacred Grove,<br>
-      A/c. No: 7120649312,<br>
-      Current Account,<br>
-      Indian Bank,<br>
-      IFSC : IDIB000C174,<br>
-      Branch: Chowdepalli (00C174)<br>
-      
-      UPI ID: 7120649312@indianbk
-    </div>
-  <% end %>
+    <% if !payment_complete?(consultation) %>
+      <strong>Important: </strong> 
+      <span>Please make your payment and send the payment details to</span>
+      <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
+      <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
+      <span class="mt-5"><strong>Account details:</strong> </span>
+      <div>The Satsang Foundation - The Sacred Grove,<br>
+        A/c. No: 7120649312,<br>
+        Current Account,<br>
+        Indian Bank,<br>
+        IFSC : IDIB000C174,<br>
+        Branch: Chowdepalli (00C174)<br>
+        
+        UPI ID: 7120649312@indianbk
+      </div>
+    <% end %>
 
 
     <% end%> 
@@ -55,7 +55,7 @@
         <% else %>
           <div class="mb-3">
             Your last consultation was more than a month back or you cancelled a consultation before it was completed. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). Please fill a new case sheet to confirm your consultation.
-          </div>
+          </div> 
           <div class="d-flex justify-content-center align-items-center mb-3">
             <%= link_to "Proceed with new booking", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
           </div>
@@ -118,11 +118,79 @@
     </div>
   <% end %>
 
-
   <% if current_user_admin? %>
-    <div class="calenderDiv mt-5">
-      <h3 class="text-center mb-5 calenderheading">Calender</h3>
-      <%= render 'calender' %>
-    </div>
-  <% end %> 
+    <h1 class="mt-5 mb-5">All Online Consultations</h1>
+      <div class="form-group">
+        <%= form_with url: online_consultations_path, method: :get, local: true do |form| %>
+          <%= form.select :filter, [['All Consultations', 'all'], ['Confirmed Consultations', 'confirmed'], ['Unconfirmed Consultations', 'unconfirmed'], ['Completed Consultations', 'completed'], ['Payment Complete Consultations', 'payment_complete'], ['Cancelled Consultations', 'cancelled']], class: "form-control" %>
+          <%= form.submit "Filter" %>
+        <% end %>
+      </div>
+    
+      <table>
+          <thead>
+              <tr>
+                  
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Payment Status</th>
+                  <th>Actions</th>
+                  <!-- Add other column headers here -->
+              </tr>
+          </thead>
+          <tbody>
+          <% if @online_consultations.any? %>
+            <% @online_consultations.each do |consultation| %>
+              <tr>
+                <td data-th="Full Name"><%= link_to user_full_name(consultation.user), user_profile_path(user_id: consultation.user.id), class: "nav-link" %></td>
+                <td data-th="Email"><%= consultation.user.email %></td>
+                  <td data-th="Date"><%= consultation.date %></td>
+                  <td data-th="Time"><%= consultation.start_time %></td>
+                <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
+                    <%= tag.span class: "badge #{consultation_status_class(consultation)}" do %>
+                    <%= consultation.status %>
+                  <% end %>      
+                </td>
+                <td data-th="Payment Status">
+                  <% if payment_complete?(consultation) %>
+                    <span class="badge bg-success fs-lg">Payment complete</span>
+                  <% else %>
+                    <span class="badge bg-warning fs-lg">Payment pending</span>
+                  <% end %>
+                <!-- Add other columns here -->
+                <td data-th="Actions">
+                  <%= link_to 'View', online_consultation_path(consultation), class: 'btn btn-outline-success btn-sm' %>
+                  <span><%= button_to 'Delete', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+                  <% if consultation.confirmed == true && consultation.completed == false %>
+                  
+                    <% if payment_complete?(consultation)%>
+                        <% if !consultation.completed? %>
+                            <%= button_to 'Mark payment pending', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>
+                            <%= button_to "Mark completed", online_consultation_path(consultation), method: :patch, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-warning btn-sm'%>
+                        <% end %>    
+                    <% else %>
+                      <%= button_to 'Mark payment complete', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>      
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="7" class="text-center">No consultations to display</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+          <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+    
+      <div class="calenderDiv mt-5">
+        <h3 class="text-center mb-5 calenderheading">Calender</h3>
+        <%= render 'calender' %>
+      </div>
+  <% end %>
+
 </section>
