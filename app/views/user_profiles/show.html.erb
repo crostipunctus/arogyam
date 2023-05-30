@@ -130,7 +130,7 @@
 
 <% if current_user_admin? %>
 <h3>Other users</h3>
-  <% User.all.each do |user|%>
+  <% @users.each do |user|%>
   <% if user != current_user %>
     <li><%= link_to user_full_name(user), user_profile_path(user_id: user.id) %></li>
   <% end %>

@@ -4,6 +4,7 @@ class UserProfilesController < ApplicationController
   before_action :set_user
 
   def show
+    @users = User.all.order(created_at: :desc)
     @profile = @user.user_profile
     @confirmed_consultations = @user.online_consultations.select { |consultation| consultation.status != 'cancelled' }.sort_by { |consultation| -consultation.created_at.to_i }
     @cancelled_consultations = @user.online_consultations.select { |consultation| consultation.status == 'cancelled' }.sort_by { |consultation| -consultation.created_at.to_i }
