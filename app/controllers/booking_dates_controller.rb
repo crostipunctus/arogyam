@@ -5,9 +5,11 @@ class BookingDatesController < ApplicationController
 
   def update 
     @booking = BookingDate.find(params[:id])
-    @booking.update(available: false)
-    @booking.update(status: "BLOCKED")
-    redirect_to online_consultations_path
+    if @booking.update(available: false, status: "BLOCKED")
+      render json: @booking
+    else
+      render json: { errors: @booking.errors.full_messages }, status: :unprocessable_entity
+    end
   end 
 
  

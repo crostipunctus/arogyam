@@ -18,7 +18,7 @@
                   <% online_consultation = find_online_consultation(booking_date) %>
                   <%= link_to "Reschedule", edit_online_consultation_path(online_consultation), class: "badge bg-success" %>
                 <% elsif booking_date.status != 'BLOCKED' %>
-                  <%= button_to "Block", booking_date_path(booking_date), method: :patch, class: "badge bg-danger" %>
+                  <%= link_to "Block", booking_date_path(booking_date), method: :patch, remote: true, class: "badge bg-danger block-button", data: { id: booking_date.id } %>
                 <% end %>
               </span>
             </li>

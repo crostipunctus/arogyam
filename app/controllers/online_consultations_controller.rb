@@ -98,7 +98,7 @@ class OnlineConsultationsController < ApplicationController
     if @online_consultation.confirmed == true 
       @online_consultation.update(completed: true, status: "completed", confirmed: false )
       @online_consultation.booking_date.update(available: true)
-      redirect_to registrations_path, notice: "Your booking has been completed"
+      redirect_to online_consultations_path, notice: "Your booking has been completed"
     else
       @online_consultation.update(confirmed: true, status: "confirmed")
       last_case_sheet = CaseSheet.where(user_id: current_user.id).last
@@ -122,7 +122,7 @@ class OnlineConsultationsController < ApplicationController
       OnlineConsultationMailer.online_consultation_payment_confirmation_email(@online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_payment_user_confirmation_email(@online_consultation).deliver_later
     end
-    redirect_to registrations_path, notice: "Your booking has been confirmed"
+    redirect_to online_consultations_path, notice: "Your booking has been confirmed"
   end 
 
   def destroy
