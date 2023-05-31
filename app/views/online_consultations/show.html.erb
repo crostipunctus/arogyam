@@ -25,7 +25,7 @@
             <li><strong>Weight:</strong> <%= @case_sheet.weight %></li>
             <li>Blood Group: <%= @case_sheet.blood_group %></li>
             <li>Appetite: <%= @case_sheet.appetite %></li>
-            <li>Sleep: <%= @case_sheet.sleep %></li>
+            <li>Sleep: <%= @case_sheet.sleep %></li> 
             <li>Motion: <%= @case_sheet.motion %></li>
             <li>Energy Level: <%= @case_sheet.energy_level %></li>
             <li>Hereditary Mother: <%= @case_sheet.hereditary_mother %></li>
@@ -42,6 +42,7 @@
         </div>
       </div>
     </div>
+<%= link_to "Download case sheet", export_online_consultations_case_sheet_path(format: 'xlsx', id: @online_consultation.id), class: "btn btn-outline-success" %>
 
     <% if @online_consultation.completed == false %>
       <div class=" mt-5">

@@ -40,7 +40,7 @@ class OnlineConsultationsController < ApplicationController
     @case_sheet = @online_consultation.case_sheets.last
   end 
 
-  def new
+  def new 
     @booking_date = BookingDate.new
   end 
 
@@ -145,6 +145,16 @@ class OnlineConsultationsController < ApplicationController
       format.xlsx { render xlsx: 'online_consultations', filename: 'online_consultations.xlsx' }
     end
   end
+
+ 
+  def export_online_consultations_case_sheet 
+    @online_consultation = OnlineConsultation.find(params[:id])
+    @case_sheet = @online_consultation.case_sheets.last
+
+    respond_to do |format|
+      format.xlsx { render xlsx: 'show', filename: 'show.xlsx' }
+    end
+  end 
 
   private  
 
