@@ -1,0 +1,80 @@
+require 'axlsx'
+
+# Prepare headers
+headers = [
+  'Full Name',
+  'Booked On',
+  'Date',
+  'Start Time',
+  'End Time',
+  'Vegetarian',
+  'Height',
+  'Weight',
+  'Blood Group',
+  'Appetite',
+  'Sleep',
+  'Motion',
+  'Energy Level',
+  'Hereditary Mother',
+  'Hereditary Father',
+  'Surgeries',
+  'Normal Deliveries',
+  'Caesarian Deliveries',
+  'Exercise Routine',
+  'Past Ailments',
+  'Present Complaints'
+]
+
+xlsx_package = Axlsx::Package.new
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Online Consultations') do |sheet|
+  # Add column headers
+  sheet.add_row headers
+
+  # Add consultations data
+  OnlineConsultation.all.each do |consultation|
+    # Get the latest case sheet for this consultation
+    latest_case_sheet = consultation.case_sheets.order(created_at: :desc).first
+
+    if latest_case_sheet
+      data_row = [
+        user_full_name(consultation.user),
+        consultation.created_at,
+        consultation.date,
+        consultation.start_time,
+        consultation.end_time,
+        latest_case_sheet.vegetarian,
+        latest_case_sheet.height,
+        latest_case_sheet.weight,
+        latest_case_sheet.blood_group,
+        latest_case_sheet.appetite,
+        latest_case_sheet.sleep,
+        latest_case_sheet.motion,
+        latest_case_sheet.energy_level,
+        latest_case_sheet.hereditary_mother,
+        latest_case_sheet.hereditary_father,
+        latest_case_sheet.surgeries,
+        latest_case_sheet.normal_deliveries,
+        latest_case_sheet.caesarian_deliveries,
+        latest_case_sheet.exercise_routine,
+        latest_case_sheet.past_ailments,
+        latest_case_sheet.present_complaints
+      ]
+    else
+      data_row = [
+        user_full_name(consultation.user),
+        consultation.created_at,
+        consultation.date,
+        consultation.start_time,
+        consultation.end_time,
+        consultation.user_id
+      ] + Array.new(headers.length - 6, nil)
+    end
+
+    sheet.add_row data_row
+  end
+end
+
+# Save the xlsx file
+xlsx_package.serialize 'OnlineConsultations.xlsx'

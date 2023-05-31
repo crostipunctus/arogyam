@@ -137,6 +137,15 @@ class OnlineConsultationsController < ApplicationController
     redirect_to online_consultations_path, notice: "Your booking has been cancelled"
   end
 
+
+  def export_online_consultations
+    @online_consultations = OnlineConsultation.where(payment_complete: true)
+  
+    respond_to do |format|
+      format.xlsx { render xlsx: 'online_consultations', filename: 'online_consultations.xlsx' }
+    end
+  end
+
   private  
 
   def online_consultation_params 

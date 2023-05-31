@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   
   post 'online_consultations/:id/reschedule' => 'online_consultations#reschedule', as: :reschedule_online_consultation
 
+  get 'export_online_consultations' => 'online_consultations#export_online_consultations'
+
   get 'all_online_consultations' => 'online_consultations#all'
   resources :booking_dates
   
