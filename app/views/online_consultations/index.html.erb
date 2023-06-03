@@ -1,3 +1,5 @@
+<% if current_user_admin? %>
+
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
   <h1 class="cardHeading packages text-center">Online Consultations</h1>
   <% if current_user %>
@@ -163,7 +165,7 @@
                 <!-- Add other columns here -->
                 <td data-th="Actions">
                   <%= link_to 'View', online_consultation_path(consultation), class: 'btn btn-outline-success btn-sm' %>
-                  <span><%= button_to 'Delete', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
+                  <span><%= button_to 'Cancel', online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
                   <% if consultation.confirmed == true && consultation.completed == false %>
                   
                     <% if payment_complete?(consultation)%>
@@ -194,3 +196,20 @@
   <% end %>
 
 </section>
+
+<% else %>
+<section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
+<h1 class="cardHeading packages text-center">Online Consultations</h1>
+  <div class="d-flex justify-content-center text-center pb-sm-3 pt-4">
+      <p class="fs-lg fw-medium pb-3 mb-3"><strong>Please call +91 8340932384 or email 
+      <a class=" emailLink  nav-link fs-lg p-0 d-flex justify-content-center" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>with your preferred date and time. We will get in touch with you.
+      <br>
+      <br> Online consultations cost Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. Review consultation eligibility is determined in the following way: <br> 
+      <br> 1. Within 1 month of the previous completed consultation with same complaint: Rs. 350 for residents of India and Rs. 750 for non-residents for 30 minutes. <br>
+      <br> 2. Within 1 months of the previous completed consultation but with different complaint: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      <br> 3. After 1 month of the previous completed consultation: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
+      </p>
+    </div>
+</section>
+
+<% end %>
