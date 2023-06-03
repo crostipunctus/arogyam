@@ -54,7 +54,7 @@
           </div>
         <% else %>
           <div class="mb-3">
-            Your last consultation was more than a month back or you cancelled a consultation before it was completed. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). Please fill a new case sheet to confirm your consultation.
+            Your last consultation was more than a month back or your consultation was not completed. This will be treated as a fresh consultation and will be charged at Rs. 750(Indian residents) and Rs. 1500(non-residents). Please fill a new case sheet to confirm your consultation.
           </div> 
           <div class="d-flex justify-content-center align-items-center mb-3">
             <%= link_to "Proceed with new booking", new_online_consultation_case_sheet_path(consultation), class: "btn btn-outline-success" %>
@@ -122,7 +122,7 @@
     <h1 class="mt-5 mb-5">All Online Consultations</h1>
       <div class="form-group mb-3">
         <%= form_with url: online_consultations_path, method: :get, local: true do |form| %>
-          <%= form.select :filter, [['All Consultations', 'all'], ['Confirmed Consultations', 'confirmed'], ['Unconfirmed Consultations', 'unconfirmed'], ['Completed Consultations', 'completed'], ['Payment Complete Consultations', 'payment_complete'], ['Cancelled Consultations', 'cancelled']], class: "form-control" %>
+          <%= form.select :filter, [['All Consultations', 'all'], ['Upcoming Consultations', 'upcoming'],['Confirmed Consultations', 'confirmed'], ['Unconfirmed Consultations', 'unconfirmed'], ['Completed Consultations', 'completed'], ['Payment Complete Consultations', 'payment_complete'], ['Cancelled Consultations', 'cancelled']], class: "form-control" %>
           <%= form.submit "Filter", class: "btn btn-outline-success btn-sm" %>
         <% end %>
       </div>
@@ -147,7 +147,7 @@
               <tr>
                 <td data-th="Full Name"><%= link_to user_full_name(consultation.user), user_profile_path(user_id: consultation.user.id), class: "nav-link" %></td>
                 <td data-th="Email"><%= consultation.user.email %></td>
-                  <td data-th="Date"><%= consultation.date %></td>
+                  <td data-th="Date"><%= formatted_date(consultation.date) %></td>
                   <td data-th="Time"><%= consultation.start_time %></td>
                 <td data-th="Status" data-controller="status" data-status-id-value="<%= consultation.id %>" data-endpoint="<%= online_consultation_path(consultation) %>">
                     <%= tag.span class: "badge #{consultation_status_class(consultation)}" do %>

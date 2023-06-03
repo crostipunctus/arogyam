@@ -31,9 +31,11 @@ module ApplicationHelper
     end
   end
 
-  def formatted_date(date)
-    date.strftime("%B #{date.day}#{ordinal_suffix(date.day)}")
-  end 
+def formatted_date(date)
+  date.strftime("%d-%m-%y")
+end
+
+
   
   def user_full_name(user)
     "#{user.first_name.capitalize} #{user.last_name.capitalize}"
@@ -101,7 +103,7 @@ module ApplicationHelper
   end
 
   def find_online_consultation(booking_date)
-    booking_date.online_consultations.find_by(date: booking_date.date, start_time: booking_date.start_time)
+    booking_date.online_consultations.find_by(date: booking_date.date, start_time: booking_date.start_time, confirmed: true, cancelled: false)
   end
   
 

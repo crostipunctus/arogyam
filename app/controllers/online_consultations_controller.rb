@@ -8,15 +8,17 @@ class OnlineConsultationsController < ApplicationController
     when 'all'
       @online_consultations = OnlineConsultation.all
     when 'confirmed'
-      @online_consultations = OnlineConsultation.where(confirmed: true, completed: false)
+      @online_consultations = OnlineConsultation.where(confirmed: true, completed: false, cancelled: false)
     when 'unconfirmed'
       @online_consultations = OnlineConsultation.where(status: 'unconfirmed')
     when 'completed'
       @online_consultations = OnlineConsultation.where(completed: true)
     when 'payment_complete'
-      @online_consultations = OnlineConsultation.where(payment_complete: true)
+      @online_consultations = OnlineConsultation.where(payment_complete: true, cancelled: false)
     when 'cancelled'
       @online_consultations = OnlineConsultation.where(cancelled: true)
+    when 'upcoming'
+      @online_consultations = OnlineConsultation.where(date: Date.today..Date.today + 30.days, payment_complete: true, completed: false, cancelled: false)
     else
       @online_consultations = OnlineConsultation.all
     end
