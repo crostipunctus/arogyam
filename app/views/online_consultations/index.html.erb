@@ -124,12 +124,12 @@
     
     <h1 class="mt-5 mb-5">All Online Consultations</h1>
       <div class="form-group mb-3">
-        <%= form_with url: online_consultations_path, method: :get, data: {turbo_frame: "consultations_table"}, local: true do |form| %>
+        <%= form_with url: online_consultations_path, method: :get, local: true do |form| %>
           <%= form.select :filter, [['All Consultations', 'all'], ['Upcoming Consultations', 'upcoming'],['Confirmed Consultations', 'confirmed'], ['Unconfirmed Consultations', 'unconfirmed'], ['Completed Consultations', 'completed'], ['Payment Complete Consultations', 'payment_complete'], ['Cancelled Consultations', 'cancelled']], class: "form-control" %>
           <%= form.submit "Filter", class: "btn btn-outline-success btn-sm" %>
         <% end %>
       </div>
-      <%= turbo_frame_tag "consultations_table" do %>
+      <%# <%= turbo_frame_tag "consultations_table" do %> 
       <table>
           <thead>
               <tr>
@@ -174,7 +174,7 @@
                             <%= button_to "Mark completed", online_consultation_path(consultation), method: :patch, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-warning btn-sm'%>
                         <% end %>    
                     <% else %>
-                      <%= button_to 'Mark payment complete', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm', data: { turbo_frame: "consultations_table"} %>      
+                      <%= button_to 'Mark payment complete', payment_complete_path(consultation), method: :patch, class: 'btn btn-outline-primary btn-sm' %>      
                     <% end %>
                   <% end %>
                 </td>
@@ -187,7 +187,7 @@
           <% end %>
         </tbody>
       </table>
-      <% end %>
+      <%# <% end %> 
 
           <%= link_to 'Download Payment Complete Consultations', export_online_consultations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
     
