@@ -24,6 +24,7 @@ import './swiper'
 import './date_picker'
 import "./theme"
 import "./booking_dates"
+import "./duration"
 
 
 

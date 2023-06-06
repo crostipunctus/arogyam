@@ -5,6 +5,7 @@
       <h2 >Basic Information</h2>
       <ul>
         <li>Package selected: <%= @registration.package.name %></li>
+        <li>Duration (if applicable): <%= @registration.duration %> days</li>
         <li>Batch date:<%= formatted_date_with_year(@registration.batch.start_date.to_s) %></li>
         <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
         <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>

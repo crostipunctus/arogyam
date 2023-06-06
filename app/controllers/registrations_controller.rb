@@ -39,7 +39,7 @@ class RegistrationsController < ApplicationController
   end 
 
   def create
-  
+    puts "Registration params: #{registration_params}"
     @batch = Batch.find(params[:registration][:batch_id])
     
     if Registration.exists?(user: current_user, batch_id: @batch.id, status: "Registered")
@@ -53,10 +53,18 @@ class RegistrationsController < ApplicationController
       @registration.user = current_user
       @registration.batch = @batch
       @registration.package = @package
+  
+      # Determine which duration field to use based on the package_id
+      if @package.name == 'VishraM'
+        @registration.duration = registration_params[:duration]
+      elsif @package.name == 'ShamanaM'
+        @registration.duration = registration_params[:shamanam_duration]
+      end
+  
       if @registration.save
         RegistrationMailer.registration_email(@registration).deliver_later
         RegistrationMailer.registration_user_email(@registration).deliver_later
-
+  
         @registration.update(status: "Registered")
         redirect_to batches_path, notice: "Registered successfully"
       else
@@ -65,6 +73,7 @@ class RegistrationsController < ApplicationController
     end
     
   end
+  
   
   
 
@@ -103,7 +112,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :shamanam_duration, :package_id, :batch_id)
   end 
 
  

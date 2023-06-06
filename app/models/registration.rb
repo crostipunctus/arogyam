@@ -7,7 +7,7 @@ class Registration < ApplicationRecord
 
   after_create :registered
   after_create :not_cancelled
-  before_destroy :send_cancel_email
+ 
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
   validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create

@@ -8,10 +8,22 @@
     <%= form_with(model: @registration) do |f|%>
       <%= render 'shared/errors', object: @registration %> 
      <%= f.hidden_field :batch_id %>
-       <div class="mb-3"> 
-          <%= f.label :package_id, "Programme *" %>
-          <%= f.collection_select :package_id, Package.all, :id, :name, { prompt: "Select a package" }, class: "form-control" %>
+        <div class="mb-3"> 
+        <%= f.label :package_id, "Programme *" %> 
+        <%= f.collection_select :package_id, Package.all, :id, :name, { prompt: "Select a package" }, class: "form-control", id: "package-select" %>
+      </div>
+
+
+        <div id="vishram-days" class="mb-3" style="display: none;">
+          <%= f.label :duration, "Duration *" %>
+          <%= f.select :duration, [['3 days', "3"], ['5 days', "5"]], { prompt: 'Select days' }, class: 'form-control' %>
         </div>
+
+        <div id="shamanam-days" class="mb-3" style="display: none;">
+          <%= f.label :shamanam_duration, "Duration *" %>
+          <%= f.select :shamanam_duration, [['7 days', "7"], ['14 days', "14"]], { prompt: 'Select days' }, class: 'form-control' %>
+        </div>
+
         <div class="mb-3">
           <%= f.label :subtances, "Do you currently or in the past have used tobacco, alcohol, recreational drugs, or illicit substances? If yes, please list substance and frequency of use: *" %>
           <%= f.text_area :substances, class: "form-control" %>
