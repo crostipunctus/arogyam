@@ -10,5 +10,8 @@ application.register("hello", HelloController)
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
 
+import ProfileCheckerController from "./profile_checker_controller"
+application.register("profile-checker", ProfileCheckerController)
+
 import StatusController from "./status_controller"
 application.register("status", StatusController)

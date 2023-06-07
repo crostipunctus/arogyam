@@ -107,6 +107,10 @@ module ApplicationHelper
   def find_online_consultation(booking_date)
     booking_date.online_consultations.find_by(date: booking_date.date, start_time: booking_date.start_time, confirmed: true, cancelled: false)
   end
+
+  def has_profile?(user)
+    user.user_profile.present?
+  end
   
 
   

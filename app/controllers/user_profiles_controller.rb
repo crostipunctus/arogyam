@@ -38,7 +38,7 @@ class UserProfilesController < ApplicationController
     @profile.user = @user 
 
     if @profile.save 
-      redirect_to user_profile_path(@user)
+      redirect_to batches_path, notice: "Profile created successfully!"
     else  
       render :new, status: :unprocessable_entity
     end 
