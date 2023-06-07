@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["link"]
   connect() {
-    this.hasProfile = this.data.get("hasProfile") === "true";
+    this.hasProfile = this.data.has("hasProfile") && this.data.get("hasProfile") === "true";
     if (!this.hasProfile) {
       this.linkTargets.forEach(el => el.classList.add("disabled"));
     }

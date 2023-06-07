@@ -109,8 +109,9 @@ module ApplicationHelper
   end
 
   def has_profile?(user)
-    user.user_profile.present?
+    user&.user_profile.present?
   end
+  
   
 
   
