@@ -1,0 +1,47 @@
+<turbo-stream action="update" target="consultation_status_display">
+  <template>
+    <span class="badge bg-success">Confirmed!</span>
+    <% @confirmed_online_consultations.each do |consultation| %>
+      <% if payment_complete?(consultation) %>
+        <span class="badge bg-success">Payment complete</span>
+      <% else %>
+        <span class="badge bg-warning">Payment pending</span>
+      <% end %>
+    <% end %>
+  </template>
+</turbo-stream>
+
+<%= turbo_stream.update "is_payment_complete" do %>
+  <% @confirmed_online_consultations.each do |consultation| %>
+    <% if !payment_complete?(consultation) %>
+        <strong>Important: </strong> 
+        <span>Please make your payment and send the payment details to</span>
+        <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
+        <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
+        <span class="mt-5"><strong>Account details:</strong> </span>
+        <div>The Satsang Foundation - The Sacred Grove,<br>
+          A/c. No: 7120649312,<br>
+          Current Account,<br>
+          Indian Bank,<br>
+          IFSC : IDIB000C174,<br>
+          Branch: Chowdepalli (00C174)<br>
+          
+          UPI ID: 7120649312@indianbk
+        </div>
+     
+      <% end %>
+  <% end %>
+
+<% end %>
+
+
+
+
+
+<%= turbo_stream.replace "consultations_table" do %>
+  <%= render "consultations_table" %>
+<% end %>
+
+
+
+         
