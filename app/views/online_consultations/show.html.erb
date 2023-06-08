@@ -1,7 +1,8 @@
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5 ">
   <div class="registrations">
-    <h2 class="text-center mb-5">Your Online Consultation</h2>
-
+    <h2 class="text-center mb-5"><%= user_full_name(@online_consultation.user) %>'s Online Consultation</h2>
+    <h5 class="text-center"><%= @online_consultation.user.email %></h5>
+    <h4 class="text-center">Consultation id: <%= @online_consultation.id %></h4>
     <div class="row mb-4">
       <div class="col-md-12">
         <div class="online-consultation-card online-consultation-container">
