@@ -13,6 +13,7 @@ window.Stimulus = Application.start()
 Stimulus.register("notification", NotificationController)
 Stimulus.register("status", StatusController)
 Stimulus.register("profile-checker", ProfileCheckerController)
+Stimulus.register("form", FormController)
 
 import "@hotwired/turbo-rails"
 import "./controllers"
