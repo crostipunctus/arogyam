@@ -18,6 +18,7 @@ date_ranges = [
 
 # Clear existing data to avoid duplicates when seeding
 Batch.destroy_all
+Package.destroy_all
 
 # Iterate through the date ranges and create Batch records
 date_ranges.each do |start_date, end_date|
@@ -26,3 +27,5 @@ date_ranges.each do |start_date, end_date|
     end_date: Date.parse(end_date),
   )
 end
+
+# Create Package records
