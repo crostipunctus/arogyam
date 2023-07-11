@@ -59,8 +59,8 @@ Rails.application.routes.draw do
 
   resources :blogs
   get "packages/new" => "packages#new" 
-  get "packages" => "packages#index"
-  get "packages/:id" => "packages#show", as: :package
+  get "programmes" => "packages#index", as: :programmes
+  get "programme/:id" => "packages#show", as: :programme 
   get "packages/:id/edit" => "packages#edit", as: :edit_package
   patch "packages/:id" => "packages#update"
 
@@ -79,8 +79,6 @@ Rails.application.routes.draw do
   resources :contacts, only: [:index, :create]
 
   resources :batches 
-
-  
 
   resources :registrations do
     collection do
