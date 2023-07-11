@@ -8,7 +8,7 @@ class PackagesController < ApplicationController
   end 
 
   def show 
-    @package = Package.find(params[:id])
+    @package = Package.find_by!(slug: params[:id])
   end 
 
   def new 

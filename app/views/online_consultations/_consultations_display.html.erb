@@ -1,0 +1,34 @@
+<% @confirmed_online_consultations.each do |consultation| %> 
+  <div class="consultation-card my-3 p-3 bg-light border rounded" >
+    <h5 class="mb-2 text-center">
+    <%= formatted_date(consultation.date) %>, <%= consultation.start_time %> to <%= consultation.end_time %>
+    <div id="consultation_status_display">
+      <span class="badge bg-success">Confirmed!</span>
+      <% if payment_complete?(consultation) %>
+        <span class="badge bg-success">Payment complete</span>
+      <% else %>
+        <span class="badge bg-warning">Payment pending</span>
+      <% end %>
+    </div>
+    <%= button_to "Cancel", online_consultation_path(consultation), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } ,class: "btn btn-outline-danger mt-3" %>
+  </div>
+  <div class="d-flex flex-column align-items-center text-center" id="is_payment_complete">
+    <% if !payment_complete?(consultation) %>
+      <strong>Important: </strong> 
+      <span>Please make your payment and send the payment details to</span>
+      <a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a>
+      <span>at least 48 hours prior to the consultation start time or your consultation will be automatically cancelled.</span>
+      <span class="mt-5"><strong>Account details:</strong> </span>
+      <div>The Satsang Foundation - The Sacred Grove,<br>
+        A/c. No: 7120649312,<br>
+        Current Account,<br>
+        Indian Bank,<br>
+        IFSC : IDIB000C174,<br>
+        Branch: Chowdepalli (00C174)<br>
+        
+        UPI ID: 7120649312@indianbk
+      </div>
+  
+    <% end %>
+  </div>
+<% end%> 

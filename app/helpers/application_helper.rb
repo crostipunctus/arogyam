@@ -65,7 +65,7 @@ module ApplicationHelper
 
   def vishram
     vishram = Package.find_by(name: 'VishraM')
-    package_path(vishram)
+    programme_path(vishram)
 
   end 
 

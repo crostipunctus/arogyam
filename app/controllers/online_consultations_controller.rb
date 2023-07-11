@@ -116,15 +116,20 @@ class OnlineConsultationsController < ApplicationController
 
 
   def payment_complete 
+    @confirmed_online_consultations = current_user.online_consultations.where(confirmed: true, completed: false)
+    @online_consultations = OnlineConsultation.all
     @online_consultation = OnlineConsultation.find(params[:id])
     if @online_consultation.payment_complete == true
       @online_consultation.update(payment_complete: false)
+
+      render :payment_complete
     else
       @online_consultation.update(payment_complete: true)
       OnlineConsultationMailer.online_consultation_payment_confirmation_email(@online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_payment_user_confirmation_email(@online_consultation).deliver_later
+      render :payment_complete
     end
-    redirect_to online_consultations_path, notice: "Your booking has been confirmed"
+    
   end 
 
   def destroy
