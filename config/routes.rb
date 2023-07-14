@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   get "accommodation" => "accommodation#index"
 
   resources :blogs
-  get "programmes/new" => "packages#new" 
+  get "programmes/new" => "packages#new", as: :new_programme 
   get "programmes" => "packages#index", as: :programmes
   get "programme/:id" => "packages#show", as: :programme 
   get "programme/:id/edit" => "packages#edit", as: :edit_package

@@ -25,7 +25,12 @@
               <% end %>
             </div>
         
-          
+      <% if current_user_admin? %>
+
+        <div class="text-center">
+          <%= link_to 'New Programme', new_programme_path, class: "btn btn-outline-primary rounded-pill" %>
+        </div>
+      <% end %>
         
         
        
