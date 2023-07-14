@@ -1,7 +1,7 @@
 
 <section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
   <h1 class="cardHeading packages text-center">Online Consultations</h1>
-  <% if current_user %>
+  <% if current_user_admin? %>
     <%= render 'consultations_display' %>
     <% @unconfirmed_online_consultations.each do |consultation| %>
       <div class="consultation-card my-3 p-3 bg-light border rounded text-center d-flex flex-column align-items-center justify-content-center">
@@ -48,10 +48,12 @@
       <br> 3. After 1 month of the previous completed consultation: Rs. 750 for residents of India and Rs. 1500 for non-residents for 30 minutes. <br>
       </p>
     </div>
-    <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
-    <div class="d-flex justify-content-center">
-      <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
-    </div>
+    <% if current_user_admin? %>
+      <h3 class="mb-2 text-center">BOOK AN ONLINE CONSULTATION</h3>
+      <div class="d-flex justify-content-center">
+        <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
+      </div>
+    <% end %>
   <% end %>
 
   <% if current_user_admin? %>
