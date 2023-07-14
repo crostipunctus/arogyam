@@ -18,7 +18,7 @@ class PackagesController < ApplicationController
   def create  
     @package = Package.create(package_params)
     if @package.save
-      redirect_to @package 
+      redirect_to programme_path(@package)
     else  
       render :new, status: :unprocessable_entity
     end 
