@@ -25,16 +25,16 @@ class PackagesController < ApplicationController
   end 
 
   def edit 
-    @package = Package.find(params[:id])
+    @package = Package.find_by!(slug: params[:id])
   end 
 
   def update 
-    @package = Package.find(params[:id])
+    @package = Package.find_by!(slug: params[:id])
     @package.update(package_params)
 
     if @package.save 
       flash[:notice] = "Package successfully updated!"
-      redirect_to @package 
+      redirect_to programme_path(@package) 
     else  
       render :edit, status: :unprocessable_entity
     end

@@ -1,7 +1,7 @@
 
 <div class="packageform">
   <div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
-    <%= form_with(model: @package) do |f| %>
+    <%= form_with(model: @package, url: programme_path(@package)) do |f| %>
       <div class="mb-3">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
