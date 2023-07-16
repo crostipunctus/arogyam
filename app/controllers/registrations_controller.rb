@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
   end
 
   def export_batch
-    @batches = Batch.includes(registrations: { user: :user_profile }).all
+    @batches = Batch.joins(:registrations).includes(registrations: { user: :user_profile }).distinct
   
     respond_to do |format|
       format.xlsx { render xlsx: 'registrations', filename: 'registrations.xlsx' }

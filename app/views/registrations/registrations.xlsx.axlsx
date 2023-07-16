@@ -16,6 +16,8 @@ headers = [
   'Status'
 ]
 
+
+
 wb.add_worksheet(name: 'Registrations') do |sheet|
   @batches.each do |batch|
     # Add batch header row
@@ -46,6 +48,8 @@ wb.add_worksheet(name: 'Registrations') do |sheet|
         registration.status
       ]
       sheet.add_row data_row
+
+      
     end
 
     # Add an empty row to separate batches
