@@ -1,7 +1,7 @@
 class VishraamRegistration < ApplicationRecord
   belongs_to :user
 
-  validates :date, presence: true
+  validates :date, presence: true, uniqueness: { scope: :user_id, message: "You have already registered for VishraM on this date. Please select another date." }
   validates :duration, presence: true
   attr_accessor :agreement
   attr_accessor :terms

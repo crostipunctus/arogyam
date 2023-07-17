@@ -22,8 +22,9 @@ class VishraamRegistrationsController < ApplicationController
       
         if @vishraam_registration.save
           VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
+          VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
           @vishraam_registration.update(status: "Registered")
-          redirect_to packages_path, notice: "Vishram registration successful"
+          redirect_to programmes_path, notice: "Vishram registration successful"
         else
           flash[:error] = "Vishram registration failed"
           render :new, status: :unprocessable_entity 
@@ -56,6 +57,8 @@ class VishraamRegistrationsController < ApplicationController
     @vishraam_registration = VishraamRegistration.find(params[:id])
     if @vishraam_registration.update(status: "Cancelled")
       @vishraam_registration.update(cancelled: true)
+      VishraamRegistrationMailer.vishraam_registration_cancel_email(@vishraam_registration).deliver_later
+      VishraamRegistrationMailer.vishraam_registration_user_cancellation_email(@vishraam_registration).deliver_later
     end
 
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
