@@ -123,9 +123,10 @@
   <% end %>
 </div>
 
-<div class="personal-info">
+
 
 <% if current_user_admin? %>
+<div class="personal-info">
   <h2>All Users</h2>
   <% @users.each do |user|%>
     <% if !user.admin? %>
