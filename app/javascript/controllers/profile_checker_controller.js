@@ -14,7 +14,7 @@ export default class extends Controller {
     if (!this.hasProfile) {
       event.preventDefault();
       // Optionally, show a message to the user here
-      alert('You need to create a profile first.');
+      alert('You need to create a user profile first.');
     }
   }
 }
