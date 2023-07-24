@@ -5,7 +5,7 @@
   <% if current_user && !has_profile?(current_user) %>
     <div class="text-center mb-5" id="PleaseCreateProfileHeading">Please create your user profile before registering for a batch <strong><%= link_to "Create user profile", new_user_profile_path(current_user), class: "btn btn-outline-primary rounded-pill btn-sm text-center", id: "PleaseCreateProfile" %></strong></div> 
   <% elsif current_user && has_profile?(current_user) %>
-      <h4 class="text-center mb-3 mt-5" id="PleaseCreateProfileHeading">Please select the batch you wish to register for. You can choose your desired programme in the next step</h4>
+      <h4 class="text-center mb-3 mt-5" id="PleaseCreateProfileHeading">Please select the batch you wish to register for</h4>
 
   <% end %>
     
@@ -36,10 +36,10 @@
                     <% if registration.status != "Completed" %>
                       <%= button_to "Cancel", registration_path(registration), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {action: "click->profile-checker#checkProfile"} %> 
                     <% else %>
-                      <%= link_to "Register", new_registration_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
+                      <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
                     <% end %>
                   <% elsif current_user %>
-                    <%= link_to "Register", new_registration_path(batch_id: batch.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
+                    <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
                   <% else %>  
                     <%= link_to "Sign in to register", new_user_session_path, class: "btn btn-outline-primary rounded-pill", id: "registerButton" %>
                   <% end %>

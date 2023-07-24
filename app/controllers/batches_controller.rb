@@ -4,13 +4,22 @@ class BatchesController < ApplicationController
 
   def index 
     @batches = Batch.order(start_date: :asc)
-    
+    if params[:package_id] && Package.exists?(params[:package_id])
+      @selected_package_id = params[:package_id].to_i
+    else
+      @selected_package_id = nil
+    end
   end 
 
   def new         
     @batch = Batch.new
-
+    if params[:package_id] && Package.exists?(params[:package_id])
+      @selected_package_id = params[:package_id].to_i
+    else
+      @selected_package_id = nil
+    end
   end 
+  
   def create  
     @batch = Batch.create(batch_params)
     if @batch.save 

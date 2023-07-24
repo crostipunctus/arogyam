@@ -9,8 +9,13 @@
       <%= render 'shared/errors', object: @registration %> 
      <%= f.hidden_field :batch_id %>
         <div class="mb-3"> 
-        <%= f.label :package_id, "Programme *" %> 
-        <%= f.collection_select :package_id, Package.all, :id, :name, { prompt: "Select a package" }, class: "form-control", id: "package-select" %>
+        <% if @selected_package_id == nil %>
+          <%= f.label :package_id, "Programme *" %> 
+        <% else %>
+          <%= f.label :package_id, "Selected Programme *"%>
+          <div id="changeSelectedProgramme">Change selected programme</div>
+        <% end %>
+        <%= f.collection_select :package_id, Package.all, :id, :name, { selected: @selected_package_id, prompt: "Select a package" }, class: "form-control", id: "package-select" %>
       </div>
 
 
@@ -41,14 +46,25 @@
           <%= f.text_area :medication, class: "form-control" %>
         </div>
 
-        <h5>By receiving your application, we assume that you are physically and mentally fit and not pregnant. If any of the health information supplied by you is found to be false then we reserve the right to cancel your registration from the course.</h5>
+        <h6>By receiving your application, 
+        we assume that you are physically and mentally fit and not pregnant. 
+        If any of the health information supplied by you is found to be false then we reserve the right to cancel your registration from the course.</h6>
           <div class="mb-3">
             <%= f.check_box :agreement, class: "form-check-input" %>  
 
             <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above.", class: "form-check-label" %>
           </div>
 
-          <h5>By submitting this application, I confirm that the facts stated in it are true and complete. I understand that if I am accepted as a candidate, any false statements, omissions, or other misrepresentations made by me on this application may result in the immediate withdrawal of my application and legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. I confirm that I have no health issues which may stop me from participating in the course. I understand that fees paid for this program is non-refundable. I also declare that ArogyaM and The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.</h5>
+          <h6>By submitting this application, 
+          I confirm that the facts stated in it are true and complete. 
+          I understand that if I am accepted as a candidate, any false statements, omissions, 
+          or other misrepresentations made by me on this application 
+          may result in the immediate withdrawal of my application and 
+          legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. 
+          I confirm that I have no health issues which may stop me from participating in the course. 
+          I understand that fees paid for this program is non-refundable. 
+          I also declare that ArogyaM and 
+          The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.</h6>
           <div class="mb-3">
             <%= f.check_box :terms, class: "form-check-input" %>  
 

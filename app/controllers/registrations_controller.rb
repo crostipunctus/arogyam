@@ -31,11 +31,14 @@ class RegistrationsController < ApplicationController
   end
 
   def new 
-    if current_user.user_profile
-      @registration = Registration.new(batch_id: params[:batch_id])
+    @registration = Registration.new(batch_id: params[:batch_id])
+    if params[:package_id] && Package.exists?(params[:package_id])
+      puts "Package id: #{params[:package_id]}"
+      @selected_package_id = params[:package_id].to_i
     else
-      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+      @selected_package_id = nil
     end
+   
   end 
 
   def create

@@ -733,7 +733,7 @@ h4 {
 
 .form-control {
   width: 100%;
-  box-shadow: 2px 2px 10px rgba(151, 150, 150, 0.4);
+  /*box-shadow: 2px 2px 10px rgba(151, 150, 150, 0.4);
   /* set width to 90% for mobile and tablet screens */
 }
 
@@ -2114,4 +2114,9 @@ li {
   border: black solid 1px !important;
   padding: 10px;
   width: fit-content
+}
+
+#changeSelectedProgramme {
+  font-size: 12px !important;
+  margin-bottom: 5px;
 }

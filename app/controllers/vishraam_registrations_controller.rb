@@ -59,6 +59,8 @@ class VishraamRegistrationsController < ApplicationController
       @vishraam_registration.update(cancelled: true)
       VishraamRegistrationMailer.vishraam_registration_cancel_email(@vishraam_registration).deliver_later
       VishraamRegistrationMailer.vishraam_registration_user_cancellation_email(@vishraam_registration).deliver_later
+    else
+      puts @vishraam_registration.errors.full_messages
     end
 
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"
