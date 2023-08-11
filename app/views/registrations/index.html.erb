@@ -1,39 +1,43 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
-  <h1>Batch Registrations</h1>
-  <% if @batches.exists? %>
-    <% @batches.each do |batch| %>
-      <h4 class="mt-5 mb-2">Batch Dates: <%= batch_date_range(batch) %></h4>
-      <% if batch.registrations.exists? %>
+  <h1>Upcoming Registrations</h1>
+      
         <table class="registration-table">
           <thead>
             <tr>
               <th>Full Name</th>
               <th>Email</th>
               <th>Programme</th>
+              <th>Batch</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% batch.registrations.each do |registration| %>
-              <tr>
+            <% @registrations.each do |registration|%>
+              <tr style="<%= 'background-color: #FFCCCC;' if registration.status == 'Cancelled' %>">
                 <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
                 <td data-th="Email"><%= registration.user.email %></td>
                 <td data-th="Programme"><%= registration.package.name %></td>
+                <td data-th="Batch"><%= formatted_date(registration.batch.start_date) %></td>
                 <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">            
-                <span data-status-target="status"><%= registration.status %></span>
-                <% if registration.status != 'Cancelled' %>
-                  <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
-                <% end %>
-                <div data-status-target="editMode" style="display:none;">
-                  <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
-                    <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
-                    <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
+                  
+                  <span data-status-target="status"><%= registration.status %></span>
+                  <% if registration.status != 'Cancelled' %>
+                      <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
+                  <% else %>
+                      <!-- No action for Cancelled status -->
                   <% end %>
-                  <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
-                </div>
-                </td>
+                  
+                  <div data-status-target="editMode" style="display:none;">
+                      <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
+                          <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
+                          <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
+                      <% end %>
+                      <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
+                  </div>
+              </td>
+
 
                 <td data-th="Actions">
                   <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
@@ -45,14 +49,10 @@
             <% end %>
           </tbody>
         </table>
-      <% else %>
-        <h6>No registrations</h6>
-      <% end %>
-    <% end %>
-        <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
-    <% else %>  
-        <h4>No registrations</h4>
-    <% end %>
+      
+    
+      <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+   
 
 
     <h1 class="vishraam_reg_heading">Vishram Registrations (not in a batch)</h1>
