@@ -13,7 +13,7 @@
     <tbody>
       <% if @registrations.exists? %>
         <% @registrations.each do |registration|%>
-          <% if registration.batch.start_date >= Date.today %>
+          
             <tr style="<%= 'background-color: #FFCCCC;' if registration.status == 'Cancelled' %>">
               <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
               <td data-th="Email"><%= registration.user.email %></td>
@@ -41,7 +41,7 @@
                 <% end %>
               </td>
             </tr>
-          <% end %>
+          
         <% end %>
       <% else %>
         <tr>
