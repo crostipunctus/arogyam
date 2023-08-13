@@ -12,7 +12,9 @@ class RegistrationsController < ApplicationController
     when 'completed'
       @registrations = Registration.where(completed: true)
     when 'upcoming'
-      @registrations = Registration.where(cancelled: false, completed: false)
+      @registrations = Registration.joins(:batch)
+                             .where(cancelled: false, completed: false)
+                             .where('batches.start_date > ?', Date.today)
     when 'payment_complete'
       @registrations = Registration.where(status: 'Payment Completed')
     when 'payment_pending'
