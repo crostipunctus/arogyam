@@ -20,7 +20,9 @@ class RegistrationsController < ApplicationController
     when 'payment_pending'
       @registrations = Registration.where(status: 'Payment Pending')
     else
-      @registrations = Registration.all
+      @registrations = Registration.joins(:batch)
+      .where(cancelled: false, completed: false)
+      .where('batches.start_date > ?', Date.today)
     end
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all

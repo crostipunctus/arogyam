@@ -3,7 +3,7 @@
     <h1>Upcoming Registrations</h1>
     <div class="form-group mb-3">
       <%= form_with url: registrations_path, method: :get, data: {turbo_frame: "registrations_table", controller: "form", action: "click=>form#submit"} do |form| %>
-        <%= form.select :filter, [['All Registrations', 'all'], ['Upcoming Registrations', 'upcoming'], ['Completed Registrations', 'completed'], ['Payment Complete Registrations', 'payment_complete'], ['Payment Pending Registrations', 'payment_pending'], ['Cancelled Registrations', 'cancelled']], class: "form-control" %>
+        <%= form.select :filter, [['Upcoming Registrations', 'upcoming'], ['Completed Registrations', 'completed'], ['Payment Complete Registrations', 'payment_complete'], ['Payment Pending Registrations', 'payment_pending'], ['All Registrations', 'all'], ['Cancelled Registrations', 'cancelled']], class: "form-control" %>
       <% end %>
     </div>
     
