@@ -4,10 +4,25 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update ]
   
   def index 
-    @registrations = Registration.all 
+    case params[:filter]
+    when 'all'
+      @registrations = Registration.all
+    when 'cancelled'
+      @registrations = Registration.where(cancelled: true)
+    when 'completed'
+      @registrations = Registration.where(completed: true)
+    when 'upcoming'
+      @registrations = Registration.where(cancelled: false, completed: false)
+    when 'payment_complete'
+      @registrations = Registration.where(status: 'Payment Completed')
+    when 'payment_pending'
+      @registrations = Registration.where(status: 'Payment Pending')
+    else
+      @registrations = Registration.all
+    end
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all
-    @batches = Batch.all
+    @batches = Batch.all 
   end
 
   def export_batch
@@ -92,7 +107,8 @@ class RegistrationsController < ApplicationController
         puts "Registration status updated to #{registration_params[:status]}"
         @registration.update_column(:comments, registration_params[:comments])
         @registration.update(completed: true) if registration_params[:status] == "Completed"
-        
+        @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
+        @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
