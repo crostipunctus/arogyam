@@ -27,7 +27,7 @@
                     <!-- No action for Cancelled status -->
                 <% end %>
                 <div data-status-target="editMode" style="display:none;">
-                    <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
+                    <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { controller: 'status', data: { action: 'submit->status#save' } } do |f| %>
                         <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
                         <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
                     <% end %>

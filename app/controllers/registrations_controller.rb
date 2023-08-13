@@ -110,6 +110,7 @@ class RegistrationsController < ApplicationController
         @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
         @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
         format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
+        
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
         format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @registration.errors.full_messages } }

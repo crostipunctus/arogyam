@@ -41,8 +41,13 @@ export default class extends Controller {
     if (!response.ok) {
       console.error("Failed to update status:", response);
     } else {
-      this.statusTarget.textContent = this.statusSelectTarget.value;
-      this.toggleEditMode(event);
+      const responseData = await response.json();
+      if (responseData.status === "ok") {
+        location.reload();
+      } else {
+        this.statusTarget.textContent = this.statusSelectTarget.value;
+        this.toggleEditMode(event);
+      }
     }
   }
 
