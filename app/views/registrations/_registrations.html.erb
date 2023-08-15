@@ -48,5 +48,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= paginate @registrations, data: { turbo_frame: 'registrations_table' } %>
+  <div class="pagination-wrapper">
+    <%= paginate @registrations, data: { turbo_frame: 'registrations_table' } %>
+  </div>
 <% end %>
