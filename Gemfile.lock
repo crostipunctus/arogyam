@@ -394,6 +394,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jsbundling-rails
+  kaminari
   mail_form
   pg
   puma (~> 5.0)

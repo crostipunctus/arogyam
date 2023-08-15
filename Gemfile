@@ -83,6 +83,7 @@ gem 'caxlsx_rails'
 
 gem 'rails_admin', '~> 3.0'
 
+gem 'kaminari'
 
 
 group :development, :test do

@@ -13,7 +13,6 @@
     <tbody>
       <% if @registrations.exists? %>
         <% @registrations.each do |registration|%>
-          
             <tr style="<%= 'background-color: #FFCCCC;' if registration.status == 'Cancelled' %>">
               <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
               <td data-th="Email"><%= registration.user.email %></td>
@@ -36,12 +35,11 @@
               </td>
               <td data-th="Actions">
                 <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
-                <% if registration.completed = false %>
+                <% if registration.completed == false %>
                   <span><%= button_to 'Cancel appointment', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
                 <% end %>
               </td>
             </tr>
-          
         <% end %>
       <% else %>
         <tr>
@@ -50,4 +48,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= paginate @registrations, data: { turbo_frame: 'registrations_table' } %>
 <% end %>

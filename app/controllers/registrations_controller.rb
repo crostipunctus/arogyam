@@ -6,27 +6,28 @@ class RegistrationsController < ApplicationController
   def index 
     case params[:filter]
     when 'all'
-      @registrations = Registration.all
+      @registrations = Registration.all.page(params[:page]).per(10)
     when 'cancelled'
-      @registrations = Registration.where(cancelled: true)
+      @registrations = Registration.where(cancelled: true).page(params[:page]).per(10)
     when 'completed'
-      @registrations = Registration.where(completed: true)
+      @registrations = Registration.where(completed: true).page(params[:page]).per(10)
     when 'upcoming'
       @registrations = Registration.joins(:batch)
                              .where(cancelled: false, completed: false)
-                             .where('batches.start_date > ?', Date.today)
+                             .where('batches.start_date > ?', Date.today).page(params[:page]).per(10)
     when 'payment_complete'
-      @registrations = Registration.where(status: 'Payment Completed')
+      @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
-      @registrations = Registration.where(status: 'Payment Pending')
+      @registrations = Registration.where(status: 'Payment Pending').page(params[:page]).per(10)
     else
       @registrations = Registration.joins(:batch)
       .where(cancelled: false, completed: false)
-      .where('batches.start_date > ?', Date.today)
+      .where('batches.start_date > ?', Date.today).page(params[:page]).per(10)
     end
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all
     @batches = Batch.all 
+    
   end
 
   def export_batch
