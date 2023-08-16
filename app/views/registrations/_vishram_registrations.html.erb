@@ -1,0 +1,45 @@
+    <%= turbo_frame_tag "vishram_registrations_table" do %>
+      <% if @vishraam_registrations.exists? %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Dates</th>
+              <th>Duration</th>
+              <th>Actions</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @vishraam_registrations.each do |registration| %>
+              <tr>
+                <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
+                <td data-th="Email"><%= registration.user.email %></td>
+                <td data-th="Date"><%= formatted_date(registration.date) %></td>
+                <td data-th="Duration"><%= registration.duration %></td>
+                <td data-th="Actions" data-controller="status">
+                  <%= link_to 'View', vishraam_registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
+                </td>
+                <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= vishraam_registration_path(registration) %>">
+                  <span data-status-target="status"><%= registration.status %></span>
+                  <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
+                  <div data-status-target="editMode" style="display:none;">
+                    <%= form_with url: vishraam_registration_path(registration), method: :patch, remote: true, html: { data: { action: 'submit->status#save' } } do |f| %>
+                      <%= f.select :status, [['Cancelled'], ['Registered'], ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
+                      <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
+                    <% end %>
+
+                    <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      <% else %>
+
+          <h4>No registrations found</h4>
+      <% end %>
+    <% end %>
