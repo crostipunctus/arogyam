@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
     else
       @registrations = Registration.joins(:batch)
       .where(cancelled: false, completed: false)
-      .where('batches.start_date > ?', Date.today).page(params[:page]).per(10)
+      .where('batches.start_date > ?', Date.today).page(params[:page])
     end
     @vishraam_registrations = VishraamRegistration.all
     @online_consultations = OnlineConsultation.all
