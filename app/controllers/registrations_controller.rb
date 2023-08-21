@@ -14,7 +14,7 @@ class RegistrationsController < ApplicationController
     when 'upcoming'
       @registrations = Registration.joins(:batch)
                              .where(cancelled: false, completed: false)
-                             .where('batches.start_date > ?', Date.today).page(params[:page]).per(10)
+                             .where('batches.start_date > ?', Date.today).page(params[:page])
     when 'payment_complete'
       @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
