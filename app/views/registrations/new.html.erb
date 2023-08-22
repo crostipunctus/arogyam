@@ -13,7 +13,7 @@
           <%= f.label :package_id, "Programme *" %> 
         <% else %>
           <%= f.label :package_id, "Selected Programme *"%>
-          <div id="changeSelectedProgramme">Change selected programme</div>
+          <div id="changeSelectedProgramme">You can change selected programme here:</div>
         <% end %>
         <%= f.collection_select :package_id, Package.all, :id, :name, { selected: @selected_package_id, prompt: "Select a package" }, class: "form-control", id: "package-select" %>
       </div>
