@@ -13,7 +13,8 @@
           </thead>
           <tbody>
             <% @vishraam_registrations.each do |registration| %>
-              <tr>
+              <tr style="<%= 'background-color: #FFCCCC;' if registration.status == 'Cancelled' %>">
+
                 <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id) %></td>
                 <td data-th="Email"><%= registration.user.email %></td>
                 <td data-th="Date"><%= formatted_date(registration.date) %></td>
