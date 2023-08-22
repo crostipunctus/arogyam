@@ -4,7 +4,31 @@ class VishraamRegistrationsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update ]
 
   def index 
-    @vishraam_registrations = VishraamRegistration.all
+    case params[:filter]
+    when 'all'
+      @vishraam_registrations = VishraamRegistration.all.page(params[:page]).per(10)
+      
+    when 'cancelled'
+      @vishraam_registrations = VishraamRegistration.where(cancelled: true).page(params[:page]).per(10)
+    when 'completed'
+      @vishraam_registrations = VishraamRegistration.where(completed: true).page(params[:page]).per(10)
+    when 'upcoming'
+      @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
+                                             .where(cancelled: false, completed: false)
+                                             .page(params[:page])
+
+    when 'payment_complete'
+      @vishraam_registrations = VishraamRegistration.where(status: 'Payment Completed').page(params[:page]).per(10)
+    when 'payment_pending'
+      @vishraam_registrations = VishraamRegistration.where(status: 'Payment Pending').page(params[:page]).per(10)
+    else
+      @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
+                                             .where(cancelled: false, completed: false)
+                                             .page(params[:page])
+
+    end
+
+   
   end 
 
   def show 

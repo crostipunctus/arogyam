@@ -24,7 +24,9 @@ class RegistrationsController < ApplicationController
       .where(cancelled: false, completed: false)
       .where('batches.start_date > ?', Date.today).page(params[:page])
     end
-    @vishraam_registrations = VishraamRegistration.all
+    @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
+    .where(cancelled: false, completed: false)
+    .page(params[:page])
     @online_consultations = OnlineConsultation.all
     @batches = Batch.all 
     
