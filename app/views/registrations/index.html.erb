@@ -1,5 +1,5 @@
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <h1>Upcoming Registrations</h1>
+  <h1>Registrations</h1>
   <div class="form-group mb-3">
     <%= form_with url: registrations_path, method: :get, data: {turbo_frame: "registrations_table", controller: "form", action: "click=>form#submit"} do |form| %>
       <%= form.select :filter, [['Upcoming Registrations', 'upcoming'], ['Completed Registrations', 'completed'], ['Payment Complete Registrations', 'payment_complete'], ['Payment Pending Registrations', 'payment_pending'], ['All Registrations', 'all'], ['Cancelled Registrations', 'cancelled']], class: "form-control" %>
