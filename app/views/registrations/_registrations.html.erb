@@ -39,11 +39,9 @@
                   <span data-expand-target="content" data-full="<%= registration.comments %>">
                       <%= truncate(registration.comments, length: 50) %>
                   </span>
-                  
                   <% if registration.comments && registration.comments.length > 50 %>
                       <button class="btn btn-outline-info btn-sm expand-btn" data-action="click->expand#expand">Expand</button>
                   <% end %>
-
                   <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-outline-success btn-sm'%>
               </td>
 
