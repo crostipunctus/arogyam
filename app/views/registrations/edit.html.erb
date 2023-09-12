@@ -1,0 +1,8 @@
+
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  <%= form_with model: @registration do |f| %>
+    <%= f.label :comments %>
+    <%= f.text_area :comments, rows: 5, class: "comment-form form-control" %>
+    <%= f.submit 'Save Comment', class: "btn btn-outline-success" %>
+  <% end %>
+</section>

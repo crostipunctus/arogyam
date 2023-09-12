@@ -8,7 +8,7 @@
         <th>Batch</th>
         <th>Status</th>
         <th>Comments</th>
-        <th>Actions</th>
+        <th>Actions</th> 
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,22 @@
                     <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
                 </div>
               </td>
-              <td data-th="Comments"><%= registration.comments %></td>
+             
+                <td data-th="Comments" data-controller="expand">
+                  <span data-expand-target="content" data-full="<%= registration.comments %>">
+                      <%= truncate(registration.comments, length: 50) %>
+                  </span>
+                  
+                  <% if registration.comments && registration.comments.length > 50 %>
+                      <button class="btn btn-outline-info btn-sm expand-btn" data-action="click->expand#expand">Expand</button>
+                  <% end %>
+
+                  <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-outline-success btn-sm'%>
+              </td>
+
+
+
+
               <td data-th="Actions">
                 <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
                 <% if registration.completed == false %>

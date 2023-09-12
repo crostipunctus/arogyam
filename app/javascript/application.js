@@ -30,6 +30,7 @@ import "./duration"
 
 
 
+
 import "trix"
 import "@rails/actiontext"
 

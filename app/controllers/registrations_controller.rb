@@ -103,27 +103,43 @@ class RegistrationsController < ApplicationController
   
 
   def edit  
-
+    @registration = Registration.find(params[:id])
+    
   end 
 
-  def update 
+  def update
+    # when save comments button is clicked the status is updated to blank 
     @registration = Registration.find(params[:id])
     @batch = @registration.batch
+    puts "Registration params: #{registration_params}"
     respond_to do |format|
-      if @registration.update_column(:status, registration_params[:status])
-        puts "Registration status updated to #{registration_params[:status]}"
-        @registration.update_column(:comments, registration_params[:comments])
-        @registration.update(completed: true) if registration_params[:status] == "Completed"
-        @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
-        @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
-        format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
-        
+      # Check if status is blank
+      if registration_params[:status].blank?
+        if @registration.update_column(:comments, registration_params[:comments])
+          format.json { render json: { status: :ok, message: "Comments were successfully updated." } }
+          format.html { redirect_to registrations_path, notice: "Comments were successfully updated." }
+        else
+          Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
+          format.json { render json: { status: :unprocessable_entity, message: "Failed to update registration comments.", errors: @registration.errors.full_messages } }
+        end
       else
-        Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
-        format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @registration.errors.full_messages } }
+        if @registration.update_column(:status, registration_params[:status])
+          puts "Registration status updated to #{registration_params[:status]}"
+          @registration.update(completed: true) if registration_params[:status] == "Completed"
+          @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
+          @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
+          format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
+          format.html { redirect_to registrations_path, notice: "Registration was successfully updated." }
+        else
+          Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@registration.errors.full_messages}"
+          format.json { render json: { status: :unprocessable_entity, message: "Failed to update Vishraam registration.", errors: @registration.errors.full_messages } }
+        end
       end
     end
-  end 
+  end
+  
+
+ 
 
   def destroy 
     @registration = Registration.find(params[:id])

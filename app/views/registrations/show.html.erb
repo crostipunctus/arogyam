@@ -12,6 +12,7 @@
         <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
         <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
         <li>Email: <%= @registration.user.email %></li>
+        <li>Comments: <%= @registration.comments %></li>
         <li>Gender: <%= @registration.user.user_profile.gender %></li>
         <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></li>
         <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
