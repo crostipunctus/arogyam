@@ -10,6 +10,9 @@
       <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
         <% @blogs.each do |blog| %>
           <h3><%= link_to blog.title.capitalize, blog_path(blog) %></h3>
+          <% if blog.image.attached? %>
+            <%= image_tag blog.image.variant(:thumb), class: "img-fluid rounded mb-4" %>
+          <% end %>
           <p class="mb-3"><%= blog.content %></p>
           <div class="mb-5 text-muted fs-sm"><%= blog.created_at.strftime("%d %b %y") %></div>
         <% end %>

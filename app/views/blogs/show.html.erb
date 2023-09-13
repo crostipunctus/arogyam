@@ -3,6 +3,9 @@
     <div class="col-lg-9 col-xl-8">
       <%= link_to "< Back to blogs", blogs_path, class: "nav-link", id: "back_to" %>
       <h1 class="pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4 mt-5"><%= @blog.title.capitalize %></h1>
+      <% if @blog.image.attached? %>
+        <%= image_tag @blog.image, class: "img-fluid rounded mb-4" %>
+      <% end %>
       <p class="fs-lg mb-3"> <%= @blog.content %></p>
       <% if current_user_admin? %>
         <div class="admin">
