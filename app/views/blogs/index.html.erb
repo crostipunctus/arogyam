@@ -1,29 +1,22 @@
 
-    
-      <div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
-       
-        <!-- Page title + filters-->
-        <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-            <h1 class="packages text-center">Blog</h1>
-          
-            <div class="mt-5 coming_soon text-center">COMING SOON</div>
-    
-        </div>
-        <!-- Post-->
-        <article class="row g-0 border-0 mb-4"><a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 16rem"></a>
-          <div class="col-sm-7 col-lg-8">
-            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-              <% @blogs.each do |blog| %>
-                <h3><%= link_to blog.title.capitalize, blog_path(blog) %></h3>
-                <div class="mb-5 text-muted fs-sm"><%= blog.created_at.strftime("%d %b %y") %></div>
-              <% end %>
-            </div>
-          </div>
-        </article>
-        
-        <!-- Pagination-->
-        
+
+<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+  <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+      <h1 class="packages text-center">Blog</h1>
+      <div class="mt-5 coming_soon text-center">COMING SOON</div>
+  </div>
+  <!-- Post-->
+  <article class="row g-0 border-0 mb-4"><a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-5" href="blog-single-v1.html" style="background-image: url(assets/img/blog/list/01.jpg); min-height: 16rem"></a>
+    <div class="col-sm-7 col-lg-8">
+      <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+        <% @blogs.each do |blog| %>
+          <h3><%= link_to blog.title.capitalize, blog_path(blog) %></h3>
+          <div class="mb-5 text-muted fs-sm"><%= blog.created_at.strftime("%d %b %y") %></div>
+        <% end %>
       </div>
+    </div>
+  </article>
+</div>
     
     
   
