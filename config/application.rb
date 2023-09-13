@@ -13,6 +13,7 @@ module Arogyam
 
     config.active_job.queue_adapter = :sidekiq
     
+    config.time_zone = 'Asia/Kolkata'
 
     # Configuration for the application, engines, and railties goes here.
     #

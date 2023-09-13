@@ -23,12 +23,10 @@
           <div class="d-md-flex w-100">
             <div style="max-width: 26rem;">
               <h3 class="h6 mb-2">Posted by: <%= @user.first_name %></h3>
+              <div class="mb-5 text-muted fs-sm"><%= @blog.created_at.strftime("%d %b %y %H:%M") %></div>
+
             </div>
-            <div class="pt-4 pt-md-0 ps-md-4 ms-md-auto">
-              <h3 class="h5">Share post:</h3>
-              <div class="d-flex"><a class="nav-link p-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Instagram"><i class="bi bi-instagram"></i></a><a class="nav-link p-2 me-2" href="https://www.facebook.com/sharer/sharer.php?u=<%= get_current_url %>" target="_blank"><i class="bi bi-facebook"></i></a>
-              <a class="nav-link p-2 me-2 twitter-share-button" href="https://twitter.com/intent/tweet?text=<%= get_current_url %>" target="_blank"><i class="bi bi-twitter"></i></a>
-            </div>
+            
           </div>
         </div>
       </div>
