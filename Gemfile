@@ -85,6 +85,8 @@ gem 'rails_admin', '~> 3.0'
 
 gem 'kaminari'
 
+gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
+
 gem "sentry-ruby"
 gem "sentry-rails"
 

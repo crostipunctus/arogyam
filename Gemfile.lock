@@ -408,6 +408,7 @@ DEPENDENCIES
   recaptcha
   redis (~> 4.0)
   responders
+  ruby-vips (~> 2.1, >= 2.1.4)
   sassc-rails
   selenium-webdriver
   sendgrid-ruby
