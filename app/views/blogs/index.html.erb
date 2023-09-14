@@ -29,7 +29,7 @@
                   <% if blog.image.attached? %>
                       <div class="align-self-center">
                           <%# image_tag(rails_public_blob_url(package.package_image) %>
-                          <%= image_tag(rails_public_blob_url(blog.image.variant(:thumb)), class: "img-fluid rounded mb-4") %>
+                          <%= image_tag(rails_public_blob_url(blog.image), class: "img-fluid rounded mb-4") %>
                       </div>
                   <% end %>
               </div>
