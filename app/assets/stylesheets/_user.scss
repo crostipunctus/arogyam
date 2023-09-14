@@ -2143,3 +2143,14 @@ li {
   max-width: 750px;
   resize: vertical;
 }
+
+.container-custom {
+  max-width: 600px;
+}
+
+.blog-item {
+  padding: 20px;
+  background-color: rgb(245, 241, 241);
+  margin-bottom: 30px;
+  border-bottom: #333 1px solid;
+}

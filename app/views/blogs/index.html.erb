@@ -7,25 +7,39 @@
 
   <% if current_user_admin? %>
     <div class="admin">
-      <%= link_to "New post", new_blog_path, class: "text-center btn btn-outline-success btn-sm" %>
+      <%= link_to "New post", new_blog_path, class: "btn btn-outline-success btn-sm" %>
     </div>
   <% end %>
 
   <!-- Post-->
-  <article class="row g-0 border-0 mb-4">
-    <div class="col-sm-7 col-lg-8">
-      <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+ <div class="container-custom mx-auto">
+    <article class="row g-0 border-0 mb-4">
         <% @blogs.each do |blog| %>
-          <h3><%= link_to blog.title.capitalize, blog_path(blog) %></h3>
-          <% if blog.image.attached? %>
-            <%= image_tag blog.image.variant(:thumb), class: "img-fluid rounded mb-4" %>
-          <% end %>
-          <p class="mb-3"><%= blog.content %></p>
-          <div class="mb-5 text-muted fs-sm"><%= blog.created_at.strftime("%d %b %y %H:%M") %></div>
+            <div class="blog-item">
+              <div class="col-sm-12 col-lg-12 d-flex">
+                  <div class=" flex-grow-1">
+                      <h3><%= link_to blog.title.capitalize, blog_path(blog) %></h3>
+                      <% if blog.subtitle.present? %>
+                        <h5 class="mb-3"><%= blog.subtitle %></h5>
+                      <% else %>
+                        <p class="fs-lg mb-3"><%= blog.content.to_plain_text.truncate(100) %></p>
+                      <% end %>
+
+                  </div>
+                  <% if blog.image.attached? %>
+                      <div class="align-self-center">
+                          <%= image_tag blog.image.variant(:thumb), class: "img-fluid rounded mb-4" %>
+                      </div>
+                  <% end %>
+              </div>
+              <div class="col-sm-12 text-muted fs-sm mb-5">
+                  <%= blog.created_at.strftime("%d %b %y %H:%M") %>
+              </div>
+            </div>
         <% end %>
-      </div>
-    </div>
-  </article>
+    </article>
+</div>
+
 </div>
 
 

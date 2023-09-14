@@ -1,20 +1,26 @@
+<section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
 
-<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
-  <%= form_with(model: @blog) do |f|%>
-    <%# <%= @blog.errors.full_messages.to_sentence %>
-    <div class="mb-3">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :content %> 
-      <%= f.rich_text_area :content, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :image %>
-      <%= f.file_field :image, class: "form-control" %>
-    </div>
-    
-    <%= f.submit class:"btn btn-primary"%>
-  <% end %>
-</div>
+  <div data-turbo="false" class=" d-flex align-items-center justify-content-center">
+    <%= form_with(model: @blog) do |f|%>
+      <%# <%= @blog.errors.full_messages.to_sentence %>
+      <div class="mb-3">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :subtitle %>
+        <%= f.text_field :subtitle, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content %> 
+        <%= f.rich_text_area :content, class: "form-control blog-text-area" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :image, class: "form-control" %>
+      </div>
+      
+      <%= f.submit class:"btn btn-primary"%>
+    <% end %>
+  </div>
+</section>
