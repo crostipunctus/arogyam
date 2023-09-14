@@ -2137,3 +2137,9 @@ li {
 .comment-form {
   margin-bottom: 30px;
 }
+
+.blog-text-area {
+  min-height: 500px;
+  max-width: 750px;
+  resize: vertical;
+}

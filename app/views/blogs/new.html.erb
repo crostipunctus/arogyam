@@ -1,5 +1,5 @@
 
-<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
+<div data-turbo="false" class="h-100 mt-5 d-flex align-items-center justify-content-center">
   <%= form_with(model: @blog) do |f|%>
     <%# <%= @blog.errors.full_messages.to_sentence %>
     <div class="mb-3">
@@ -8,13 +8,13 @@
     </div>
     <div class="form-group">
       <%= f.label :content %> 
-      <%= f.rich_text_area :content, class: "form-control" %>
+      <%= f.rich_text_area :content, class: "form-control blog-text-area" %>
     </div>
     <div class="form-group">
       <%= f.label :image %>
       <%= f.file_field :image, class: "form-control" %>
     </div>
     
-    <%= f.submit class:"btn btn-primary"%>
+    <%= f.submit class:"btn btn-outline-success mt-3"%>
   <% end %>
 </div>
