@@ -36,6 +36,16 @@
               <div class="col-sm-12 text-muted fs-sm mb-5">
                   <%= blog.created_at.strftime("%d %b %y %H:%M") %>
               </div>
+              
+                <% if current_user_admin? %>
+                  <div class="admin">
+                    <%= link_to "Edit", edit_blog_path(blog), class: "btn btn-outline-success btn-sm" %>
+                  </div>
+                  <div class="admin">
+                    <%= link_to "Delete", blog_path(blog), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
+                  </div>
+                <% end %>
+              
             </div>
         <% end %>
     </article>
