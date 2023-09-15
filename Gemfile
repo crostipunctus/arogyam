@@ -63,6 +63,7 @@ gem "responders"
 gem "aws-sdk-s3"
 
 gem 'jquery-rails'
+
 gem 'fancybox-rails'
 
 gem 'mail_form'
@@ -79,6 +80,7 @@ gem 'sidekiq'
 gem 'sendgrid-ruby'
 
 gem 'caxlsx', '~> 3.0'
+
 gem 'caxlsx_rails'
 
 gem 'rails_admin', '~> 3.0'
@@ -88,6 +90,7 @@ gem 'kaminari'
 gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
 
 gem "sentry-ruby"
+
 gem "sentry-rails"
 
 
