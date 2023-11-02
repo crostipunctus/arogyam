@@ -52,16 +52,21 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
   end
 
-  def new 
-    @registration = Registration.new(batch_id: params[:batch_id])
+  def new
+    if session[:registration_params]
+      @registration = Registration.new(session[:registration_params])
+    else
+      @registration = Registration.new(batch_id: params[:batch_id])
+    end
+    
     if params[:package_id] && Package.exists?(params[:package_id])
       puts "Package id: #{params[:package_id]}"
       @selected_package_id = params[:package_id].to_i
     else
       @selected_package_id = nil
     end
-   
-  end 
+  end
+  
 
   def create
     puts "Registration params: #{registration_params}"
@@ -86,19 +91,33 @@ class RegistrationsController < ApplicationController
         @registration.duration = registration_params[:shamanam_duration]
       end
   
-      if @registration.save
-        RegistrationMailer.registration_email(@registration).deliver_later
-        RegistrationMailer.registration_user_email(@registration).deliver_later
-  
-        @registration.update(status: "Registered")
-        redirect_to batches_path, notice: "Registered successfully"
+      if @registration.valid?
+        session[:registration_params] = @registration.attributes
+        redirect_to review_registrations_path
       else
-        render :new, status: :unprocessable_entity 
+        render :new, status: :unprocessable_entity
       end
     end
     
   end
+
+  def review
+    @registration = Registration.new(session[:registration_params])
+  end
+
+  def confirm
+    @registration = Registration.new(session[:registration_params])
+    if @registration.save
+      session[:registration_params] = nil
+      RegistrationMailer.registration_email(@registration).deliver_later
+      RegistrationMailer.registration_user_email(@registration).deliver_later
   
+      @registration.update(status: "Registered")
+      redirect_to batches_path, notice: "Registered successfully"
+    else
+      render :review
+    end
+  end
   
   
 

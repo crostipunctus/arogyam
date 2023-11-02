@@ -1,0 +1,17 @@
+<!-- app/views/registrations/review.html.erb -->
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  <div class="Profileform">
+    <!-- Display all registration details here for review -->
+    <!-- For example: -->
+    <h3><strong>Programme:</strong> <%= @registration.package.name %></h3>
+    <h3><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %></h3>
+    <h3><strong>Cost:</strong> <%= @registration.package.cost %></h3>
+    <!-- Add other fields as needed -->
+
+    <%= form_with url: confirm_registrations_path, method: :post do %>
+      <%= hidden_field_tag :confirm, true %>
+      <%= submit_tag 'Confirm Registration', class: 'btn btn-success' %>
+    <% end %>
+    <%= link_to 'Edit', new_registration_path(session[:registration_params]), class: 'btn btn-secondary' %> <!-- This is a link to the new registration page, with the params stored in the session -->
+  </div>
+</section>

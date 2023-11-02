@@ -84,6 +84,8 @@ Rails.application.routes.draw do
     collection do
       get :export_batch
       get :export_vishraam
+      get :review
+      post :confirm
     end
   end
   
