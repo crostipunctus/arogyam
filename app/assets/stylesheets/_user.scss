@@ -2160,6 +2160,34 @@ li {
 }
 
 #uniqueCardColor {
-  background-color: #17a2b8;
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, rgb(184, 221, 108), rgb(238, 214, 184));
   /* Bootstrap's bg-info color as an example */
+}
+
+#registration_review {
+  color: rgb(28, 36, 176);
+}
+
+.advance-payment-notice {
+  font-weight: bold;
+  /* Makes text bold */
+  color: #0e0c00;
+  /* Gold color for prominence */
+  background-color: #000;
+  /* Black background for contrast */
+  padding: 10px;
+  /* Adds space around the text */
+  border-radius: 5px;
+  /* Rounds the corners of the background */
+  display: block;
+  /* Ensures the element fills the width of the container */
+  width: fit-content;
+  /* Ensures the background only takes as much width as the content */
+  margin: 20px auto;
+  /* Centers the element horizontally and adds space above */
+
+  /* Adds a subtle shadow for depth */
+  text-align: center;
+  /* Centers the text within the element */
 }

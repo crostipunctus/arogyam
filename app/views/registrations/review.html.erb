@@ -1,12 +1,10 @@
 <section class="container py-5 my-5">
   <div class="card mx-auto d-block border-0" style="max-width: 40rem;">
     <div class="card-body text-white" id="uniqueCardColor">
-      <h2 class="card-title text-center mb-4">Registration Review</h2>
+      <h2 class="card-title text-center mb-4" id="registration_review">Registration Review</h2>
       <!-- Display all registration details here for review -->
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
-        
-
         <% if @registration.package.name == "VishraM" %>
           <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 10 a.m.</li>
 
@@ -23,10 +21,12 @@
           <% else %>
             <%= days_and_nights_duration(@registration.batch) %>
           <% end %>
-        
         </li>
-        <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= number_to_currency(@registration.package.cost) %></li>
+        <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= "Rs. #{@registration.package.cost}/-" %></li>
+        
       </ul>
+<h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
+      
 
       <!-- Add other fields as needed -->
 
