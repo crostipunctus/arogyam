@@ -111,7 +111,6 @@ class RegistrationsController < ApplicationController
       session[:registration_params] = nil
       RegistrationMailer.registration_email(@registration).deliver_later
       RegistrationMailer.registration_user_email(@registration).deliver_later
-  
       @registration.update(status: "Registered")
       redirect_to batches_path, notice: "Registered successfully"
     else
