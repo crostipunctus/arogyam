@@ -1,17 +1,33 @@
-<!-- app/views/registrations/review.html.erb -->
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <div class="Profileform">
-    <!-- Display all registration details here for review -->
-    <!-- For example: -->
-    <h3><strong>Programme:</strong> <%= @registration.package.name %></h3>
-    <h3><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %></h3>
-    <h3><strong>Cost:</strong> <%= @registration.package.cost %></h3>
-    <!-- Add other fields as needed -->
+<section class="container py-5 my-5">
+  <div class="card mx-auto d-block border-0" style="max-width: 40rem;">
+    <div class="card-body text-white" id="uniqueCardColor">
+      <h2 class="card-title text-center mb-4">Registration Review</h2>
+      <!-- Display all registration details here for review -->
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
+        <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 5 p.m.</li>
+        <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(@registration.batch.end_date) %> at 11 a.m.</li>
 
-    <%= form_with url: confirm_registrations_path, method: :post do %>
-      <%= hidden_field_tag :confirm, true %>
-      <%= submit_tag 'Confirm Registration', class: 'btn btn-success' %>
-    <% end %>
-    <%= link_to 'Edit', new_registration_path(session[:registration_params]), class: 'btn btn-secondary' %> <!-- This is a link to the new registration page, with the params stored in the session -->
+        <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
+          <% if @registration.package.name == "VishraM" %>
+            <%= @registration.duration %> days 
+          <% else %>
+            <%= days_and_nights_duration(@registration.batch) %>
+          <% end %>
+        
+        </li>
+        <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= number_to_currency(@registration.package.cost) %></li>
+      </ul>
+
+      <!-- Add other fields as needed -->
+
+      <%= form_with url: confirm_registrations_path, method: :post, html: { class: 'mt-4' } do %>
+        <%= hidden_field_tag :confirm, true %>
+        <div class="text-center">
+          <%= submit_tag 'Confirm Registration', class: 'btn btn-light btn-lg' %>
+          <%= link_to 'Edit', new_registration_path(session[:registration_params]), class: 'btn btn-outline-light ms-2' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </section>

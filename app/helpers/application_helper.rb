@@ -111,6 +111,18 @@ module ApplicationHelper
   def has_profile?(user)
     user&.user_profile.present?
   end
+
+  
+
+  def days_and_nights_duration(batch)
+    "#{(batch.end_date - batch.start_date).to_i + 1} days, #{(batch.end_date - batch.start_date).to_i} nights"
+  end 
+
+ 
+
+  
+
+ 
   
   
 

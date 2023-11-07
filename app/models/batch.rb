@@ -4,6 +4,8 @@ class Batch < ApplicationRecord
 
   before_save :calculate_duration 
 
+  
+
   private 
 
   def calculate_duration 

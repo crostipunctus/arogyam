@@ -57,7 +57,7 @@ class VishraamRegistrationsController < ApplicationController
     else  
       redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
     end 
-  end 
+  end  
 
   def edit 
 
