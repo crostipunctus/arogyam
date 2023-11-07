@@ -118,6 +118,10 @@ module ApplicationHelper
     "#{(batch.end_date - batch.start_date).to_i + 1} days, #{(batch.end_date - batch.start_date).to_i} nights"
   end 
 
+  def vishraam_end_date(batch, duration)
+    batch.start_date + duration.to_i
+  end 
+
  
 
   
