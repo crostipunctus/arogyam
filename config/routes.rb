@@ -93,7 +93,12 @@ Rails.application.routes.draw do
 
   get 'batch/:id' => 'batches#pdf', as: :batch_pdf
 
-  resources :vishraam_registrations
+  resources :vishraam_registrations do 
+    collection do 
+      get :review 
+      post :confirm 
+    end 
+  end 
 
   get 'vishraam_pdf' => 'vishraam_registrations#pdf'
 

@@ -122,6 +122,14 @@ module ApplicationHelper
     batch.start_date + duration.to_i
   end 
 
+  def vishraam_cost(duration)
+    if duration == "3"
+      "Rs. 16,280"
+    else 
+      "Rs. 27,000"
+    end 
+  end 
+
  
 
   

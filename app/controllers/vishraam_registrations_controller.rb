@@ -36,7 +36,11 @@ class VishraamRegistrationsController < ApplicationController
   end 
 
   def new 
-    @vishraam_registration = VishraamRegistration.new
+    if session[:vishraam_registration_params]
+      @vishraam_registration = VishraamRegistration.new(session[:vishraam_registration_params])
+    else 
+      @vishraam_registration = VishraamRegistration.new 
+    end
   end 
 
   def create 
@@ -44,11 +48,10 @@ class VishraamRegistrationsController < ApplicationController
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       @vishraam_registration.user_id = current_user.id
       
-        if @vishraam_registration.save
-          VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
-          VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
-          @vishraam_registration.update(status: "Registered")
-          redirect_to programmes_path, notice: "Vishram registration successful"
+        if @vishraam_registration.valid? 
+          session[:vishraam_registration_params] = @vishraam_registration.attributes
+          redirect_to review_vishraam_registrations_path
+          
         else
           flash[:error] = "Vishram registration failed"
           render :new, status: :unprocessable_entity 
@@ -58,6 +61,23 @@ class VishraamRegistrationsController < ApplicationController
       redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
     end 
   end  
+
+  def review 
+    @vishraam_registration = VishraamRegistration.new(session[:vishraam_registration_params])
+  end 
+
+  def confirm 
+    @vishraam_registration = VishraamRegistration.new(session[:vishraam_registration_params])
+    if @vishraam_registration.save
+      session[:vishraam_registration_params] = nil 
+      VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
+      VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
+      @vishraam_registration.update(status: "Registered")
+      redirect_to programmes_path, notice: "Vishram registration successful"
+    else 
+      render :review 
+    end 
+  end 
 
   def edit 
 

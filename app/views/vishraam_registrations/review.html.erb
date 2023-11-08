@@ -1,0 +1,28 @@
+<section class="container py-5 my-5">
+  <div class="card mx-auto d-block border-0" style="max-width: 40rem;">
+    <div class="card-body text-white" id="uniqueCardColor">
+      <h2 class="card-title text-center mb-4" id="registration_review">VishraM Registration Review</h2>
+      <!-- Display all registration details here for review -->
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent"><strong>Programme:</strong> VishraM </li>
+        <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@vishraam_registration.date) %> at 10 a.m.</li>
+        <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(@vishraam_registration.date + @vishraam_registration.duration.to_i) %> at 11 a.m.</li>
+        <li class="list-group-item bg-transparent"><strong>Duration: <%= @vishraam_registration.duration %> days </strong>     
+        <li class="list-group-item bg-transparent"><strong>Cost: <%= vishraam_cost(@vishraam_registration.duration) %> </strong>     
+
+      </ul>
+      <h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
+      
+
+      <!-- Add other fields as needed -->
+
+      <%= form_with url: confirm_vishraam_registrations_path, method: :post, html: { class: 'mt-4' } do %>
+        <%= hidden_field_tag :confirm, true %>
+        <div class="text-center">
+          <%= submit_tag 'Confirm Registration', class: 'btn btn-light btn-lg' %>
+          <%= link_to 'Edit', new_vishraam_registration_path(session[:registration_params]), class: 'btn btn-outline-light ms-2' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
