@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'Admin@arogyam.life'
+  config.mailer_sender = 'ArogyaM@arogyam.life'
 
   config.navigational_formats = ['*/*', :html, :turbo_stream]
   config.responder.error_status = :unprocessable_entity
