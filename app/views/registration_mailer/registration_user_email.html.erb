@@ -3,13 +3,33 @@
        <%= @registration.user.first_name %>, you registered for a batch!
     </h1>
     <p class="welcome-email-text">
-      Your batch is from <%= @registration.batch.start_date %> to <%= @registration.batch.end_date %> Please visit
+<li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
+        <% if @registration.package.name == "VishraM" %>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.batch.start_date.strftime("%B #{ @registration.batch.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
+
+          <% end_date = @registration.batch.start_date + @registration.batch.duration.to_i.days %>
+          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+
+        <% else %>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.batch.start_date.strftime("%B #{ @registration.batch.start_date.day.ordinalize }, %Y") %> at 5 p.m.</li>
+
+          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= @registration.batch.end_date.strftime("%B #{ @registration.batch.end_date.day.ordinalize }, %Y") %> at 11 a.m.</li>
+        <% end %>
+        <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
+          <% if @registration.package.name == "VishraM" %>
+            <%= @registration.duration %> days 
+          <% else %>
+            <%= "#{(@registration.batch.end_date - @registration.batch.start_date).to_i + 1} days, #{(@registration.batch.end_date - @registration.batch.start_date).to_i} nights" %>
+          <% end %>
+        </li>
+        <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= "Rs. #{@registration.package.cost}" %></li>
+         Please visit
       <a href="https://www.arogyam.life" class="welcome-email-link">
         arogyam.life to cancel your registration or edit your user profile. 
       </a>
       . Please feel free to contact us at
       <a
-        href="mailto:wellnesscenter@satsang-foundation.org"
+        href="mailto:wellnesscenter@satsang-foundation.org" 
         class="welcome-email-link"
       >
         wellnesscenter@satsang-foundation.org
