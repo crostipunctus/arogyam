@@ -2,8 +2,24 @@
     <h1 class="welcome-email-title">
        <%= @vishraam_registration.user.first_name %>, you registered for the VishraM programme!
     </h1>
+     <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent"><strong>Programme:</strong> VishraM </li>
+        <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @vishraam_registration.date.strftime("%B #{ @vishraam_registration.date.day.ordinalize }, %Y") %> at 10 a.m.</li>
+        <% end_date = @vishraam_registration.date + @vishraam_registration.duration.to_i.days %>
+        <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+        <li class="list-group-item bg-transparent"><strong>Duration: <%= @vishraam_registration.duration %> days </strong>     
+        <li class="list-group-item bg-transparent"><strong>Cost: 
+          <% if @vishraam_registration.duration == "3"%>
+            <strong>Rs. 16,280</strong>
+          <% else %>
+            <strong>Rs. 27,000</strong>
+          <%end %>
+        
+
+      </ul>
+      <h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
     <p class="welcome-email-text">
-      Your programme starts on <%= @vishraam_registration.date %> and is for <%= @vishraam_registration.duration %> days. Please visit
+      Please visit
       <a href="https://www.arogyam.life" class="welcome-email-link">
         arogyam.life to cancel your registration or edit your user profile. 
       </a>
@@ -14,5 +30,5 @@
       >
         wellnesscenter@satsang-foundation.org
       </a>
-      if you have any doubts or questions.
+      if you have any questions.
     </p>
