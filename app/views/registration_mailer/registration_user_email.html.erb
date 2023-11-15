@@ -17,7 +17,7 @@
         <% end %>
         <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
           <% if @registration.package.name == "VishraM" %>
-            <%= @registration.duration %> days 
+            <%= @registration.duration %> days
           <% else %>
             <%= "#{(@registration.batch.end_date - @registration.batch.start_date).to_i + 1} days, #{(@registration.batch.end_date - @registration.batch.start_date).to_i} nights" %>
           <% end %>
