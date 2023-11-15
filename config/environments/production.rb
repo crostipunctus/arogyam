@@ -10,18 +10,19 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.action_mailer.delivery_method = :smtp
-  host = 'arogyam.life' #replace with your own url
+  host = 'ArogyaM.life' #replace with your own url
   config.action_mailer.default_url_options = { host: host }
 
 # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => Rails.application.credentials.gmail[:username],
-    :password             => Rails.application.credentials.gmail[:password],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
+config.action_mailer.smtp_settings = {
+  address: 'smtp.sendgrid.net',
+  port: 587,
+  domain: 'ArogyaM.life', # Replace with your domain
+  user_name: 'apikey', # This is the literal username
+  password: Rails.application.credentials.sendgrid[:api_key],
+  authentication: :plain,
+  enable_starttls_auto: true
+}
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
