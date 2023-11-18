@@ -130,6 +130,18 @@ module ApplicationHelper
     end 
   end 
 
+  
+  def display_country_name(country_code)
+    if country_code.present?
+      country = Carmen::Country.coded(country_code)
+      country ? country.name : 'Unknown Country'
+    else
+      'No country specified'
+    end
+  end
+  
+  
+
  
 
   

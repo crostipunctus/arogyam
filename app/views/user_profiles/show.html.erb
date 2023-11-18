@@ -18,11 +18,11 @@
       <li><strong>Address:</strong> <%= @profile.address %></li>
       <li><strong>City:</strong> <%= @profile.city %></li>
       <li><strong>ZIP:</strong> <%= @profile.zip %></li>
-      <li><strong>Country:</strong> <%= @profile.country %></li>
+      <li><strong>Country:</strong> <%= display_country_name(@profile.country) %></li>
       <li><strong>Phone Number:</strong> <%= @profile.phone_number %></li>
       <li><strong>Alternate Phone Number:</strong> <%= @profile.alternate_phone_number %></li>
       <li><strong>Doctor Contact Details:</strong> <%= @profile.doctor_contact_details %></li>
-      <li><strong>Nationality:</strong> <%= @profile.nationality %></li>
+      <li><strong>Nationality:</strong> <%= display_country_name(@profile.nationality) %></li>
       <li><strong>Marital Status:</strong> <%= @profile.marital_status %></li>
       <li><strong>Occupation:</strong> <%= @profile.occupation %></li>
     </ul>
