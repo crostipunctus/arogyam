@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   get "programmes" => "packages#index", as: :programmes
   get "programme/:id" => "packages#show", as: :programme 
   get "programme/:id/edit" => "packages#edit", as: :edit_package
-  patch "programme/:id" => "packages#update"
+  patch "programme/:id" => "packages#update" 
 
   
   get "about" => "about#index"

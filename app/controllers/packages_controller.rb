@@ -8,8 +8,15 @@ class PackagesController < ApplicationController
   end 
 
   def show 
+    Rails.logger.info "Looking for package with slug: #{params[:id]}"
     @package = Package.find_by!(slug: params[:id])
-  end 
+    if @package
+      Rails.logger.info "Package found: #{@package}"
+    else
+      Rails.logger.error "Package not found for slug: #{params[:id]}"
+      redirect_to programmes_path, notice: "Package not found"
+    end
+  end   
 
   def new 
     @package = Package.new 
