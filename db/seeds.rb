@@ -23,7 +23,7 @@ Batch.destroy_all
 Package.destroy_all
 
 
-User.destroy_all
+# User.destroy_all
 
 
 # Iterate through the date ranges and create Batch records
