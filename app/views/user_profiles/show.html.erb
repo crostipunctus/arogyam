@@ -126,17 +126,19 @@
 
 
 <% if current_user_admin? %>
-<div class="personal-info">
-  <h2>All Users</h2>
-  <% @users.each do |user|%>
-    <% if !user.admin? %>
-      <ul>
-        <li><%= link_to user_full_name(user), user_profile_path(user), class: "nav-link" %></li>
-      </ul>
+  <div class="personal-info">
+    <h2>All Users</h2>
+    <%= turbo_frame_tag "users_list" do %>
+      <% @users.each do |user| %>
+        <ul>
+          <li><%= link_to user_full_name(user), user_profile_path(user), class: "nav-link", target: "_top"  %></li>
+        </ul>
+      <% end %>
+      <%= paginate @users %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
-</div>
+
 
 
 
