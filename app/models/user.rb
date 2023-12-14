@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  
+
+  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,7 +22,7 @@ class User < ApplicationRecord
 
   attr_accessor :privacy_policy
   validates :privacy_policy, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
-
+  
   # check if profile associated with the user has been created. 
 
   def confirm(*args, &block)
@@ -39,4 +43,8 @@ class User < ApplicationRecord
     online_consultations.exists?
   end
 
+ 
+
+
 end
+ 

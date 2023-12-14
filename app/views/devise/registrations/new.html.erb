@@ -1,12 +1,35 @@
+<script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key]%>"></script>
+<script>
+  function submitForm(e) {
+    e.preventDefault();
+    const form = document.getElementById("registration_form");
+
+    grecaptcha.ready(function() {
+      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'register'}).then(function(token) {
+        const input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "recaptcha_token");
+        input.setAttribute("value", token);
+        form.appendChild(input);
+
+        form.submit();
+      }).catch(function(error) {
+        console.error("Error during reCAPTCHA execution:", error);
+      });
+    });
+  }
+</script>
+  
+
 <%= page_title 'Sign up' %>
 <main class="page-wrapper d-flex  justify-content-center" style="min-height: 100vh;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div id="signinCard" class="border-0 bg-success py-md-3 py-lg-4 px-lg-4 px-xl-5">
-          <div>
+          <div> 
             <h1 id="signup" class="py-2 pb-lg-3">Sign Up</h1>
-            <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+            <%= form_for(resource, as: resource_name, url: user_registration_path, html: { id: "registration_form" }) do |f| %>
               <%= render "shared/errors", object: resource %>
               <div class="pb-3 mb-3">
                 <div class="position-relative mb-3">
@@ -38,7 +61,7 @@
                     <%= f.label :privacy_policy, sanitize("I accept the #{link_to 'Privacy Policy', privacy_policy_path}"), class: 'form-check-label' %>
                   </div>
                 <div class="actions">
-                  <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4" %>
+                  <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4", onclick: "submitForm(event)" %>
                 </div>
               <% end %>
               <%= render "devise/shared/links" %>

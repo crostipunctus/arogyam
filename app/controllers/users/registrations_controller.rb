@@ -13,9 +13,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    
+    recaptcha_token = params[:recaptcha_token]
+    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'register')
 
+    if recaptcha_success
+      super
+    else
+      self.resource = resource_class.new sign_up_params
+      resource.validate # Check for other validation errors besides reCAPTCHA
+      set_minimum_password_length
+      respond_with_navigational(resource) { render :new }
+    end
   end
 
   #GET /resource/edit
@@ -46,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :privacy_policy])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :privacy_policy, :recaptcha_token])
     
   end
 
@@ -64,4 +72,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+ 
 end
