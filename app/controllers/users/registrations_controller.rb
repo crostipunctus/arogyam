@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  after_action :subscribe_to_newsletter, only: [:create]
   respond_to :html, :json
   # before_action :configure_account_update_params, only: [:update]
 
@@ -55,8 +56,38 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :privacy_policy, :recaptcha_token])
-    
   end
+
+  private 
+
+  def subscribe_to_newsletter
+    if resource.persisted? && resource.newsletter_subscription == "1"
+      if Rails.env.development?
+        # Log the action instead of making an API call in development
+        Rails.logger.info "Newsletter subscription: Would subscribe #{resource.email} to newsletter in production."
+      else
+        # Actual subscription logic for non-development environments
+        gibbon = Gibbon::Request.new(api_key: Rails.application.credentials.gibbon[:api])
+        list_id = "5b6215d26b" # Replace with your actual list ID
+  
+        begin
+          response = gibbon.lists(list_id).members.create(
+            body: {
+              email_address: resource.email,
+              status: "subscribed"
+            }
+          )
+          flash[:notice] = "You have been successfully subscribed to the newsletter."
+        rescue Gibbon::MailChimpError => e
+          handle_mailchimp_error(e)
+        end
+      end
+    else
+      flash[:alert] = "There was an error with the CAPTCHA verification. Please try again."
+    end
+  end
+  
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

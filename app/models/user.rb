@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
 
   attr_accessor :privacy_policy
+  attr_accessor :newsletter_subscription
+
   validates :privacy_policy, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
   
   # check if profile associated with the user has been created. 

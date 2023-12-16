@@ -60,6 +60,11 @@
                     <%= f.check_box :privacy_policy, { class: 'form-check-input', value: true } %>
                     <%= f.label :privacy_policy, sanitize("I accept the #{link_to 'Privacy Policy', privacy_policy_path}"), class: 'form-check-label' %>
                   </div>
+                  <div class="field mb-3">
+                    <%= f.check_box :newsletter_subscription, class: 'form-check-input', value: "1", unchecked_value: "0" %>
+                    <%= f.label :newsletter_subscription, "Subscribe to our Newsletter", class: 'form-check-label' %>
+
+                  </div>
                 <div class="actions">
                   <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4", onclick: "submitForm(event)" %>
                 </div>

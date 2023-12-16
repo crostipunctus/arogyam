@@ -23,7 +23,6 @@
       <%= link_to "Explore programmes", programmes_path, class: "HomePageButton btn btn-outline-primary rounded-pill"%>
       <%= link_to "Online Consultations", online_consultations_path, class: "HomePageButton  btn btn-outline-primary rounded-pill"%>
       <%# <%= link_to "Customized programmes", " ", class: "orangeButton explorebutton btn btn-outline-primary rounded-pill"%> 
-        
     </div>
   </div>
 </div>
@@ -58,7 +57,7 @@
             <%= form.email_field :email, class: "form-control", placeholder: "Enter your email address", id: "newsletter" %>
             <div class="mt-3 g-recaptcha" data-sitekey="<%= Rails.application.credentials.recaptcha_v2[:site_key] %>"></div>
             <%= form.submit "Subscribe", class: "btn btn-outline rounded-pill mt-3", id: "newsletterSubmit" %>
-          <% end %>
+        <% end %>
       </div>   
     </div>
   </div>
