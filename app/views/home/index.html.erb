@@ -1,4 +1,6 @@
   <%= page_title 'Arogyam: The Wellness Center' %>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
   <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring-small.jpg);">
       <div class="big-logo"><%= image_tag(dev_images("big-logo-2.png"), alt: 'big-logo') %></div>
       <div class="newlogo">
@@ -54,12 +56,13 @@
           <div class="form-group">
             <%= form.label :email, "Email", class: "custom-label mb-2" %>
             <%= form.email_field :email, class: "form-control", placeholder: "Enter your email address", id: "newsletter" %>
+            <div class="g-recaptcha" data-sitekey="<%= Rails.application.credentials.recaptcha_v2[:site_key] %>"></div>
             <%= form.submit "Subscribe", class: "btn btn-outline rounded-pill mt-3", id: "newsletterSubmit" %>
           <% end %>
       </div>   
     </div>
   </div>
-</section>  
+</section>   
 
 
 
