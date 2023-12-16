@@ -87,6 +87,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
   
+  def handle_mailchimp_error(e)
+    Rails.logger.error "MailChimpError: #{e.message}"
+    flash[:alert] = "There was an error with the newsletter subscription. Please try again."
+  end
 
 
   # If you have extra params to permit, append them to the sanitizer.
