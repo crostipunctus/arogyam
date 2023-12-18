@@ -7,29 +7,18 @@
         <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
         <% if @registration.package.name == "VishraM" %>
           <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 10 a.m.</li>
-
           <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(vishraam_end_date(@registration.batch, @registration.duration)) %> at 11 a.m.</li>
-
         <% else %>
-                <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 5 p.m.</li>
-
-          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(@registration.batch.end_date) %> at 11 a.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 5 p.m.</li>
         <% end %>
-        <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
           <% if @registration.package.name == "VishraM" %>
+          <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
             <%= @registration.duration %> days 
-          <% else %>
-            <%= days_and_nights_duration(@registration.batch) %>
           <% end %>
         </li>
         <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= "Rs. #{@registration.package.cost}" %></li>
-        
       </ul>
-<h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
-      
-
-      <!-- Add other fields as needed -->
-
+      <h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
       <%= form_with url: confirm_registrations_path, method: :post, html: { class: 'mt-4' } do %>
         <%= hidden_field_tag :confirm, true %>
         <div class="text-center">

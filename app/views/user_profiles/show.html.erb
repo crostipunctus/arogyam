@@ -38,13 +38,13 @@
 
 
 <div class="registrations">
-<h3>Batch Registrations:</h3>
+<h2>Batch Registrations:</h2>
 <% registrations_found = false %>
 <% @user.batches.uniq { |batch| batch.id }.each do |batch|%>
   <% latest_non_cancelled_registration = batch.registrations.reject(&:cancelled).sort_by(&:created_at).last %>
   <% if latest_non_cancelled_registration %>
     <% registrations_found = true %>
-    <h4>Batch: <%= batch_date_range(latest_non_cancelled_registration.batch) %>:</h4>
+    <h5><%= formatted_date(latest_non_cancelled_registration.batch.start_date) %></h5>
     <%= button_to "Cancel", registration_path(latest_non_cancelled_registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
   <% end %>
 <% end %>

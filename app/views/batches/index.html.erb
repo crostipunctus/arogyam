@@ -16,11 +16,7 @@
               <div class="border p-3 rounded <%= is_nearest_batch(batch, @batches) ? 'nearest_batch' : '' %>">
                 <div class="mb-3">
                   <div class="card-flex">
-                    <% if current_user_admin? %>
-                      <h5><%= link_to batch_date_range(batch), batch_path(batch) %></h5>
-                    <% else %>
-                      <h5><%= batch_date_range(batch) %></h5>
-                    <% end %>
+                    <h5><%= formatted_date(batch.start_date) %></h5>
                     <% if is_nearest_batch(batch, @batches) %>
                       <h6  class="coming-up">Coming up in <%= (batch.start_date - Date.today).to_i %> <%= (batch.start_date - Date.today).to_i == 1 ? "day" : "days" %></h6>
                     <% end %>

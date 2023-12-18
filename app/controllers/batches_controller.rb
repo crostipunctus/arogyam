@@ -29,10 +29,7 @@ class BatchesController < ApplicationController
     end 
   end 
 
-  def show 
-    @batch = Batch.find(params[:id])
-    @students = @batch.users
-  end 
+  
 
   def edit  
     @batch = Batch.find(params[:id])
