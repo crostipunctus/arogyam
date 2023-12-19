@@ -10,6 +10,8 @@
           <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(vishraam_end_date(@registration.batch, @registration.duration)) %> at 11 a.m.</li>
         <% else %>
           <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@registration.batch.start_date) %> at 5 p.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @registration.package.duration %></li>
+          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(registration_end_date(@registration)) %> at 11 a.m.</li>
         <% end %>
           <% if @registration.package.name == "VishraM" %>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> 

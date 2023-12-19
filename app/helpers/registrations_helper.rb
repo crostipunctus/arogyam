@@ -10,4 +10,8 @@ module RegistrationsHelper
       ''
     end
   end
+
+  def registration_end_date(registration)
+    registration.batch.start_date + registration.package.duration.to_i
+  end
 end

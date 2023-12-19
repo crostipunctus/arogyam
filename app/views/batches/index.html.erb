@@ -22,9 +22,7 @@
                     <% end %>
                   </div>
                 </div>
-                <ul class="list-unstyled mb-3">
-                  <li><strong>Duration:</strong> <%= "#{batch.duration} days" %></li>
-                </ul>
+                
                 <div data-controller="profile-checker" data-profile-checker-has-profile="<%= has_profile?(current_user) %>">
                   <% if current_user && registration = Registration.find_by(user_id: current_user.id, batch_id: batch.id, cancelled: false) %>
                     
