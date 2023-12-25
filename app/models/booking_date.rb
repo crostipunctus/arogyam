@@ -22,7 +22,7 @@ class BookingDate < ApplicationRecord
       end
     end
 
-   AddDayWorker.perform_async unless already_queued? 
+  #  AddDayWorker.perform_async unless already_queued? 
    end
   
  
