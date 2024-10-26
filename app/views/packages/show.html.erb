@@ -3,6 +3,21 @@
    <%= link_to "<i class='bi bi-arrow-left-circle'></i>".html_safe, :back, id:"back_to", data: {turbo: false} %>
     <h1 id="packageName" class="text-center"><%= @package.name %></h1>
     <div id="packageTagline"><%= @package.short_description %></div>
+
+    <div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-6 text-center">
+        <% if current_user && !has_profile?(current_user) %>
+          <div class="mb-4" id="PleaseCreateProfileHeading">
+            <h5 class="mb-3">Please create your user profile before registering for a batch</h5>
+            <%= link_to "Create user profile", new_user_profile_path(current_user), class: "btn btn-outline-primary rounded-pill btn-sm", id: "PleaseCreateProfile" %>
+          </div> 
+        <% elsif current_user && has_profile?(current_user) %>
+          <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
     
     <div class="durationCostContainer">
       <div class="packageDuration"><%= "#{@package.duration} days"%></div>
@@ -13,8 +28,7 @@
         <% else %>
           <div id="registerBatch" class="registerBatch package-titles"><strong>Please sign in to register for this programme: <%= link_to "Sign in", new_user_session_path, class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>        
         <% end %>
-      <% else %>
-        <div id="registerBatch" class="registerBatch package-titles"><strong>Please register for a batch to avail this programme: <%= link_to "Register", batches_path(package_id: @package.id), class: "bookProgButton btn btn-outline-primary rounded-pill" %></strong></div>
+      
       <% end %>
     </div>
     <div id="package-image" class="package-image">

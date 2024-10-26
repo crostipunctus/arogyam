@@ -30,7 +30,7 @@
                     <% if registration.status != "Completed" %>
                       <%= button_to "Cancel", registration_path(registration), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {action: "click->profile-checker#checkProfile"} %> 
                     <% else %>
-                      <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
+                      <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %> 
                     <% end %>
                   <% elsif current_user %>
                     <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
