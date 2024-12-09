@@ -1,6 +1,5 @@
 class Registration < ApplicationRecord
   belongs_to :user 
-  belongs_to :batch 
   belongs_to :package
   attr_accessor :agreement
   attr_accessor :terms

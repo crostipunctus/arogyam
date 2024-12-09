@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_14_050721) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_26_004254) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -162,7 +162,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_050721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.integer "batch_id", null: false
     t.integer "package_id"
     t.text "substances"
     t.text "lifestyle"
@@ -174,7 +173,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_050721) do
     t.boolean "cancelled"
     t.string "duration"
     t.string "shamanam_duration"
-    t.index ["batch_id"], name: "index_registrations_on_batch_id"
     t.index ["package_id"], name: "index_registrations_on_package_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
@@ -258,7 +256,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_050721) do
   add_foreign_key "case_sheets", "users"
   add_foreign_key "online_consultations", "booking_dates"
   add_foreign_key "online_consultations", "users"
-  add_foreign_key "registrations", "batches"
   add_foreign_key "registrations", "packages"
   add_foreign_key "registrations", "users"
   add_foreign_key "user_profiles", "users"

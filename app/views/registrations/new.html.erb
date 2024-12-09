@@ -7,7 +7,6 @@
      <h5>Please fill in the following details to complete your registration. All fields marked with * are mandatory.</h5>
     <%= form_with(model: @registration) do |f|%>
       <%= render 'shared/errors', object: @registration %> 
-     <%= f.hidden_field :batch_id %>
         <div class="mb-3"> 
         <% if @selected_package_id == nil %>
           <%= f.label :package_id, "Programme *" %> 

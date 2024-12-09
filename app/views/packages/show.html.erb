@@ -12,8 +12,8 @@
             <h5 class="mb-3">Please create your user profile before registering for a batch</h5>
             <%= link_to "Create user profile", new_user_profile_path(current_user), class: "btn btn-outline-primary rounded-pill btn-sm", id: "PleaseCreateProfile" %>
           </div> 
-        <% elsif current_user && has_profile?(current_user) %>
-          <%= link_to "Register", new_registration_path(batch_id: batch.id, package_id: @selected_package_id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
+          <% elsif current_user && has_profile?(current_user) %>
+          <%= link_to "Register", new_registration_path(package_id: @package.id), class: "btn btn-outline-primary rounded-pill", id: "registerButton", data: {turbo: false, action: "click->profile-checker#checkProfile"} %>
         <% end %>
       </div>
     </div>

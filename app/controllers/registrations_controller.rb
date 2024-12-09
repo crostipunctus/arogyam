@@ -12,17 +12,17 @@ class RegistrationsController < ApplicationController
     when 'completed'
       @registrations = Registration.where(completed: true).page(params[:page]).per(10)
     when 'upcoming'
-      @registrations = Registration.joins(:batch)
-                             .where(cancelled: false, completed: false)
-                             .where('batches.start_date > ?', Date.today).page(params[:page])
+      @registrations = Registration.where(cancelled: false, completed: false)
+                                 .where('created_at > ?', Date.today)
+                                 .page(params[:page])
     when 'payment_complete'
       @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
       @registrations = Registration.where(status: 'Payment Pending').page(params[:page]).per(10)
     else
-      @registrations = Registration.joins(:batch)
-      .where(cancelled: false, completed: false)
-      .where('batches.start_date > ?', Date.today).page(params[:page])
+      @registrations = Registration.where(cancelled: false, completed: false)
+                                 .where('created_at > ?', Date.today)
+                                 .page(params[:page])
     end
     @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
     .where(cancelled: false, completed: false)
@@ -53,10 +53,12 @@ class RegistrationsController < ApplicationController
   end
 
   def new
+    @registration = Registration.new  # Always initialize
+
     if session[:registration_params]
+      puts "Session registration params: #{session[:registration_params]}"
       @registration = Registration.new(session[:registration_params])
-    else
-      @registration = Registration.new(batch_id: params[:batch_id])
+      
     end
     
     if params[:package_id] && Package.exists?(params[:package_id])
@@ -70,18 +72,13 @@ class RegistrationsController < ApplicationController
 
   def create
     puts "Registration params: #{registration_params}"
-    @batch = Batch.find(params[:registration][:batch_id])
     
-    if Registration.exists?(user: current_user, batch_id: @batch.id, status: "Registered")
-      registration = Registration.find_by(user: current_user, batch_id: @batch.id)
-     
-      redirect_to batches_path, alert: "You have already registered for this batch"
+    if Registration.exists?(user: current_user, status: "Registered")
+      redirect_to packages_path, alert: "You have already registered for this programme"
     else
-      @batch = Batch.find(params[:registration][:batch_id])
       @package = Package.find(params[:registration][:package_id])
       @registration = Registration.new(registration_params)
       @registration.user = current_user
-      @registration.batch = @batch
       @registration.package = @package
   
       # Determine which duration field to use based on the package_id
@@ -98,7 +95,6 @@ class RegistrationsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     end
-    
   end
 
   def review
@@ -128,7 +124,6 @@ class RegistrationsController < ApplicationController
   def update
     # when save comments button is clicked the status is updated to blank 
     @registration = Registration.find(params[:id])
-    @batch = @registration.batch
     puts "Registration params: #{registration_params}"
     respond_to do |format|
       # Check if status is blank
@@ -161,7 +156,7 @@ class RegistrationsController < ApplicationController
 
   def destroy 
     @registration = Registration.find(params[:id])
-    @batch = @registration.batch
+   
     RegistrationMailer.registration_cancel_user_email(@registration).deliver_later
     RegistrationMailer.registration_cancel_email(@registration).deliver_later
 
@@ -173,7 +168,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :shamanam_duration, :package_id, :batch_id)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :shamanam_duration, :package_id)
   end 
 
  
