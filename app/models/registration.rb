@@ -11,7 +11,7 @@ class Registration < ApplicationRecord
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
   validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
   validates :terms, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
-
+  validates :start_date, presence: true
   
   private 
 

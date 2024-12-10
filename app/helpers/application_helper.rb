@@ -143,6 +143,10 @@ module ApplicationHelper
       country_input
     end
   end
+
+  def registration_end_date(registration, package)
+    registration.start_date + package.duration.to_i
+  end
   
   
 

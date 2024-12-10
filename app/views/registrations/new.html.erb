@@ -16,7 +16,10 @@
         <% end %>
         <%= f.collection_select :package_id, Package.all, :id, :name, { selected: @selected_package_id, prompt: "Select a package" }, class: "form-control", id: "package-select" %>
       </div>
-
+      <div class="mb-3">
+        <%= f.label :start_date, "Start Date *" %>
+      <%= f.date_field :start_date, class: "form-control" %>
+    </div>
 
         <div id="vishram-days" class="mb-3" style="display: none;">
           <%= f.label :duration, "Duration *" %>

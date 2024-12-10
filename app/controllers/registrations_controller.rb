@@ -108,7 +108,7 @@ class RegistrationsController < ApplicationController
       RegistrationMailer.registration_email(@registration).deliver_later
       RegistrationMailer.registration_user_email(@registration).deliver_later
       @registration.update(status: "Registered")
-      redirect_to batches_path, notice: "Registered successfully"
+      redirect_to root_path, notice: "Registered successfully"
     else
       render :review
     end
@@ -168,7 +168,7 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :shamanam_duration, :package_id)
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :start_date, :shamanam_duration, :package_id)
   end 
 
  

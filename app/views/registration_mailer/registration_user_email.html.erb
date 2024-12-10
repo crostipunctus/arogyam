@@ -1,20 +1,20 @@
     <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
     <h1 class="welcome-email-title">
-       <%= @registration.user.first_name %>, you registered for a batch!
+       <%= @registration.user.first_name %>, you registered for a health programme!
     </h1>
     <p class="welcome-email-text">
 <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
         <% if @registration.package.name == "VishraM" %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.batch.start_date.strftime("%B #{ @registration.batch.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
             <%= @registration.duration %> days  </li>
-          <% end_date = @registration.batch.start_date + @registration.duration.to_i.days %>
+          <% end_date = @registration.start_date + @registration.duration.to_i.days %>
           <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
 
         <% else %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.batch.start_date.strftime("%B #{ @registration.batch.start_date.day.ordinalize }, %Y") %> at 5 p.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 5 p.m.</li>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @registration.package.duration %></li>
-          <% end_date = @registration.batch.start_date + @registration.package.duration.to_i.days %>
+          <% end_date = @registration.start_date + @registration.package.duration.to_i.days %>
           <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
         <% end %>
 

@@ -6,9 +6,11 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
         <% if @registration.package.name == "VishraM" %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> 'Vishraam duration' at 10 a.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
         <% else %>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @registration.package.duration %></li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
+
         <% end %>
           <% if @registration.package.name == "VishraM" %>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
