@@ -33,10 +33,14 @@ class RegistrationsController < ApplicationController
   end
 
   def export_batch
-    @batches = Batch.joins(:registrations).includes(registrations: { user: :user_profile }).distinct
+    @registrations = Registration.includes(user: :user_profile)
+                               .order(created_at: :desc)
   
     respond_to do |format|
-      format.xlsx { render xlsx: 'registrations', filename: 'registrations.xlsx' }
+      format.xlsx { 
+        render xlsx: 'registrations', 
+        filename: "registrations-#{Date.today.strftime("%Y%m%d")}.xlsx" 
+      }
     end
   end
 
@@ -165,11 +169,67 @@ class RegistrationsController < ApplicationController
     redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
   end 
 
+
+  def pdf
+    @registrations = Registration.where(cancelled: false)
+                               .includes(user: :user_profile)
+                               .order(created_at: :desc)
+  
+    respond_to do |format|
+      format.pdf do
+        html = render_to_string(inline: render_table)
+        kit = PDFKit.new(html)
+        file = kit.to_file('registrations_table.pdf')
+        send_file(
+          file.path,
+          filename: 'registrations_table.pdf',
+          type: 'application/pdf',
+          disposition: 'attachment'
+        )
+      end
+      
+      format.xlsx do
+        response.headers['Content-Disposition'] = 'attachment; filename="registrations.xlsx"'
+        render xlsx: 'registrations'  # Changed from 'pdf' to 'registrations' to match your template name
+      end
+    end
+  end
+
+
   private 
 
   def registration_params
     params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :start_date, :shamanam_duration, :package_id)
   end 
+
+
+def render_table
+  <<-HTML
+  <h1>Registrations List</h1>
+  <table style="width: 100%; font-size: 12pt; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Name</th>
+        <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Email</th>
+        <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Programme</th>
+        <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Start Date</th>
+        <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @registrations.each do |registration| %>
+        <tr style="background-color: <%= cycle('#ccffd9', '#e6ffec') %>;">
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.package.name %></td>
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.start_date.strftime("%d-%m-%Y") %></td>
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  HTML
+end
 
  
 

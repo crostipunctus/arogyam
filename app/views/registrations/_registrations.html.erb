@@ -5,6 +5,7 @@
         <th>Full Name</th>
         <th>Email</th>
         <th>Programme</th>
+        <th>Start Date</th>
         <th>Status</th>
         <th>Comments</th>
         <th>Actions</th> 
@@ -17,6 +18,7 @@
               <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
               <td data-th="Email"><%= registration.user.email %></td>
               <td data-th="Programme"><%= registration.package.name %></td>
+              <td data-th="Start Date"><%= registration.start_date.strftime("%d-%m-%Y")  %></td>
               <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">            
                 <span data-status-target="status"><%= registration.status %></span>
                 <% if registration.status != 'Cancelled' %>

@@ -86,6 +86,7 @@ Rails.application.routes.draw do
       get :export_vishraam
       get :review
       post :confirm
+      get :pdf
     end
   end
   

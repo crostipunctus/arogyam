@@ -8,7 +8,7 @@
   
   <%= render 'registrations' %>
   
-  <%= link_to 'Download Registrations Excel', export_batch_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
+  <%= link_to 'Download Registrations Excel', pdf_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
   
   <h1 class="vishraam_reg_heading">Vishram Registrations (not in a batch)</h1>
 
