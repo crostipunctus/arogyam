@@ -44,22 +44,51 @@ class VishraamRegistrationsController < ApplicationController
   end 
 
   def create 
+    puts "\n=== Starting Vishraam Registration Create ==="
+    puts "Params received: #{params.inspect}"
+    puts "Current user: #{current_user.inspect}"
+    puts "Current user has profile? #{current_user.user_profile.present?}"
+    
     if current_user.user_profile
+      puts "\n--- Building Registration ---"
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       @vishraam_registration.user_id = current_user.id
       
-        if @vishraam_registration.valid? 
-          session[:vishraam_registration_params] = @vishraam_registration.attributes
-          redirect_to review_vishraam_registrations_path
-          
-        else
-          flash[:error] = "Vishram registration failed"
-          render :new, status: :unprocessable_entity 
-        end
+      puts "Registration params: #{vishraam_registration_params.inspect}"
+      puts "New registration object: #{@vishraam_registration.inspect}"
+      puts "Registration valid? #{@vishraam_registration.valid?}"
       
+      if !@vishraam_registration.valid?
+        puts "\n--- Validation Errors ---"
+        puts @vishraam_registration.errors.full_messages
+      end
+      
+      if @vishraam_registration.valid? 
+        puts "\n--- Registration Valid, Proceeding ---"
+        session[:vishraam_registration_params] = @vishraam_registration.attributes
+        puts "Session params set: #{session[:vishraam_registration_params].inspect}"
+        puts "Redirecting to review page"
+        redirect_to review_vishraam_registrations_path
+      else
+        puts "\n--- Registration Invalid ---"
+        puts "Rendering new with errors"
+        flash.now[:error] = "Vishram registration failed: #{@vishraam_registration.errors.full_messages.join(', ')}"
+        render :new, status: :unprocessable_entity 
+      end
     else  
-      redirect_to new_user_profile_path(user_id: current_user.id), alert: "Please complete your profile before registering for a batch"
+      puts "\n--- No User Profile Found ---"
+      puts "Redirecting to profile creation"
+      redirect_to new_user_profile_path(user_id: current_user.id), 
+                  alert: "Please complete your profile before registering for a batch"
     end 
+    puts "=== End of Create Action ===\n"
+  rescue => e
+    puts "\n!!! ERROR !!!"
+    puts "Error class: #{e.class}"
+    puts "Error message: #{e.message}"
+    puts "Backtrace:"
+    puts e.backtrace[0..5]
+    raise e
   end  
 
   def review 
