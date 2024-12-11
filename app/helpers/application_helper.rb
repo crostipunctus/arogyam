@@ -43,9 +43,7 @@ module ApplicationHelper
     "#{user.first_name.capitalize} #{user.last_name.capitalize}"
   end
  
-  def batch_date_range(batch)
-    formatted_date(batch.start_date) + " - " + formatted_date(batch.end_date)
-  end 
+  
 
   def formatted_created_at_date(date)
     date = DateTime.parse(date)
@@ -114,13 +112,8 @@ module ApplicationHelper
 
   
 
-  def days_and_nights_duration(batch)
-    "#{(batch.end_date - batch.start_date).to_i + 1} days, #{(batch.end_date - batch.start_date).to_i} nights"
-  end 
 
-  def vishraam_end_date(batch, duration)
-    batch.start_date + duration.to_i
-  end 
+
 
   def vishraam_cost(duration)
     if duration == "3"

@@ -28,7 +28,7 @@ class RegistrationsController < ApplicationController
     .where(cancelled: false, completed: false)
     .page(params[:page])
     @online_consultations = OnlineConsultation.all
-    @batches = Batch.all 
+    
     
   end
 

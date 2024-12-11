@@ -78,7 +78,6 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:index, :create]
 
-  resources :batches 
 
   resources :registrations do
     collection do
@@ -92,7 +91,7 @@ Rails.application.routes.draw do
   
   get 'pdf' => 'registrations#pdf'
 
-  get 'batch/:id' => 'batches#pdf', as: :batch_pdf
+  
 
   resources :vishraam_registrations do 
     collection do 

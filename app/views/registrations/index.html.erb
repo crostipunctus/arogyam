@@ -10,7 +10,7 @@
   
   <%= link_to 'Download Registrations Excel', pdf_registrations_path(format: :xlsx), class: 'mt-5 btn btn-outline-primary rounded-pill' %>
   
-  <h1 class="vishraam_reg_heading">Vishram Registrations (not in a batch)</h1>
+  <h1 class="vishraam_reg_heading">Vishram Registrations</h1>
 
   <div class="form-group mb-3">
     <%= form_with url: vishraam_registrations_path, method: :get, data: {turbo_frame: "vishram_registrations_table", controller: "form", action: "click=>form#submit"} do |form| %>
