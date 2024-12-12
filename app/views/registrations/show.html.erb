@@ -8,7 +8,8 @@
         <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM"%>
           <li>Duration: <%= @registration.duration %> days</li>
         <% end %>
-        <li>Start Date:<%= formatted_date_with_year(@registration.start_date.to_s) %></li>
+
+        <li>Start Date:<%= formatted_date_with_year(@registration.start_date.to_s) || 'Not set' %></li>
         <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
         <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
         <li>Email: <%= @registration.user.email %></li>
@@ -24,7 +25,7 @@
         <li>Marital Status: <%= @registration.user.user_profile.marital_status %></li>
         <li>Status: <%= @registration.status %></li>
         <% if @registration.cancelled == true %>
-          <li>Cancelled: Yes</li>
+          <li>Cancelled: Yes</li> 
         <% end %>
 
         
