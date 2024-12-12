@@ -57,45 +57,57 @@ class RegistrationsController < ApplicationController
   end
 
   def new
+    Rails.logger.debug "Starting new registration action"
     @registration = Registration.new  # Always initialize
-
+    Rails.logger.debug "Initialized new registration object"
+  
     if session[:registration_params]
-      puts "Session registration params: #{session[:registration_params]}"
+      Rails.logger.debug "Found registration params in session: #{session[:registration_params]}"
       @registration = Registration.new(session[:registration_params])
-      
+      Rails.logger.debug "Created registration from session params"
     end
     
     if params[:package_id] && Package.exists?(params[:package_id])
-      puts "Package id: #{params[:package_id]}"
+      Rails.logger.debug "Package ID from params: #{params[:package_id]}"
       @selected_package_id = params[:package_id].to_i
+      Rails.logger.debug "Set selected_package_id to: #{@selected_package_id}"
     else
+      Rails.logger.debug "No valid package_id found in params"
       @selected_package_id = nil
     end
   end
   
-
   def create
-    puts "Registration params: #{registration_params}"
+    Rails.logger.debug "Starting create registration action"
+    Rails.logger.debug "Registration params received: #{registration_params}"
     
-    if Registration.exists?(user: current_user, status: "Registered")
+    if Registration.exists?(user: current_user, status: ["Registered", "Payment Pending"])
+      Rails.logger.debug "User already has an active registration"
       redirect_to packages_path, alert: "You have already registered for this programme"
     else
+      Rails.logger.debug "Finding package with ID: #{params[:registration][:package_id]}"
       @package = Package.find(params[:registration][:package_id])
+      Rails.logger.debug "Found package: #{@package.inspect}"
+      
       @registration = Registration.new(registration_params)
       @registration.user = current_user
       @registration.package = @package
-  
-      # Determine which duration field to use based on the package_id
+      
+      Rails.logger.debug "Setting duration based on package type"
       if @package.name == 'VishraM'
         @registration.duration = registration_params[:duration]
-      elsif @package.name == 'ShamanaM'
-        @registration.duration = registration_params[:shamanam_duration]
+        Rails.logger.debug "Set VishraM duration to: #{@registration.duration}"
+      else
+        @registration.duration = @package.duration
+        Rails.logger.debug "Set fixed package duration to: #{@registration.duration}"
       end
   
       if @registration.valid?
+        Rails.logger.debug "Registration is valid, saving to session"
         session[:registration_params] = @registration.attributes
         redirect_to review_registrations_path
       else
+        Rails.logger.error "Registration validation failed: #{@registration.errors.full_messages}"
         render :new, status: :unprocessable_entity
       end
     end
