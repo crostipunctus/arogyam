@@ -37,22 +37,7 @@
 
 
 
-<div class="registrations">
-<h2>Batch Registrations:</h2>
-<% registrations_found = false %>
-<% @user.batches.uniq { |batch| batch.id }.each do |batch|%>
-  <% latest_non_cancelled_registration = batch.registrations.reject(&:cancelled).sort_by(&:created_at).last %>
-  <% if latest_non_cancelled_registration %>
-    <% registrations_found = true %>
-    <h5><%= formatted_date(latest_non_cancelled_registration.batch.start_date) %></h5>
-    <%= button_to "Cancel", registration_path(latest_non_cancelled_registration), method: :delete, class: "btn btn-outline-danger rounded-pill btn-sm", form: { data: { 'turbo-confirm': 'Are you sure?' } }, id: "registerButton" %> 
-  <% end %>
-<% end %>
 
-<% unless registrations_found %>
-  <h4>No registrations found.</h4>
-  <%= link_to "Register", batches_path, class: "btn btn-outline-danger rounded-pill" %>
-<% end %>
 
   
 
@@ -63,7 +48,7 @@
 
 
  
-</div>
+
 <div class="registrations">
   <% if @user.vishraam_registrations.exists? %>
   <h3>Your Vishram Registrations are:</h3>
