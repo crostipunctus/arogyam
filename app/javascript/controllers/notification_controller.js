@@ -4,9 +4,22 @@ export default class extends Controller {
   static targets = ["message"];
 
   connect() {
+    // Check for message on initial connect
     if (this.messageTarget.textContent.trim() !== "") {
       this.showNotification();
     }
+
+    // Listen for Turbo Drive events
+    document.addEventListener("turbo:load", () => {
+      if (this.messageTarget.textContent.trim() !== "") {
+        this.showNotification();
+      }
+    });
+  }
+
+  disconnect() {
+    // Clean up event listener when controller is disconnected
+    document.removeEventListener("turbo:load", this.showNotification);
   }
 
   showNotification() {
@@ -36,8 +49,8 @@ export default class extends Controller {
       messageContent.includes("sign in") ||
       messageContent.includes("sign up") ||
       messageContent.includes("please complete your profile") ||
-      messageContent.includes("not authorized")
-
+      messageContent.includes("not authorized") ||
+      messageContent.includes("please cancel your current registration")
     ) {
       this.element.classList.add("error");
     } else {

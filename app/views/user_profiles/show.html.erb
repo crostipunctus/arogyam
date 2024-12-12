@@ -35,39 +35,32 @@
   </div>
   
 
-
-
-
-
-  
-
-
-
-
-
-
-
- 
-
-<div class="registrations">
-  <% if @user.vishraam_registrations.exists? %>
-  <h3>Your Vishram Registrations are:</h3>
-  <ul>
-    <% @user.vishraam_registrations.each do |vishraam| %>
-    <div class="cancelBatch">
-      <li><%= "#{formatted_date(vishraam.date)} for #{vishraam.duration} days" %></li>
-      <% if vishraam.cancelled %>
-        <span class="badge bg-danger fs-sm">Cancelled</span>
-      <% else %>
-        <%= button_to "Cancel", vishraam_registration_path(vishraam), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger rounded-pill btn-sm" %>
+  <div class="registrations">
+  <% if @user.registrations.exists? %>
+    <h3>Your Programme Registrations are:</h3>
+    <ul>
+      <% @user.registrations.each do |registration| %>
+        <div class="cancelBatch">
+          <li>
+            <%= "#{registration.package.name} starting from #{formatted_date(registration.start_date)} for #{registration.duration} days" %>
+            <% if registration.status == 'Payment Pending' %>
+              <span class="badge bg-warning fs-sm">Payment Pending</span>
+            <% end %>
+          </li>
+          <% if registration.cancelled %>
+            <span class="badge bg-danger fs-sm">Cancelled</span>
+          <% else %>
+            <%= button_to "Cancel", registration_path(registration), method: :delete, 
+                form: { data: { 'turbo-confirm': 'Are you sure?' } }, 
+                class: "btn btn-outline-danger rounded-pill btn-sm" %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
-    <% end %>
-  </ul>
-<% else %>
-  <h5>You have not registered for Vishraam</h5>
-  <%= link_to "Register", new_vishraam_registration_path, class: "btn btn-outline-danger rounded-pill" %>
-<% end %>
+    </ul>
+  <% else %>
+    <h5>You have not registered for any programmes</h5>
+    <%= link_to "Register", packages_path, class: "btn btn-outline-danger rounded-pill" %>
+  <% end %>
 </div>
 
 <div class="registrations">
