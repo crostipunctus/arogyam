@@ -42,7 +42,11 @@
       <% @user.registrations.each do |registration| %>
         <div class="cancelBatch">
           <li>
-            <%= "#{registration.package.name} starting from #{formatted_date(registration.start_date)} for #{registration.duration} days" %>
+            <%= registration.package.name %>
+            <% if registration.start_date %>
+              starting from <%= formatted_date(registration.start_date) %>
+            <% end %>
+            for <%= registration.duration %> days
             <% if registration.status == 'Payment Pending' %>
               <span class="badge bg-warning fs-sm">Payment Pending</span>
             <% end %>
