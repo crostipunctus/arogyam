@@ -121,6 +121,9 @@ group :development do
   gem 'ed25519', '~> 1.3'
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'capistrano-sidekiq'
+  gem 'net-ssh', '~> 7.1.0'
+  gem 'rbnacl', '~> 7.1'
+gem 'rbnacl-libsodium'
  
 
 

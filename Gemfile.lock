@@ -91,7 +91,8 @@ GEM
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
-    bcrypt_pbkdf (1.1.0)
+    bcrypt_pbkdf (1.1.1)
+    bcrypt_pbkdf (1.1.1-x86_64-darwin)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -245,7 +246,7 @@ GEM
       digest
       net-protocol
       timeout
-    net-ssh (7.0.0.beta1)
+    net-ssh (7.1.0)
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
@@ -294,6 +295,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rbnacl (7.1.2)
+      ffi (~> 1)
+    rbnacl-libsodium (1.0.16)
+      rbnacl (>= 3.0.1)
     recaptcha (5.14.0)
     redis (4.8.0)
     redis-client (0.14.1)
@@ -420,10 +425,13 @@ DEPENDENCIES
   jsbundling-rails
   kaminari
   mail_form
+  net-ssh (~> 7.1.0)
   pg
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails_admin (~> 3.0)
+  rbnacl (~> 7.1)
+  rbnacl-libsodium
   recaptcha
   redis (~> 4.0)
   responders
