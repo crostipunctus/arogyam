@@ -52,7 +52,9 @@ module ApplicationHelper
   end
 
   def formatted_date_with_year(date)
-    date = DateTime.parse(date)
+    return 'Not set' if date.blank?
+    
+    date = date.is_a?(String) ? DateTime.parse(date) : date
     date.strftime('%B %-dth, %Y')
   end
 
