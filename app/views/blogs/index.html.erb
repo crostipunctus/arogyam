@@ -5,6 +5,10 @@
     <h1 class="cardHeading packages text-center">Blog</h1>    
   </div>
 
+  <div class="alert alert-info text-center p-4 mb-4" style="background-color: #d0f6ea; border: none;">
+    <h3 class="display-6 mb-0">Coming Soon</h3>
+  </div>
+
   <% if current_user_admin? %>
     <div class="admin">
       <%= link_to "New post", new_blog_path, class: "btn btn-outline-success btn-sm" %>
