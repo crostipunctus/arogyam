@@ -1481,17 +1481,16 @@ img {
 
 .home_buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Changed to flex-start to align with text above */
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
   margin-top: 20px;
 }
-
 /* This will make the div width only as wide as its content */
 
 @media screen and (max-width: 990px) {
   .home_buttons {
-    justify-content: center;
+    justify-content: left;
   }
 }
 
