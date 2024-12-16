@@ -83,7 +83,10 @@ class RegistrationsController < ApplicationController
     
     if Registration.exists?(user: current_user, status: ["Registered", "Payment Pending"])
       Rails.logger.debug "User already has an active registration"
-      redirect_to packages_path, alert: "Please cancel your current registration or complete payment for it before booking another programme.", status: :see_other
+      flash.now[:alert] = "Please cancel your current registration or complete payment for it before booking another programme."
+      @registration = Registration.new(registration_params)
+      @selected_package_id = params[:registration][:package_id]
+      render :new, status: :unprocessable_entity
     else
       Rails.logger.debug "Finding package with ID: #{params[:registration][:package_id]}"
       @package = Package.find(params[:registration][:package_id])

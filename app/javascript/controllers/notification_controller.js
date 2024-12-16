@@ -61,6 +61,6 @@ export default class extends Controller {
     this.element.classList.add("visible");
     setTimeout(() => {
       this.element.classList.remove("visible");
-    }, 3000);
+    }, 5000);
   }
 }

@@ -7,7 +7,8 @@
         <h2 class="text-center mb-4">Registration Form</h2>
         
         <%= form_with(model: @registration) do |f|%>
-          <%= render 'shared/errors', object: @registration %> 
+          <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
+
 
           <div class="mb-4"> 
             <% if @selected_package_id == nil %>
