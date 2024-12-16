@@ -14,12 +14,11 @@
             <% if !has_profile?(current_user) %>
               <div id="PleaseCreateProfileHeading">
                 <i class="bi bi-person-plus fs-1 text-primary mb-3 d-block"></i>
-                <h5 class="mb-3">Complete Your Profile</h5>
-                <p class="text-muted mb-4">Please create your profile to register for a programme</p>
+                <p class="text-muted mb-4">Please create or complete your profile to register for a programme</p>
                 <%= link_to new_user_profile_path(current_user), 
-                    class: "btn btn-primary rounded-pill px-4", 
+                    class: "btn btn-outline-primary rounded-pill px-4", 
                     id: "PleaseCreateProfile" do %>
-                  <i class="bi bi-person-circle me-2"></i>Create Profile
+                  <i class="bi bi-person-circle me-2"></i>Go to Profile
                 <% end %>
               </div>
             <% else %>
