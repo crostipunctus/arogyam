@@ -4,7 +4,13 @@ module ApplicationHelper
     link_to image_tag('https://d1w11gv0j27jrz.cloudfront.net/symbol.png', class: "no-border-radius", width: 20, alt: 'symbol'), root_path, data: {turbo: false}
   end 
 
- 
+  def has_active_registration?(user)
+    user.registrations.where(
+      cancelled: false, 
+      completed: false,
+      status: ['Registered', 'Payment Pending', 'Payment Completed']
+    ).where('start_date >= ? OR start_date IS NULL', Date.today).exists?
+  end
 
   def get_current_url
     request.original_url

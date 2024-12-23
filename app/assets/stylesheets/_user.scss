@@ -1607,6 +1607,14 @@ tbody tr:hover {
 
 }
 
+.active-registration-notice {
+  opacity: 0.8;
+  
+  .text-muted {
+    font-weight: 500;
+  }
+}
+
 #registeredButton {
   background-color: transparent;
   color: #ed5050;

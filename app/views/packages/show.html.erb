@@ -10,28 +10,37 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-6">
         <div class="registration-prompt p-4 rounded-3 mb-4 text-center">
-          <% if current_user %>
-            <% if !has_profile?(current_user) %>
-              <div id="PleaseCreateProfileHeading">
-                <i class="bi bi-person-plus fs-1 text-primary mb-3 d-block"></i>
-                <p class="text-muted mb-4">Please create or complete your profile to register for a programme</p>
-                <%= link_to new_user_profile_path(current_user), 
-                    class: "btn btn-outline-primary rounded-pill px-4", 
-                    id: "PleaseCreateProfile" do %>
-                  <i class="bi bi-person-circle me-2"></i>Go to Profile
-                <% end %>
-              </div>
-            <% else %>
-              <i class="bi bi-calendar-check fs-1 text-primary mb-3 d-block"></i>
-              <h5 class="mb-3">Ready to Join?</h5>
-              <%= link_to new_registration_path(package_id: @package.id), 
+        <% if current_user %>
+          <% if !has_profile?(current_user) %>
+            <div id="PleaseCreateProfileHeading">
+              <i class="bi bi-person-plus fs-1 text-primary mb-3 d-block"></i>
+              <p class="text-muted mb-4">Please create or complete your profile to register for a programme</p>
+              <%= link_to new_user_profile_path(current_user), 
                   class: "btn btn-outline-primary rounded-pill px-4", 
-                  id: "registerButton",
-                  data: {turbo: false, action: "click->profile-checker#checkProfile"} do %>
-                <i class="bi bi-arrow-right-circle me-2"></i>Register Now
+                  id: "PleaseCreateProfile" do %>
+                <i class="bi bi-person-circle me-2"></i>Go to Profile
               <% end %>
-            <% end %>
+            </div>
+          <% elsif has_active_registration?(current_user) %>
+            <div class="active-registration-notice">
+              <i class="bi bi-exclamation-circle fs-1 text-warning mb-3 d-block"></i>
+              <p class="text-muted mb-4">Please cancel your current active registration to register for another programme</p>
+              <%= link_to registrations_path, 
+                  class: "btn btn-outline-warning rounded-pill px-4" do %>
+                <i class="bi bi-arrow-right-circle me-2"></i>View My Registrations
+              <% end %>
+            </div>
           <% else %>
+            <i class="bi bi-calendar-check fs-1 text-primary mb-3 d-block"></i>
+            <h5 class="mb-3">Ready to Join?</h5>
+            <%= link_to new_registration_path(package_id: @package.id), 
+                class: "btn btn-outline-primary rounded-pill px-4", 
+                id: "registerButton",
+                data: {turbo: false, action: "click->profile-checker#checkProfile"} do %>
+              <i class="bi bi-arrow-right-circle me-2"></i>Register Now
+            <% end %>
+          <% end %>
+      <% else %>
             <i class="bi bi-box-arrow-in-right fs-1 text-primary mb-3 d-block"></i>
             <p class="text-muted mb-4">Please sign in to register for this batch</p>
             <%= link_to new_user_session_path, 

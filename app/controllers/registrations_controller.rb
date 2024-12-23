@@ -82,7 +82,7 @@ class RegistrationsController < ApplicationController
     Rails.logger.debug "Starting create registration action"
     Rails.logger.debug "Registration params received: #{registration_params}"
     
-    if Registration.exists?(user: current_user, status: ["Registered", "Payment Pending"])
+    if has_active_registration?(current_user)  # Use the helper method here
       Rails.logger.debug "User already has an active registration"
       flash.now[:alert] = "Please cancel your current registration or complete payment for it before booking another programme."
       @registration = Registration.new(registration_params)
