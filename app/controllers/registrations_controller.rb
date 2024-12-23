@@ -13,17 +13,20 @@ class RegistrationsController < ApplicationController
       @registrations = Registration.where(completed: true).page(params[:page]).per(10)
     when 'upcoming'
       @registrations = Registration.where(cancelled: false, completed: false)
-                                 .where('start_date >= ? OR start_date IS NULL', Date.today)
-                                 .page(params[:page])
-                                 .per(10)
+                               .where('start_date >= ? OR start_date IS NULL', Date.current)  # Changed from Date.today
+                               .order(start_date: :asc, created_at: :desc)  # Added ordering
+                               .page(params[:page])
+                               .per(10)
     when 'payment_complete'
       @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
       @registrations = Registration.where(status: 'Payment Pending').page(params[:page]).per(10)
     else
       @registrations = Registration.where(cancelled: false, completed: false)
-                                 .where('created_at > ?', Date.today)
-                                 .page(params[:page])
+                               .where('start_date >= ? OR start_date IS NULL', Date.current)  # Changed from created_at comparison
+                               .order(start_date: :asc, created_at: :desc)  # Added ordering
+                               .page(params[:page])
+                               .per(10)
     end
     @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
     .where(cancelled: false, completed: false)
