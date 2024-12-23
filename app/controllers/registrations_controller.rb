@@ -13,8 +13,9 @@ class RegistrationsController < ApplicationController
       @registrations = Registration.where(completed: true).page(params[:page]).per(10)
     when 'upcoming'
       @registrations = Registration.where(cancelled: false, completed: false)
-                                 .where('created_at > ?', Date.today)
+                                 .where('start_date >= ? OR start_date IS NULL', Date.today)
                                  .page(params[:page])
+                                 .per(10)
     when 'payment_complete'
       @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
