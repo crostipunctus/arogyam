@@ -239,13 +239,15 @@ def render_table
         <th style="padding: 8px 10px; text-align: left; border: 1px solid #000; background-color: #e0e0e0; font-weight: bold;">Status</th>
       </tr>
     </thead>
-    <tbody>
+     <tbody>
       <% @registrations.each do |registration| %>
         <tr style="background-color: <%= cycle('#ccffd9', '#e6ffec') %>;">
           <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
           <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
           <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.package.name %></td>
-          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.start_date.strftime("%d-%m-%Y") %></td>
+          <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;">
+            <%= registration.start_date ? registration.start_date.strftime("%B #{registration.start_date.day.ordinalize}, %Y") : 'Not set' %>
+          </td>
           <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.status %></td>
         </tr>
       <% end %>
