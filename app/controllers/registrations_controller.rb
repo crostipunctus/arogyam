@@ -193,8 +193,10 @@ class RegistrationsController < ApplicationController
 
   def pdf
     @registrations = Registration.where(cancelled: false)
+                               .where('start_date >= ? OR (start_date IS NULL AND created_at >= ?)', 
+                                     Date.current, 30.days.ago)
                                .includes(user: :user_profile)
-                               .order(created_at: :desc)
+                               .order(start_date: :asc, created_at: :desc)
   
     respond_to do |format|
       format.pdf do
@@ -203,15 +205,15 @@ class RegistrationsController < ApplicationController
         file = kit.to_file('registrations_table.pdf')
         send_file(
           file.path,
-          filename: 'registrations_table.pdf',
+          filename: "upcoming_registrations-#{Date.current.strftime("%Y%m%d")}.pdf",
           type: 'application/pdf',
           disposition: 'attachment'
         )
       end
       
       format.xlsx do
-        response.headers['Content-Disposition'] = 'attachment; filename="registrations.xlsx"'
-        render xlsx: 'registrations'  # Changed from 'pdf' to 'registrations' to match your template name
+        response.headers['Content-Disposition'] = 'attachment; filename="upcoming_registrations.xlsx"'
+        render xlsx: 'registrations'
       end
     end
   end
