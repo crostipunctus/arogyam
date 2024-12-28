@@ -12,6 +12,7 @@ module Arogyam
     config.load_defaults 7.0
 
     config.active_job.queue_adapter = :sidekiq
+    config.action_mailer.deliver_later_queue_name = :mailers
     
     config.time_zone = 'Asia/Kolkata'
 
