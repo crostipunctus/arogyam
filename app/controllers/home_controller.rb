@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index 
-    @packages = Package.all
+    @packages = Package.with_attached_package_image.all
   end 
 
  def test 
