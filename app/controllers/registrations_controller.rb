@@ -4,38 +4,40 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update ]
   
   def index 
-    case params[:filter]
+    base_query = Registration.includes(:package, :user, user: :user_profile)
+
+    @registrations = case params[:filter]
     when 'all'
-      @registrations = Registration.all.page(params[:page]).per(10)
+      base_query.page(params[:page]).per(10)
     when 'cancelled'
-      @registrations = Registration.where(cancelled: true).page(params[:page]).per(10)
+      base_query.where(cancelled: true).page(params[:page]).per(10)
     when 'completed'
-      @registrations = Registration.where(completed: true).page(params[:page]).per(10)
+      base_query.where(completed: true).page(params[:page]).per(10)
     when 'upcoming'
-      @registrations = Registration.where(cancelled: false, completed: false)
-                               .where('start_date >= ? OR (start_date IS NULL AND created_at >= ?)', 
-                                     Date.current, 30.days.ago)  # Show recent registrations without start dates
-                               .order(start_date: :asc, created_at: :desc)
-                               .page(params[:page])
-                               .per(10)
+      base_query.where(cancelled: false, completed: false)
+              .where('start_date >= ? OR (start_date IS NULL AND created_at >= ?)', 
+                    Date.current, 30.days.ago)
+              .order(start_date: :asc, created_at: :desc)
+              .page(params[:page])
+              .per(10)
     when 'payment_complete'
-      @registrations = Registration.where(status: 'Payment Completed').page(params[:page]).per(10)
+      base_query.where(status: 'Payment Completed').page(params[:page]).per(10)
     when 'payment_pending'
-      @registrations = Registration.where(status: 'Payment Pending').page(params[:page]).per(10)
+      base_query.where(status: 'Payment Pending').page(params[:page]).per(10)
     else
-      @registrations = Registration.where(cancelled: false, completed: false)
-                              .where('start_date >= ? OR (start_date IS NULL AND created_at >= ?)', 
-                                    Date.current, 30.days.ago)  # Show recent registrations without start dates
-                              .order(start_date: :asc, created_at: :desc)
-                              .page(params[:page])
-                              .per(10)
+      base_query.where(cancelled: false, completed: false)
+              .where('start_date >= ? OR (start_date IS NULL AND created_at >= ?)', 
+                    Date.current, 30.days.ago)
+              .order(start_date: :asc, created_at: :desc)
+              .page(params[:page])
+              .per(10)
     end
-    @vishraam_registrations = VishraamRegistration.where("date > ?", Date.today)
-    .where(cancelled: false, completed: false)
-    .page(params[:page])
-    @online_consultations = OnlineConsultation.all
-    
-    
+
+    @vishraam_registrations = VishraamRegistration.includes(:user)
+                                                 .where("date > ?", Date.today)
+                                                 .where(cancelled: false, completed: false)
+                                                 .page(params[:page])
+    @online_consultations = OnlineConsultation.includes(:user)
   end
 
   def export_batch
