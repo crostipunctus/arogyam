@@ -5,9 +5,9 @@ class GalleryController < ApplicationController
 
   def index 
     if Rails.env.development? || Rails.env.test?
-      @gallery = Gallery.find(13)
+      @gallery = Gallery.with_attached_images.find(13)
     else
-      @gallery = Gallery.find(2)
+      @gallery = Gallery.with_attached_images.find(2)
     end
     @images = @gallery.images
   end 
