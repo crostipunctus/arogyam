@@ -4,6 +4,7 @@ class UserProfilesController < ApplicationController
   before_action :set_user
 
   def show
+    @user = User.includes(registrations: :package).find(params[:user_id])
     @users = User.order(:first_name, :last_name).page(params[:page]).per(10)
     @profile = @user.user_profile
     @confirmed_consultations = @user.online_consultations.select { |consultation| consultation.status != 'cancelled' }.sort_by { |consultation| -consultation.created_at.to_i }
