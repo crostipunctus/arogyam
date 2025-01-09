@@ -4,7 +4,9 @@ class PackagesController < ApplicationController
   before_action :require_admin, only: [:new, :edit, :create, :destroy]
 
   def index 
-    @packages = Package.order(:name) 
+    @packages = Package.with_attached_package_image
+                      .includes(:registrations)
+                      .order(:name)
   end 
 
   def show 
