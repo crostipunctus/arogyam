@@ -48,21 +48,32 @@
   </div>
 </section>
 
-<section class="container py-2 mt-2 mb-md-3 mb-lg-4 mb-xxl-5">
-  <div class="form-container py-5">
-    <div class="row">
-      <div class="col-md-6 d-flex align-items-center">
-        <h2 class="newsletterHeading mb-0">SUBSCRIBE TO OUR NEWSLETTER</h2>
+<section class="arogyam-newsletter-section">
+  <div class="arogyam-newsletter-wrapper">
+    <div class="arogyam-newsletter-inner">
+      <div class="arogyam-newsletter-header">
+        <h2>Join Our Community</h2>
+        <p>Subscribe to receive wellness tips, event updates, and other insights.</p>
       </div>
-      <div class="col-md-6">
-        <%= form_with(model: NewsletterSubscription.new, url: newsletter_subscriptions_path, local: true) do |form| %>
-          <div class="form-group">
-            <%= form.label :email, "Email", class: "custom-label mb-2" %>
-            <%= form.email_field :email, class: "form-control", placeholder: "Enter your email address", id: "newsletter" %>
-            <div class="mt-3 g-recaptcha" data-sitekey="<%= Rails.application.credentials.recaptcha_v2[:site_key] %>"></div>
-            <%= form.submit "Subscribe", class: "btn btn-outline rounded-pill mt-3", id: "newsletterSubmit" %>
-        <% end %>
-      </div>   
+      
+      <%= form_with(model: NewsletterSubscription.new, 
+                    url: newsletter_subscriptions_path, 
+                    local: true, 
+                    class: "arogyam-newsletter-form") do |form| %>
+        <div class="arogyam-newsletter-input-group">
+          <%= form.email_field :email, 
+              class: "arogyam-newsletter-email", 
+              placeholder: "Enter your email address", 
+              id: "newsletter",
+              required: true %>
+          <%= form.submit "Subscribe", 
+              class: "arogyam-newsletter-submit", 
+              id: "newsletterSubmit" %>
+        </div>
+        <div class="arogyam-newsletter-recaptcha">
+          <div class="g-recaptcha" data-sitekey="<%= Rails.application.credentials.recaptcha_v2[:site_key] %>"></div>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>   
