@@ -6,7 +6,6 @@
       <% if current_user_admin? %>
         <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link" %></li>
       <% end %>
-      <li class="nav-item"><%= link_to "Gallery", gallery_index_path, class: "nav-link", data: {turbo: false}%></li>
 
       <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link", data: {turbo: false}%></li>
 
