@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_cache_headers, if: -> { request.get? }
 
   def after_sign_in_path_for(resource_or_scope)
 
@@ -59,6 +60,11 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:recaptcha_token, :newsletter_subscription])
+  end
+
+  def set_cache_headers
+    response.headers["Cache-Control"] = "public, max-age=31536000"
+    response.headers["Expires"] = 1.year.from_now.to_formatted_s(:rfc822)
   end
 
  
