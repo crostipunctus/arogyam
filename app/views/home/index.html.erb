@@ -1,9 +1,9 @@
   <%= page_title 'Arogyam: The Wellness Center' %>
 
   <%# Preload critical background image %>
-  <link rel="preload" href="https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp" as="image">
+  <link rel="preload" href="https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp" as="image" fetchpriority="high">
 
-  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp);">
+  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed-small.webp);">
       <div class="big-logo">
           <%= image_tag(dev_images("big-logo-2.png"), alt: 'big-logo', loading: 'eager', width: '300', height: '150') %>
       </div>
@@ -50,7 +50,12 @@
         <% end %>
       </div>
     <% else %>
-      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", width: 800, data: {fancybox: 'imageGallery'}, alt: 'placeholder-flower') %>
+      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", 
+                    width: 800, 
+                    height: 600, 
+                    loading: 'lazy',
+                    data: {fancybox: 'imageGallery'}, 
+                    alt: 'placeholder-flower') %>
     <% end %>
   </div>
 </section>
@@ -86,6 +91,18 @@
 </section>   
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+  // Load the actual background image after page load
+  window.addEventListener('load', function() {
+    const cover = document.querySelector('.cover');
+    const img = new Image();
+    img.onload = function() {
+      cover.style.backgroundImage = 'url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp)';
+    };
+    img.src = 'https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp';
+  });
+</script>
 
 
 
