@@ -30,11 +30,107 @@
     .newlogo {
       margin-top: 0;
     }
+    /* Critical font styles */
+    @font-face {
+      font-family: 'Nanum Myeongjo';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: local('Nanum Myeongjo'), url(https://fonts.gstatic.com/s/nanummyeongjo/v22/9Btx3DZF0dXLMZlywRbVRNhxy2pXV1A0.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* Critical Swiper styles */
+    .swiper-container {
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      z-index: 1;
+    }
+    /* Critical Fancybox styles */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-gap: 15px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    /* Newsletter section styles */
+    .arogyam-newsletter-section {
+      background-color: #f8f9fa;
+      padding: 3rem 0;
+    }
+    .arogyam-newsletter-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    .arogyam-newsletter-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .arogyam-newsletter-input-group {
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 1rem;
+    }
+    .arogyam-newsletter-email {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 1px solid #ced4da;
+      border-radius: 20px 0 0 20px;
+      outline: none;
+    }
+    .arogyam-newsletter-submit {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      cursor: pointer;
+    }
     /* Add other critical styles here */
   </style>
 
   <%# Preload critical background image with proper priority %>
   <link rel="preload" href="https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp" as="image" fetchpriority="high" type="image/webp">
+  
+  <%# Preload critical fonts %>
+  <link rel="preload" href="https://fonts.gstatic.com/s/nanummyeongjo/v22/9Btx3DZF0dXLMZlywRbVRNhxy2pXV1A0.woff2" as="font" type="font/woff2" crossorigin>
+
+  <%# Defer non-critical CSS %>
+  <link rel="stylesheet" href="/assets/swiper.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/assets/actiontext.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox/dist/jquery.fancybox.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" media="print" onload="this.media='all'">
+  
+  <%# Fallback for browsers that don't support onload for link elements %>
+  <noscript>
+    <link rel="stylesheet" href="/assets/swiper.css">
+    <link rel="stylesheet" href="/assets/actiontext.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css">
+  </noscript>
+  
+  <%# Load Google Fonts with display=swap for better performance %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Barlow&family=Courier+Prime&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Barlow&family=Courier+Prime&display=swap">
+  </noscript>
 
   <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed-small.webp);" id="coverElement">
       <div class="big-logo">
@@ -151,6 +247,28 @@
       }
     };
     img.src = 'https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp';
+  }
+  
+  // Lazy load remaining CSS
+  function loadDeferredStyles() {
+    const stylesheets = [
+      '/assets/application.css'
+      // Add any other non-critical stylesheets here
+    ];
+    
+    stylesheets.forEach(href => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      document.head.appendChild(link);
+    });
+  }
+  
+  // Load remaining styles after page is interactive
+  if (window.requestIdleCallback) {
+    requestIdleCallback(loadDeferredStyles);
+  } else {
+    setTimeout(loadDeferredStyles, 3000);
   }
 </script>
 
