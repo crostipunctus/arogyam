@@ -160,7 +160,7 @@
 
 <section class="container py-4 mt-4">
   <div class="gallery-container">  
-    <% if gallery_index.images.attached? %>
+      <% if gallery_index && gallery_index.images.attached? %>
       <div class="gallery-grid">
         <% gallery_index.images.each do |image| %>
           <div class="gallery-item">

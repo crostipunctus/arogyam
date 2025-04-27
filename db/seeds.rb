@@ -19,7 +19,7 @@ date_ranges = [
 
 
 # Clear existing data to avoid duplicates when seeding
-Batch.destroy_all
+#Batch.destroy_all
 Package.destroy_all
 
 
@@ -27,12 +27,7 @@ Package.destroy_all
 
 
 # Iterate through the date ranges and create Batch records
-date_ranges.each do |start_date, end_date|
-  Batch.create!(
-    start_date: Date.parse(start_date),
-    end_date: Date.parse(end_date),
-  )
-end
+
 
 # Create Package records
 Package.create!(name: "VishraM", short_description: "Rest and rejuvenation", duration: "10 days", cost: "10000")  

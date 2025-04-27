@@ -99,6 +99,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
     bcrypt_pbkdf (1.1.1)
+    bcrypt_pbkdf (1.1.1-arm64-darwin)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
     bindex (0.8.1)
     bootsnap (1.13.0)
@@ -256,7 +257,9 @@ GEM
       timeout
     net-ssh (7.1.0)
     netrc (0.11.0)
-    nio4r (2.5.8)
+    nio4r (2.7.4)
+    nokogiri (1.13.8-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
@@ -362,6 +365,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.5.0-arm64-darwin)
     sqlite3 (1.5.0-x86_64-darwin)
     sqlite3 (1.5.0-x86_64-linux)
     sshkit (1.21.3)
@@ -401,6 +405,7 @@ GEM
     zeitwerk (2.6.0)
 
 PLATFORMS
+  arm64-darwin-24
   x86_64-darwin-21
   x86_64-linux
 
