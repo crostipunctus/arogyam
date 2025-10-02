@@ -13,16 +13,16 @@ Rails.application.configure do
   host = 'ArogyaM.life' #replace with your own url
   config.action_mailer.default_url_options = { host: host }
 
-# SMTP settings for gmail
-config.action_mailer.smtp_settings = {
-  address: 'smtp.sendgrid.net',
-  port: 587,
-  domain: 'ArogyaM.life', # Replace with your domain
-  user_name: 'apikey', # This is the literal username
-  password: Rails.application.credentials.sendgrid[:api_key],
-  authentication: :plain,
-  enable_starttls_auto: true
-}
+  # SMTP settings for Amazon SES
+  config.action_mailer.smtp_settings = {
+    address: 'email-smtp.us-east-1.amazonaws.com', # Change region if needed
+    port: 587,
+    domain: 'ArogyaM.life',
+    user_name: Rails.application.credentials.dig(:aws_ses, :smtp_username),
+    password: Rails.application.credentials.dig(:aws_ses, :smtp_password),
+    authentication: :login,
+    enable_starttls_auto: true
+  }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers

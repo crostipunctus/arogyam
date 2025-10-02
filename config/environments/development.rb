@@ -11,9 +11,23 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  # Option 1: Use MailCatcher (default - recommended for development)
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
   config.action_mailer.raise_delivery_errors = false
+  
+  # Option 2: Use AWS SES (uncomment to test real email sending)
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'email-smtp.ap-northeast-1.amazonaws.com',
+  #   port: 587,
+  #   domain: 'localhost',
+  #   user_name: Rails.application.credentials.dig(:aws_ses, :smtp_username),
+  #   password: Rails.application.credentials.dig(:aws_ses, :smtp_password),
+  #   authentication: :login,
+  #   enable_starttls_auto: true
+  # }
+  # config.action_mailer.raise_delivery_errors = true
   
 
   
