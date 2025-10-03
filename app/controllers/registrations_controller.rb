@@ -132,8 +132,8 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(session[:registration_params])
     if @registration.save
       session[:registration_params] = nil
-      RegistrationMailer.registration_email(@registration).deliver_later
-      RegistrationMailer.registration_user_email(@registration).deliver_later
+      RegistrationMailer.registration_email(@registration).deliver_now
+      RegistrationMailer.registration_user_email(@registration).deliver_now
       @registration.update(status: "Registered")
       redirect_to root_path, notice: "Registered successfully"
     else
@@ -184,8 +184,8 @@ class RegistrationsController < ApplicationController
   def destroy 
     @registration = Registration.find(params[:id])
    
-    RegistrationMailer.registration_cancel_user_email(@registration).deliver_later
-    RegistrationMailer.registration_cancel_email(@registration).deliver_later
+    RegistrationMailer.registration_cancel_user_email(@registration).deliver_now
+    RegistrationMailer.registration_cancel_email(@registration).deliver_now
 
     @registration.update(cancelled: true, status: "Cancelled")
     
