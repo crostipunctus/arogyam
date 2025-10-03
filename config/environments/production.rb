@@ -15,7 +15,7 @@ Rails.application.configure do
 
   # SMTP settings for Amazon SES
   config.action_mailer.smtp_settings = {
-    address: 'email-smtp.us-east-1.amazonaws.com', # Change region if needed
+    address: 'email-smtp.ap-northeast-1.amazonaws.com', # Change region if needed
     port: 587,
     domain: 'ArogyaM.life',
     user_name: Rails.application.credentials.dig(:aws_ses, :smtp_username),
