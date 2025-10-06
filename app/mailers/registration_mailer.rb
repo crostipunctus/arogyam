@@ -4,7 +4,7 @@ class RegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'New Registration'
     )
@@ -15,7 +15,7 @@ class RegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'Registration Cancelled'
     )
@@ -26,7 +26,7 @@ class RegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @registration.user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'You registered for a health programme!'
     )
@@ -37,7 +37,7 @@ class RegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @registration.user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'Registration cancelled'
     )

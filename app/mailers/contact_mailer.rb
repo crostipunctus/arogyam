@@ -4,7 +4,7 @@ class ContactMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ContactForm@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'Contact Form Enquiry'
     )

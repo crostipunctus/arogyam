@@ -4,7 +4,7 @@ class VishraamRegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'New VishraM Registration'
     )
@@ -15,7 +15,7 @@ class VishraamRegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'VishraM Registration Cancelled'
     )
@@ -26,7 +26,7 @@ class VishraamRegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @vishraam_registration.user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'VishraM Registration Confirmation'
     )
@@ -37,7 +37,7 @@ class VishraamRegistrationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @vishraam_registration.user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'ArogyaM@arogyam.life',
+      from: 'admin@arogyam.life',
       to: email_address,
       subject: 'VishraM Registration Cancellation'
     )
