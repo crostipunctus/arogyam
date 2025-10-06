@@ -3,7 +3,7 @@ class WelcomeMailer < ApplicationMailer
     @user = user
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: user.email,
       subject: 'Welcome to ArogyaM'
     )

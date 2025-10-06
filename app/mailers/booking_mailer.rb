@@ -4,7 +4,7 @@ class BookingMailer < ApplicationMailer
     email_address = Rails.env.production? ? "arogyamtesting@gmail.com" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Contact Form Enquiry'
     )

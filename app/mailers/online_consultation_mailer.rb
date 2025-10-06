@@ -4,7 +4,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Online Consultation Booked(unconfirmed)'
     )
@@ -15,7 +15,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Online Consultation Booked(confirmed)'
     )
@@ -26,7 +26,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Online Consultation Cancelled'
     )
@@ -38,7 +38,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Your Consultation is Confirmed!'
     )
@@ -50,7 +50,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Your Consultation is Cancelled!'
     )
@@ -61,7 +61,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Review Consultation Booked'
     )
@@ -73,7 +73,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Payment Confirmation'
     )
@@ -85,7 +85,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Payment Confirmation'
     )
@@ -97,7 +97,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Consultation Rescheduled'
     )
@@ -109,7 +109,7 @@ class OnlineConsultationMailer < ApplicationMailer
     email_address = Rails.env.production? ? @user.email : "rshan.ali@gmail.com"
     
     mail(
-      from: 'admin@arogyam.life',
+      from: 'ArogyaM <admin@arogyam.life>',
       to: email_address,
       subject: 'Consultation Rescheduled'
     )
