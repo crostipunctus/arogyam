@@ -63,8 +63,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cache_headers
-    response.headers["Cache-Control"] = "public, max-age=31536000"
-    response.headers["Expires"] = 1.year.from_now.to_formatted_s(:rfc822)
+    # Only set aggressive caching for static assets served through Rails
+    # Never cache HTML pages that contain user authentication state
+    if request.format.symbol == :html || request.format.symbol == :turbo_stream
+      # No caching for HTML pages - they contain dynamic user-specific content
+      response.headers["Cache-Control"] = "no-store, must-revalidate"
+    else
+      # Cache other formats (CSS, JS, JSON, etc.) - though these are typically served by web server
+      response.headers["Cache-Control"] = "public, max-age=31536000"
+      response.headers["Expires"] = 1.year.from_now.to_formatted_s(:rfc822)
+    end
   end
 
  
