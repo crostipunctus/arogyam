@@ -28,5 +28,7 @@
 @import './theme.scss';
 @import './swiper.css';
 
+// Override Bootstrap Icons font path to use Rails asset pipeline
+$bootstrap-icons-font-dir: "../fonts";
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'actiontext.css';
