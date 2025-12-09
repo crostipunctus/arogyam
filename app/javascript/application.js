@@ -1,22 +1,9 @@
 // Entry point for the build script in your package.json
 
-//= require swiper
-//= require jquery
-//= require fancybox
-
-import { Application } from "@hotwired/stimulus"
-import NotificationController from "./controllers/notification_controller"
-
-
-window.Stimulus = Application.start()
-
-Stimulus.register("notification", NotificationController)
-Stimulus.register("status", StatusController)
-Stimulus.register("profile-checker", ProfileCheckerController)
-Stimulus.register("form", FormController)
+// Import Stimulus controllers (this sets up window.Stimulus and registers all controllers)
+import "./controllers"
 
 import "@hotwired/turbo-rails"
-import "./controllers"
 import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
@@ -27,13 +14,4 @@ import './date_picker'
 import "./theme"
 import "./booking_dates"
 import "./duration"
-
-
-
-
-import "trix"
-import "@rails/actiontext"
-
-
 import "./fancybox"
-

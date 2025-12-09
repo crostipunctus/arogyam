@@ -17,11 +17,8 @@ module ApplicationHelper
   end
 
   def dev_images(image_name)
-    if Rails.env.development? || Rails.env.test?
-      image_name
-    else
-      "#{Rails.application.credentials.cloudfront[:host]}/#{image_name}"
-    end
+    # Always use CloudFront for these images since they're not in app/assets/images
+    "https://d1w11gv0j27jrz.cloudfront.net/#{image_name}"
   end 
   
   def ordinal_suffix(day)
