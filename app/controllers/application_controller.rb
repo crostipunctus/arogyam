@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
 
   def team_index 
-    @team = TeamMember.all 
+    @team = TeamMember.with_attached_avatar.all 
   end 
 
   def announcements 
