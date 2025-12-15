@@ -4,9 +4,17 @@
     </h1>
      <ul class="list-group list-group-flush">
         <li class="list-group-item bg-transparent"><strong>Programme:</strong> VishraM </li>
-        <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @vishraam_registration.date.strftime("%B #{ @vishraam_registration.date.day.ordinalize }, %Y") %> at 10 a.m.</li>
-        <% end_date = @vishraam_registration.date + @vishraam_registration.duration.to_i.days %>
-        <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+        <li class="list-group-item bg-transparent"><strong>Start date:</strong> 
+          <% if @vishraam_registration.date.present? %>
+            <%= @vishraam_registration.date.strftime("%B #{ @vishraam_registration.date.day.ordinalize }, %Y") %> at 10 a.m.
+          <% else %>
+            Not set
+          <% end %>
+        </li>
+        <% if @vishraam_registration.date.present? %>
+          <% end_date = @vishraam_registration.date + @vishraam_registration.duration.to_i.days %>
+          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+        <% end %>
         <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @vishraam_registration.duration %> days</li>  
         <li class="list-group-item bg-transparent"><strong>Cost:</strong> 
           <% if @vishraam_registration.duration == "3"%>

@@ -125,7 +125,17 @@ class RegistrationsController < ApplicationController
   end
 
   def review
+    unless session[:registration_params].present?
+      redirect_to new_registration_path, alert: "Please complete the registration form first."
+      return
+    end
+    
     @registration = Registration.new(session[:registration_params])
+    
+    unless @registration.start_date.present?
+      redirect_to new_registration_path, alert: "Please select a start date for your registration."
+      return
+    end
   end
 
   def confirm

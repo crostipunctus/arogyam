@@ -5,17 +5,33 @@
     <p class="welcome-email-text">
 <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package.name %></li>
         <% if @registration.package.name == "VishraM" %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> 
+            <% if @registration.start_date.present? %>
+              <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.
+            <% else %>
+              Not set
+            <% end %>
+          </li>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
             <%= @registration.duration %> days  </li>
-          <% end_date = @registration.start_date + @registration.duration.to_i.days %>
-          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+          <% if @registration.start_date.present? %>
+            <% end_date = @registration.start_date + @registration.duration.to_i.days %>
+            <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+          <% end %>
 
         <% else %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 5 p.m.</li>
+          <li class="list-group-item bg-transparent"><strong>Start date:</strong> 
+            <% if @registration.start_date.present? %>
+              <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 5 p.m.
+            <% else %>
+              Not set
+            <% end %>
+          </li>
           <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @registration.package.duration %></li>
-          <% end_date = @registration.start_date + @registration.package.duration.to_i.days %>
-          <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+          <% if @registration.start_date.present? %>
+            <% end_date = @registration.start_date + @registration.package.duration.to_i.days %>
+            <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= end_date.strftime("%B #{end_date.day.ordinalize}, %Y") %> at 11 a.m.</li>
+          <% end %>
         <% end %>
 
         <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= "Rs. #{@registration.package.cost}" %></li>
