@@ -1,3 +1,6 @@
+<% set_meta_tags title: @blog.title.capitalize,
+                 description: @blog.subtitle.presence || truncate(strip_tags(@blog.content.to_s), length: 160) %>
+
 <section class="container pt-5 mt-md-2 mt-lg-3 mt-xl-4">
   <div class="row justify-content-center pt-xxl-2">
     <div class="col-lg-9 col-xl-8">

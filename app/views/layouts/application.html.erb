@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= page_title %></title>
-     <%= favicon_link_tag asset_path('favicon.ico') %>
-    <meta name="description" content="Ayurvedic Wellness Center">
-    <meta name="keywords" content="Ayurveda, Yoga, Wellness, wellness center, satsang foundation, chowdepalli, sacred grove, arogyam wellness center, sri m">
+    <%= display_meta_tags(default_meta_tags) %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,9 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" rel="stylesheet">
-    <link href="/fancybox.css" rel="stylesheet">    
-    <!-- Viewport-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/fancybox.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLQGEBVGRW"></script>
     <script>
@@ -24,8 +20,6 @@
       gtag('config', 'G-JLQGEBVGRW');
     </script>
 
-    
-
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +28,7 @@
     <link rel="preconnect" href="https://d1w11gv0j27jrz.cloudfront.net">
     <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Courier+Prime" rel="stylesheet" id="google-font">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -44,18 +38,18 @@
     <body>
     <%= render 'layouts/navbar' %>
       <main class="page-wrapper">
-      
+
         <div data-controller="notification" class="notification">
           <div data-notification-target="message">
             <%= flash[:notice] ? " #{flash[:notice]}" : (flash[:alert] ? " #{flash[:alert]}" : "") %>
           </div>
         </div>
-      
-        
+
+
         <%= yield %>
-      
+
       </main>
-      
+
       <%= render 'layouts/footer' %>
   </body>
 </html>

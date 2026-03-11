@@ -1,8 +1,40 @@
 module ApplicationHelper
 
-  def logo 
+  SITE_NAME = 'ArogyaM'.freeze
+  SITE_DOMAIN = 'https://arogyam.life'.freeze
+  DEFAULT_DESCRIPTION = 'ArogyaM is an Ayurvedic wellness center at Sacred Grove, Chowdepalli offering health programmes, yoga, Ayurveda treatments, and holistic healing retreats.'.freeze
+  DEFAULT_IMAGE = 'https://d1w11gv0j27jrz.cloudfront.net/symbol.png'.freeze
+
+  def default_meta_tags
+    {
+      site: SITE_NAME,
+      title: 'The Wellness Center',
+      reverse: true,
+      separator: '|',
+      description: DEFAULT_DESCRIPTION,
+      keywords: 'Ayurveda, Yoga, Wellness, wellness center, Satsang Foundation, Chowdepalli, Sacred Grove, ArogyaM, Sri M, Ayurvedic treatment, health retreat, holistic healing',
+      canonical: request.original_url,
+      og: {
+        site_name: SITE_NAME,
+        title: :full_title,
+        description: :description,
+        type: 'website',
+        url: request.original_url,
+        image: DEFAULT_IMAGE
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: '@arogyam_life',
+        title: :full_title,
+        description: :description,
+        image: DEFAULT_IMAGE
+      }
+    }
+  end
+
+  def logo
     link_to image_tag('https://d1w11gv0j27jrz.cloudfront.net/symbol.png', class: "no-border-radius", width: 20, alt: 'symbol'), root_path, data: {turbo: false}
-  end 
+  end
 
   def has_active_registration?(user)
     user.registrations.where(
@@ -74,10 +106,21 @@ module ApplicationHelper
 
   def page_title(title = nil)
     if title.present?
+      set_meta_tags(title: title)
       content_for(:title) { title }
     else
       content_for?(:title) ? content_for(:title) : generate_title_from_url
     end
+  end
+
+  def set_page_meta(title:, description: nil, image: nil)
+    tags = { title: title }
+    tags[:description] = description if description.present?
+    if image.present?
+      tags[:og] = { image: image }
+      tags[:twitter] = { image: image }
+    end
+    set_meta_tags(tags)
   end
 
   def generate_title_from_url

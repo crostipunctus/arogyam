@@ -59,3 +59,19 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # set :ssh_options, verify_host_key: :secure
 
 set :passenger_restart_with_touch, true
+
+# Generate sitemap after deploy
+namespace :sitemap do
+  desc 'Refresh the sitemap'
+  task :refresh do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env, 'production') do
+          execute :rake, 'sitemap:refresh'
+        end
+      end
+    end
+  end
+end
+
+after 'deploy:published', 'sitemap:refresh'

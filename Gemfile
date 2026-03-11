@@ -95,6 +95,9 @@ gem "sentry-ruby"
 
 gem "sentry-rails"
 
+gem 'meta-tags'
+gem 'sitemap_generator'
+
 gem 'faker'
 
 gem 'rest-client'

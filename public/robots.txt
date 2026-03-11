@@ -1,1 +1,17 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /sidekiq
+Disallow: /users/sign_in
+Disallow: /users/sign_up
+Disallow: /users/password
+Disallow: /profiles
+Disallow: /registrations
+Disallow: /vishraam_registrations
+Disallow: /booking_dates
+Disallow: /online_consultations
+Disallow: /export_online_consultations
+
+Sitemap: https://arogyam.life/sitemap.xml.gz
