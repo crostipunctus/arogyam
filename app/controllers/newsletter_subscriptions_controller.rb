@@ -29,7 +29,7 @@ class NewsletterSubscriptionsController < ApplicationController
       flash[:alert] = "There was an error with the CAPTCHA verification. Please try again."
     end
   
-    redirect_to root_path
+    redirect_back fallback_location: root_path
   end
   
  
