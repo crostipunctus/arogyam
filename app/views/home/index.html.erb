@@ -165,24 +165,23 @@
 
 <section class="arogyam-newsletter-section">
   <div class="arogyam-newsletter-wrapper">
-    <div class="arogyam-newsletter-inner">
+    <div id="newsletter-form-container">
       <div class="arogyam-newsletter-header">
         <h2>Join Our Community</h2>
         <p>Subscribe to receive wellness tips, event updates, and other insights.</p>
       </div>
-      
-      <%= form_with(model: NewsletterSubscription.new, 
-                    url: newsletter_subscriptions_path, 
-                    local: true, 
+
+      <%= form_with(model: NewsletterSubscription.new,
+                    url: newsletter_subscriptions_path,
                     class: "arogyam-newsletter-form") do |form| %>
         <div class="arogyam-newsletter-input-group">
-          <%= form.email_field :email, 
-              class: "arogyam-newsletter-email", 
-              placeholder: "Enter your email address", 
+          <%= form.email_field :email,
+              class: "arogyam-newsletter-email",
+              placeholder: "Enter your email address",
               id: "newsletter",
               required: true %>
-          <%= form.submit "Subscribe", 
-              class: "arogyam-newsletter-submit", 
+          <%= form.submit "Subscribe",
+              class: "arogyam-newsletter-submit",
               id: "newsletterSubmit" %>
         </div>
         <div class="arogyam-newsletter-recaptcha">
