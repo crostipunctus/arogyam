@@ -34,9 +34,11 @@
       </div>
     </div>
     <div class="accoImage">
-      <%= image_tag(dev_images('acco1.jpg'),  data: {fancybox: 'imageGallery' }, class: "AccomImage", alt: 'room-1') %>
-      <%= image_tag(dev_images('acco2.jpg'),  data: {fancybox: 'imageGallery' }, class: "AccomImage", alt: 'room-1') %>
-      <%= image_tag(dev_images('acco4.jpg'),  data: {fancybox: 'imageGallery' }, class: "AccomImage", alt: 'room-1') %>
-      <%= image_tag(dev_images('acco3.jpg'),  data: {fancybox: 'imageGallery' }, class: "AccomImage", alt: 'room-1') %>
+      <%= image_tag(dev_images('acco1.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM guest room - single occupancy', loading: "lazy") %>
+      <%= image_tag(dev_images('acco2.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM guest room - double occupancy', loading: "lazy") %>
+      <%= image_tag(dev_images('acco4.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM courtyard and central garden', loading: "lazy") %>
+      <%= image_tag(dev_images('acco3.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM wellness center exterior', loading: "lazy") %>
     </div>
 </section>
+
+<%= render 'shared/cta_banner' %>

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :gallery_index
   helper_method :team_index
   helper_method :announcements
+  helper_method :testimonials_preview
   protect_from_forgery with: :exception
 
   before_action :store_user_location!, if: :storable_location?
@@ -50,8 +51,12 @@ class ApplicationController < ActionController::Base
     @team = TeamMember.with_attached_avatar.all 
   end 
 
-  def announcements 
-    @announcement = Announcement.all 
+  def announcements
+    @announcement = Announcement.all
+  end
+
+  def testimonials_preview
+    @testimonials_preview ||= Testimonial.limit(2)
   end 
 
   

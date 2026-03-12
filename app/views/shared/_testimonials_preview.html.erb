@@ -1,0 +1,22 @@
+<section class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-2">What Our Guests Say</h2>
+    <p class="text-center text-muted mb-4">Hear from patients who experienced our health programmes</p>
+    <div class="row justify-content-center g-4">
+      <% testimonials_preview.each do |testimonial| %>
+        <div class="col-12 col-md-6">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0"
+                    title="<%= testimonial.title.presence || 'ArogyaM patient testimonial' %>"
+                    frameborder="0"
+                    allowfullscreen
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="text-center mt-4">
+      <%= link_to "View all testimonials", testimonials_path, class: "btn btn-outline-primary rounded-pill" %>
+    </div>
+  </div>
+</section>

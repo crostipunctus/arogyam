@@ -137,7 +137,7 @@
           <div class="gallery-item">
             <%= image_tag(rails_public_blob_url(image), 
                           data: {fancybox: 'imageGallery'}, 
-                          alt: 'home-page-gallery',
+                          alt: 'ArogyaM wellness center at Sacred Grove',
                           loading: 'lazy',
                           decoding: 'async') %>
             <% if current_user_admin? %>
@@ -155,11 +155,13 @@
                     loading: 'lazy',
                     decoding: 'async',
                     data: {fancybox: 'imageGallery'}, 
-                    alt: 'placeholder-flower',
+                    alt: 'Sacred Grove gardens at ArogyaM',
                     style: 'max-width: 100%; height: auto;') %>
     <% end %>
   </div>
 </section>
+
+<%= render 'shared/testimonials_preview' %>
 
 <section class="arogyam-newsletter-section">
   <div class="arogyam-newsletter-wrapper">

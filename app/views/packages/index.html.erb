@@ -8,21 +8,22 @@
        
             <div class="cardContainer">
               <% @packages.each do |package| %>
+                <% cache package do %>
                     <div class="newpackagecard" style="width: 18rem;">
                     <% if package.package_image.attached? %>
-                      <%= image_tag(rails_public_blob_url(package.package_image),  class: "card-img-top", alt: "Card image" )%>
+                      <%= image_tag(rails_public_blob_url(package.package_image), class: "card-img-top", alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                     <% else %>
-                      <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "Card image" )%>
+                      <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                     <% end %>
                     <div class="card-body">
                       <h5 class="card-title"><%= package.name %></h5>
                       <p class="card-text"><%= package.short_description %></p>
                       <p class="card-text"><%= "Rs. #{package.cost}" %></p>
-                      <p class="card-text"><%= "#{package.duration} days" %></p>                  
+                      <p class="card-text"><%= "#{package.duration} days" %></p>
                       <%= link_to "Details", programme_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
                     </div>
-                  </div>        
-                 
+                  </div>
+                <% end %>
               <% end %>
             </div>
         
