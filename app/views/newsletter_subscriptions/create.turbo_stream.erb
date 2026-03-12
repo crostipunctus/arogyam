@@ -1,0 +1,38 @@
+<%= turbo_stream.replace "newsletter-form-container" do %>
+  <div id="newsletter-form-container">
+    <div class="arogyam-newsletter-header">
+      <% if @message_type == "success" %>
+        <h2>Thank You!</h2>
+        <p style="color: #414833; font-weight: 500;"><%= @message %></p>
+      <% else %>
+        <h2>Join Our Community</h2>
+        <p style="color: #dc3545; font-weight: 500;"><%= @message %></p>
+        <%= form_with(model: NewsletterSubscription.new,
+                      url: newsletter_subscriptions_path,
+                      class: "arogyam-newsletter-form") do |form| %>
+          <div class="arogyam-newsletter-input-group">
+            <%= form.email_field :email,
+                class: "arogyam-newsletter-email",
+                placeholder: "Enter your email address",
+                id: "newsletter",
+                required: true %>
+            <%= form.submit "Subscribe",
+                class: "arogyam-newsletter-submit",
+                id: "newsletterSubmit" %>
+          </div>
+          <div class="arogyam-newsletter-recaptcha">
+            <div class="g-recaptcha" data-sitekey="<%= Rails.application.credentials.recaptcha_v2[:site_key] %>"></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if @message_type == "success" && flash[:ga_event].present? %>
+  <%= turbo_stream.append "head" do %>
+    <script>
+      gtag('event', '<%= flash[:ga_event][:name] %>', <%= flash[:ga_event][:params].to_json.html_safe %>);
+    </script>
+  <% end %>
+<% end %>
