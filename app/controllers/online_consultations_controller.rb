@@ -54,14 +54,15 @@ class OnlineConsultationsController < ApplicationController
     date = @booking.date
 
     @online_consultation = OnlineConsultation.new(start_time: start_time, end_time: end_time, date: date, user_id: current_user.id, booking_date_id: @booking.id)
-    if @online_consultation.save 
+    if @online_consultation.save
       OnlineConsultationMailer.online_consultation_email(@online_consultation).deliver_later
       OnlineConsultationMailer.online_consultation_user_confirmation_email(@online_consultation).deliver_later
       @booking.update(available: false, status: "unconfirmed")
       @online_consultation.update(status: "unconfirmed")
+      flash[:ga_event] = { name: 'consultation_booking', params: { type: 'online_consultation' } }
       if !current_user.case_sheets.exists?
         redirect_to new_online_consultation_case_sheet_path(@online_consultation)
-      else 
+      else
       redirect_to online_consultations_path
       end
     else 

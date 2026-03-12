@@ -21,6 +21,7 @@ class NewsletterSubscriptionsController < ApplicationController
           }
         )
         flash[:notice] = "You have been successfully subscribed to the newsletter."
+        flash[:ga_event] = { name: 'newsletter_signup', params: { method: 'mailchimp' } }
       rescue Gibbon::MailChimpError => e
         handle_mailchimp_error(e)
       end

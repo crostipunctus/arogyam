@@ -102,6 +102,7 @@ class VishraamRegistrationsController < ApplicationController
       VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
       VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
       @vishraam_registration.update(status: "Registered")
+      flash[:ga_event] = { name: 'programme_registration', params: { programme: 'VishraM' } }
       redirect_to programmes_path, notice: "Vishram registration successful"
     else 
       render :review 

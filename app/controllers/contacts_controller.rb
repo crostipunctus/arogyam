@@ -12,6 +12,7 @@ class ContactsController < ApplicationController
     Rails.logger.info "reCAPTCHA response: #{recaptcha_reply.inspect}"
     if recaptcha_success && @contact.save
       ContactMailer.contact_email(@contact).deliver_later
+      flash[:ga_event] = { name: 'contact_form_submit', params: { method: 'contact_page' } }
       redirect_to contacts_path, notice: "Your message has been sent. We will get back to you soon."
     else
       render :index, status: :unprocessable_entity

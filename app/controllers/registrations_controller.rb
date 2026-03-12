@@ -145,6 +145,7 @@ class RegistrationsController < ApplicationController
       RegistrationMailer.registration_email(@registration).deliver_later
       RegistrationMailer.registration_user_email(@registration).deliver_later
       @registration.update(status: "Registered")
+      flash[:ga_event] = { name: 'programme_registration', params: { programme: @registration.package&.name } }
       redirect_to root_path, notice: "Registered successfully"
     else
       render :review
