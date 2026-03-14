@@ -3,13 +3,15 @@ class NewsletterSubscriptionsController < ApplicationController
   MAILCHIMP_LIST_ID = "5b6215d26b".freeze
 
   def create
-    email = params[:newsletter_subscription][:email]
+    @subscription = NewsletterSubscription.new(newsletter_subscription_params)
 
-    if verify_recaptcha_token
-      subscribe_to_mailchimp(email)
-    else
+    if !verify_recaptcha_token
       @message = "There was an error with the CAPTCHA verification. Please try again."
       @message_type = "error"
+    elsif @subscription.save
+      subscribe_to_mailchimp(@subscription.email)
+    else
+      set_validation_error
     end
 
     respond_to do |format|
@@ -40,20 +42,22 @@ class NewsletterSubscriptionsController < ApplicationController
         status: "subscribed"
       }
     )
+  rescue Gibbon::MailChimpError => e
+    unless e.status_code == 400 && e.title == "Member Exists"
+      Rails.logger.error "Mailchimp subscription error: #{e.message}"
+    end
+  ensure
     @message = "You have been successfully subscribed to the newsletter."
     @message_type = "success"
     flash.now[:ga_event] = { name: 'newsletter_signup', params: { method: 'mailchimp' } }
-  rescue Gibbon::MailChimpError => e
-    handle_mailchimp_error(e)
   end
 
-  def handle_mailchimp_error(e)
-    if e.status_code == 400 && e.title == "Member Exists"
+  def set_validation_error
+    if @subscription.errors[:email].include?("has already been taken")
       @message = "You are already subscribed!"
       @message_type = "success"
     else
-      Rails.logger.error "Mailchimp subscription error: #{e.message}"
-      @message = "There was an error subscribing you to the newsletter. Please try again."
+      @message = @subscription.errors.full_messages.join(", ")
       @message_type = "error"
     end
   end
