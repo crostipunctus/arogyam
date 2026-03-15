@@ -37,7 +37,6 @@ class RegistrationsController < ApplicationController
                                                  .where("date > ?", Date.today)
                                                  .where(cancelled: false, completed: false)
                                                  .page(params[:page])
-    @online_consultations = OnlineConsultation.includes(:user)
   end
 
   def export_batch

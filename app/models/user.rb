@@ -14,10 +14,6 @@ class User < ApplicationRecord
 
   has_one :user_profile, dependent: :destroy
 
-  has_many :online_consultations, dependent: :destroy
-  has_many :booking_dates, through: :online_consultations
-
-  has_many :case_sheets, dependent: :destroy
 
 
   attr_accessor :privacy_policy
@@ -41,11 +37,6 @@ class User < ApplicationRecord
     result
   end
 
-  def has_online_consultations?
-    online_consultations.exists?
-  end
-
- 
 
 
 end

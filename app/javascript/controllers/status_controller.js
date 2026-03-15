@@ -22,8 +22,6 @@ export default class extends Controller {
     let statusParamName;
     if (endpoint.includes("vishraam_registration")) {
       statusParamName = "vishraam_registration[status]";
-    } else if (endpoint.includes("online_consultation")) {
-      statusParamName = "online_consultation[status]";
     } else {
       statusParamName = "registration[status]";
     }

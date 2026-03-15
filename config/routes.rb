@@ -11,23 +11,8 @@ Rails.application.routes.draw do
   get 'profiles/show'
   resources :team_members 
 
-  patch 'payment_complete/:id' => 'online_consultations#payment_complete', as: :payment_complete
-
-
   get 'contacts/new'
   get 'contacts/create'
-
-  resources :online_consultations do
-    resource :case_sheet, only: [:show, :new, :create, :edit, :update, :destroy]
-  end
-  
-  post 'online_consultations/:id/reschedule' => 'online_consultations#reschedule', as: :reschedule_online_consultation
-
-  get 'export_online_consultations' => 'online_consultations#export_online_consultations'
-  get 'export_online_consultations_case_sheet/:id' => 'online_consultations#export_online_consultations_case_sheet', as: :export_online_consultations_case_sheet
-
-  get 'all_online_consultations' => 'online_consultations#all'
-  resources :booking_dates
   
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
