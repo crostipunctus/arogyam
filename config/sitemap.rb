@@ -1,5 +1,5 @@
 SitemapGenerator::Sitemap.default_host = "https://arogyam.life"
-SitemapGenerator::Sitemap.ping_search_engines = false
+SitemapGenerator::Sitemap.search_engines = {}
 
 SitemapGenerator::Sitemap.create do
   # Static pages
