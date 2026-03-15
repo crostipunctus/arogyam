@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user! 
-  before_action :require_admin, only: [:index, :edit, :update ]
+  before_action :require_admin, only: [:index, :edit, :update, :export_batch, :export_vishraam, :pdf]
   
   def index 
     base_query = Registration.includes(:package, :user, user: :user_profile)

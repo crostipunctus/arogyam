@@ -1,9 +1,12 @@
 class BookingDatesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :require_admin
+
   def index
-    
+
   end
 
-  def update 
+  def update
     @booking = BookingDate.find(params[:id])
     if @booking.update(available: false, status: "BLOCKED")
       render json: @booking
