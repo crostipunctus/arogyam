@@ -31,9 +31,13 @@ class VishraamRegistrationsController < ApplicationController
    
   end 
 
-  def show 
+  def show
     @vishraam_registration = VishraamRegistration.find(params[:id])
-  end 
+    unless current_user_admin? || @vishraam_registration.user == current_user
+      redirect_to root_path, alert: "You are not authorized to view this registration."
+      return
+    end
+  end
 
   def new 
     if session[:vishraam_registration_params]
@@ -43,52 +47,31 @@ class VishraamRegistrationsController < ApplicationController
     end
   end 
 
-  def create 
-    puts "\n=== Starting Vishraam Registration Create ==="
-    puts "Params received: #{params.inspect}"
-    puts "Current user: #{current_user.inspect}"
-    puts "Current user has profile? #{current_user.user_profile.present?}"
-    
+  def create
+    recaptcha_token = params[:recaptcha_token]
+    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'vishraam_registration')
+    unless recaptcha_success
+      @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
+      flash.now[:alert] = "reCAPTCHA verification failed. Please try again."
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     if current_user.user_profile
-      puts "\n--- Building Registration ---"
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       @vishraam_registration.user_id = current_user.id
-      
-      puts "Registration params: #{vishraam_registration_params.inspect}"
-      puts "New registration object: #{@vishraam_registration.inspect}"
-      puts "Registration valid? #{@vishraam_registration.valid?}"
-      
-      if !@vishraam_registration.valid?
-        puts "\n--- Validation Errors ---"
-        puts @vishraam_registration.errors.full_messages
-      end
-      
-      if @vishraam_registration.valid? 
-        puts "\n--- Registration Valid, Proceeding ---"
+
+      if @vishraam_registration.valid?
         session[:vishraam_registration_params] = @vishraam_registration.attributes
-        puts "Session params set: #{session[:vishraam_registration_params].inspect}"
-        puts "Redirecting to review page"
         redirect_to review_vishraam_registrations_path
       else
-        puts "\n--- Registration Invalid ---"
-        puts "Rendering new with errors"
         flash.now[:error] = "Vishram registration failed: #{@vishraam_registration.errors.full_messages.join(', ')}"
-        render :new, status: :unprocessable_entity 
+        render :new, status: :unprocessable_entity
       end
-    else  
-      puts "\n--- No User Profile Found ---"
-      puts "Redirecting to profile creation"
-      redirect_to new_user_profile_path(user_id: current_user.id), 
+    else
+      redirect_to new_user_profile_path(user_id: current_user.id),
                   alert: "Please complete your profile before registering for a batch"
-    end 
-    puts "=== End of Create Action ===\n"
-  rescue => e
-    puts "\n!!! ERROR !!!"
-    puts "Error class: #{e.class}"
-    puts "Error message: #{e.message}"
-    puts "Backtrace:"
-    puts e.backtrace[0..5]
-    raise e
+    end
   end  
 
   def review 
@@ -103,7 +86,7 @@ class VishraamRegistrationsController < ApplicationController
       VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
       @vishraam_registration.update(status: "Registered")
       flash[:ga_event] = { name: 'programme_registration', params: { programme: 'VishraM' } }
-      redirect_to programmes_path, notice: "Vishram registration successful"
+      redirect_to vishraam_registration_path(@vishraam_registration), notice: "You have successfully registered for VishraM. We will get back to you soon."
     else 
       render :review 
     end 
@@ -127,14 +110,19 @@ class VishraamRegistrationsController < ApplicationController
     end
   end
   
-  def destroy 
+  def destroy
     @vishraam_registration = VishraamRegistration.find(params[:id])
+    unless current_user_admin? || @vishraam_registration.user == current_user
+      redirect_to root_path, alert: "You are not authorized to cancel this registration."
+      return
+    end
+
     if @vishraam_registration.update(status: "Cancelled")
       @vishraam_registration.update(cancelled: true)
       VishraamRegistrationMailer.vishraam_registration_cancel_email(@vishraam_registration).deliver_later
       VishraamRegistrationMailer.vishraam_registration_user_cancellation_email(@vishraam_registration).deliver_later
     else
-      puts @vishraam_registration.errors.full_messages
+      Rails.logger.error "Failed to cancel vishraam registration: #{@vishraam_registration.errors.full_messages}"
     end
 
     redirect_back fallback_location: root_path, notice: "Vishram registration deleted"

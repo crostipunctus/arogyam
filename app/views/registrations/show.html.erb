@@ -1,45 +1,64 @@
+<%= page_title 'Registration Confirmation' %>
+
 <div class="custom-gradient-bg">
   <section class="container py-5 mt-5">
     <div class="registration-container">
-      <h1 class="text-center mb-4">Registration no: <%= @registration.id %> </h1>
-      <h2 >Basic Information</h2>
+      <% if flash[:notice] %>
+        <div class="alert alert-success text-center mb-4">
+          <h4 class="mb-0"><%= flash[:notice] %></h4>
+        </div>
+        <% flash.delete(:notice) %>
+      <% end %>
+
+      <h1 class="text-center mb-4">Registration #<%= @registration.id %></h1>
+
+      <h2>Programme Details</h2>
       <ul>
-        <li>Package selected: <%= @registration.package.name %></li>
-        <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM"%>
+        <li>Programme: <%= @registration.package.name %></li>
+        <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM" %>
           <li>Duration: <%= @registration.duration %> days</li>
         <% end %>
-
-<li>Start Date: <%= formatted_date_with_year(@registration.start_date) %></li>        <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %> </li>
-        <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
-        <li>Email: <%= @registration.user.email %></li>
-        <li>Comments: <%= @registration.comments %></li>
-        <li>Gender: <%= @registration.user.user_profile.gender %></li>
-        <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></li>
-        <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
-        <li>Address: <%= @registration.user.user_profile.address %></li>
-        <li>City: <%= @registration.user.user_profile.city %></li>
-        <li>Country: <%= @registration.user.user_profile.country %></li>
-        <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
-        <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
-        <li>Marital Status: <%= @registration.user.user_profile.marital_status %></li>
+        <li>Start Date: <%= formatted_date_with_year(@registration.start_date) %></li>
+        <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %></li>
         <li>Status: <%= @registration.status %></li>
-        <% if @registration.cancelled == true %>
-          <li>Cancelled: Yes</li> 
+        <% if @registration.cancelled %>
+          <li>Cancelled: Yes</li>
         <% end %>
-
-        
       </ul>
+
+      <% if current_user_admin? %>
+        <h2>Participant Information</h2>
+        <ul>
+          <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
+          <li>Email: <%= @registration.user.email %></li>
+          <li>Comments: <%= @registration.comments %></li>
+          <li>Gender: <%= @registration.user.user_profile.gender %></li>
+          <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></li>
+          <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
+          <li>Address: <%= @registration.user.user_profile.address %></li>
+          <li>City: <%= @registration.user.user_profile.city %></li>
+          <li>Country: <%= @registration.user.user_profile.country %></li>
+          <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
+          <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
+          <li>Marital Status: <%= @registration.user.user_profile.marital_status %></li>
+        </ul>
+
         <h2>Health Information</h2>
-      <ul>
-        <li>Substance use: <%= @registration.substances %></li>
-        <li>Medical conditions: <%= @registration.health_conditions %></li>
-        <li>Lifestyle: <%= @registration.lifestyle %></li>
-        <li>Medication: <%= @registration.medication %></li>
-        
-      </ul>
-    
+        <ul>
+          <li>Substance use: <%= @registration.substances %></li>
+          <li>Medical conditions: <%= @registration.health_conditions %></li>
+          <li>Lifestyle: <%= @registration.lifestyle %></li>
+          <li>Medication: <%= @registration.medication %></li>
+        </ul>
 
-      <%= link_to 'Back', registrations_path, class: "btn btn-outline-custom" %>
+        <%= link_to 'Back', registrations_path, class: "btn btn-outline-custom" %>
+      <% else %>
+        <div class="mt-4">
+          <p>A confirmation email has been sent to <strong><%= @registration.user.email %></strong>.</p>
+          <p>Our team will review your registration and get back to you shortly.</p>
+        </div>
+        <%= link_to 'View Programmes', programmes_path, class: "btn btn-outline-custom" %>
+      <% end %>
     </div>
   </section>
 </div>

@@ -1,12 +1,31 @@
 <%= page_title 'Register' %>
 
+<script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key] %>"></script>
+<script>
+  function submitRegistrationForm(e) {
+    e.preventDefault();
+    const form = document.getElementById("registration_form");
+
+    grecaptcha.ready(function() {
+      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'registration'}).then(function(token) {
+        const input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "recaptcha_token");
+        input.setAttribute("value", token);
+        form.appendChild(input);
+        form.submit();
+      });
+    });
+  }
+</script>
+
 <section class="container py-5 mt-4">
   <div class="Profileform">
     <div class="h-100 d-flex align-items-center justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
         <h2 class="text-center mb-4">Registration Form</h2>
-        
-        <%= form_with(model: @registration) do |f|%>
+
+        <%= form_with(model: @registration, local: true, id: "registration_form") do |f|%>
           <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
 
 
@@ -92,7 +111,7 @@
           </div>
 
           <div class="text-center">
-            <%= f.submit 'Register', class: "btn btn-primary btn-lg px-5 rounded-pill" %>
+            <%= f.submit 'Register', class: "btn btn-primary btn-lg px-5 rounded-pill", onclick: "submitRegistrationForm(event)" %>
           </div>
         <% end %>
       </div>

@@ -1,13 +1,32 @@
 <%= page_title 'Register for VishraM' %>
+
+<script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key] %>"></script>
+<script>
+  function submitVishraamForm(e) {
+    e.preventDefault();
+    const form = document.getElementById("vishraam_registration_form");
+
+    grecaptcha.ready(function() {
+      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'vishraam_registration'}).then(function(token) {
+        const input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "recaptcha_token");
+        input.setAttribute("value", token);
+        form.submit();
+      });
+    });
+  }
+</script>
+
 <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
-  <h1 class="cardHeading packages text-center">Vishram Registration</h1> 
+  <h1 class="cardHeading packages text-center">Vishram Registration</h1>
   <div class="Profileform">
     <div class="h-100 d-flex align-items-center justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <h5 class="text-center">Please fill in the following details to complete your registration. All fields marked with * are mandatory.</h5>
         <p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
-        <%= form_with(model: @vishraam_registration) do |f|%>
+        <%= form_with(model: @vishraam_registration, local: true, id: "vishraam_registration_form") do |f|%>
           <%= render 'shared/errors', object: @vishraam_registration %> 
           <div class="mb-3">
             <%= f.label :date %>
@@ -48,7 +67,7 @@
                 </div>
 
         
-          <%= f.submit 'Register', class:"btn btn-outline-success"%>
+          <%= f.submit 'Register', class: "btn btn-outline-success", onclick: "submitVishraamForm(event)" %>
         <% end %>
       </div>
     </div>

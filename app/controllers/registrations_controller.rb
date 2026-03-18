@@ -59,8 +59,12 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def show 
+  def show
     @registration = Registration.find(params[:id])
+    unless current_user_admin? || @registration.user == current_user
+      redirect_to root_path, alert: "You are not authorized to view this registration."
+      return
+    end
   end
 
   def new
@@ -85,11 +89,17 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    Rails.logger.debug "Starting create registration action"
-    Rails.logger.debug "Registration params received: #{registration_params}"
-    
-    if has_active_registration?(current_user)  # Use the helper method here
-      Rails.logger.debug "User already has an active registration"
+    recaptcha_token = params[:recaptcha_token]
+    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'registration')
+    unless recaptcha_success
+      @registration = Registration.new(registration_params)
+      @selected_package_id = params[:registration][:package_id]
+      flash.now[:alert] = "reCAPTCHA verification failed. Please try again."
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    if has_active_registration?(current_user)
       flash.now[:alert] = "Please cancel your current registration or complete payment for it before booking another programme."
       @registration = Registration.new(registration_params)
       @selected_package_id = params[:registration][:package_id]
@@ -145,7 +155,7 @@ class RegistrationsController < ApplicationController
       RegistrationMailer.registration_user_email(@registration).deliver_later
       @registration.update(status: "Registered")
       flash[:ga_event] = { name: 'programme_registration', params: { programme: @registration.package&.name } }
-      redirect_to root_path, notice: "Registered successfully"
+      redirect_to registration_path(@registration), notice: "You have successfully registered for #{@registration.package&.name}. We will get back to you soon."
     else
       render :review
     end
@@ -161,7 +171,7 @@ class RegistrationsController < ApplicationController
   def update
     # when save comments button is clicked the status is updated to blank 
     @registration = Registration.find(params[:id])
-    puts "Registration params: #{registration_params}"
+    Rails.logger.debug "Registration params: #{registration_params}"
     respond_to do |format|
       # Check if status is blank
       if registration_params[:status].blank?
@@ -174,7 +184,7 @@ class RegistrationsController < ApplicationController
         end
       else
         if @registration.update_column(:status, registration_params[:status])
-          puts "Registration status updated to #{registration_params[:status]}"
+          Rails.logger.debug "Registration status updated to #{registration_params[:status]}"
           @registration.update(completed: true) if registration_params[:status] == "Completed"
           @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
           @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
@@ -191,14 +201,18 @@ class RegistrationsController < ApplicationController
 
  
 
-  def destroy 
+  def destroy
     @registration = Registration.find(params[:id])
-   
+    unless current_user_admin? || @registration.user == current_user
+      redirect_to root_path, alert: "You are not authorized to cancel this registration."
+      return
+    end
+
     RegistrationMailer.registration_cancel_user_email(@registration).deliver_later
     RegistrationMailer.registration_cancel_email(@registration).deliver_later
 
     @registration.update(cancelled: true, status: "Cancelled")
-    
+
     redirect_back fallback_location: root_path, notice: "Registration cancelled successfully"
   end 
 
