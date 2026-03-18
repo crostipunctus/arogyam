@@ -1,69 +1,82 @@
 <%= turbo_frame_tag "registrations_table" do %>
-  <table class="registration-table">
-    <thead>
-      <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Programme</th>
-        <th>Start Date</th>
-        <th>Status</th>
-        <th>Comments</th>
-        <th>Actions</th>  
-      </tr>
-    </thead>
-    <tbody>
-      <% if @registrations.exists? %>
-        <% @registrations.each do |registration|%>
-            <tr style="<%= 'background-color: #FFCCCC;' if registration.status == 'Cancelled' %>">
-              <td data-th="Full Name"><%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "nav-link" %></td>
-              <td data-th="Email"><%= registration.user.email %></td>
-              <td data-th="Programme"><%= registration.package.name %></td>
-              <td data-th="Start Date"><%= registration.start_date&.strftime("%d-%m-%Y") || 'Not set' %></td>
-              <td data-th="Status" data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">            
-                <span data-status-target="status"><%= registration.status %></span>
-                <% if registration.status != 'Cancelled' %>
-                    <%= link_to 'Edit', '#', class: 'btn btn-outline-success btn-sm', data: { action: 'click->status#toggleEditMode', status_target: 'edit' } %>
-                <% else %>
-                    <!-- No action for Cancelled status -->
-                <% end %>
-                <div data-status-target="editMode" style="display:none;">
-                    <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { controller: 'status', data: { action: 'submit->status#save' } } do |f| %>
-                      <%= f.select :status, [ ['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-control', data: { status_target: 'statusSelect' } } %>
-                      <%= f.submit 'Save', class: 'btn btn-outline-primary btn-sm' %>
-                    <% end %>
-                    <%= link_to 'Cancel', '#', class: 'btn btn-outline-secondary btn-sm', data: { action: 'click->status#cancel', status_target: 'cancel' } %>
-                </div>
-              </td>
-             
-                <td data-th="Comments" data-controller="expand">
-                  <span data-expand-target="content" data-full="<%= registration.comments %>">
-                      <%= truncate(registration.comments, length: 50) %>
+  <div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th class="ps-4">Participant</th>
+            <th>Programme</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Comments</th>
+            <th class="pe-4 text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @registrations.exists? %>
+            <% @registrations.each do |registration| %>
+              <tr class="<%= 'table-danger' if registration.status == 'Cancelled' %>">
+                <td class="ps-4">
+                  <div>
+                    <%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "fw-medium text-decoration-none" %>
+                  </div>
+                  <small class="text-muted"><%= registration.user.email %></small>
+                </td>
+                <td><%= registration.package.name %></td>
+                <td><%= registration.start_date&.strftime("%d %b %Y") || 'Not set' %></td>
+                <td data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">
+                  <span data-status-target="status">
+                    <span class="badge rounded-pill bg-<%= registration_status_badge_class(registration.status) %>">
+                      <%= registration.status %>
+                    </span>
                   </span>
-                  <% if registration.comments && registration.comments.length > 50 %>
-                      <button class="btn btn-outline-info btn-sm expand-btn" data-action="click->expand#expand">Expand</button>
+                  <% if registration.status != 'Cancelled' %>
+                    <button class="btn btn-link btn-sm p-0 ms-1 text-muted" data-action="click->status#toggleEditMode" data-status-target="edit" title="Edit status">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg>
+                    </button>
                   <% end %>
-                  <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-outline-success btn-sm'%>
-              </td>
-
-
-
-
-              <td data-th="Actions">
-                <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-success btn-sm' %>
-                <% if registration.completed == false %>
-                  <span><%= button_to 'Cancel', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: 'btn btn-outline-danger btn-sm' %></span>
-                <% end %>
+                  <div data-status-target="editMode" style="display:none;" class="mt-2">
+                    <%= form_with url: registration_path(registration), method: :patch, remote: true, html: { controller: 'status', data: { action: 'submit->status#save' } } do |f| %>
+                      <div class="d-flex gap-1 align-items-center">
+                        <%= f.select :status, [['Completed'], ['Payment Completed'], ['Payment Pending']], {}, { class: 'form-select form-select-sm', style: 'max-width: 170px;', data: { status_target: 'statusSelect' } } %>
+                        <%= f.submit 'Save', class: 'btn btn-primary btn-sm' %>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-action="click->status#cancel" data-status-target="cancel">Cancel</button>
+                      </div>
+                    <% end %>
+                  </div>
+                </td>
+                <td data-controller="expand">
+                  <span data-expand-target="content" data-full="<%= registration.comments %>">
+                    <%= truncate(registration.comments, length: 40) %>
+                  </span>
+                  <% if registration.comments && registration.comments.length > 40 %>
+                    <button class="btn btn-link btn-sm p-0 ms-1" data-action="click->expand#expand">more</button>
+                  <% end %>
+                  <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-link btn-sm p-0 ms-1' %>
+                </td>
+                <td class="pe-4 text-end">
+                  <div class="d-flex justify-content-end gap-1">
+                    <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-primary btn-sm' %>
+                    <% if registration.completed == false %>
+                      <%= button_to 'Cancel', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure you want to cancel this registration?' } }, class: 'btn btn-outline-danger btn-sm' %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="6" class="text-center py-5 text-muted">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-inbox mb-2 d-block mx-auto opacity-50" viewBox="0 0 16 16"><path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z"/></svg>
+                No registrations found.
               </td>
             </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td colspan="6" style="text-align: center;">No registrations found.</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="pagination-wrapper">
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mt-3">
     <%= paginate @registrations, data: { turbo_frame: 'registrations_table' } %>
   </div>
 <% end %>

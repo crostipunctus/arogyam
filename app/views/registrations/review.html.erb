@@ -1,42 +1,89 @@
-<section class="container py-5 my-5">
-  <div class="card mx-auto d-block border-0" style="max-width: 40rem;">
-    <div class="card-body text-white" id="uniqueCardColor">
-      <h2 class="card-title text-center mb-4" id="registration_review">Registration Review</h2>
-      <!-- Display all registration details here for review -->
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-transparent"><strong>Programme:</strong> <%= @registration.package&.name %></li>
-        <% if @registration.package&.name == "VishraM" %>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> 
-            <% if @registration.start_date.present? %>
-              <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.
-            <% else %>
-              Not set
-            <% end %>
-          </li>
-        <% else %>
-          <li class="list-group-item bg-transparent"><strong>Duration:</strong> <%= @registration.package&.duration %></li>
-          <li class="list-group-item bg-transparent"><strong>Start date:</strong> 
-            <% if @registration.start_date.present? %>
-              <%= @registration.start_date.strftime("%B #{ @registration.start_date.day.ordinalize }, %Y") %> at 10 a.m.
-            <% else %>
-              Not set
-            <% end %>
-          </li>
+<%= page_title 'Review Registration' %>
 
-        <% end %>
-          <% if @registration.package&.name == "VishraM" %>
-          <li class="list-group-item bg-transparent"><strong>Duration:</strong> 
-            <%= @registration.duration %> days 
-          <% end %>
-        </li>
-        <li class="list-group-item bg-transparent"><strong>Cost:</strong> <%= "Rs. #{@registration.package&.cost}" %></li>
-      </ul>
-      <h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
-      <%= form_with url: confirm_registrations_path, method: :post, html: { class: 'mt-4' } do %>
+<section class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+
+      <%# Progress Steps %>
+      <div class="registration-steps mb-5">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="step-item completed">
+            <div class="step-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+            </div>
+            <div class="step-label">Fill Details</div>
+          </div>
+          <div class="step-line completed"></div>
+          <div class="step-item active">
+            <div class="step-circle">2</div>
+            <div class="step-label">Review</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">3</div>
+            <div class="step-label">Confirm</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-center mb-2 registration-page-title">Review Your Registration</h2>
+      <p class="text-center text-muted mb-4">Please review your details before confirming.</p>
+
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h5 class="card-section-title mb-3">Programme Details</h5>
+
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Programme</div>
+                <div class="review-value"><%= @registration.package&.name %></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Start Date</div>
+                <div class="review-value">
+                  <% if @registration.start_date.present? %>
+                    <%= @registration.start_date.strftime("%B #{@registration.start_date.day.ordinalize}, %Y") %> at 10 a.m.
+                  <% else %>
+                    Not set
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Duration</div>
+                <div class="review-value">
+                  <% if @registration.package&.name == "VishraM" || @registration.package&.name == "ShamanaM" %>
+                    <%= @registration.duration %> days
+                  <% else %>
+                    <%= @registration.package&.duration %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Cost</div>
+                <div class="review-value fw-semibold">Rs. <%= @registration.package&.cost %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.399l-.451.003.082-.381 1.974-.271.297.016zm.133-3.169a.755.755 0 1 1-1.511 0 .755.755 0 0 1 1.511 0z"/></svg>
+        <div class="small">Please make the payment in advance. Fees paid for this program are non-refundable.</div>
+      </div>
+
+      <%= form_with url: confirm_registrations_path, method: :post do %>
         <%= hidden_field_tag :confirm, true %>
-        <div class="text-center">
-          <%= submit_tag 'Confirm Registration', class: 'btn btn-light btn-lg' %>
-          <%= link_to 'Edit', new_registration_path(session[:registration_params]), class: 'btn btn-outline-light ms-2' %>
+        <div class="d-flex justify-content-center gap-3">
+          <%= submit_tag 'Confirm Registration', class: 'btn btn-primary btn-lg px-4 rounded-pill' %>
+          <%= link_to 'Edit Details', new_registration_path(session[:registration_params]), class: 'btn btn-outline-secondary btn-lg px-4 rounded-pill' %>
         </div>
       <% end %>
     </div>

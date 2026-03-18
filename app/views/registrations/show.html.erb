@@ -1,64 +1,213 @@
 <%= page_title 'Registration Confirmation' %>
 
-<div class="custom-gradient-bg">
-  <section class="container py-5 mt-5">
-    <div class="registration-container">
+<section class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+
       <% if flash[:notice] %>
-        <div class="alert alert-success text-center mb-4">
-          <h4 class="mb-0"><%= flash[:notice] %></h4>
+        <div class="alert alert-success d-flex align-items-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+          <div><%= flash[:notice] %></div>
         </div>
         <% flash.delete(:notice) %>
       <% end %>
 
-      <h1 class="text-center mb-4">Registration #<%= @registration.id %></h1>
+      <%# Progress Steps (only for non-admin users viewing their own registration) %>
+      <% unless current_user_admin? %>
+        <div class="registration-steps mb-5">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="step-item completed">
+              <div class="step-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+              </div>
+              <div class="step-label">Fill Details</div>
+            </div>
+            <div class="step-line completed"></div>
+            <div class="step-item completed">
+              <div class="step-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+              </div>
+              <div class="step-label">Review</div>
+            </div>
+            <div class="step-line completed"></div>
+            <div class="step-item completed">
+              <div class="step-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+              </div>
+              <div class="step-label">Confirmed</div>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
-      <h2>Programme Details</h2>
-      <ul>
-        <li>Programme: <%= @registration.package.name %></li>
-        <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM" %>
-          <li>Duration: <%= @registration.duration %> days</li>
-        <% end %>
-        <li>Start Date: <%= formatted_date_with_year(@registration.start_date) %></li>
-        <li>Registered on: <%= formatted_created_at_date(@registration.created_at.to_s) %></li>
-        <li>Status: <%= @registration.status %></li>
-        <% if @registration.cancelled %>
-          <li>Cancelled: Yes</li>
-        <% end %>
-      </ul>
+      <h2 class="text-center mb-4 registration-page-title">Registration #<%= @registration.id %></h2>
+
+      <%# Programme Details Card %>
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h5 class="card-section-title mb-3">Programme Details</h5>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Programme</div>
+                <div class="review-value"><%= @registration.package.name %></div>
+              </div>
+            </div>
+            <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM" %>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Duration</div>
+                  <div class="review-value"><%= @registration.duration %> days</div>
+                </div>
+              </div>
+            <% end %>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Start Date</div>
+                <div class="review-value"><%= formatted_date_with_year(@registration.start_date) %></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Registered On</div>
+                <div class="review-value"><%= formatted_created_at_date(@registration.created_at.to_s) %></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="review-detail">
+                <div class="review-label">Status</div>
+                <div class="review-value">
+                  <span class="badge rounded-pill bg-<%= registration_status_badge_class(@registration.status) %>"><%= @registration.status %></span>
+                </div>
+              </div>
+            </div>
+            <% if @registration.cancelled %>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Cancelled</div>
+                  <div class="review-value"><span class="badge rounded-pill bg-danger">Yes</span></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
       <% if current_user_admin? %>
-        <h2>Participant Information</h2>
-        <ul>
-          <li>Full name: <%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></li>
-          <li>Email: <%= @registration.user.email %></li>
-          <li>Comments: <%= @registration.comments %></li>
-          <li>Gender: <%= @registration.user.user_profile.gender %></li>
-          <li>Date of Birth: <%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></li>
-          <li>Phone: <%= @registration.user.user_profile.phone_number %></li>
-          <li>Address: <%= @registration.user.user_profile.address %></li>
-          <li>City: <%= @registration.user.user_profile.city %></li>
-          <li>Country: <%= @registration.user.user_profile.country %></li>
-          <li>Zip/Postal code: <%= @registration.user.user_profile.zip %></li>
-          <li>Occupation: <%= @registration.user.user_profile.occupation %></li>
-          <li>Marital Status: <%= @registration.user.user_profile.marital_status %></li>
-        </ul>
-
-        <h2>Health Information</h2>
-        <ul>
-          <li>Substance use: <%= @registration.substances %></li>
-          <li>Medical conditions: <%= @registration.health_conditions %></li>
-          <li>Lifestyle: <%= @registration.lifestyle %></li>
-          <li>Medication: <%= @registration.medication %></li>
-        </ul>
-
-        <%= link_to 'Back', registrations_path, class: "btn btn-outline-custom" %>
-      <% else %>
-        <div class="mt-4">
-          <p>A confirmation email has been sent to <strong><%= @registration.user.email %></strong>.</p>
-          <p>Our team will review your registration and get back to you shortly.</p>
+        <%# Participant Info Card %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-section-title mb-3">Participant Information</h5>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Full Name</div>
+                  <div class="review-value"><%= link_to user_full_name(@registration.user), user_profile_path(user_id: @registration.user.id) %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Email</div>
+                  <div class="review-value"><%= @registration.user.email %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Gender</div>
+                  <div class="review-value"><%= @registration.user.user_profile.gender %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Date of Birth</div>
+                  <div class="review-value"><%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Phone</div>
+                  <div class="review-value"><%= @registration.user.user_profile.phone_number %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Occupation</div>
+                  <div class="review-value"><%= @registration.user.user_profile.occupation %></div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="review-detail">
+                  <div class="review-label">Marital Status</div>
+                  <div class="review-value"><%= @registration.user.user_profile.marital_status %></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="review-detail">
+                  <div class="review-label">Address</div>
+                  <div class="review-value">
+                    <%= @registration.user.user_profile.address %><br>
+                    <%= @registration.user.user_profile.city %>, <%= @registration.user.user_profile.country %> <%= @registration.user.user_profile.zip %>
+                  </div>
+                </div>
+              </div>
+              <% if @registration.comments.present? %>
+                <div class="col-12">
+                  <div class="review-detail">
+                    <div class="review-label">Comments</div>
+                    <div class="review-value"><%= @registration.comments %></div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <%= link_to 'View Programmes', programmes_path, class: "btn btn-outline-custom" %>
+
+        <%# Health Information Card %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-section-title mb-3">Health Information</h5>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="review-detail">
+                  <div class="review-label">Substance Use</div>
+                  <div class="review-value"><%= @registration.substances %></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="review-detail">
+                  <div class="review-label">Medical Conditions</div>
+                  <div class="review-value"><%= @registration.health_conditions %></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="review-detail">
+                  <div class="review-label">Lifestyle</div>
+                  <div class="review-value"><%= @registration.lifestyle %></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="review-detail">
+                  <div class="review-label">Medication</div>
+                  <div class="review-value"><%= @registration.medication %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <%= link_to 'Back to Registrations', registrations_path, class: "btn btn-outline-primary rounded-pill px-4" %>
+          <%= link_to 'Edit Comments', edit_registration_path(@registration), class: "btn btn-outline-secondary rounded-pill px-4" %>
+        </div>
+      <% else %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4 text-center">
+            <p class="mb-1">A confirmation email has been sent to <strong><%= @registration.user.email %></strong>.</p>
+            <p class="text-muted mb-0">Our team will review your registration and get back to you shortly.</p>
+          </div>
+        </div>
+        <%= link_to 'View Programmes', programmes_path, class: "btn btn-primary rounded-pill px-4" %>
       <% end %>
     </div>
-  </section>
-</div>
+  </div>
+</section>

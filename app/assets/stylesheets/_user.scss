@@ -518,8 +518,8 @@ a {
 
 }
 
-.card-body:hover h4,
-p {
+.newpackagecard .card-body:hover h4,
+.newpackagecard .card-body:hover p {
   color: white;
 }
 
@@ -608,10 +608,8 @@ h4 {
   color: $terracota !important;
 }
 
-.card {
+.newpackagecard {
   background-color: #555555 !important;
-
-
 }
 
 
@@ -1216,30 +1214,12 @@ h4 {
   border-radius: 30px;
 }
 
-.card {
-  flex: 0 0 calc(33.333% - 0.75rem);
-  max-width: calc(33.333% - 0.75rem);
-  margin-bottom: 1.5rem;
+.cardContainer .newpackagecard {
+  width: 100%;
 }
 
-.card-body {
+.cardContainer .card-body {
   border: 1px solid $gray-500;
-}
-
-@media (max-width: 990px) {
-  .card {
-    flex-basis: calc(50% - 1rem);
-    max-width: calc(50% - 1rem);
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 575px) {
-  .card {
-    flex-basis: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
 }
 
 .info-card-title {
@@ -1278,12 +1258,11 @@ h4 {
   box-shadow: 0 !important;
 }
 
-.form-select {
+// Scoped to sign-in/profile forms — don't override Bootstrap's default .form-select globally
+#signinCard .form-select {
   width: 40%;
   box-shadow: 2px 2px 10px rgba(151, 150, 150, 0.4);
   margin-bottom: 30px;
-
-
 }
 
 @media (max-width: 990px) {
@@ -1964,10 +1943,135 @@ tbody tr:hover {
   color: #007bff;
 }
 
-.registration-table {
-  margin-bottom: 20px;
+// ─── Registration Pages ─────────────────────────────────
+
+.registration-page-title {
+  color: #2d3748;
+  font-weight: 700;
 }
 
+// Progress stepper
+.registration-steps {
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #718096;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .step-label {
+      font-size: 12px;
+      color: #a0aec0;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    &.active .step-circle {
+      background: #3182ce;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.2);
+    }
+
+    &.active .step-label {
+      color: #3182ce;
+      font-weight: 600;
+    }
+
+    &.completed .step-circle {
+      background: #38a169;
+      color: #fff;
+    }
+
+    &.completed .step-label {
+      color: #38a169;
+    }
+  }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    background: #e2e8f0;
+    margin: 0 8px;
+    margin-bottom: 22px;
+    max-width: 80px;
+
+    &.completed {
+      background: #38a169;
+    }
+  }
+}
+
+// Card section titles
+.card-section-title {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: #3182ce;
+  }
+}
+
+// Declaration boxes in registration form
+.declaration-box {
+  background: #f7fafc;
+  border-left: 3px solid #3182ce;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  color: #4a5568;
+}
+
+// Review page detail blocks
+.review-detail {
+  .review-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a0aec0;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .review-value {
+    color: #2d3748;
+    font-size: 15px;
+  }
+}
+
+// Admin registrations table
+.table {
+  th {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #718096;
+    font-weight: 600;
+    border-bottom-width: 1px;
+  }
+
+  td {
+    vertical-align: middle;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+// Legacy support
 .custom-gradient-bg {
   background-image: linear-gradient(135deg, #5f72bd, #9b23ea);
 }
@@ -1979,28 +2083,13 @@ tbody tr:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-h1 {
-  color: #5f72bd;
-  font-weight: bold;
-}
-
-h2 {
-  color: #9b23ea;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
 .btn-outline-custom {
-  border-color: #9b23ea;
-  color: #9b23ea;
+  border-color: #3182ce;
+  color: #3182ce;
 }
 
 .btn-outline-custom:hover {
-  background-color: #9b23ea !important;
+  background-color: #3182ce !important;
   color: white !important;
 }
 
@@ -2174,38 +2263,7 @@ li {
   width: 100px !important;
 }
 
-#uniqueCardColor {
-  border-radius: 10px;
-  background: linear-gradient(to bottom right, rgb(184, 221, 108), rgb(238, 214, 184));
-  /* Bootstrap's bg-info color as an example */
-}
-
-#registration_review {
-  color: rgb(28, 36, 176);
-}
-
-.advance-payment-notice {
-  font-weight: bold;
-  /* Makes text bold */
-  color: #0e0c00;
-  /* Gold color for prominence */
-  background-color: #000;
-  /* Black background for contrast */
-  padding: 10px;
-  /* Adds space around the text */
-  border-radius: 5px;
-  /* Rounds the corners of the background */
-  display: block;
-  /* Ensures the element fills the width of the container */
-  width: fit-content;
-  /* Ensures the background only takes as much width as the content */
-  margin: 20px auto;
-  /* Centers the element horizontally and adds space above */
-
-  /* Adds a subtle shadow for depth */
-  text-align: center;
-  /* Centers the text within the element */
-}
+// Old review page styles removed — replaced by card-based design
 
 .home-text-section {
   padding: 2rem 0;

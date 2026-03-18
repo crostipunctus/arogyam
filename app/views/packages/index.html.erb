@@ -9,7 +9,7 @@
             <div class="cardContainer">
               <% @packages.each do |package| %>
                 <% cache package do %>
-                    <div class="newpackagecard" style="width: 18rem;">
+                    <div class="newpackagecard">
                     <% if package.package_image.attached? %>
                       <%= image_tag(rails_public_blob_url(package.package_image), class: "card-img-top", alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                     <% else %>

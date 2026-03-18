@@ -14,4 +14,15 @@ module RegistrationsHelper
   def registration_end_date(registration)
     registration.batch.start_date + registration.package.duration.to_i
   end
+
+  def registration_status_badge_class(status)
+    case status
+    when 'Registered'      then 'info'
+    when 'Payment Completed' then 'success'
+    when 'Payment Pending'   then 'warning'
+    when 'Completed'         then 'primary'
+    when 'Cancelled'         then 'danger'
+    else 'secondary'
+    end
+  end
 end

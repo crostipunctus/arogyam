@@ -1,8 +1,25 @@
+<%= page_title 'Edit Registration Comments' %>
 
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <%= form_with model: @registration do |f| %>
-    <%= f.label :comments %>
-    <%= f.text_area :comments, rows: 5, class: "comment-form form-control" %>
-    <%= f.submit 'Save Comment', class: "btn btn-outline-success" %>
-  <% end %>
+<section class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h2 class="registration-page-title mb-1">Edit Comments</h2>
+      <p class="text-muted mb-4">Registration #<%= @registration.id %> &mdash; <%= @registration.package.name %> &mdash; <%= user_full_name(@registration.user) %></p>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <%= form_with model: @registration do |f| %>
+            <div class="mb-3">
+              <%= f.label :comments, class: "form-label fw-medium" %>
+              <%= f.text_area :comments, rows: 5, class: "form-control" %>
+            </div>
+            <div class="d-flex gap-2">
+              <%= f.submit 'Save Comment', class: "btn btn-primary rounded-pill px-4" %>
+              <%= link_to 'Cancel', registration_path(@registration), class: "btn btn-outline-secondary rounded-pill px-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

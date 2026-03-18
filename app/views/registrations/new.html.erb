@@ -20,101 +20,143 @@
 </script>
 
 <section class="container py-5 mt-4">
-  <div class="Profileform">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-        <h2 class="text-center mb-4">Registration Form</h2>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
 
-        <%= form_with(model: @registration, local: true, id: "registration_form") do |f|%>
-          <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
-
-
-          <div class="mb-4"> 
-            <% if @selected_package_id == nil %>
-              <%= f.label :package_id, "Programme *", class: "form-label fw-medium" %> 
-            <% else %>
-              <%= f.label :package_id, "Selected Programme *", class: "form-label fw-medium" %>
-              <div class="text-muted small mb-2">You can change selected programme here:</div>
-            <% end %>
-            <%= f.collection_select :package_id, Package.all, :id, :name, 
-                { selected: @selected_package_id, prompt: "Select a package" }, 
-                class: "form-select py-2", 
-                id: "package-select" %>
+      <%# Progress Steps %>
+      <div class="registration-steps mb-5">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="step-item active">
+            <div class="step-circle">1</div>
+            <div class="step-label">Fill Details</div>
           </div>
-
-          <div class="mb-4">
-            <%= f.label :start_date, "Start Date *", class: "form-label fw-medium" %>
-            <%= f.date_field :start_date, class: "form-control py-2" %>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">2</div>
+            <div class="step-label">Review</div>
           </div>
-
-          <div id="vishram-days" class="mb-4" style="display: none;">
-            <%= f.label :duration, "Duration *", class: "form-label fw-medium" %>
-            <%= f.select :duration, [['3 days', "3"], ['5 days', "5"]], 
-                { prompt: 'Select days' }, 
-                class: 'form-select py-2' %>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">3</div>
+            <div class="step-label">Confirm</div>
           </div>
-
-          <div id="shamanam-days" class="mb-4" style="display: none;">
-            <%= f.label :shamanam_duration, "Duration *", class: "form-label fw-medium" %>
-            <%= f.select :shamanam_duration, [['7 days', "7"], ['14 days', "14"]], 
-                { prompt: 'Select days' }, 
-                class: 'form-select py-2' %>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :subtances, "Substance Use History *", class: "form-label fw-medium" %>
-            <div class="text-muted small mb-2">Do you currently or in the past have used tobacco, alcohol, recreational drugs, or illicit substances? If yes, please list substance and frequency of use:</div>
-            <%= f.text_area :substances, class: "form-control", rows: 3 %>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :lifestyle, "Lifestyle Description *", class: "form-label fw-medium" %>
-            <div class="text-muted small mb-2">Please describe your lifestyle in brief:</div>
-            <%= f.text_area :lifestyle, class: "form-control", rows: 3 %>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :health_conditions, "Health Conditions *", class: "form-label fw-medium" %>
-            <div class="text-muted small mb-2">Please describe all your health conditions in detail. We need this information to guide you better.</div>
-            <%= f.text_area :health_conditions, class: "form-control", rows: 3 %>
-          </div>
-
-          <div class="mb-4">
-            <%= f.label :medication, "Current Medications *", class: "form-label fw-medium" %>
-            <div class="text-muted small mb-2">Are you currently on any regular Allopathic/Ayurvedic/Homeopathic or any other medicine? If yes please give us details</div>
-            <%= f.text_area :medication, class: "form-control", rows: 3 %>
-          </div>
-
-          <div class="alert alert-info p-3 mb-4">
-            By receiving your application, we assume that you are physically and mentally fit and not pregnant. 
-            If any of the health information supplied by you is found to be false then we reserve the right to cancel your registration from the course.
-          </div>
-
-          <div class="form-check mb-4">
-            <%= f.check_box :agreement, class: "form-check-input" %>  
-            <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above.", class: "form-check-label" %>
-          </div>
-
-          <div class="alert alert-info p-3 mb-4">
-            By submitting this application, I confirm that the facts stated in it are true and complete. 
-            I understand that if I am accepted as a candidate, any false statements, omissions, 
-            or other misrepresentations made by me on this application may result in the immediate withdrawal of my application and 
-            legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. 
-            I confirm that I have no health issues which may stop me from participating in the course. 
-            I understand that fees paid for this program is non-refundable. 
-            I also declare that ArogyaM and The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.
-          </div>
-
-          <div class="form-check mb-4">
-            <%= f.check_box :terms, class: "form-check-input" %>  
-            <%= f.label :terms, "I have read the self-declaration and agree to abide by the terms and conditions contained in it.", class: "form-check-label" %>
-          </div>
-
-          <div class="text-center">
-            <%= f.submit 'Register', class: "btn btn-primary btn-lg px-5 rounded-pill", onclick: "submitRegistrationForm(event)" %>
-          </div>
-        <% end %>
+        </div>
       </div>
+
+      <h2 class="text-center mb-2 registration-page-title">Programme Registration</h2>
+      <p class="text-center text-muted mb-4">Please fill in your details to register for a wellness programme.</p>
+
+      <%= form_with(model: @registration, local: true, id: "registration_form") do |f| %>
+        <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
+
+        <%# Programme Selection Card %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-section-title mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event me-2" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
+              Programme Selection
+            </h5>
+
+            <div class="mb-3">
+              <% if @selected_package_id == nil %>
+                <%= f.label :package_id, "Programme *", class: "form-label fw-medium" %>
+              <% else %>
+                <%= f.label :package_id, "Selected Programme *", class: "form-label fw-medium" %>
+                <div class="text-muted small mb-1">You can change your selected programme here:</div>
+              <% end %>
+              <%= f.collection_select :package_id, Package.all, :id, :name,
+                  { selected: @selected_package_id, prompt: "Select a programme" },
+                  class: "form-select py-2",
+                  id: "package-select" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :start_date, "Start Date *", class: "form-label fw-medium" %>
+              <%= f.date_field :start_date, class: "form-control py-2" %>
+            </div>
+
+            <div id="vishram-days" class="mb-3" style="display: none;">
+              <%= f.label :duration, "Duration *", class: "form-label fw-medium" %>
+              <%= f.select :duration, [['3 days', "3"], ['5 days', "5"]],
+                  { prompt: 'Select days' },
+                  class: 'form-select py-2' %>
+            </div>
+
+            <div id="shamanam-days" class="mb-3" style="display: none;">
+              <%= f.label :shamanam_duration, "Duration *", class: "form-label fw-medium" %>
+              <%= f.select :shamanam_duration, [['7 days', "7"], ['14 days', "14"]],
+                  { prompt: 'Select days' },
+                  class: 'form-select py-2' %>
+            </div>
+          </div>
+        </div>
+
+        <%# Health Information Card %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-section-title mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-pulse me-2" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>
+              Health Information
+            </h5>
+
+            <div class="mb-4">
+              <%= f.label :subtances, "Substance Use History *", class: "form-label fw-medium" %>
+              <div class="form-text mb-2">Do you currently or in the past have used tobacco, alcohol, recreational drugs, or illicit substances? If yes, please list substance and frequency of use:</div>
+              <%= f.text_area :substances, class: "form-control", rows: 3, placeholder: "Please describe your substance use history, if any..." %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :lifestyle, "Lifestyle Description *", class: "form-label fw-medium" %>
+              <div class="form-text mb-2">Please describe your lifestyle in brief:</div>
+              <%= f.text_area :lifestyle, class: "form-control", rows: 3, placeholder: "Describe your daily routine, diet, exercise habits..." %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :health_conditions, "Health Conditions *", class: "form-label fw-medium" %>
+              <div class="form-text mb-2">Please describe all your health conditions in detail. We need this information to guide you better.</div>
+              <%= f.text_area :health_conditions, class: "form-control", rows: 3, placeholder: "List any current or past health conditions..." %>
+            </div>
+
+            <div class="mb-0">
+              <%= f.label :medication, "Current Medications *", class: "form-label fw-medium" %>
+              <div class="form-text mb-2">Are you currently on any regular Allopathic/Ayurvedic/Homeopathic or any other medicine? If yes please give us details:</div>
+              <%= f.text_area :medication, class: "form-control", rows: 3, placeholder: "List any medications you are currently taking..." %>
+            </div>
+          </div>
+        </div>
+
+        <%# Agreements Card %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-section-title mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shield-check me-2" viewBox="0 0 16 16"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/><path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/></svg>
+              Declarations & Agreements
+            </h5>
+
+            <div class="declaration-box mb-3">
+              <p class="mb-0 small">By receiving your application, we assume that you are physically and mentally fit and not pregnant. If any of the health information supplied by you is found to be false then we reserve the right to cancel your registration from the course.</p>
+            </div>
+
+            <div class="form-check mb-4">
+              <%= f.check_box :agreement, class: "form-check-input" %>
+              <%= f.label :agreement, "I have read and understand the above statement and agree to all points mentioned above.", class: "form-check-label small" %>
+            </div>
+
+            <div class="declaration-box mb-3">
+              <p class="mb-0 small">By submitting this application, I confirm that the facts stated in it are true and complete. I understand that if I am accepted as a candidate, any false statements, omissions, or other misrepresentations made by me on this application may result in the immediate withdrawal of my application and legal prosecutions applicable and debarment from applying further and forfeiture of the fee already paid. I confirm that I have no health issues which may stop me from participating in the course. I understand that fees paid for this program is non-refundable. I also declare that ArogyaM and The Satsang Foundation will not be held liable for any accidents and injuries that may occur during this course.</p>
+            </div>
+
+            <div class="form-check mb-0">
+              <%= f.check_box :terms, class: "form-check-input" %>
+              <%= f.label :terms, "I have read the self-declaration and agree to abide by the terms and conditions contained in it.", class: "form-check-label small" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit 'Continue to Review', class: "btn btn-primary btn-lg px-5 rounded-pill", onclick: "submitRegistrationForm(event)" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
