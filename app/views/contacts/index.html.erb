@@ -1,47 +1,111 @@
 <% set_meta_tags title: 'Contact Us',
                  description: 'Get in touch with ArogyaM Wellness Center. Contact us for enquiries about Ayurvedic treatments, health programmes, and bookings.' %>
 
-<section class="container pt-5 pb-lg-2 pb-xl-4 py-xxl-5 my-5">
-  <h1 class="cardHeading packages text-center">Contact</h1>
-    <div class="contactInfo row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pt-2">
-      <!-- Address-->
-      <h3 class="howToget">General contact info</h3>
-      <div class="col pb-2">
-        <h4 class="mb-lg-4">Address</h4>
-        <p class="fs-lg fw-medium pb-3 mb-3">
-          <strong>ArogyaM</strong>, <br>
-          Gate 3, <br>The Satsang Foundation - The Sacred Grove,<br>
-          Pedda Kondamari Village and Post,<br>
-          Chowdepalle Mandal, Chittoor District,<br>
-          Andhra Pradesh, India - 517 257  </p>
-      </div>
-      <!-- Phone-->
-      <div class="col pb-2">
-        <h4 class="mb-lg-4">Phone</h4>
-        <ul class="list-unstyled mb-0">
-          
-          <li class="pb-1 mb-2"><span class="d-block mb-1"><strong>ArogyaM</strong></span><a class="nav-link fs-lg p-0">+91 8333981305</a></li>
-          <br>
-          
-          <li class="pb-1 mb-2"><span class="d-block fs-sm text-muted mb-1">The Sacred Grove</span><a class="nav-link fs-lg p-0">+91 8333981304</a></li>
-          <p class="fs-lg fw-medium pb-3 mb-3">(Please contact The Sacred Grove only for concerns regarding stay, food, and general details of TSG and not for treatments and consultations)</p>
-        </ul>
-      </div>
-      
-      <!-- Email-->
-      <div class="col pb-2">
-        <h4 class="mb-lg-4">Email</h4><a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">contact@thesacredgrove.in</a>
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  <h1 class="cardHeading packages text-center">Contact Us</h1>
+  <p class="text-center text-muted mb-5">We'd love to hear from you. Reach out for enquiries about programmes, treatments, or bookings.</p>
+
+  <div class="row g-4 mb-5">
+    <%# Contact Info Cards %>
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4 text-center">
+          <div class="contact-icon-circle mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+          </div>
+          <h5 class="contact-card-title">Address</h5>
+          <p class="contact-card-text">
+            <strong>ArogyaM</strong><br>
+            Gate 3, The Satsang Foundation<br>
+            The Sacred Grove,<br>
+            Pedda Kondamari Village and Post,<br>
+            Chowdepalle Mandal, Chittoor District,<br>
+            Andhra Pradesh, India - 517 257
+          </p>
+        </div>
       </div>
     </div>
-    <%= render 'form' %>
-    <div class="gettingThere" >
-      <h3 class="howToget">How to Get Here</h3>
-      <p class="fs-lg fw-medium pb-3 mb-3"><strong>By air</strong>: The closest airport is Tirupati which is about 3 hours away by road. The closest major airport is Bangalore which is about 3.5 hours away by road.
-      <p class="fs-lg fw-medium pb-3 mb-3"><strong>By train</strong>: The closest major train station is Katpadi Junction which is about 2 and a half hours by road. 
-      <p class="fs-lg fw-medium pb-3 mb-3"><strong>By road</strong>: Bangalore is about 4 hours by road. 
+
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4 text-center">
+          <div class="contact-icon-circle mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
+          </div>
+          <h5 class="contact-card-title">Phone</h5>
+          <p class="contact-card-text">
+            <strong>ArogyaM</strong><br>
+            <a href="tel:+918333981305" class="contact-link">+91 8333 981 305</a>
+          </p>
+          <p class="contact-card-text">
+            <strong>The Sacred Grove</strong><br>
+            <a href="tel:+918333981304" class="contact-link">+91 8333 981 304</a>
+          </p>
+          <p class="contact-card-note">Contact The Sacred Grove for stay, food, and general details only — not for treatments or consultations.</p>
+        </div>
+      </div>
     </div>
-    <div class="mapContainer">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3880.388818787221!2d78.6680652!3d13.450113!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb28753e8b7f917%3A0xbc03f894230aec9c!2s%C4%80rogyaM%3A%20Centre%20for%20Yoga%20and%20Ayurveda!5e0!3m2!1sen!2sin!4v1681124166078!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4 text-center">
+          <div class="contact-icon-circle mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
+          </div>
+          <h5 class="contact-card-title">Email</h5>
+          <p class="contact-card-text">
+            <a href="mailto:wellnesscenter@satsang-foundation.org" class="contact-link">wellnesscenter@satsang-foundation.org</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <%# Contact Form %>
+    <div class="col-12 col-lg-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+          <h3 class="contact-section-heading mb-4">Send Us a Message</h3>
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+
+    <%# How to Get Here %>
+    <div class="col-12 col-lg-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4 p-md-5">
+          <h3 class="contact-section-heading mb-4">How to Get Here</h3>
+
+          <div class="travel-option mb-3">
+            <div class="travel-mode">By Air</div>
+            <p class="travel-detail">The closest airport is Tirupati, about 3 hours by road. The closest major airport is Bangalore, about 3.5 hours by road.</p>
+          </div>
+
+          <div class="travel-option mb-3">
+            <div class="travel-mode">By Train</div>
+            <p class="travel-detail">The closest major train station is Katpadi Junction, about 2.5 hours by road.</p>
+          </div>
+
+          <div class="travel-option">
+            <div class="travel-mode">By Road</div>
+            <p class="travel-detail mb-0">Bangalore is approximately 4 hours by road.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# Map %>
+  <div class="contact-map-wrapper">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3880.388818787221!2d78.6680652!3d13.450113!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb28753e8b7f917%3A0xbc03f894230aec9c!2s%C4%80rogyaM%3A%20Centre%20for%20Yoga%20and%20Ayurveda!5e0!3m2!1sen!2sin!4v1681124166078!5m2!1sen!2sin"
+      width="100%" height="400"
+      style="border:0; border-radius: 12px;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
 </section>
-
-

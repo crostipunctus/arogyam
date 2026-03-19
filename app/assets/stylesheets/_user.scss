@@ -2086,6 +2086,79 @@ tbody tr:hover {
   color: white !important;
 }
 
+// ─── Contact Page ───────────────────────────────────────
+
+.contact-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(68, 140, 116, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #448c74;
+}
+
+.contact-card-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 600;
+  color: $gray-800;
+  margin-bottom: 0.75rem;
+}
+
+.contact-card-text {
+  color: $gray-700;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.contact-card-note {
+  color: $gray-500;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.contact-link {
+  color: #448c74;
+  font-weight: 500;
+
+  &:hover {
+    color: darken(#448c74, 10%);
+  }
+}
+
+.contact-section-heading {
+  font-family: 'Nanum Myeongjo', serif;
+  color: $gray-800;
+  font-weight: 600;
+  font-size: 1.35rem;
+}
+
+.travel-option {
+  padding-left: 1rem;
+  border-left: 3px solid rgba(68, 140, 116, 0.3);
+}
+
+.travel-mode {
+  font-weight: 600;
+  color: $gray-800;
+  margin-bottom: 0.25rem;
+}
+
+.travel-detail {
+  color: $gray-600;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.contact-map-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
 // ─── Accommodation Page ─────────────────────────────────
 
 .acco-gallery {
