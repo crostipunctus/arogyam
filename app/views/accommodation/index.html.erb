@@ -2,43 +2,80 @@
                  description: 'View accommodation options at ArogyaM Wellness Center, Sacred Grove, Chowdepalli. Comfortable stays during your Ayurvedic wellness retreat.' %>
 
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-    <h1 class="cardHeading packages text-center">Accommodation</h1>
-    <div class="aboutContainer">
-      <div class="aboutText">  
-        ArogyaM has two wings separated by a central courtyard where Dhanwantri, 
-        the deity of the wellness center, is enshrined under a 40-year-old tamarind tree. 
-        The guest rooms are beautifully designed and tastefully furnished for single, 
-        double, and triple occupancy. 
-        The nine rooms in the guest wing are named after various herbs such as <i>dhatri</i>, <i>japa</i>, <i>abhaya</i>, <i>aparajitha</i>, and so on. 
-        <br>
-        <br>
-        <strong>Guidelines:</strong>
-        <br>
-        <br>
-        In order to benefit most out of the therapies, it is essential that certain Yamas &amp; Niyamas (Rules
-        &amp; Regulations) are observed by all the participants:
-        <ul>
-          <li>The Sacred Grove campus is a non-smoking and non-intoxicant zone. Smoking, drinking, or consuming any intoxicants is strictly prohibited.</li>
-          <li>Follow the physician's advised dos and don'ts strictly.</li>
-          <li>Respect the peaceful atmosphere by avoiding loud music or disruptive group activities.</li>
-          <li>Do not pluck any flowers, fruits, or leaves from the orchards and gardens.</li>
-          <li>Vegetarian meals are served, and individual cooking or bringing outside food is not allowed.</li>
-          <li>Be eco-conscious and use plastics sparingly. If necessary, dispose of plastic waste in designated bins.</li>
-          <li>Dress appropriately to be in harmony with the spirit of the place.</li>
-          <li>Follow the program schedule and its timings for treatments and activities.</li>
-          <li>Keep rooms and surroundings clean at all times. The housekeeping staff will clean the rooms every other day from 9 AM to 11 AM.</li>
-          <li>Dispose of waste in designated bins.</li>
-          <li>We welcome your suggestions and feedback. Please email us at: 
-          <strong><a class="emailLink nav-link fs-lg p-0" href="mailto:wellnesscenter@satsang-foundation.org">wellnesscenter@satsang-foundation.org</a></strong><br></li>
-        </ul>
+  <h1 class="cardHeading packages text-center">Accommodation</h1>
+  <p class="text-center text-muted mb-5">Comfortable, peaceful stays at Sacred Grove during your wellness retreat</p>
+
+  <div class="row g-5 align-items-center mb-5">
+    <%# Image grid %>
+    <div class="col-12 col-lg-6">
+      <div class="acco-gallery">
+        <div class="acco-gallery-main">
+          <%= image_tag(dev_images('acco1.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM guest room - single occupancy', loading: "lazy") %>
+        </div>
+        <div class="acco-gallery-grid">
+          <%= image_tag(dev_images('acco2.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM guest room - double occupancy', loading: "lazy") %>
+          <%= image_tag(dev_images('acco4.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM courtyard and central garden', loading: "lazy") %>
+          <%= image_tag(dev_images('acco3.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM wellness center exterior', loading: "lazy") %>
+        </div>
       </div>
     </div>
-    <div class="accoImage">
-      <%= image_tag(dev_images('acco1.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM guest room - single occupancy', loading: "lazy") %>
-      <%= image_tag(dev_images('acco2.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM guest room - double occupancy', loading: "lazy") %>
-      <%= image_tag(dev_images('acco4.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM courtyard and central garden', loading: "lazy") %>
-      <%= image_tag(dev_images('acco3.jpg'), data: {fancybox: 'imageGallery'}, class: "AccomImage", alt: 'ArogyaM wellness center exterior', loading: "lazy") %>
+
+    <%# Description %>
+    <div class="col-12 col-lg-6">
+      <div class="acco-description">
+        <p>
+          ArogyaM has two wings separated by a central courtyard where Dhanwantri,
+          the deity of the wellness center, is enshrined under a 40-year-old tamarind tree.
+        </p>
+        <p>
+          The guest rooms are beautifully designed and tastefully furnished for single,
+          double, and triple occupancy. The nine rooms in the guest wing are named after
+          various herbs such as <em>dhatri</em>, <em>japa</em>, <em>abhaya</em>,
+          <em>aparajitha</em>, and so on.
+        </p>
+      </div>
     </div>
+  </div>
+
+  <%# Guidelines %>
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+          <h3 class="acco-guidelines-heading mb-4">Guidelines for Guests</h3>
+          <p class="text-muted mb-4">To benefit most from the therapies, it is essential that certain Yamas &amp; Niyamas (Rules &amp; Regulations) are observed by all participants:</p>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-6">
+              <ul class="acco-guidelines-list">
+                <li>The Sacred Grove campus is a non-smoking and non-intoxicant zone. Smoking, drinking, or consuming any intoxicants is strictly prohibited.</li>
+                <li>Follow the physician's advised dos and don'ts strictly.</li>
+                <li>Respect the peaceful atmosphere by avoiding loud music or disruptive group activities.</li>
+                <li>Do not pluck any flowers, fruits, or leaves from the orchards and gardens.</li>
+                <li>Vegetarian meals are served, and individual cooking or bringing outside food is not allowed.</li>
+              </ul>
+            </div>
+            <div class="col-12 col-md-6">
+              <ul class="acco-guidelines-list">
+                <li>Be eco-conscious and use plastics sparingly. If necessary, dispose of plastic waste in designated bins.</li>
+                <li>Dress appropriately to be in harmony with the spirit of the place.</li>
+                <li>Follow the program schedule and its timings for treatments and activities.</li>
+                <li>Keep rooms and surroundings clean at all times. Housekeeping staff clean rooms every other day from 9 AM to 11 AM.</li>
+                <li>Dispose of waste in designated bins.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-top">
+            <p class="mb-0 text-muted">
+              We welcome your suggestions and feedback. Please email us at
+              <a href="mailto:wellnesscenter@satsang-foundation.org" class="fw-medium">wellnesscenter@satsang-foundation.org</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <%= render 'shared/cta_banner' %>
