@@ -3,19 +3,37 @@
 
 <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
   <h1 class="cardHeading packages text-center">Testimonials</h1>
-  <div class="TestimoText text-center">
-        A few words from patients who underwent our health programmes.
+  <p class="text-center text-muted mb-5">Hear from patients who experienced our health programmes</p>
+
+  <div class="row g-4 justify-content-center">
+    <% @testimonials.each do |testimonial| %>
+      <div class="col-12 col-md-6">
+        <div class="testimonial-card">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0"
+                    title="<%= testimonial.title.presence || 'ArogyaM patient testimonial' %>"
+                    frameborder="0"
+                    allowfullscreen
+                    loading="lazy"></iframe>
+          </div>
+          <% if testimonial.title.present? %>
+            <div class="testimonial-card-body">
+              <h5 class="testimonial-card-title"><%= testimonial.title %></h5>
+            </div>
+          <% end %>
+          <% if current_user_admin? %>
+            <div class="testimonial-card-admin">
+              <%= link_to "Delete", "testimonials/#{testimonial.id}", class: "btn btn-outline-danger btn-sm rounded-pill px-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <% @testimonials.each do |testimonial| %>
-    <div class="videoContainer">
-      <iframe src="https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0"
-              title="<%= testimonial.title.presence || 'ArogyaM patient testimonial' %>"
-              frameborder="0"
-              height="500"
-              width="500"
-              allowfullscreen
-              loading="lazy"
-              class="video"></iframe>
+
+  <% if current_user_admin? %>
+    <div class="text-center mt-5">
+      <%= link_to 'Add Testimonial', "testimonials/new", class: "btn btn-outline-primary rounded-pill px-4" %>
     </div>
   <% end %>
 </section>

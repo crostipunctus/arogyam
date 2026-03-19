@@ -2086,6 +2086,103 @@ tbody tr:hover {
   color: white !important;
 }
 
+// ─── About Page ─────────────────────────────────────────
+
+.about-section-heading {
+  font-family: 'Nanum Myeongjo', serif;
+  color: $gray-800;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(68, 140, 116, 0.2);
+}
+
+.about-text {
+  color: $gray-700;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.about-highlight {
+  background: linear-gradient(135deg, rgba(184, 221, 108, 0.12), rgba(238, 214, 184, 0.12));
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+
+  p {
+    color: $gray-700;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.team-card {
+  padding: 1.5rem 1rem;
+
+  .team-card-photo {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-card-name {
+    font-family: 'Nanum Myeongjo', serif;
+    color: $gray-800;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .team-card-role {
+    color: #448c74;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .team-card-bio {
+    color: $gray-600;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+// ─── Testimonials Page ──────────────────────────────────
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  iframe {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .testimonial-card-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .testimonial-card-title {
+    font-family: 'Nanum Myeongjo', serif;
+    color: $gray-800;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .testimonial-card-admin {
+    padding: 0 1.25rem 1rem;
+  }
+}
+
 // ─── Contact Page ───────────────────────────────────────
 
 .contact-icon-circle {

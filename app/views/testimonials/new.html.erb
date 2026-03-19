@@ -1,16 +1,30 @@
+<%= page_title 'Add Testimonial' %>
 
-<div data-turbo="false" class="h-100 d-flex align-items-center justify-content-center">
-  <%= form_with(model: @testimonial) do |f|%>
-    <%= @testimonial.errors.full_messages.to_sentence %>
-    <div class="mb-3">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
+<section class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h2 class="registration-page-title mb-4">Add Testimonial</h2>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <%= form_with(model: @testimonial) do |f| %>
+            <%= render "shared/errors", object: @testimonial %>
+            <div class="mb-3">
+              <%= f.label :title, class: "form-label fw-medium" %>
+              <%= f.text_field :title, class: "form-control", placeholder: "Testimonial title" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :youtube_id, "YouTube Video ID", class: "form-label fw-medium" %>
+              <%= f.text_field :youtube_id, class: "form-control", placeholder: "e.g. dQw4w9WgXcQ" %>
+              <div class="form-text">The ID from the YouTube URL (after v=)</div>
+            </div>
+            <div class="d-flex gap-2">
+              <%= f.submit 'Add Testimonial', class: "btn btn-primary rounded-pill px-4" %>
+              <%= link_to 'Cancel', "/testimonials", class: "btn btn-outline-secondary rounded-pill px-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label "Youtube_id", :youtube_id %>
-      <%= f.text_field :youtube_id, class: "form-control" %>
-    </div>
-   
-    <%= f.submit class:"btn btn-primary"%>
-  <% end %>
-</div>
+  </div>
+</section>
