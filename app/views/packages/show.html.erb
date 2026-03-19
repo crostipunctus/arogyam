@@ -1,91 +1,122 @@
-  <% set_meta_tags title: @package.name,
-                   description: @package.short_description.presence || "Learn about the #{@package.name} programme at ArogyaM Wellness Center." %>
-  <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
-   <%= link_to "<i class='bi bi-arrow-left-circle'></i>".html_safe, :back, id:"back_to", data: {turbo: false} %>
-    <h1 id="packageName" class="text-center"><%= @package.name %></h1>
-    <div id="packageTagline"><%= @package.short_description %></div>
+<% set_meta_tags title: @package.name,
+                 description: @package.short_description.presence || "Learn about the #{@package.name} programme at ArogyaM Wellness Center." %>
 
+<section class="container pt-5 mt-5 mb-4">
+  <%= link_to programmes_path, class: "text-muted text-decoration-none d-inline-flex align-items-center mb-3", data: { turbo: false } do %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-1" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/></svg> All Programmes
+  <% end %>
 
-
-    <div class="container-fluid mt-5">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-        <div class="registration-prompt p-4 rounded-3 mb-4 text-center">
-        <% if current_user %>
-          <% if !has_profile?(current_user) %>
-            <div id="PleaseCreateProfileHeading">
-              <i class="bi bi-person-plus fs-1 text-primary mb-3 d-block"></i>
-              <p class="text-muted mb-4">Please create or complete your profile to register for a programme</p>
-              <%= link_to new_user_profile_path(current_user), 
-                  class: "btn btn-outline-primary rounded-pill px-4", 
-                  id: "PleaseCreateProfile" do %>
-                <i class="bi bi-person-circle me-2"></i>Go to Profile
-              <% end %>
-            </div>
-          <% elsif has_active_registration?(current_user) %>
-            <div class="active-registration-notice">
-              <i class="bi bi-exclamation-circle fs-1 text-warning mb-3 d-block"></i>
-              <p class="text-muted mb-4">Please cancel your current active registration to register for another programme</p>
-              <%= link_to registrations_path, 
-                  class: "btn btn-outline-warning rounded-pill px-4" do %>
-                <i class="bi bi-arrow-right-circle me-2"></i>View My Registrations
-              <% end %>
-            </div>
-          <% else %>
-            <i class="bi bi-calendar-check fs-1 text-primary mb-3 d-block"></i>
-            <h5 class="mb-3">Ready to Join?</h5>
-            <%= link_to new_registration_path(package_id: @package.id), 
-                class: "btn btn-outline-primary rounded-pill px-4", 
-                id: "registerButton",
-                data: {turbo: false, action: "click->profile-checker#checkProfile"} do %>
-              <i class="bi bi-arrow-right-circle me-2"></i>Register Now
-            <% end %>
-          <% end %>
-      <% else %>
-            <i class="bi bi-box-arrow-in-right fs-1 text-primary mb-3 d-block"></i>
-            <p class="text-muted mb-4">Please sign in to register for this batch</p>
-            <%= link_to new_user_session_path, 
-                class: "btn btn-outline-primary rounded-pill px-4" do %>
-              <i class="bi bi-door-open me-2"></i>Sign In
-            <% end %>
-          <% end %>
-        </div>
+  <div class="row g-5">
+    <%# Left column: Image + Quick Info %>
+    <div class="col-12 col-lg-5">
+      <div class="programme-image-wrapper mb-4">
+        <% if @package.package_image.attached? %>
+          <%= image_tag(rails_public_blob_url(@package.package_image),
+              class: "programme-hero-image",
+              alt: "#{@package.name} - Ayurvedic wellness programme at ArogyaM",
+              loading: "lazy") %>
+        <% else %>
+          <%= image_tag(dev_images('flowers.jpg'),
+              class: "programme-hero-image",
+              alt: "#{@package.name} - ArogyaM wellness programme",
+              loading: "lazy") %>
+        <% end %>
       </div>
-    </div>
-  </div>
-    
-    <div class="durationCostContainer">
-      <div class="packageDuration"><%= "#{@package.duration} days"%></div>
-      <div class="packageCost"><%= "Rs. #{@package.cost}" %></div>
-      
-    </div>
-    <div id="package-image" class="package-image">
-          <%= package_image(@package) %>
-        </div> 
-      <div class="packageShow">
-        <div class="packageText">
+
+      <%# Quick Info Card %>
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+            <div>
+              <div class="programme-meta-label">Duration</div>
+              <div class="programme-meta-value"><%= @package.duration %> days</div>
+            </div>
+            <div class="text-end">
+              <div class="programme-meta-label">Cost</div>
+              <div class="programme-meta-value">Rs. <%= @package.cost %></div>
+            </div>
+          </div>
+
           <% if @package.dates.present? %>
-              <h3 class="dates mb-lg-4"><%= "Dates: #{@package.dates}" %></h3>
-          <% end %>
-          <div id="package" class="package mb-0 mb-md-1 mb-lg-3"><%= @package.content%></div><br>
-          <div class="package-titles"><strong>Benefits:</strong></div>
-          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.benefits%></span><br>
-          <div class="package-titles"><strong>Eligibility:</strong></div>
-          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.eligibility%></span><br>
-          <div class="package-titles"><strong>Note:</strong></div>
-          <span id="package" class="mb-0 mb-md-1 mb-lg-3"><%= @package.note%></span>
-          <% if current_user_admin? %>
-            <div class="admin">
-              <%= link_to "Edit package", edit_package_path(@package), class: "btn btn-primary btn-sm" %>
-            </div>
-            <div  class="admin">
-              <%= link_to "Delete package", destroy_package_path(@package), class: "btn btn-danger btn-sm", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+            <div class="mb-3">
+              <div class="programme-meta-label">Upcoming Dates</div>
+              <div class="programme-meta-value text-primary"><%= @package.dates %></div>
             </div>
           <% end %>
-        
+
+          <%# CTA %>
+          <% if current_user %>
+            <% if !has_profile?(current_user) %>
+              <p class="text-muted small mb-2">Complete your profile to register</p>
+              <%= link_to new_user_profile_path(current_user),
+                  class: "btn btn-outline-primary rounded-pill w-100" do %>
+                <i class="bi bi-person-circle me-1"></i> Complete Profile
+              <% end %>
+            <% elsif has_active_registration?(current_user) %>
+              <p class="text-muted small mb-2">Cancel your current registration first</p>
+              <%= link_to registrations_path,
+                  class: "btn btn-outline-warning rounded-pill w-100" do %>
+                <i class="bi bi-arrow-right-circle me-1"></i> View My Registrations
+              <% end %>
+            <% else %>
+              <%= link_to new_registration_path(package_id: @package.id),
+                  class: "btn btn-primary rounded-pill w-100 btn-lg",
+                  id: "registerButton",
+                  data: { turbo: false } do %>
+                <i class="bi bi-arrow-right-circle me-1"></i> Register Now
+              <% end %>
+            <% end %>
+          <% else %>
+            <p class="text-muted small mb-2">Sign in to register for this programme</p>
+            <%= link_to new_user_session_path,
+                class: "btn btn-outline-primary rounded-pill w-100" do %>
+              <i class="bi bi-door-open me-1"></i> Sign In to Register
+            <% end %>
+          <% end %>
         </div>
       </div>
+
+      <% if current_user_admin? %>
+        <div class="d-flex gap-2">
+          <%= link_to "Edit Programme", edit_package_path(@package), class: "btn btn-outline-primary btn-sm rounded-pill px-3" %>
+          <%= link_to "Delete Programme", destroy_package_path(@package), class: "btn btn-outline-danger btn-sm rounded-pill px-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this programme?" } %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Right column: Content %>
+    <div class="col-12 col-lg-7">
+      <h1 class="programme-title"><%= @package.name %></h1>
+      <p class="programme-tagline"><%= @package.short_description %></p>
+
+      <div class="programme-content">
+        <div class="programme-section">
+          <%= @package.content %>
+        </div>
+
+        <% if @package.benefits.present? %>
+          <div class="programme-section">
+            <h3 class="programme-section-heading">Benefits</h3>
+            <%= @package.benefits %>
+          </div>
+        <% end %>
+
+        <% if @package.eligibility.present? %>
+          <div class="programme-section">
+            <h3 class="programme-section-heading">Eligibility</h3>
+            <%= @package.eligibility %>
+          </div>
+        <% end %>
+
+        <% if @package.note.present? %>
+          <div class="programme-section">
+            <h3 class="programme-section-heading">Important Note</h3>
+            <%= @package.note %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
+</section>
 
 <%= render 'shared/testimonials_preview' %>
-

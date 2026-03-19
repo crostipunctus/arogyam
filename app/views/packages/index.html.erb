@@ -1,48 +1,42 @@
-  <% set_meta_tags title: 'Health Programmes',
-                   description: 'Explore ArogyaM health programmes including Ayurvedic treatments, Panchakarma, yoga retreats, and wellness packages at Sacred Grove, Chowdepalli.' %>
-  <section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-    <!-- Page title-->
-    
-    <h1 class="cardHeading packages text-center">Health Programmes</h1> 
-   
-       
-            <div class="cardContainer">
-              <% @packages.each do |package| %>
-                <% cache package do %>
-                    <div class="newpackagecard">
-                    <% if package.package_image.attached? %>
-                      <%= image_tag(rails_public_blob_url(package.package_image), class: "card-img-top", alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
-                    <% else %>
-                      <%= image_tag(dev_images('flowers.jpg'), class: "card-img-top", alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
-                    <% end %>
-                    <div class="card-body">
-                      <h5 class="card-title"><%= package.name %></h5>
-                      <p class="card-text"><%= package.short_description %></p>
-                      <p class="card-text"><%= "Rs. #{package.cost}" %></p>
-                      <p class="card-text"><%= "#{package.duration} days" %></p>
-                      <%= link_to "Details", programme_path(package), id: "NewPackageCardButton", class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-        
-      <% if current_user_admin? %>
+<% set_meta_tags title: 'Health Programmes',
+                 description: 'Explore ArogyaM health programmes including Ayurvedic treatments, Panchakarma, yoga retreats, and wellness packages at Sacred Grove, Chowdepalli.' %>
 
-        <div class="text-center">
-          <%= link_to 'New Programme', new_programme_path, class: "btn btn-outline-primary rounded-pill" %>
+<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
+  <h1 class="cardHeading packages text-center">Health Programmes</h1>
+  <p class="text-center text-muted mb-5">Discover our Ayurvedic wellness programmes designed to restore balance and vitality</p>
+
+  <div class="row g-4 justify-content-center">
+    <% @packages.each do |package| %>
+      <% cache package do %>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <%= link_to programme_path(package), class: "programme-card d-block text-decoration-none h-100", data: { turbo: false } do %>
+            <div class="programme-card-inner h-100">
+              <div class="programme-card-image">
+                <% if package.package_image.attached? %>
+                  <%= image_tag(rails_public_blob_url(package.package_image), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                <% else %>
+                  <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                <% end %>
+              </div>
+              <div class="programme-card-body">
+                <h5 class="programme-card-title"><%= package.name %></h5>
+                <p class="programme-card-description"><%= package.short_description %></p>
+                <div class="programme-card-meta">
+                  <span><%= package.duration %> days</span>
+                  <span class="programme-card-divider"></span>
+                  <span>Rs. <%= package.cost %></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
-        
-        
-       
-      
-     
-    
+    <% end %>
+  </div>
+
+  <% if current_user_admin? %>
+    <div class="text-center mt-5">
+      <%= link_to 'New Programme', new_programme_path, class: "btn btn-outline-primary rounded-pill px-4" %>
+    </div>
+  <% end %>
 </section>
-
-
-
-
-
-
