@@ -50,27 +50,27 @@
               <p class="text-muted small mb-2">Complete your profile to register</p>
               <%= link_to new_user_profile_path(current_user),
                   class: "btn btn-outline-primary rounded-pill w-100" do %>
-                <i class="bi bi-person-circle me-1"></i> Complete Profile
+                Complete Profile
               <% end %>
             <% elsif has_active_registration?(current_user) %>
               <p class="text-muted small mb-2">Cancel your current registration first</p>
               <%= link_to registrations_path,
                   class: "btn btn-outline-warning rounded-pill w-100" do %>
-                <i class="bi bi-arrow-right-circle me-1"></i> View My Registrations
+                View My Registrations
               <% end %>
             <% else %>
               <%= link_to new_registration_path(package_id: @package.id),
                   class: "btn btn-primary rounded-pill w-100 btn-lg",
                   id: "registerButton",
                   data: { turbo: false } do %>
-                <i class="bi bi-arrow-right-circle me-1"></i> Register Now
+                Register Now
               <% end %>
             <% end %>
           <% else %>
             <p class="text-muted small mb-2">Sign in to register for this programme</p>
             <%= link_to new_user_session_path,
                 class: "btn btn-outline-primary rounded-pill w-100" do %>
-              <i class="bi bi-door-open me-1"></i> Sign In to Register
+              Sign In to Register
             <% end %>
           <% end %>
         </div>
