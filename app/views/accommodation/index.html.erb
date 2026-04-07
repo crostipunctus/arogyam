@@ -1,38 +1,84 @@
 <% set_meta_tags title: 'Accommodation',
                  description: 'View accommodation options at ArogyaM Wellness Center, Sacred Grove, Chowdepalli. Comfortable stays during your Ayurvedic wellness retreat.' %>
 
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <h1 class="cardHeading packages text-center">Accommodation</h1>
-  <p class="text-center text-muted mb-5">Comfortable, peaceful stays at Sacred Grove during your wellness retreat</p>
+<section class="acco-hero-section">
+  <div class="container">
+    <div class="acco-hero-content text-center">
+      <p class="acco-hero-label">Your home during the retreat</p>
+      <h1 class="acco-hero-title">Accommodation</h1>
+      <p class="acco-hero-subtitle">Peaceful, beautifully designed rooms named after healing herbs</p>
+    </div>
+  </div>
+</section>
 
-  <div class="row g-5 align-items-center mb-5">
-    <%# Image grid %>
-    <div class="col-12 col-lg-6">
-      <div class="acco-gallery">
-        <div class="acco-gallery-main">
+<section class="container py-5 mb-md-3 mb-lg-4 mb-xxl-5">
+
+  <%# Bento Gallery %>
+  <div class="row justify-content-center mb-5 pb-lg-3">
+    <div class="col-12 col-lg-10">
+      <div class="acco-bento-gallery">
+        <div class="acco-bento-main">
           <%= image_tag(dev_images('acco1.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM guest room - single occupancy', loading: "lazy") %>
         </div>
-        <div class="acco-gallery-grid">
+        <div class="acco-bento-side">
           <%= image_tag(dev_images('acco2.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM guest room - double occupancy', loading: "lazy") %>
           <%= image_tag(dev_images('acco4.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM courtyard and central garden', loading: "lazy") %>
           <%= image_tag(dev_images('acco3.jpg'), data: { fancybox: 'imageGallery' }, alt: 'ArogyaM wellness center exterior', loading: "lazy") %>
         </div>
       </div>
     </div>
+  </div>
 
-    <%# Description %>
-    <div class="col-12 col-lg-6">
-      <div class="acco-description">
-        <p>
-          ArogyaM has two wings separated by a central courtyard where Dhanwantri,
-          the deity of the wellness center, is enshrined under a 40-year-old tamarind tree.
-        </p>
-        <p>
-          The guest rooms are beautifully designed and tastefully furnished for single,
-          double, and triple occupancy. The nine rooms in the guest wing are named after
-          various herbs such as <em>dhatri</em>, <em>japa</em>, <em>abhaya</em>,
-          <em>aparajitha</em>, and so on.
-        </p>
+  <%# Description %>
+  <div class="row justify-content-center mb-5 pb-lg-3">
+    <div class="col-12 col-lg-10">
+      <div class="acco-about-block">
+        <div class="row g-5 align-items-center">
+          <div class="col-12 col-md-7">
+            <h3 class="acco-section-heading">A Sanctuary for Healing</h3>
+            <p class="acco-about-text">
+              ArogyaM has two wings separated by a central courtyard where Dhanwantri,
+              the deity of the wellness center, is enshrined under a 40-year-old tamarind tree.
+            </p>
+            <p class="acco-about-text mb-0">
+              The guest rooms are beautifully designed and tastefully furnished for single,
+              double, and triple occupancy. The nine rooms in the guest wing are named after
+              various herbs such as <em>dhatri</em>, <em>japa</em>, <em>abhaya</em>,
+              <em>aparajitha</em>, and so on.
+            </p>
+          </div>
+          <div class="col-12 col-md-5">
+            <div class="acco-features">
+              <div class="acco-feature-item">
+                <div class="acco-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/></svg>
+                </div>
+                <div>
+                  <strong>9 Guest Rooms</strong>
+                  <p class="mb-0 text-muted small">Single, double & triple occupancy</p>
+                </div>
+              </div>
+              <div class="acco-feature-item">
+                <div class="acco-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16c3.314 0 6-2.686 6-6a6.003 6.003 0 0 0-3.3-5.36l.145-.117a.5.5 0 0 0-.64-.768l-.16.13A6.003 6.003 0 0 0 8 4c-.68 0-1.34.113-1.955.32l-.205-.166a.5.5 0 1 0-.628.776l.09.073A6.003 6.003 0 0 0 2 10c0 3.314 2.686 6 6 6zM8 5a5 5 0 1 1 0 10A5 5 0 0 1 8 5z"/><path d="M6.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5zM8 0a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 0z"/></svg>
+                </div>
+                <div>
+                  <strong>Herb-Named Rooms</strong>
+                  <p class="mb-0 text-muted small">Dhatri, Japa, Abhaya & more</p>
+                </div>
+              </div>
+              <div class="acco-feature-item">
+                <div class="acco-feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+                </div>
+                <div>
+                  <strong>Central Courtyard</strong>
+                  <p class="mb-0 text-muted small">40-year-old tamarind tree</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,38 +86,65 @@
   <%# Guidelines %>
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
-      <div class="card border-0 shadow-sm">
-        <div class="card-body p-4 p-md-5">
-          <h3 class="acco-guidelines-heading mb-4">Guidelines for Guests</h3>
-          <p class="text-muted mb-4">To benefit most from the therapies, it is essential that certain Yamas &amp; Niyamas (Rules &amp; Regulations) are observed by all participants:</p>
+      <div class="acco-guidelines-block">
+        <div class="text-center mb-4">
+          <p class="acco-hero-label mb-2">For a fulfilling retreat experience</p>
+          <h3 class="acco-section-heading">Guidelines for Guests</h3>
+          <p class="text-muted">To benefit most from the therapies, it is essential that certain Yamas &amp; Niyamas are observed by all participants.</p>
+        </div>
 
-          <div class="row g-4">
-            <div class="col-12 col-md-6">
-              <ul class="acco-guidelines-list">
-                <li>The Sacred Grove campus is a non-smoking and non-intoxicant zone. Smoking, drinking, or consuming any intoxicants is strictly prohibited.</li>
-                <li>Follow the physician's advised dos and don'ts strictly.</li>
-                <li>Respect the peaceful atmosphere by avoiding loud music or disruptive group activities.</li>
-                <li>Do not pluck any flowers, fruits, or leaves from the orchards and gardens.</li>
-                <li>Vegetarian meals are served, and individual cooking or bringing outside food is not allowed.</li>
-              </ul>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">01</span>
+              <p>The Sacred Grove campus is a non-smoking and non-intoxicant zone. Smoking, drinking, or consuming any intoxicants is strictly prohibited.</p>
             </div>
-            <div class="col-12 col-md-6">
-              <ul class="acco-guidelines-list">
-                <li>Be eco-conscious and use plastics sparingly. If necessary, dispose of plastic waste in designated bins.</li>
-                <li>Dress appropriately to be in harmony with the spirit of the place.</li>
-                <li>Follow the program schedule and its timings for treatments and activities.</li>
-                <li>Keep rooms and surroundings clean at all times. Housekeeping staff clean rooms every other day from 9 AM to 11 AM.</li>
-                <li>Dispose of waste in designated bins.</li>
-              </ul>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">02</span>
+              <p>Follow the physician's advised dos and don'ts strictly.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">03</span>
+              <p>Respect the peaceful atmosphere by avoiding loud music or disruptive group activities.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">04</span>
+              <p>Do not pluck any flowers, fruits, or leaves from the orchards and gardens.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">05</span>
+              <p class="mb-0">Vegetarian meals are served, and individual cooking or bringing outside food is not allowed.</p>
             </div>
           </div>
-
-          <div class="mt-4 pt-3 border-top">
-            <p class="mb-0 text-muted">
-              We welcome your suggestions and feedback. Please email us at
-              <a href="mailto:wellnesscenter@satsang-foundation.org" class="fw-medium">wellnesscenter@satsang-foundation.org</a>
-            </p>
+          <div class="col-12 col-md-6">
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">06</span>
+              <p>Be eco-conscious and use plastics sparingly. If necessary, dispose of plastic waste in designated bins.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">07</span>
+              <p>Dress appropriately to be in harmony with the spirit of the place.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">08</span>
+              <p>Follow the program schedule and its timings for treatments and activities.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">09</span>
+              <p>Keep rooms and surroundings clean at all times. Housekeeping staff clean rooms every other day from 9 AM to 11 AM.</p>
+            </div>
+            <div class="acco-guideline-card">
+              <span class="acco-guideline-number">10</span>
+              <p class="mb-0">Dispose of waste in designated bins.</p>
+            </div>
           </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-top text-center">
+          <p class="mb-0 text-muted">
+            We welcome your suggestions and feedback. Please email us at
+            <a href="mailto:wellnesscenter@satsang-foundation.org" class="fw-medium" style="color: #448c74;">wellnesscenter@satsang-foundation.org</a>
+          </p>
         </div>
       </div>
     </div>

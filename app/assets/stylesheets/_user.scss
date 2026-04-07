@@ -2088,69 +2088,174 @@ tbody tr:hover {
 
 // ─── About Page ─────────────────────────────────────────
 
-.about-section-heading {
-  font-family: 'Nanum Myeongjo', serif;
-  color: $gray-800;
-  font-size: 1.35rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(68, 140, 116, 0.2);
+.about-hero-section {
+  background: linear-gradient(135deg, rgba(68, 140, 116, 0.06) 0%, rgba(184, 221, 108, 0.08) 50%, rgba(238, 214, 184, 0.06) 100%);
+  padding: 6rem 0 3rem;
+  margin-top: 56px;
+
+  @media (max-width: 768px) {
+    padding: 5rem 0 2.5rem;
+  }
 }
 
-.about-text {
+.about-hero-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #448c74;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.about-hero-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: $gray-800;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.about-hero-subtitle {
+  color: $gray-600;
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
+
+.about-story-block {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 768px) {
+    padding: 1.75rem;
+  }
+}
+
+.about-decorative-badge {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  .about-badge-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(68, 140, 116, 0.1);
+    color: #448c74;
+    margin-bottom: 1rem;
+  }
+
+  .about-badge-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: $gray-800;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-badge-line {
+    width: 40px;
+    height: 2px;
+    background: rgba(68, 140, 116, 0.3);
+    margin: 0 auto;
+  }
+}
+
+.about-story-text {
   color: $gray-700;
   font-size: 1.05rem;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
-.about-highlight {
-  background: linear-gradient(135deg, rgba(184, 221, 108, 0.12), rgba(238, 214, 184, 0.12));
-  border-radius: 12px;
-  padding: 2rem 2.5rem;
+.about-quote-block {
+  background: linear-gradient(135deg, rgba(184, 221, 108, 0.1), rgba(238, 214, 184, 0.1));
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
   text-align: center;
+  position: relative;
 
-  p {
+  .about-quote-mark {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 4rem;
+    color: rgba(68, 140, 116, 0.2);
+    line-height: 1;
+    margin-bottom: -0.5rem;
+  }
+
+  .about-quote-text {
     color: $gray-700;
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.85;
+    font-style: italic;
+    margin-bottom: 0;
   }
 
   @media (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
 }
 
-.team-card {
-  padding: 1.5rem 1rem;
+.about-team-heading {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $gray-800;
+}
 
-  .team-card-photo {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.about-team-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
 
-  .team-card-name {
+  .about-team-photo-wrapper {
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .about-team-photo {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(68, 140, 116, 0.15);
+  }
+
+  .about-team-info {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .about-team-name {
     font-family: 'Nanum Myeongjo', serif;
     color: $gray-800;
     font-weight: 600;
     margin-bottom: 0.25rem;
   }
 
-  .team-card-role {
+  .about-team-role {
     color: #448c74;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
     margin-bottom: 0.75rem;
   }
 
-  .team-card-bio {
+  .about-team-bio {
     color: $gray-600;
     font-size: 0.9rem;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 }
 
@@ -2258,73 +2363,206 @@ tbody tr:hover {
 
 // ─── Accommodation Page ─────────────────────────────────
 
-.acco-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.acco-hero-section {
+  background: linear-gradient(135deg, rgba(68, 140, 116, 0.06) 0%, rgba(184, 221, 108, 0.08) 50%, rgba(238, 214, 184, 0.06) 100%);
+  padding: 6rem 0 3rem;
+  margin-top: 56px;
 
-  .acco-gallery-main img {
+  @media (max-width: 768px) {
+    padding: 5rem 0 2.5rem;
+  }
+}
+
+.acco-hero-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #448c74;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.acco-hero-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: $gray-800;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.acco-hero-subtitle {
+  color: $gray-600;
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
+
+.acco-bento-gallery {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 10px;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .acco-bento-main img {
     width: 100%;
-    height: 300px;
+    height: 100%;
+    min-height: 360px;
     object-fit: cover;
-    border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 
-  .acco-gallery-grid {
+  .acco-bento-side {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
 
     img {
       width: 100%;
-      height: 150px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
       cursor: pointer;
-      transition: opacity 0.2s ease;
+      transition: transform 0.3s ease;
 
       &:hover {
-        opacity: 0.85;
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+    .acco-bento-main img {
+      min-height: 240px;
+    }
+
+    .acco-bento-side {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+
+      img {
+        height: 120px;
       }
     }
   }
 }
 
-.acco-description {
+.acco-about-block {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 768px) {
+    padding: 1.75rem;
+  }
+}
+
+.acco-section-heading {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray-800;
+  margin-bottom: 1rem;
+}
+
+.acco-about-text {
+  color: $gray-700;
+  font-size: 1.05rem;
+  line-height: 1.85;
+
+  em {
+    font-style: italic;
+    color: $gray-800;
+  }
+}
+
+.acco-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.acco-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(68, 140, 116, 0.04);
+  border-radius: 12px;
+  border-left: 3px solid rgba(68, 140, 116, 0.3);
+
+  strong {
+    color: $gray-800;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+}
+
+.acco-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: rgba(68, 140, 116, 0.1);
+  color: #448c74;
+}
+
+.acco-guidelines-block {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 768px) {
+    padding: 1.75rem;
+  }
+}
+
+.acco-guideline-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(68, 140, 116, 0.03);
+  }
+
   p {
     color: $gray-700;
-    font-size: 1.1rem;
-    line-height: 1.8;
-
-    em {
-      font-style: italic;
-      color: $gray-800;
-    }
-  }
-}
-
-.acco-guidelines-heading {
-  font-family: 'Nanum Myeongjo', serif;
-  color: $gray-800;
-  font-weight: 600;
-  font-size: 1.5rem;
-}
-
-.acco-guidelines-list {
-  padding-left: 1.25rem;
-  margin: 0;
-
-  li {
-    color: $gray-700;
-    line-height: 1.7;
-    margin-bottom: 0.75rem;
     font-size: 0.95rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    line-height: 1.65;
+    margin-bottom: 0.25rem;
   }
+}
+
+.acco-guideline-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(68, 140, 116, 0.1);
+  color: #448c74;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 // ─── Programme Index Cards ───────────────────────────────
