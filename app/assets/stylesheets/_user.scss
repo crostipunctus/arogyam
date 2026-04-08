@@ -2567,6 +2567,47 @@ tbody tr:hover {
 
 // ─── Programme Index Cards ───────────────────────────────
 
+// ─── Programme Hero Section ────────────────────────────
+
+.prog-hero-section {
+  background: linear-gradient(135deg, rgba(68, 140, 116, 0.06) 0%, rgba(184, 221, 108, 0.08) 50%, rgba(238, 214, 184, 0.06) 100%);
+  padding: 6rem 0 3rem;
+  margin-top: 56px;
+
+  @media (max-width: 768px) {
+    padding: 5rem 0 2.5rem;
+  }
+}
+
+.prog-hero-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #448c74;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.prog-hero-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: $gray-800;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.prog-hero-subtitle {
+  color: $gray-600;
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
+
+// ─── Programme Cards ───────────────────────────────────
+
 .programme-card {
   .programme-card-inner {
     border-radius: 16px;
@@ -2672,6 +2713,58 @@ tbody tr:hover {
   border-bottom: 1px solid $gray-300;
 }
 
+.programme-info-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.programme-info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $gray-200;
+  }
+}
+
+.programme-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(68, 140, 116, 0.1);
+  color: #448c74;
+  flex-shrink: 0;
+}
+
+.programme-cta-wrapper {
+  padding-top: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.programme-cta-btn {
+  background: #448c74;
+  border-color: #448c74;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: darken(#448c74, 8%);
+    border-color: darken(#448c74, 8%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(68, 140, 116, 0.3);
+  }
+}
+
 .programme-meta-label {
   font-size: 12px;
   text-transform: uppercase;
@@ -2683,7 +2776,7 @@ tbody tr:hover {
 
 .programme-meta-value {
   color: #2d3748;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
 

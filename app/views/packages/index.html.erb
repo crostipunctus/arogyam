@@ -1,9 +1,17 @@
 <% set_meta_tags title: 'Health Programmes',
                  description: 'Explore ArogyaM health programmes including Ayurvedic treatments, Panchakarma, yoga retreats, and wellness packages at Sacred Grove, Chowdepalli.' %>
 
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <h1 class="cardHeading packages text-center">Health Programmes</h1>
-  <p class="text-center text-muted mb-5">Discover our Ayurvedic wellness programmes designed to restore balance and vitality</p>
+<section class="prog-hero-section">
+  <div class="container">
+    <div class="prog-hero-content text-center">
+      <p class="prog-hero-label">Holistic Healing &middot; Sacred Grove</p>
+      <h1 class="prog-hero-title">Health Programmes</h1>
+      <p class="prog-hero-subtitle">Discover our Ayurvedic wellness programmes designed to restore balance and vitality</p>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
   <div class="row g-4 justify-content-center">
     <% @packages.each do |package| %>
