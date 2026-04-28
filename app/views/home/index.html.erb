@@ -83,7 +83,7 @@
   
   <%# Fonts are loaded via Google Fonts CSS below %>
 
-  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed-small.webp);" id="coverElement">
+  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp);" id="coverElement">
       <div class="big-logo">
           <%= image_tag(dev_images("big-logo-2.png"), alt: 'Arogyam logo', loading: 'eager', fetchpriority: 'high', width: '400', height: '200', decoding: 'async') %>
       </div>
@@ -156,51 +156,6 @@
   </div>
 </section>   
 
-<script>
-  // Improved background image loading strategy
-  document.addEventListener('turbo:load', function() {
-    const cover = document.getElementById('coverElement');
-    if (!cover) return;
-    
-    // Load high-res background immediately for LCP improvement
-    loadHighResBackground(cover);
-  });
-
-  function loadHighResBackground(element) {
-    const img = new Image();
-    img.fetchPriority = 'high';
-    img.onload = function() {
-      element.style.backgroundImage = 'url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp)';
-      // Mark the LCP as complete for analytics
-      if (window.performance && window.performance.mark) {
-        window.performance.mark('lcp-complete');
-      }
-    };
-    img.src = 'https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp';
-  }
-  
-  // Lazy load remaining CSS
-  function loadDeferredStyles() {
-    const stylesheets = [
-      '/assets/application.css'
-      // Add any other non-critical stylesheets here
-    ];
-    
-    stylesheets.forEach(href => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = href;
-      document.head.appendChild(link);
-    });
-  }
-  
-  // Load remaining styles after page is interactive
-  if (window.requestIdleCallback) {
-    requestIdleCallback(loadDeferredStyles);
-  } else {
-    setTimeout(loadDeferredStyles, 3000);
-  }
-</script>
 
 
 
