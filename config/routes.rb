@@ -97,15 +97,25 @@ Rails.application.routes.draw do
   # config/routes.rb
 
 
-  direct :rails_public_blob do |blob|
-    # Preserve the behaviour of `rails_blob_url` inside these environments
-    # where S3 or the CDN might not be configured
+  # Builds a direct CloudFront URL for an Active Storage attachment OR a variant.
+  # In development/test, falls back to standard Active Storage routes so the
+  # site works without S3/CDN configured.
+  direct :rails_public_blob do |source|
     if Rails.env.development? || Rails.env.test?
-      route_for(:rails_blob, blob)
+      if source.respond_to?(:variation)
+        route_for(:rails_blob_representation,
+                  source.blob.signed_id,
+                  source.variation.key,
+                  source.blob.filename)
+      else
+        route_for(:rails_blob, source)
+      end
     else
-      # Use an environment variable instead of hard-coding the CDN host
-      # You could also use the Rails.configuration to achieve the same
-      File.join(Rails.application.credentials.cloudfront[:host], blob.key)
+      # `processed` triggers variant generation on first access (sync) and is
+      # a no-op once the variant exists in S3. For plain attachments, .key is
+      # the blob's storage key directly.
+      key = source.respond_to?(:processed) ? source.processed.key : source.key
+      File.join(Rails.application.credentials.cloudfront[:host], key)
     end
   end
 

@@ -33,7 +33,7 @@
                   </div>
                   <% if blog.image.attached? %>
                       <div class="align-self-center">
-                          <%= image_tag(rails_public_blob_url(blog.image), class: "blog-index-images img-fluid rounded mb-4", alt: "#{blog.title} - ArogyaM blog", loading: "lazy") %>
+                          <%= image_tag(rails_public_blob_url(blog.image.variant(:thumb)), class: "blog-index-images img-fluid rounded mb-4", alt: "#{blog.title} - ArogyaM blog", loading: "lazy") %>
                       </div>
                   <% end %>
               </div>

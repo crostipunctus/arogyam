@@ -11,7 +11,7 @@
     <div class="col-12 col-lg-5">
       <div class="programme-image-wrapper mb-4">
         <% if @package.package_image.attached? %>
-          <%= image_tag(rails_public_blob_url(@package.package_image),
+          <%= image_tag(rails_public_blob_url(@package.package_image.variant(:hero)),
               class: "programme-hero-image",
               alt: "#{@package.name} - Ayurvedic wellness programme at ArogyaM",
               loading: "lazy") %>

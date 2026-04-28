@@ -21,7 +21,7 @@
             <div class="programme-card-inner h-100">
               <div class="programme-card-image">
                 <% if package.package_image.attached? %>
-                  <%= image_tag(rails_public_blob_url(package.package_image), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                  <%= image_tag(rails_public_blob_url(package.package_image.variant(:card)), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                 <% else %>
                   <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                 <% end %>

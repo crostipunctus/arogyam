@@ -114,11 +114,12 @@
       <div class="gallery-grid">
         <% gallery_index.images.each do |image| %>
           <div class="gallery-item">
-            <%= image_tag(rails_public_blob_url(image), 
-                          data: {fancybox: 'imageGallery'}, 
-                          alt: 'ArogyaM wellness center at Sacred Grove',
-                          loading: 'lazy',
-                          decoding: 'async') %>
+            <%= link_to rails_public_blob_url(image.variant(:large)), data: { fancybox: 'imageGallery' } do %>
+              <%= image_tag(rails_public_blob_url(image.variant(:thumb)),
+                            alt: 'ArogyaM wellness center at Sacred Grove',
+                            loading: 'lazy',
+                            decoding: 'async') %>
+            <% end %>
             <% if current_user_admin? %>
               <%= link_to destroy_gallery_path(gallery_index, param2: "#{image.id}"), 
                   class: "delete-gallery-image", 
