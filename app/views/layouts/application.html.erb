@@ -8,10 +8,29 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://d1w11gv0j27jrz.cloudfront.net">
+
+    <%# All Google Fonts in a single request, deferred via media="print" swap %>
+    <% google_fonts_url = "https://fonts.googleapis.com/css2?family=Barlow&family=Courier+Prime&family=Libre+Baskerville&family=Montserrat:wght@500&family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Playfair+Display&display=swap" %>
+    <link rel="stylesheet" href="<%= google_fonts_url %>" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="<%= google_fonts_url %>"></noscript>
+
+    <%# Defer non-critical third-party CSS %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/fancybox.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css">
+      <link rel="stylesheet" href="/fancybox.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </noscript>
+
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" rel="stylesheet">
-    <link href="/fancybox.css" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLQGEBVGRW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -22,21 +41,6 @@
 
     <%= ga_conversion_tag %>
     <%= render 'layouts/json_ld' %>
-    <!-- Import Google Font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://d1w11gv0j27jrz.cloudfront.net">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Courier+Prime" rel="stylesheet" id="google-font">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <body>
     <%= render 'layouts/navbar' %>
       <main class="page-wrapper">

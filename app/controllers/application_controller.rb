@@ -41,9 +41,9 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin? 
   end 
  
-  def gallery_index 
-    @gallery = Gallery.first
-  end 
+  def gallery_index
+    @gallery = Gallery.with_attached_images.first
+  end
 
 
 
@@ -68,13 +68,15 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cache_headers
-    # Only set aggressive caching for static assets served through Rails
-    # Never cache HTML pages that contain user authentication state
     if request.format.symbol == :html || request.format.symbol == :turbo_stream
-      # No caching for HTML pages - they contain dynamic user-specific content
-      response.headers["Cache-Control"] = "no-store, must-revalidate"
+      # Only suppress caching for signed-in users, whose pages render
+      # user-specific content (admin controls, profile menu, etc).
+      # For anonymous visitors, leave headers alone so the browser's
+      # back/forward cache works and the back button feels instant.
+      if user_signed_in?
+        response.headers["Cache-Control"] = "private, no-store"
+      end
     else
-      # Cache other formats (CSS, JS, JSON, etc.) - though these are typically served by web server
       response.headers["Cache-Control"] = "public, max-age=31536000"
       response.headers["Expires"] = 1.year.from_now.to_formatted_s(:rfc822)
     end

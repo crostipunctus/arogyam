@@ -83,26 +83,6 @@
   
   <%# Fonts are loaded via Google Fonts CSS below %>
 
-  <%# Defer non-critical CSS %>
-  <link rel="stylesheet" href="/assets/swiper.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="/assets/actiontext.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" media="print" onload="this.media='all'">
-  
-  <%# Fallback for browsers that don't support onload for link elements %>
-  <noscript>
-    <link rel="stylesheet" href="/assets/swiper.css">
-    <link rel="stylesheet" href="/assets/actiontext.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css">
-  </noscript>
-  
-  <%# Load Google Fonts with display=swap for better performance %>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Barlow&family=Courier+Prime&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Barlow&family=Courier+Prime&display=swap">
-  </noscript>
-
   <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed-small.webp);" id="coverElement">
       <div class="big-logo">
           <%= image_tag(dev_images("big-logo-2.png"), alt: 'Arogyam logo', loading: 'eager', fetchpriority: 'high', width: '400', height: '200', decoding: 'async') %>
@@ -174,9 +154,6 @@
     </div>
   </div>
 </section>   
-
-<%# Defer non-critical scripts %>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
   // Improved background image loading strategy

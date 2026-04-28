@@ -3,9 +3,9 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
 
-  def index 
-    @blogs = Blog.order(created_at: :asc)
-  end 
+  def index
+    @blogs = Blog.with_attached_image.order(created_at: :asc)
+  end
 
   def show 
     @blog = Blog.find(params[:id])

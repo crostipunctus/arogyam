@@ -75,8 +75,20 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Use Redis for fragment caching so caches are shared across Passenger
+  # workers and survive deploys. DB 2 keeps it isolated from Sidekiq (0)
+  # and Action Cable (1). The error_handler ensures a Redis outage degrades
+  # to cache-miss behaviour instead of 500s.
+  config.cache_store = :redis_cache_store, {
+    url: ENV.fetch("REDIS_CACHE_URL") { "redis://localhost:6379/2" },
+    namespace: "arogyam_cache",
+    expires_in: 7.days,
+    reconnect_attempts: 1,
+    error_handler: ->(method:, returning:, exception:) {
+      Sentry.capture_exception(exception, level: "warning",
+        tags: { cache_method: method, cache_returning: returning })
+    }
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
