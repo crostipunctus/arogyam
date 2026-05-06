@@ -104,6 +104,8 @@ gem 'rest-client'
 
 gem 'activerecord-session_store'
 
+gem 'cloudflare-rails'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

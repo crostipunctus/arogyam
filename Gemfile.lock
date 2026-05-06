@@ -149,6 +149,11 @@ GEM
       caxlsx (>= 3.0)
     cgi (0.4.1)
     childprocess (4.1.0)
+    cloudflare-rails (5.0.1)
+      actionpack (>= 6.1, < 7.2.0)
+      activesupport (>= 6.1, < 7.2.0)
+      railties (>= 6.1, < 7.2.0)
+      zeitwerk (>= 2.5.0)
     concurrent-ruby (1.1.10)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -426,6 +431,7 @@ DEPENDENCIES
   carmen
   caxlsx (~> 3.0)
   caxlsx_rails
+  cloudflare-rails
   cssbundling-rails
   debug
   devise (~> 4.9, >= 4.9.2)
