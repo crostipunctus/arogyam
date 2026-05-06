@@ -3,14 +3,11 @@ class GalleryController < ApplicationController
 
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
-  def index 
-    if Rails.env.development? || Rails.env.test?
-      @gallery = Gallery.with_attached_images.find(13)
-    else
-      @gallery = Gallery.with_attached_images.find(2)
-    end
-    @images = @gallery.images
-  end 
+  def index
+    gallery_id = (Rails.env.development? || Rails.env.test?) ? 13 : 2
+    @gallery = Gallery.find(gallery_id)
+    @images = @gallery.images.with_all_variant_records
+  end
 
   def new 
     @gallery = Gallery.new 
