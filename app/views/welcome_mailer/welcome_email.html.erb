@@ -1,19 +1,21 @@
-    <%= image_tag("#{Rails.application.credentials.cloudfront[:host]}/#{"big-logo.png"}", alt: 'big-logo', class: "welcome-email-image", width: 200) %>
-    <h1 class="welcome-email-title">
-      Thank you for signing up, <%= @user.first_name %>!
-    </h1>
-    <p class="welcome-email-text">
-      You can register for a health programme, update your profile, see photographs of
-      ArogyaM and many more things on
-      <a href="https://www.arogyam.life" class="welcome-email-link">
-        arogyam.life
-      </a> 
-      . Please feel free to contact us at
-      <a
-        href="mailto:admin@arogyam.life"
-        class="welcome-email-link"
-      >
-        admin@arogyam.life
-      </a>
-      if you have any doubts or questions.
-    </p>
+<h1 style="margin:0 0 16px 0; font-size:24px; line-height:1.3; color:#2c3e2d; font-weight:600;">
+  Welcome, <%= @user.first_name %>.
+</h1>
+<p style="margin:0 0 16px 0; font-size:16px; line-height:1.6; color:#2c3e2d;">
+  Thank you for signing up with ArogyaM. We're delighted to have you with us.
+</p>
+<p style="margin:0 0 24px 0; font-size:16px; line-height:1.6; color:#2c3e2d;">
+  You can register for a health programme, update your profile, and explore our work at
+  <a href="https://www.arogyam.life" style="color:#448c74; text-decoration:none; font-weight:500;">arogyam.life</a>.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+  <tr>
+    <td style="background-color:#448c74; border-radius:4px;">
+      <a href="https://www.arogyam.life/programmes" style="display:inline-block; padding:12px 28px; color:#ffffff; text-decoration:none; font-weight:500; font-size:15px;">Explore Programmes</a>
+    </td>
+  </tr>
+</table>
+<p style="margin:0; font-size:14px; line-height:1.6; color:#6b6b6b;">
+  Questions? Reply to this email or write to
+  <a href="mailto:admin@arogyam.life" style="color:#448c74; text-decoration:none;">admin@arogyam.life</a>.
+</p>
