@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_15_044747) do
+ActiveRecord::Schema[7.0].define(version: 2026_05_07_044226) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -133,6 +133,13 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_15_044747) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "whatsapp_number"
+    t.string "whatsapp_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_members", force: :cascade do |t|

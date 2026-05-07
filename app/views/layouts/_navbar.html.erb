@@ -42,6 +42,11 @@
             </a>
              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><%= link_to 'Profile', user_profile_path(user_id: current_user.id), class: "dropdown-item"%></li>
+              <% if current_user_admin? %>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to 'Admin Dashboard', rails_admin_path, class: "dropdown-item", data: { turbo: false } %></li>
+                <li><hr class="dropdown-divider"></li>
+              <% end %>
               <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item",  data: { turbo_method: :delete} %></li>
             </ul>
           </li>

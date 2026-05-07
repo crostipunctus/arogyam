@@ -2,6 +2,10 @@ module ApplicationHelper
 
   SITE_NAME = 'ArogyaM'.freeze
   SITE_DOMAIN = 'https://arogyam.life'.freeze
+
+  def site_settings
+    Setting.instance
+  end
   DEFAULT_DESCRIPTION = 'ArogyaM is an Ayurvedic wellness center at Sacred Grove, Chowdepalli offering health programmes, yoga, Ayurveda treatments, and holistic healing retreats.'.freeze
   DEFAULT_IMAGE = 'https://d1w11gv0j27jrz.cloudfront.net/symbol.png'.freeze
 

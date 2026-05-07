@@ -3322,3 +3322,53 @@ tbody tr:hover {
   display: flex;
   justify-content: center;
 }
+
+.whatsapp-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1040;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: #25D366;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+
+  i {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  &:hover,
+  &:focus {
+    background: #1ebe5d;
+    color: #fff !important;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 211, 102, 0.4), 0 3px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 575px) {
+    padding: 0.85rem;
+    .whatsapp-float-label {
+      display: none;
+    }
+    i {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+@media print {
+  .whatsapp-float {
+    display: none !important;
+  }
+}

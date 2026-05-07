@@ -35,6 +35,28 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Setting' do
+    label 'Site Settings'
+    label_plural 'Site Settings'
+    navigation_label 'Configuration'
+    navigation_icon 'fa fa-cog'
+
+    list do
+      field :whatsapp_number
+      field :whatsapp_message
+      field :updated_at
+    end
+
+    edit do
+      field :whatsapp_number do
+        help 'WhatsApp number with country code, digits only (e.g. country code 91 followed by the 10-digit number). Leave blank to hide the chat button.'
+      end
+      field :whatsapp_message do
+        help 'Optional. Pre-filled message when a visitor opens the chat.'
+      end
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
