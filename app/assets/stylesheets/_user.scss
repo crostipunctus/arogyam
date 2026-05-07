@@ -3045,6 +3045,43 @@ tbody tr:hover {
   }
 }
 
+.home-featured-programmes {
+  .home-featured-label {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+    color: $gray-600;
+    margin-bottom: 0.5rem;
+  }
+  .home-featured-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 2.4rem;
+    color: $gray-900;
+    margin-bottom: 0.75rem;
+  }
+  .home-featured-subtitle {
+    color: $gray-700;
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .programme-card-actions {
+    padding: 0 1.25rem 1.25rem;
+    margin-top: auto;
+  }
+}
+
+.location-highlight {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid rgba(65, 72, 51, 0.5);
+  background: rgba(184, 221, 108, 0.08);
+  border-radius: 4px;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: $gray-800 !important;
+}
+
 .services-summary {
   text-align: center;
   background: linear-gradient(to right, rgba(184, 221, 108, 0.1), rgba(238, 214, 184, 0.1));

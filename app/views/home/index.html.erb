@@ -90,7 +90,7 @@
       <div class="newlogo">
           <div class="homeLogo"><%= image_tag(dev_images("symbol.png"), alt: 'Arogyam symbol', loading: 'eager', fetchpriority: 'high', width: '100', height: '100', decoding: 'async') %></div>
           <div class="ayurvedicWellness">WELLNESS CENTER</div>
-          <div>Intentional living <br><span class="for">for</span><br> body & mind wellness</div>
+          <div>Mindful living <br><span class="for">for</span><br> body & mind wellness</div>
           <div class="landingpagetext">Arogyam (noun): <strong>Health</strong>. Derived from "<i>aroga</i>" which means absence of disease. "<i>roga</i>": 
               derived from the Sanskrit root "<i>ruk</i>" or pain.
           </div>
@@ -108,8 +108,55 @@
   </div>
 </div>
 
+<% if @featured_packages.present? %>
+  <section class="container py-5 home-featured-programmes">
+    <div class="text-center mb-5">
+      <p class="home-featured-label">Begin Your Journey</p>
+      <h2 class="home-featured-title">Featured Programmes</h2>
+      <p class="home-featured-subtitle">Healing journeys rooted in Ayurveda and yoga at the Sacred Grove</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <% @featured_packages.each do |package| %>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <div class="programme-card h-100">
+            <div class="programme-card-inner h-100">
+              <%= link_to programme_path(package), class: "text-decoration-none text-reset", data: { turbo: false } do %>
+                <div class="programme-card-image">
+                  <% if package.package_image.attached? %>
+                    <%= image_tag(rails_public_blob_url(package.package_image.variant(:card)), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                  <% else %>
+                    <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                  <% end %>
+                </div>
+                <div class="programme-card-body">
+                  <h5 class="programme-card-title"><%= package.name %></h5>
+                  <p class="programme-card-description"><%= package.short_description %></p>
+                  <div class="programme-card-meta">
+                    <span><%= package.duration %></span>
+                    <span class="programme-card-divider"></span>
+                    <span>Rs. <%= package.cost %></span>
+                  </div>
+                </div>
+              <% end %>
+              <div class="programme-card-actions">
+                <%= link_to "Book now", new_registration_path(package_id: package.id), class: "btn btn-primary rounded-pill w-100", data: { turbo: false } %>
+                <%= link_to "Learn more", programme_path(package), class: "btn btn-link rounded-pill w-100 mt-1", data: { turbo: false } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="text-center mt-5">
+      <%= link_to "See all programmes", programmes_path, class: "btn btn-outline-primary rounded-pill px-4", data: { turbo: false } %>
+    </div>
+  </section>
+<% end %>
+
 <section class="container py-4 mt-4">
-  <div class="gallery-container">  
+  <div class="gallery-container">
       <% if gallery_index && gallery_index.images.attached? %>
       <div class="gallery-grid">
         <% gallery_index.images.each do |image| %>
