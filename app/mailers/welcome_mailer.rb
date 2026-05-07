@@ -4,6 +4,7 @@ class WelcomeMailer < ApplicationMailer
     
     mail(
       from: 'ArogyaM <admin@arogyam.life>',
+      reply_to: ['admin@arogyam.life', 'wellnesscenter@satsang-foundation.org'],
       to: user.email,
       subject: 'Welcome to ArogyaM'
     )

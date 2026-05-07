@@ -1,7 +1,7 @@
 class RegistrationMailer < ApplicationMailer
   def registration_email(registration)
     @registration = registration
-    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
+    email_address = Rails.env.production? ? ["admin@arogyam.life", "wellnesscenter@satsang-foundation.org"] : "rshan.ali@gmail.com"
     
     mail(
       from: 'ArogyaM <admin@arogyam.life>',
@@ -12,7 +12,7 @@ class RegistrationMailer < ApplicationMailer
 
   def registration_cancel_email(registration_data)
     @registration_data = registration_data
-    email_address = Rails.env.production? ? "wellnesscenter@satsang-foundation.org" : "rshan.ali@gmail.com"
+    email_address = Rails.env.production? ? ["admin@arogyam.life", "wellnesscenter@satsang-foundation.org"] : "rshan.ali@gmail.com"
     
     mail(
       from: 'ArogyaM <admin@arogyam.life>',
@@ -27,6 +27,7 @@ class RegistrationMailer < ApplicationMailer
     
     mail(
       from: 'ArogyaM <admin@arogyam.life>',
+      reply_to: ['admin@arogyam.life', 'wellnesscenter@satsang-foundation.org'],
       to: email_address,
       subject: 'You registered for a health programme!'
     )
@@ -38,6 +39,7 @@ class RegistrationMailer < ApplicationMailer
     
     mail(
       from: 'ArogyaM <admin@arogyam.life>',
+      reply_to: ['admin@arogyam.life', 'wellnesscenter@satsang-foundation.org'],
       to: email_address,
       subject: 'Registration cancelled'
     )
