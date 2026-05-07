@@ -21,7 +21,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 
-set :sidekiq_roles, :worker
+set :sidekiq_roles, :app
 set :sidekiq_default_hooks, false
 set :sidekiq_env, fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
 
@@ -30,7 +30,7 @@ set :sidekiq_config_files, ['config/sidekiq.yml']
 
 # Restart system-mode sidekiq.service via sudo on every deploy.
 # Avoids stale ActionView template paths after Capistrano cleans up old releases.
-namespace :sidekiq do
+namespace :sidekiq_systemd do
   desc 'Restart sidekiq via systemd (system unit)'
   task :restart do
     on roles(fetch(:sidekiq_roles)) do
@@ -39,8 +39,8 @@ namespace :sidekiq do
   end
 end
 
-after  'deploy:published', 'sidekiq:restart'
-before 'deploy:cleanup',   'sidekiq:restart'
+after  'deploy:published', 'sidekiq_systemd:restart'
+before 'deploy:cleanup',   'sidekiq_systemd:restart'
 
 
 
