@@ -17,13 +17,13 @@ module ApplicationHelper
       separator: '|',
       description: DEFAULT_DESCRIPTION,
       keywords: 'Ayurveda, Yoga, Wellness, wellness center, Satsang Foundation, Chowdepalli, Sacred Grove, ArogyaM, Sri M, Ayurvedic treatment, health retreat, holistic healing',
-      canonical: request.original_url,
+      canonical: canonical_url,
       og: {
         site_name: SITE_NAME,
         title: :full_title,
         description: :description,
         type: 'website',
-        url: request.original_url,
+        url: canonical_url,
         image: DEFAULT_IMAGE
       },
       twitter: {
@@ -50,6 +50,10 @@ module ApplicationHelper
 
   def get_current_url
     request.original_url
+  end
+
+  def canonical_url
+    "#{request.protocol}#{request.host_with_port}#{request.path}"
   end
 
   def dev_images(image_name)
