@@ -86,6 +86,55 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # === SIGN IN FEEDBACK TESTS (Turbo) ===
+  # Regression: a failed Turbo sign-in used to return a 401 that Turbo discarded,
+  # so the user was bounced back to the form with no message. The Turbo failure
+  # app now redirects, persisting flash[:alert] so the reason is actually shown.
+
+  test "unconfirmed user sees confirm-email alert on failed login" do
+    User.create!(
+      email: "unconfirmed@example.com",
+      password: "password123",
+      first_name: "Un",
+      last_name: "Confirmed",
+      privacy_policy: "1"
+    )
+
+    post user_session_path,
+         params: { user: { email: "unconfirmed@example.com", password: "password123" } },
+         headers: { "Accept" => "text/vnd.turbo-stream.html, text/html" }
+
+    assert_redirected_to new_user_session_path
+    assert_match(/confirm your email/i, flash[:alert].to_s)
+  end
+
+  test "wrong password shows invalid alert on failed login" do
+    user = User.create!(
+      email: "confirmed@example.com",
+      password: "password123",
+      first_name: "Con",
+      last_name: "Firmed",
+      privacy_policy: "1"
+    )
+    user.confirm
+
+    post user_session_path,
+         params: { user: { email: "confirmed@example.com", password: "wrongpassword" } },
+         headers: { "Accept" => "text/vnd.turbo-stream.html, text/html" }
+
+    assert_redirected_to new_user_session_path
+    assert_match(/invalid/i, flash[:alert].to_s)
+  end
+
+  test "password reset for unknown email gives neutral paranoid message (no enumeration)" do
+    post user_password_path,
+         params: { user: { email: "nobody@example.com" } }
+
+    assert_redirected_to new_user_session_path
+    assert_match(/if your email address exists/i, flash[:notice].to_s)
+    assert_no_match(/not found/i, flash[:notice].to_s + flash[:alert].to_s)
+  end
+
   # === REGISTRATION FLOW TESTS ===
 
   test "authenticated user can submit registration form" do

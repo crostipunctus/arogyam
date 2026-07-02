@@ -2,65 +2,41 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["message"];
+  static values = { type: String };
 
   connect() {
-    // Check for message on initial connect
-    if (this.messageTarget.textContent.trim() !== "") {
-      this.showNotification();
-    }
-
-    // Listen for Turbo Drive events
-    document.addEventListener("turbo:load", () => {
-      if (this.messageTarget.textContent.trim() !== "") {
-        this.showNotification();
-      }
-    });
+    this.boundMaybeShow = this.maybeShow.bind(this);
+    this.maybeShow();
+    // Re-check after Turbo Drive navigations
+    document.addEventListener("turbo:load", this.boundMaybeShow);
   }
 
   disconnect() {
-    // Clean up event listener when controller is disconnected
-    document.removeEventListener("turbo:load", this.showNotification);
+    document.removeEventListener("turbo:load", this.boundMaybeShow);
+  }
+
+  maybeShow() {
+    // A page may render the same flash inline (e.g. the auth forms). Don't
+    // duplicate it as a toast in that case.
+    if (document.querySelector("[data-inline-flash]")) return;
+    if (this.messageTarget.textContent.trim() === "") return;
+
+    this.showNotification();
   }
 
   showNotification() {
-    // Remove previous classes (if any) before adding new ones
     this.element.classList.remove("success", "error");
 
-    // Convert the message content to lower case for easier comparison
-    const messageContent = this.messageTarget.textContent.toLowerCase();
+    // Style by flash type (notice => success, alert => error) instead of
+    // guessing from the message text, so no message is ever silently dropped.
+    const type = this.typeValue === "success" ? "success" : "error";
+    this.element.classList.add(type, "visible");
 
-    // Add classes based on the type of notification
-    if (
-      messageContent.includes("success") ||
-      messageContent.includes("successfully") ||
-      messageContent.includes("registration cancelled") ||
-      messageContent.includes("batch deleted") ||
-      messageContent.includes("confirmation link") ||
-      messageContent.includes("password reset") ||
-      messageContent.includes("password changed") ||
-      messageContent.includes("message has been sent") ||
-      messageContent.includes("subscribed!") ||
-      messageContent.includes("has been cancelled")
-    ) {
-      this.element.classList.add("success");
-    } else if (
-      messageContent.includes("error") ||
-      messageContent.includes("invalid") ||
-      messageContent.includes("sign in") ||
-      messageContent.includes("sign up") ||
-      messageContent.includes("please complete your profile") ||
-      messageContent.includes("not authorized") ||
-      messageContent.includes("please cancel your current registration")
-    ) {
-      this.element.classList.add("error");
-    } else {
-      // If the message doesn't include any of the keywords, don't display anything
-      return;
-    }
-
-    this.element.classList.add("visible");
+    // Auto-dismiss success toasts quickly; leave errors up longer so the user
+    // has time to read and act on them.
+    const timeout = type === "success" ? 5000 : 10000;
     setTimeout(() => {
       this.element.classList.remove("visible");
-    }, 5000);
+    }, timeout);
   }
 }

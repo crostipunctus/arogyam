@@ -6,6 +6,24 @@
 # breaking changes in upgrades (i.e., in the event that future versions of
 # Devise change the default values for those options).
 #
+# Failure app that makes Devise play nicely with Turbo. Turbo only renders form
+# responses on 422/500, so Devise's default 401 "recall" (re-render) is dropped
+# and the user sees no error. For Turbo Stream requests we redirect back to the
+# sign-in page instead, which persists flash[:alert] so the message is shown.
+class TurboDeviseFailureApp < Devise::FailureApp
+  def respond
+    if request_format == :turbo_stream
+      redirect
+    else
+      super
+    end
+  end
+
+  def skip_format?
+    %w[html turbo_stream */*].include?(request_format.to_s)
+  end
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -94,7 +112,10 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  # Enabled so password-reset / resend-confirmation reply with a neutral
+  # "if your email exists, you'll receive instructions" message instead of
+  # leaking "Email not found" (prevents account/email enumeration).
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -281,10 +302,15 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  # On a failed sign-in Devise's default failure app *recalls* (re-renders) the
+  # sessions#new action with a 401. Turbo discards non-422/500 form responses,
+  # so the flash.now[:alert] (e.g. "You have to confirm your email address…")
+  # never reaches the user — they're bounced silently back to the login form.
+  # For Turbo Stream requests we redirect instead, which persists flash[:alert]
+  # to the following GET so the message is actually displayed.
+  config.warden do |manager|
+    manager.failure_app = TurboDeviseFailureApp
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

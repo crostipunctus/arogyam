@@ -46,10 +46,9 @@
     <%= render 'layouts/navbar' %>
       <main class="page-wrapper">
 
-        <div data-controller="notification" class="notification">
-          <div data-notification-target="message">
-            <%= flash[:notice] ? " #{flash[:notice]}" : (flash[:alert] ? " #{flash[:alert]}" : "") %>
-          </div>
+        <% notification_type = flash[:notice].present? ? "success" : (flash[:alert].present? ? "error" : "") %>
+        <div data-controller="notification" data-notification-type-value="<%= notification_type %>" class="notification">
+          <div data-notification-target="message"><%= flash[:notice].presence || flash[:alert].presence %></div>
         </div>
 
 

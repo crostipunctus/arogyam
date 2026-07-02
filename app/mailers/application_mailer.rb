@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "ArogyaM <admin@arogyam.life>"
   layout "mailer"
 
   # Ensure view paths are always resolved, even when running in Sidekiq.
