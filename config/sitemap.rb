@@ -9,6 +9,7 @@ SitemapGenerator::Sitemap.create do
   add blogs_path, changefreq: 'weekly', priority: 0.8
   add testimonials_path, changefreq: 'monthly', priority: 0.6
   add accommodation_path, changefreq: 'monthly', priority: 0.6
+  add donate_path, changefreq: 'monthly', priority: 0.7
   add contacts_path, changefreq: 'monthly', priority: 0.5
   add privacy_policy_path, changefreq: 'yearly', priority: 0.2
 

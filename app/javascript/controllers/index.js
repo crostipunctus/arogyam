@@ -21,3 +21,6 @@ application.register("profile-checker", ProfileCheckerController)
 
 import StatusController from "./status_controller"
 application.register("status", StatusController)
+
+import DonationPlannerController from "./donation_planner_controller"
+application.register("donation-planner", DonationPlannerController)

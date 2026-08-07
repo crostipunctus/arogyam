@@ -1,0 +1,221 @@
+<% set_meta_tags title: "Donate",
+                 description: "Support ArogyaM Wellness Center at Sacred Grove. Choose a cause and help nurture holistic wellbeing through Ayurveda and yoga.",
+                 keywords: "donate to ArogyaM, support Ayurveda wellness, Sacred Grove donation, holistic wellbeing donation" %>
+
+<svg class="donation-icon-sprite" aria-hidden="true">
+  <symbol id="donation-icon-compass" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="m15.8 8.2-2.3 5.3-5.3 2.3 2.3-5.3 5.3-2.3Z"></path>
+  </symbol>
+  <symbol id="donation-icon-heart" viewBox="0 0 24 24">
+    <path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+  </symbol>
+  <symbol id="donation-icon-people" viewBox="0 0 24 24">
+    <circle cx="9" cy="8" r="3"></circle>
+    <path d="M3.5 19v-1.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V19"></path>
+    <path d="M16 5.3a3 3 0 0 1 0 5.7M17 13a4.5 4.5 0 0 1 3.5 4.4V19"></path>
+  </symbol>
+  <symbol id="donation-icon-flower" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="2.2"></circle>
+    <path d="M12 9.8C9.3 8.4 9 5.5 12 3c3 2.5 2.7 5.4 0 6.8ZM14.2 12c1.4-2.7 4.3-3 6.8 0-2.5 3-5.4 2.7-6.8 0ZM12 14.2c2.7 1.4 3 4.3 0 6.8-3-2.5-2.7-5.4 0-6.8ZM9.8 12c-1.4 2.7-4.3 3-6.8 0 2.5-3 5.4-2.7 6.8 0Z"></path>
+  </symbol>
+  <symbol id="donation-icon-check" viewBox="0 0 24 24">
+    <path d="m5 12 4 4L19 6"></path>
+  </symbol>
+  <symbol id="donation-icon-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M12 7v5l3 2"></path>
+  </symbol>
+  <symbol id="donation-icon-shield" viewBox="0 0 24 24">
+    <path d="M12 3 5 6v5c0 4.6 2.9 8.1 7 10 4.1-1.9 7-5.4 7-10V6l-7-3Z"></path>
+    <path d="m8.5 12 2.2 2.2 4.8-5"></path>
+  </symbol>
+  <symbol id="donation-icon-target" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"></circle>
+    <circle cx="12" cy="12" r="5"></circle>
+    <circle cx="12" cy="12" r="1"></circle>
+  </symbol>
+  <symbol id="donation-icon-mail" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+    <path d="m4 7 8 6 8-6"></path>
+    <path d="m16 17 1.5 1.5L21 15"></path>
+  </symbol>
+</svg>
+
+<section class="donation-hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 text-center">
+        <p class="donation-eyebrow">A thoughtful act of care</p>
+        <h1>Help wellbeing take root</h1>
+        <p class="donation-hero-copy">
+          Your contribution can help ArogyaM nurture spaces, care, and initiatives grounded in the
+          timeless wisdom of Ayurveda and yoga.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="donation-section" data-controller="donation-planner">
+  <div class="container">
+    <div class="row g-4 g-xl-5 align-items-start">
+      <div class="col-12 col-lg-8">
+        <div class="donation-step">
+          <div class="donation-step-heading">
+            <span class="donation-step-number" aria-hidden="true">1</span>
+            <div>
+              <p class="donation-step-label">Choose a cause</p>
+              <h2>What would you like to support?</h2>
+            </div>
+          </div>
+
+          <div class="row g-3" role="group" aria-label="Donation causes">
+            <% @causes.each_with_index do |cause, index| %>
+              <div class="col-12 col-md-6">
+                <button
+                  type="button"
+                  class="donation-cause-card <%= "is-selected" if index.zero? %>"
+                  aria-pressed="<%= index.zero? %>"
+                  data-donation-planner-target="causeButton"
+                  data-donation-cause-name="<%= cause[:name] %>"
+                  data-action="click->donation-planner#selectCause">
+                  <span class="donation-cause-icon" aria-hidden="true">
+                    <svg class="donation-icon-svg"><use href="#donation-icon-<%= cause[:icon] %>"></use></svg>
+                  </span>
+                  <span class="donation-cause-content">
+                    <strong><%= cause[:name] %></strong>
+                    <span><%= cause[:description] %></span>
+                  </span>
+                  <span class="donation-cause-check" aria-hidden="true">
+                    <svg class="donation-icon-svg"><use href="#donation-icon-check"></use></svg>
+                  </span>
+                </button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="donation-step mt-4">
+          <div class="donation-step-heading">
+            <span class="donation-step-number" aria-hidden="true">2</span>
+            <div>
+              <p class="donation-step-label">Choose an amount</p>
+              <h2>Every contribution matters</h2>
+            </div>
+          </div>
+
+          <div class="donation-amount-grid" role="group" aria-label="Suggested donation amounts">
+            <% @suggested_amounts.each_with_index do |amount, index| %>
+              <button
+                type="button"
+                class="donation-amount-button <%= "is-selected" if index == 1 %>"
+                aria-pressed="<%= index == 1 %>"
+                data-donation-planner-target="amountButton"
+                data-donation-amount-value="<%= amount %>"
+                data-action="click->donation-planner#selectAmount">
+                <%= number_to_currency(amount, unit: "₹", precision: 0) %>
+              </button>
+            <% end %>
+          </div>
+
+          <div class="donation-custom-amount mt-3">
+            <label for="custom-donation-amount">Or enter another amount</label>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" aria-hidden="true">₹</span>
+              <input
+                id="custom-donation-amount"
+                type="number"
+                class="form-control"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="Enter amount"
+                aria-describedby="donation-amount-help"
+                data-donation-planner-target="amountInput"
+                data-action="input->donation-planner#enterCustomAmount focus->donation-planner#enterCustomAmount">
+            </div>
+            <p id="donation-amount-help" class="form-text mb-0">Amounts are shown in Indian rupees.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <aside class="donation-summary" aria-labelledby="donation-summary-title">
+          <div class="donation-summary-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-heart"></use></svg>
+          </div>
+          <p class="donation-summary-kicker">Your intended contribution</p>
+          <h2 id="donation-summary-title" data-donation-planner-target="causeName"><%= @causes.first[:name] %></h2>
+          <p class="donation-summary-amount" data-donation-planner-target="amountSummary" aria-live="polite">
+            <%= number_to_currency(1_000, unit: "₹", precision: 0) %>
+          </p>
+
+          <div class="donation-launch-notice">
+            <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-clock"></use></svg>
+            <div>
+              <strong>Online donations are opening soon</strong>
+              <span>The secure payment service is not connected yet.</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-lg rounded-pill w-100" disabled>
+            Continue to secure payment
+          </button>
+
+          <p class="donation-privacy-note">
+            <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-shield"></use></svg>
+            No payment or personal information is collected on this preview page.
+          </p>
+
+          <hr>
+
+          <p class="donation-contact-copy">Would you like to discuss supporting ArogyaM?</p>
+          <%= mail_to "admin@arogyam.life", "Contact us about giving", class: "donation-contact-link" %>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="donation-impact-section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-4 mb-md-5">
+      <div class="col-12 col-lg-8">
+        <p class="donation-eyebrow">A shared intention</p>
+        <h2>Support rooted in purpose</h2>
+        <p>Every gift will be directed with care, responsibility, and respect for the intention behind it.</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="donation-value-card">
+          <span class="donation-value-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-target"></use></svg>
+          </span>
+          <h3>Purpose-led</h3>
+          <p>Choose the area of ArogyaM's work that feels most meaningful to you.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="donation-value-card">
+          <span class="donation-value-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-shield"></use></svg>
+          </span>
+          <h3>Secure by design</h3>
+          <p>Payments will be handled by a trusted gateway; ArogyaM will not store card or UPI credentials.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="donation-value-card">
+          <span class="donation-value-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-mail"></use></svg>
+          </span>
+          <h3>Clearly acknowledged</h3>
+          <p>Once payments launch, successful contributions will receive a confirmation and receipt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

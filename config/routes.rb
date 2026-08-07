@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   
   get "about" => "about#index"
+  get "donate" => "donations#index", as: :donate
   
   post "packages" => "packages#create"
   delete "packages/:id" => "packages#destroy", as: :destroy_package
