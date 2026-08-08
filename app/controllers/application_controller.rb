@@ -68,18 +68,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cache_headers
-    if request.format.symbol == :html || request.format.symbol == :turbo_stream
-      # Only suppress caching for signed-in users, whose pages render
-      # user-specific content (admin controls, profile menu, etc).
-      # For anonymous visitors, leave headers alone so the browser's
-      # back/forward cache works and the back button feels instant.
-      if user_signed_in?
-        response.headers["Cache-Control"] = "private, no-store"
-      end
+    response.headers["Cache-Control"] = if user_signed_in?
+      "private, no-store"
     else
-      response.headers["Cache-Control"] = "public, max-age=31536000"
-      response.headers["Expires"] = 1.year.from_now.to_formatted_s(:rfc822)
+      "private, max-age=0, must-revalidate"
     end
+    response.headers.delete("Expires")
   end
 
  

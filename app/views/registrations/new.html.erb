@@ -1,23 +1,6 @@
 <%= page_title 'Register' %>
 
 <script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key] %>"></script>
-<script>
-  function submitRegistrationForm(e) {
-    e.preventDefault();
-    const form = document.getElementById("registration_form");
-
-    grecaptcha.ready(function() {
-      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'registration'}).then(function(token) {
-        const input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "recaptcha_token");
-        input.setAttribute("value", token);
-        form.appendChild(input);
-        form.submit();
-      });
-    });
-  }
-</script>
 
 <section class="container py-5 mt-4">
   <div class="row justify-content-center">
@@ -46,7 +29,15 @@
       <h2 class="text-center mb-2 registration-page-title">Programme Registration</h2>
       <p class="text-center text-muted mb-4">Please fill in your details to register for a wellness programme.</p>
 
-      <%= form_with(model: @registration, local: true, id: "registration_form") do |f| %>
+      <%= form_with model: @registration,
+                    local: true,
+                    id: "registration_form",
+                    data: {
+                      controller: "recaptcha-form",
+                      action: "submit->recaptcha-form#submit",
+                      recaptcha_form_site_key_value: Rails.application.credentials.recaptcha[:site_key],
+                      recaptcha_form_action_name_value: "registration"
+                    } do |f| %>
         <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
 
         <%# Programme Selection Card %>
@@ -154,7 +145,7 @@
         </div>
 
         <div class="text-center">
-          <%= f.submit 'Continue to Review', class: "btn btn-primary btn-lg px-5 rounded-pill", onclick: "submitRegistrationForm(event)" %>
+          <%= f.submit 'Continue to Review', class: "btn btn-primary btn-lg px-5 rounded-pill" %>
         </div>
       <% end %>
     </div>

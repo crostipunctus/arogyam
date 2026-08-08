@@ -8,8 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Arogyam
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    # Use the framework defaults for the version this application runs on.
+    config.load_defaults 8.1
 
     config.active_job.queue_adapter = :sidekiq
     

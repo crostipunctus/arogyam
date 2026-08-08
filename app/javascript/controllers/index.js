@@ -24,3 +24,9 @@ application.register("status", StatusController)
 
 import DonationPlannerController from "./donation_planner_controller"
 application.register("donation-planner", DonationPlannerController)
+
+import RecaptchaFormController from "./recaptcha_form_controller"
+application.register("recaptcha-form", RecaptchaFormController)
+
+import AnalyticsController from "./analytics_controller"
+application.register("analytics", AnalyticsController)

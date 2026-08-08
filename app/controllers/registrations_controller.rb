@@ -78,7 +78,7 @@ class RegistrationsController < ApplicationController
       Rails.logger.debug "Created registration from session params"
     end
     
-    if params[:package_id] && Package.exists?(params[:package_id])
+    if params[:package_id] && Package.exists?(id: params[:package_id])
       Rails.logger.debug "Package ID from params: #{params[:package_id]}"
       @selected_package_id = params[:package_id].to_i
       Rails.logger.debug "Set selected_package_id to: #{@selected_package_id}"
@@ -140,6 +140,7 @@ class RegistrationsController < ApplicationController
     end
     
     @registration = Registration.new(session[:registration_params])
+    @registration.user = current_user
     
     unless @registration.start_date.present?
       redirect_to new_registration_path, alert: "Please select a start date for your registration."
@@ -148,12 +149,23 @@ class RegistrationsController < ApplicationController
   end
 
   def confirm
+    unless session[:registration_params].present?
+      redirect_to new_registration_path, alert: "Please complete the registration form first."
+      return
+    end
+
     @registration = Registration.new(session[:registration_params])
+    @registration.assign_attributes(
+      user: current_user,
+      status: "Registered",
+      completed: false,
+      cancelled: false
+    )
+
     if @registration.save
       session[:registration_params] = nil
       RegistrationMailer.registration_email(@registration).deliver_later
       RegistrationMailer.registration_user_email(@registration).deliver_later
-      @registration.update(status: "Registered")
       flash[:ga_event] = { name: 'programme_registration', params: { programme: @registration.package&.name } }
       redirect_to registration_path(@registration), notice: "You have successfully registered for #{@registration.package&.name}. We will get back to you soon."
     else
@@ -171,11 +183,11 @@ class RegistrationsController < ApplicationController
   def update
     # when save comments button is clicked the status is updated to blank 
     @registration = Registration.find(params[:id])
-    Rails.logger.debug "Registration params: #{registration_params}"
+    Rails.logger.debug "Registration params: #{registration_admin_params}"
     respond_to do |format|
       # Check if status is blank
-      if registration_params[:status].blank?
-        if @registration.update_column(:comments, registration_params[:comments])
+      if registration_admin_params[:status].blank?
+        if @registration.update_column(:comments, registration_admin_params[:comments])
           format.json { render json: { status: :ok, message: "Comments were successfully updated." } }
           format.html { redirect_to registrations_path, notice: "Comments were successfully updated." }
         else
@@ -183,11 +195,11 @@ class RegistrationsController < ApplicationController
           format.json { render json: { status: :unprocessable_entity, message: "Failed to update registration comments.", errors: @registration.errors.full_messages } }
         end
       else
-        if @registration.update_column(:status, registration_params[:status])
-          Rails.logger.debug "Registration status updated to #{registration_params[:status]}"
-          @registration.update(completed: true) if registration_params[:status] == "Completed"
-          @registration.update(completed: false) if registration_params[:status] == "Payment Completed"
-          @registration.update(completed: false) if registration_params[:status] == "Payment Pending"
+        if @registration.update_column(:status, registration_admin_params[:status])
+          Rails.logger.debug "Registration status updated to #{registration_admin_params[:status]}"
+          @registration.update(completed: true) if registration_admin_params[:status] == "Completed"
+          @registration.update(completed: false) if registration_admin_params[:status] == "Payment Completed"
+          @registration.update(completed: false) if registration_admin_params[:status] == "Payment Pending"
           format.json { render json: { status: :ok, message: "Registration was successfully updated." } }
           format.html { redirect_to registrations_path, notice: "Registration was successfully updated." }
         else
@@ -248,8 +260,12 @@ class RegistrationsController < ApplicationController
   private 
 
   def registration_params
-    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled, :duration, :start_date, :shamanam_duration, :package_id)
-  end 
+    params.require(:registration).permit(:substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :duration, :start_date, :shamanam_duration, :package_id)
+  end
+
+  def registration_admin_params
+    params.require(:registration).permit(:status, :comments)
+  end
 
 
 

@@ -185,7 +185,7 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
 
     get review_registrations_path
     assert_response :success
-    assert_select "#registration_review", text: "Registration Review"
+    assert_select "h2", text: "Review Your Registration"
   end
 
   test "review redirects if no registration in session" do
@@ -212,8 +212,8 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     assert_equal user, registration.user
     assert_equal @package, registration.package
     assert_equal "Registered", registration.status
-    assert_redirected_to root_path
-    assert_equal "Registered successfully", flash[:notice]
+    assert_redirected_to registration_path(registration)
+    assert_match(/successfully registered/i, flash[:notice])
   end
 
   test "user cannot register twice with an active registration" do
@@ -229,6 +229,28 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     post registrations_path, params: { registration: valid_registration_params }
 
     assert_response :unprocessable_entity
+  end
+
+  test "public registration cannot set admin-managed state" do
+    user = create_and_sign_in_user
+
+    post registrations_path, params: {
+      registration: valid_registration_params.merge(
+        status: "Completed",
+        comments: "Injected",
+        completed: "1",
+        cancelled: "1"
+      )
+    }
+
+    post confirm_registrations_path
+
+    registration = Registration.last
+    assert_equal user, registration.user
+    assert_equal "Registered", registration.status
+    assert_not registration.completed?
+    assert_not registration.cancelled?
+    assert_nil registration.comments
   end
 
   test "user can register again after cancelling previous registration" do

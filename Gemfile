@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.4.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4"
+gem "rails", "~> 8.1.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -13,7 +13,7 @@ gem "sprockets-rails"
 
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 7.2", ">= 7.2.1"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -27,11 +27,14 @@ gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 
+# RailsAdmin's Sprockets asset source compiles the engine's SCSS at runtime.
+gem "sassc-rails", "~> 2.1"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.4"
 
 gem 'swiper-rails'
 
@@ -52,14 +55,11 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Sass to process CSS
-gem "sassc-rails"
-
 gem "recaptcha"
 
 gem "bootstrap_form", "~> 5.1"
 
-gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'devise', '~> 5.0', '>= 5.0.4'
 
 gem "responders"
 
@@ -71,21 +71,20 @@ gem 'fancybox-rails'
 
 gem 'mail_form'
 
-gem 'strscan', '=3.0.1'
-
 gem 'gibbon'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 7.3'
+gem 'connection_pool', '< 3'
 
 
 gem 'caxlsx', '~> 3.0'
 
 gem 'caxlsx_rails'
 
-gem 'rails_admin', '~> 3.0'
+gem 'rails_admin', '~> 3.3'
 
 gem 'kaminari'
 
@@ -102,15 +101,13 @@ gem 'faker'
 
 gem 'rest-client'
 
-gem 'activerecord-session_store'
-
-gem 'cloudflare-rails'
+gem 'activerecord-session_store', '~> 2.3'
 
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3", "~> 2.9", ">= 2.9.5"
 end
 
 group :production do 
@@ -143,16 +140,11 @@ gem 'rbnacl-libsodium'
 end
 
 group :test do
+  gem "minitest", "< 6"
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
-  gem 'byebug'
+  gem "selenium-webdriver", ">= 4.14"
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
-
-
-
-
 

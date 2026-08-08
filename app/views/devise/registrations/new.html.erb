@@ -1,25 +1,4 @@
 <script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key]%>"></script>
-<script>
-  function submitForm(e) {
-    e.preventDefault();
-    const form = document.getElementById("registration_form");
-
-    grecaptcha.ready(function() {
-      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'register'}).then(function(token) {
-        const input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "recaptcha_token");
-        input.setAttribute("value", token);
-        form.appendChild(input);
-
-        form.submit();
-      }).catch(function(error) {
-        console.error("Error during reCAPTCHA execution:", error);
-      });
-    });
-  }
-</script>
-  
 
 <%= page_title 'Sign up' %>
 <main class="page-wrapper d-flex  justify-content-center" style="min-height: 100vh;">
@@ -30,7 +9,18 @@
           <div> 
             <h1 id="signup" class="py-2 pb-lg-3">Sign Up</h1>
             <%= render "shared/flash_messages" %>
-            <%= form_for(resource, as: resource_name, url: user_registration_path, html: { id: "registration_form" }) do |f| %>
+            <%= form_for resource,
+                         as: resource_name,
+                         url: user_registration_path,
+                         html: {
+                           id: "registration_form",
+                           data: {
+                             controller: "recaptcha-form",
+                             action: "submit->recaptcha-form#submit",
+                             recaptcha_form_site_key_value: Rails.application.credentials.recaptcha[:site_key],
+                             recaptcha_form_action_name_value: "register"
+                           }
+                         } do |f| %>
               <%= render "shared/errors", object: resource %>
               <div class="pb-3 mb-3">
                 <div class="position-relative mb-3">
@@ -67,7 +57,7 @@
 
                   </div>
                 <div class="actions">
-                  <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4", onclick: "submitForm(event)" %>
+                  <%= f.submit "Sign up", class: "btn btn-lg btn-light w-100 mb-4" %>
                 </div>
               <% end %>
               <%= render "devise/shared/links" %>

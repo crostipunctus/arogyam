@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.17.1"
+lock "~> 3.20.1"
 
 set :application, "arogyam"
 set :repo_url, "git@github.com:crostipunctus/arogyam.git"
@@ -55,8 +55,8 @@ before 'deploy:cleanup',   'sidekiq_systemd:restart'
 # Default value for :pty is false
 # set :pty, true
 
-# Default value for :linked_files is []
-#append :linked_files, "config/database.yml", 'config/master.key'
+# Keep the encrypted credentials key outside each release and link it at deploy time.
+append :linked_files, 'config/master.key'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'

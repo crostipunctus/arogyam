@@ -1,7 +1,7 @@
 class PackagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :require_admin, only: [:new, :edit, :create, :destroy]
+  before_action :require_admin, except: [:index, :show]
 
   def index 
     @packages = Package.with_attached_package_image

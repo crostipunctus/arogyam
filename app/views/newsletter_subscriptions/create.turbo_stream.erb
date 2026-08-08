@@ -14,11 +14,7 @@
 <% end %>
 
 <% if @message_type == "success" && flash[:ga_event].present? %>
-  <%= turbo_stream.append "head" do %>
-    <script>
-      if (typeof gtag === 'function') {
-        gtag('event', '<%= flash[:ga_event][:name] %>', <%= flash[:ga_event][:params].to_json.html_safe %>);
-      }
-    </script>
+  <%= turbo_stream.append "analytics-events" do %>
+    <%= ga_conversion_event(flash[:ga_event]) %>
   <% end %>
 <% end %>

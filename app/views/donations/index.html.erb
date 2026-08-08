@@ -2,6 +2,11 @@
                  description: "Support ArogyaM Wellness Center at Sacred Grove. Choose a cause and help nurture holistic wellbeing through Ayurveda and yoga.",
                  keywords: "donate to ArogyaM, support Ayurveda wellness, Sacred Grove donation, holistic wellbeing donation" %>
 
+<% selected_category = @donation.category.presence || @sub_causes.first[:key] %>
+<% selected_sub_cause = @sub_causes.find { |sub_cause| sub_cause[:key] == selected_category } || @sub_causes.first %>
+<% selected_amount = @donation.amount.to_i %>
+<% custom_amount = selected_amount unless @suggested_amounts.include?(selected_amount) %>
+
 <svg class="donation-icon-sprite" aria-hidden="true">
   <symbol id="donation-icon-compass" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="9"></circle>
@@ -42,6 +47,10 @@
   </symbol>
 </svg>
 
+<% if @donation_enabled %>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.dig(:recaptcha, :site_key) %>"></script>
+<% end %>
+
 <section class="donation-hero">
   <div class="container">
     <div class="row justify-content-center">
@@ -57,124 +66,255 @@
   </div>
 </section>
 
-<section class="donation-section" data-controller="donation-planner">
+<section class="donation-section">
   <div class="container">
-    <div class="row g-4 g-xl-5 align-items-start">
-      <div class="col-12 col-lg-8">
-        <div class="donation-step">
-          <div class="donation-step-heading">
-            <span class="donation-step-number" aria-hidden="true">1</span>
-            <div>
-              <p class="donation-step-label">Choose a cause</p>
-              <h2>What would you like to support?</h2>
+    <%= form_with model: @donation,
+                  url: donate_path,
+                  method: :post,
+                  html: {
+                    class: "donation-form",
+                    data: {
+                      controller: "donation-planner",
+                      action: "submit->donation-planner#submit",
+                      donation_planner_site_key_value: Rails.application.credentials.dig(:recaptcha, :site_key),
+                      donation_planner_pan_threshold_value: DonationRequest::PAN_THRESHOLD
+                    }
+                  } do |form| %>
+      <%= form.hidden_field :category, value: selected_category, data: { donation_planner_target: "causeInput" } %>
+      <%= form.hidden_field :amount, value: selected_amount, data: { donation_planner_target: "amountField" } %>
+
+      <% if @donation.errors.any? %>
+        <div class="alert alert-danger donation-error-summary" role="alert" data-inline-flash>
+          <strong>Please review your donation details.</strong>
+          <ul class="mb-0 mt-2">
+            <% @donation.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="alert alert-danger donation-error-summary" role="alert" hidden data-donation-planner-target="recaptchaError">
+        We could not start the secure verification. Please refresh the page and try again.
+      </div>
+
+      <div class="row g-4 g-xl-5 align-items-start">
+        <div class="col-12 col-lg-8">
+          <div class="donation-step">
+            <div class="donation-step-heading">
+              <span class="donation-step-number" aria-hidden="true">1</span>
+              <div>
+                <p class="donation-step-label">Choose an area to support</p>
+                <h2>What would you like to support?</h2>
+              </div>
+            </div>
+
+            <div class="row g-3" role="group" aria-label="Areas to support">
+              <% @sub_causes.each do |sub_cause| %>
+                <% cause_selected = sub_cause[:key] == selected_category %>
+                <div class="col-12 col-md-6">
+                  <button
+                    type="button"
+                    class="donation-cause-card <%= "is-selected" if cause_selected %>"
+                    aria-pressed="<%= cause_selected %>"
+                    data-donation-planner-target="causeButton"
+                    data-donation-cause-key="<%= sub_cause[:key] %>"
+                    data-donation-cause-name="<%= sub_cause[:name] %>"
+                    data-action="click->donation-planner#selectCause">
+                    <span class="donation-cause-icon" aria-hidden="true">
+                      <svg class="donation-icon-svg"><use href="#donation-icon-<%= sub_cause[:icon] %>"></use></svg>
+                    </span>
+                    <span class="donation-cause-content">
+                      <strong><%= sub_cause[:name] %></strong>
+                      <span><%= sub_cause[:description] %></span>
+                    </span>
+                    <span class="donation-cause-check" aria-hidden="true">
+                      <svg class="donation-icon-svg"><use href="#donation-icon-check"></use></svg>
+                    </span>
+                  </button>
+                </div>
+              <% end %>
             </div>
           </div>
 
-          <div class="row g-3" role="group" aria-label="Donation causes">
-            <% @causes.each_with_index do |cause, index| %>
-              <div class="col-12 col-md-6">
+          <div class="donation-step mt-4">
+            <div class="donation-step-heading">
+              <span class="donation-step-number" aria-hidden="true">2</span>
+              <div>
+                <p class="donation-step-label">Choose an amount</p>
+                <h2>Every contribution matters</h2>
+              </div>
+            </div>
+
+            <div class="donation-amount-grid" role="group" aria-label="Suggested donation amounts">
+              <% @suggested_amounts.each do |amount| %>
+                <% amount_selected = amount == selected_amount %>
                 <button
                   type="button"
-                  class="donation-cause-card <%= "is-selected" if index.zero? %>"
-                  aria-pressed="<%= index.zero? %>"
-                  data-donation-planner-target="causeButton"
-                  data-donation-cause-name="<%= cause[:name] %>"
-                  data-action="click->donation-planner#selectCause">
-                  <span class="donation-cause-icon" aria-hidden="true">
-                    <svg class="donation-icon-svg"><use href="#donation-icon-<%= cause[:icon] %>"></use></svg>
-                  </span>
-                  <span class="donation-cause-content">
-                    <strong><%= cause[:name] %></strong>
-                    <span><%= cause[:description] %></span>
-                  </span>
-                  <span class="donation-cause-check" aria-hidden="true">
-                    <svg class="donation-icon-svg"><use href="#donation-icon-check"></use></svg>
-                  </span>
+                  class="donation-amount-button <%= "is-selected" if amount_selected %>"
+                  aria-pressed="<%= amount_selected %>"
+                  data-donation-planner-target="amountButton"
+                  data-donation-amount-value="<%= amount %>"
+                  data-action="click->donation-planner#selectAmount">
+                  <%= number_to_currency(amount, unit: "₹", precision: 0) %>
                 </button>
+              <% end %>
+            </div>
+
+            <div class="donation-custom-amount mt-3">
+              <label for="custom-donation-amount">Or enter another amount</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text" aria-hidden="true">₹</span>
+                <input
+                  id="custom-donation-amount"
+                  type="number"
+                  class="form-control <%= "is-invalid" if @donation.errors[:amount].any? %>"
+                  min="1"
+                  max="<%= DonationRequest::MAX_AMOUNT %>"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="Enter amount"
+                  value="<%= custom_amount %>"
+                  aria-describedby="donation-amount-help"
+                  data-donation-planner-target="amountInput"
+                  data-action="input->donation-planner#enterCustomAmount focus->donation-planner#enterCustomAmount">
               </div>
+              <% if @donation.errors[:amount].any? %>
+                <div class="invalid-feedback d-block"><%= @donation.errors[:amount].to_sentence %></div>
+              <% end %>
+              <p id="donation-amount-help" class="form-text mb-0">Amounts are shown in Indian rupees.</p>
+            </div>
+          </div>
+
+          <div class="donation-step mt-4">
+            <div class="donation-step-heading">
+              <span class="donation-step-number" aria-hidden="true">3</span>
+              <div>
+                <p class="donation-step-label">Your details</p>
+                <h2>Who is making this contribution?</h2>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <%= form.label :donor_name, "Full name", class: "form-label" %>
+                <%= form.text_field :donor_name,
+                                    required: true,
+                                    autocomplete: "name",
+                                    maxlength: 100,
+                                    class: "form-control #{"is-invalid" if @donation.errors[:donor_name].any?}" %>
+                <% if @donation.errors[:donor_name].any? %>
+                  <div class="invalid-feedback"><%= @donation.errors[:donor_name].to_sentence %></div>
+                <% end %>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <%= form.label :email, "Email address", class: "form-label" %>
+                <%= form.email_field :email,
+                                     required: true,
+                                     autocomplete: "email",
+                                     maxlength: 254,
+                                     class: "form-control #{"is-invalid" if @donation.errors[:email].any?}" %>
+                <% if @donation.errors[:email].any? %>
+                  <div class="invalid-feedback"><%= @donation.errors[:email].to_sentence %></div>
+                <% end %>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <%= form.label :mobile, "Mobile number", class: "form-label" %>
+                <%= form.telephone_field :mobile,
+                                         required: true,
+                                         autocomplete: "tel-national",
+                                         inputmode: "numeric",
+                                         placeholder: "10-digit Indian mobile number",
+                                         class: "form-control #{"is-invalid" if @donation.errors[:mobile].any?}" %>
+                <% if @donation.errors[:mobile].any? %>
+                  <div class="invalid-feedback"><%= @donation.errors[:mobile].to_sentence %></div>
+                <% end %>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <%= form.label :pan_number, "PAN number", class: "form-label" %>
+                <%= form.text_field :pan_number,
+                                    autocomplete: "off",
+                                    maxlength: 10,
+                                    pattern: "[A-Za-z]{5}[0-9]{4}[A-Za-z]",
+                                    placeholder: "Required from ₹2,000",
+                                    class: "form-control text-uppercase #{"is-invalid" if @donation.errors[:pan_number].any?}",
+                                    data: { donation_planner_target: "panInput" } %>
+                <% if @donation.errors[:pan_number].any? %>
+                  <div class="invalid-feedback"><%= @donation.errors[:pan_number].to_sentence %></div>
+                <% end %>
+                <p class="form-text mb-0" data-donation-planner-target="panNotice">PAN is mandatory for donations of ₹2,000 or more.</p>
+              </div>
+
+              <div class="col-12">
+                <fieldset>
+                  <legend class="form-label mb-2">Payment method</legend>
+                  <div class="donation-payment-methods">
+                    <% DonationRequest::PAYMENT_METHODS.each do |value, label| %>
+                      <label class="donation-payment-option">
+                        <%= form.radio_button :payment_method, value, required: true %>
+                        <span><%= label %></span>
+                      </label>
+                    <% end %>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="col-12">
+                <%= form.label :message, "Message (optional)", class: "form-label" %>
+                <%= form.text_area :message,
+                                   rows: 3,
+                                   maxlength: 500,
+                                   placeholder: "Add a short note with your donation",
+                                   class: "form-control #{"is-invalid" if @donation.errors[:message].any?}" %>
+                <% if @donation.errors[:message].any? %>
+                  <div class="invalid-feedback"><%= @donation.errors[:message].to_sentence %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="donation-form-action mt-4">
+            <% if @donation_enabled %>
+              <%= form.submit "Continue to secure payment", class: "btn btn-primary btn-lg rounded-pill w-100", data: { donation_planner_target: "submitButton" } %>
+              <p class="donation-privacy-note">
+                <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-shield"></use></svg>
+                Payment is completed securely on The Satsang Foundation's hosted page.
+              </p>
+            <% else %>
+              <div class="donation-launch-notice">
+                <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-clock"></use></svg>
+                <div>
+                  <strong>Online donations are being configured</strong>
+                  <span>The payment service is not available on this environment yet.</span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg rounded-pill w-100" disabled>Continue to secure payment</button>
             <% end %>
           </div>
         </div>
 
-        <div class="donation-step mt-4">
-          <div class="donation-step-heading">
-            <span class="donation-step-number" aria-hidden="true">2</span>
-            <div>
-              <p class="donation-step-label">Choose an amount</p>
-              <h2>Every contribution matters</h2>
+        <div class="col-12 col-lg-4">
+          <aside class="donation-summary" aria-labelledby="donation-summary-title">
+            <div class="donation-summary-icon" aria-hidden="true">
+              <svg class="donation-icon-svg"><use href="#donation-icon-heart"></use></svg>
             </div>
-          </div>
+            <p class="donation-summary-kicker">Your intended contribution</p>
+            <h2 id="donation-summary-title" data-donation-planner-target="causeName"><%= selected_sub_cause[:name] %></h2>
+            <p class="donation-summary-amount" data-donation-planner-target="amountSummary" aria-live="polite">
+              <%= number_to_currency(selected_amount, unit: "₹", precision: 0) %>
+            </p>
 
-          <div class="donation-amount-grid" role="group" aria-label="Suggested donation amounts">
-            <% @suggested_amounts.each_with_index do |amount, index| %>
-              <button
-                type="button"
-                class="donation-amount-button <%= "is-selected" if index == 1 %>"
-                aria-pressed="<%= index == 1 %>"
-                data-donation-planner-target="amountButton"
-                data-donation-amount-value="<%= amount %>"
-                data-action="click->donation-planner#selectAmount">
-                <%= number_to_currency(amount, unit: "₹", precision: 0) %>
-              </button>
-            <% end %>
-          </div>
+            <hr>
 
-          <div class="donation-custom-amount mt-3">
-            <label for="custom-donation-amount">Or enter another amount</label>
-            <div class="input-group input-group-lg">
-              <span class="input-group-text" aria-hidden="true">₹</span>
-              <input
-                id="custom-donation-amount"
-                type="number"
-                class="form-control"
-                min="1"
-                step="1"
-                inputmode="numeric"
-                placeholder="Enter amount"
-                aria-describedby="donation-amount-help"
-                data-donation-planner-target="amountInput"
-                data-action="input->donation-planner#enterCustomAmount focus->donation-planner#enterCustomAmount">
-            </div>
-            <p id="donation-amount-help" class="form-text mb-0">Amounts are shown in Indian rupees.</p>
-          </div>
+            <p class="donation-contact-copy">Would you like to discuss supporting ArogyaM?</p>
+            <%= mail_to "admin@arogyam.life", "Contact us about giving", class: "donation-contact-link" %>
+          </aside>
         </div>
       </div>
-
-      <div class="col-12 col-lg-4">
-        <aside class="donation-summary" aria-labelledby="donation-summary-title">
-          <div class="donation-summary-icon" aria-hidden="true">
-            <svg class="donation-icon-svg"><use href="#donation-icon-heart"></use></svg>
-          </div>
-          <p class="donation-summary-kicker">Your intended contribution</p>
-          <h2 id="donation-summary-title" data-donation-planner-target="causeName"><%= @causes.first[:name] %></h2>
-          <p class="donation-summary-amount" data-donation-planner-target="amountSummary" aria-live="polite">
-            <%= number_to_currency(1_000, unit: "₹", precision: 0) %>
-          </p>
-
-          <div class="donation-launch-notice">
-            <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-clock"></use></svg>
-            <div>
-              <strong>Online donations are opening soon</strong>
-              <span>The secure payment service is not connected yet.</span>
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-primary btn-lg rounded-pill w-100" disabled>
-            Continue to secure payment
-          </button>
-
-          <p class="donation-privacy-note">
-            <svg class="donation-icon-svg" aria-hidden="true"><use href="#donation-icon-shield"></use></svg>
-            No payment or personal information is collected on this preview page.
-          </p>
-
-          <hr>
-
-          <p class="donation-contact-copy">Would you like to discuss supporting ArogyaM?</p>
-          <%= mail_to "admin@arogyam.life", "Contact us about giving", class: "donation-contact-link" %>
-        </aside>
-      </div>
-    </div>
+    <% end %>
   </div>
 </section>
 
@@ -191,29 +331,23 @@
     <div class="row g-4">
       <div class="col-12 col-md-4">
         <div class="donation-value-card">
-          <span class="donation-value-icon" aria-hidden="true">
-            <svg class="donation-icon-svg"><use href="#donation-icon-target"></use></svg>
-          </span>
+          <span class="donation-value-icon" aria-hidden="true"><svg class="donation-icon-svg"><use href="#donation-icon-target"></use></svg></span>
           <h3>Purpose-led</h3>
           <p>Choose the area of ArogyaM's work that feels most meaningful to you.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="donation-value-card">
-          <span class="donation-value-icon" aria-hidden="true">
-            <svg class="donation-icon-svg"><use href="#donation-icon-shield"></use></svg>
-          </span>
+          <span class="donation-value-icon" aria-hidden="true"><svg class="donation-icon-svg"><use href="#donation-icon-shield"></use></svg></span>
           <h3>Secure by design</h3>
-          <p>Payments will be handled by a trusted gateway; ArogyaM will not store card or UPI credentials.</p>
+          <p>Payment details stay on The Satsang Foundation's hosted payment page.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="donation-value-card">
-          <span class="donation-value-icon" aria-hidden="true">
-            <svg class="donation-icon-svg"><use href="#donation-icon-mail"></use></svg>
-          </span>
+          <span class="donation-value-icon" aria-hidden="true"><svg class="donation-icon-svg"><use href="#donation-icon-mail"></use></svg></span>
           <h3>Clearly acknowledged</h3>
-          <p>Once payments launch, successful contributions will receive a confirmation and receipt.</p>
+          <p>Successful contributions are recorded by The Satsang Foundation for confirmation and receipt.</p>
         </div>
       </div>
     </div>

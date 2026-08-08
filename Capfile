@@ -56,4 +56,4 @@ install_plugin Capistrano::Sidekiq::Systemd
 
 
 set :rbenv_type, :user
-set :rbenv_ruby, '3.1.2'
+set :rbenv_ruby, '3.4.3'

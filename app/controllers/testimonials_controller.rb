@@ -1,7 +1,7 @@
 class TestimonialsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, except: :index
 
-  before_action :require_admin, only: [:new, :edit, :destroy]
+  before_action :require_admin, except: :index
 
 
   def index 

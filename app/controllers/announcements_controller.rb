@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController 
-  before_action :authenticate_user!, only: [:new, :edit, :create, :destroy]
+  before_action :authenticate_user!, except: :index
 
-  before_action :require_admin, only: [:new, :edit, :create, :destroy]
+  before_action :require_admin, except: :index
 
   def index 
     @announcements = Announcement.all 
@@ -48,4 +48,4 @@ class AnnouncementsController < ApplicationController
     params.require(:announcement).permit(:content)
   end 
 
-end 
+end

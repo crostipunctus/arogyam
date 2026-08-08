@@ -1,8 +1,9 @@
 require "test_helper"
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get profiles_show_url
-    assert_response :success
+  test "guests cannot view a user profile" do
+    get user_profile_url(user_id: 1)
+
+    assert_redirected_to new_user_session_path
   end
 end

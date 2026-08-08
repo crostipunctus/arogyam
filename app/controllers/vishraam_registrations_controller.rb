@@ -75,16 +75,33 @@ class VishraamRegistrationsController < ApplicationController
   end  
 
   def review 
+    unless session[:vishraam_registration_params].present?
+      redirect_to new_vishraam_registration_path, alert: "Please complete the registration form first."
+      return
+    end
+
     @vishraam_registration = VishraamRegistration.new(session[:vishraam_registration_params])
+    @vishraam_registration.user = current_user
   end 
 
   def confirm 
+    unless session[:vishraam_registration_params].present?
+      redirect_to new_vishraam_registration_path, alert: "Please complete the registration form first."
+      return
+    end
+
     @vishraam_registration = VishraamRegistration.new(session[:vishraam_registration_params])
+    @vishraam_registration.assign_attributes(
+      user: current_user,
+      status: "Registered",
+      completed: false,
+      cancelled: false
+    )
+
     if @vishraam_registration.save
       session[:vishraam_registration_params] = nil 
       VishraamRegistrationMailer.vishraam_registration_email(@vishraam_registration).deliver_later
       VishraamRegistrationMailer.vishraam_registration_user_confirmation_email(@vishraam_registration).deliver_later
-      @vishraam_registration.update(status: "Registered")
       flash[:ga_event] = { name: 'programme_registration', params: { programme: 'VishraM' } }
       redirect_to vishraam_registration_path(@vishraam_registration), notice: "You have successfully registered for VishraM. We will get back to you soon."
     else 
@@ -99,9 +116,9 @@ class VishraamRegistrationsController < ApplicationController
   def update
     @vishraam_registration = VishraamRegistration.find(params[:id])
     respond_to do |format|
-      if @vishraam_registration.update_column(:status, vishraam_registration_params[:status])
-        @vishraam_registration.update_column(:comments, vishraam_registration_params[:comments])
-        @vishraam_registration.update(completed: true) if vishraam_registration_params[:status] == "Completed"
+      if @vishraam_registration.update_column(:status, vishraam_registration_admin_params[:status])
+        @vishraam_registration.update_column(:comments, vishraam_registration_admin_params[:comments])
+        @vishraam_registration.update(completed: true) if vishraam_registration_admin_params[:status] == "Completed"
         format.json { render json: { status: :ok, message: "Vishraam registration was successfully updated." } }
       else
         Rails.logger.error "Failed to update registration with id: #{params[:id]}, errors: #{@vishraam_registration.errors.full_messages}"
@@ -133,7 +150,11 @@ class VishraamRegistrationsController < ApplicationController
   private 
 
   def vishraam_registration_params 
-    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms, :status, :comments, :completed, :cancelled)
+    params.require(:vishraam_registration).permit(:date, :duration, :substances, :health_conditions, :medication, :lifestyle, :agreement, :terms)
+  end
+
+  def vishraam_registration_admin_params
+    params.require(:vishraam_registration).permit(:status, :comments)
   end 
 
   

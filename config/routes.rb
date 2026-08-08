@@ -7,13 +7,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy/index'
-  get 'newsletter_subscriptions/create'
-  get 'profiles/show'
   resources :team_members 
-
-  get 'contacts/new'
-  get 'contacts/create'
-  
 
   devise_for :users, :controllers => { registrations: 'users/registrations' }
 
@@ -25,8 +19,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-
-  get "test" => "home#test"
 
   get "testimonials" => "testimonials#index"
   get "testimonials/new" => "testimonials#new"
@@ -52,6 +44,7 @@ Rails.application.routes.draw do
   
   get "about" => "about#index"
   get "donate" => "donations#index", as: :donate
+  post "donate" => "donations#create"
   
   post "packages" => "packages#create"
   delete "packages/:id" => "packages#destroy", as: :destroy_package

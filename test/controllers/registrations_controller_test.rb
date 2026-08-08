@@ -9,11 +9,11 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     @package = Package.create!(name: "nice package", cost: "100", duration: 10, short_description: "nice description", dates: "2nd to 4th")
   end
 
-  test "should create registration" do
+  test "should stage a valid registration for review" do
     sign_in @user
 
-    assert_difference('Registration.count', 1, "Registration not created") do
-      post registrations_path, params: { registration: { package_id: @package.id, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "1", terms: "1" } }
+    assert_no_difference('Registration.count') do
+      post registrations_path, params: { registration: { package_id: @package.id, start_date: 2.weeks.from_now.to_date, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "1", terms: "1" } }
     end
 
     assert_redirected_to review_registrations_path
@@ -24,7 +24,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     assert_no_difference('Registration.count') do
-      post registrations_path, params: { registration: { package_id: @package.id, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "0", terms: "0" } }
+      post registrations_path, params: { registration: { package_id: @package.id, start_date: 2.weeks.from_now.to_date, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "0", terms: "0" } }
     end
 
     assert_response :unprocessable_entity
@@ -33,7 +33,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should cancel registration and update status" do
     sign_in @user
 
-    registration = Registration.create(user: @user, package: @package, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "1", terms: "1")
+    registration = Registration.create(user: @user, package: @package, start_date: 2.weeks.from_now.to_date, lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None", agreement: "1", terms: "1")
 
     assert registration.persisted?, "Registration was not created"
     assert_no_difference('Registration.count', "Registration was deleted instead of being cancelled") do

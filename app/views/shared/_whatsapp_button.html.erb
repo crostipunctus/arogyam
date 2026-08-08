@@ -5,7 +5,12 @@
               rel: "noopener noreferrer",
               aria: { label: "Chat with ArogyaM on WhatsApp" },
               title: "Chat on WhatsApp",
-              onclick: "if(typeof gtag==='function'){gtag('event','whatsapp_click',{event_category:'engagement',event_label:'floating_button'});}" do %>
+              data: {
+                controller: "analytics",
+                action: "click->analytics#track",
+                analytics_event_name_value: "whatsapp_click",
+                analytics_params_value: { event_category: "engagement", event_label: "floating_button" }.to_json
+              } do %>
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
     <span class="whatsapp-float-label">Chat with us</span>
   <% end %>

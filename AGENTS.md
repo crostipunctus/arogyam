@@ -10,7 +10,7 @@
 ArogyaM is an Ayurvedic wellness center platform for Sacred Grove, Chowdepalli (Satsang Foundation). It manages wellness programs, online consultations, registrations, blogs, gallery, team profiles, and newsletter subscriptions.
 
 ## Tech Stack
-- **Ruby 3.1.2 / Rails 7.0.4**
+- **Ruby 3.4.3 / Rails 8.1.3**
 - **Frontend**: Hotwire (Turbo + Stimulus), Bootstrap 5.2, esbuild, SASS
 - **Database**: PostgreSQL (production), SQLite (development)
 - **Background Jobs**: Sidekiq + Redis

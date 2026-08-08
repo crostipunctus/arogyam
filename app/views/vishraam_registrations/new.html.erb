@@ -1,22 +1,6 @@
 <%= page_title 'Register for VishraM' %>
 
 <script src="https://www.google.com/recaptcha/api.js?render=<%= Rails.application.credentials.recaptcha[:site_key] %>"></script>
-<script>
-  function submitVishraamForm(e) {
-    e.preventDefault();
-    const form = document.getElementById("vishraam_registration_form");
-
-    grecaptcha.ready(function() {
-      grecaptcha.execute('<%= Rails.application.credentials.recaptcha[:site_key] %>', {action: 'vishraam_registration'}).then(function(token) {
-        const input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "recaptcha_token");
-        input.setAttribute("value", token);
-        form.submit();
-      });
-    });
-  }
-</script>
 
 <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
@@ -26,7 +10,15 @@
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <h5 class="text-center">Please fill in the following details to complete your registration. All fields marked with * are mandatory.</h5>
         <p id="note" class="card-text">Note: The dates you choose may not be available. We will get back to you once your registration is complete.</p>
-        <%= form_with(model: @vishraam_registration, local: true, id: "vishraam_registration_form") do |f|%>
+        <%= form_with model: @vishraam_registration,
+                      local: true,
+                      id: "vishraam_registration_form",
+                      data: {
+                        controller: "recaptcha-form",
+                        action: "submit->recaptcha-form#submit",
+                        recaptcha_form_site_key_value: Rails.application.credentials.recaptcha[:site_key],
+                        recaptcha_form_action_name_value: "vishraam_registration"
+                      } do |f|%>
           <%= render 'shared/errors', object: @vishraam_registration %> 
           <div class="mb-3">
             <%= f.label :date %>
@@ -67,14 +59,14 @@
                 </div>
 
         
-          <%= f.submit 'Register', class: "btn btn-outline-success", onclick: "submitVishraamForm(event)" %>
+          <%= f.submit 'Register', class: "btn btn-outline-success" %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
   document.addEventListener("DOMContentLoaded", function() {
     var today = new Date().toISOString().split("T")[0];
     document.getElementById("date_input").setAttribute("min", today);

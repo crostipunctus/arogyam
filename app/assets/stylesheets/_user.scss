@@ -3459,6 +3459,16 @@ tbody tr:hover {
   }
 }
 
+.donation-error-summary {
+  max-width: 54rem;
+  margin: 0 0 1.5rem;
+  border-radius: 0.9rem;
+
+  ul {
+    padding-left: 1.2rem;
+  }
+}
+
 .donation-step {
   padding: 2rem;
   border: 1px solid rgba(67, 74, 87, 0.1);
@@ -3647,6 +3657,107 @@ tbody tr:hover {
   .form-control:focus {
     border-color: #448c74;
     box-shadow: 0 0 0 0.2rem rgba(68, 140, 116, 0.12);
+  }
+}
+
+.donation-form {
+  .form-label {
+    color: $gray-800;
+    font-size: 0.9rem;
+    font-weight: 650;
+  }
+
+  .form-control {
+    min-height: 3rem;
+    border-color: $gray-300;
+    border-radius: 0.75rem;
+    background: #fff;
+
+    &:focus {
+      border-color: #448c74;
+      box-shadow: 0 0 0 0.2rem rgba(68, 140, 116, 0.12);
+    }
+  }
+
+  textarea.form-control {
+    min-height: 7rem;
+  }
+}
+
+.donation-payment-methods {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  @media (max-width: 575px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.donation-payment-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid $gray-300;
+  border-radius: 0.8rem;
+  background: #fff;
+  color: $gray-800;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:has(input:checked) {
+    border-color: #448c74;
+    background: rgba(68, 140, 116, 0.05);
+  }
+
+  input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #448c74;
+  }
+}
+
+.donation-form-action {
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(68, 140, 116, 0.18);
+  border-radius: 1.25rem;
+  background: rgba(68, 140, 116, 0.045);
+
+  .btn {
+    min-height: 3.5rem;
+  }
+
+  .btn:disabled {
+    opacity: 0.65;
+  }
+
+  .donation-launch-notice {
+    border-color: rgba(68, 140, 116, 0.16);
+    background: rgba(68, 140, 116, 0.07);
+
+    > .donation-icon-svg {
+      color: #448c74;
+    }
+
+    strong {
+      color: $gray-900;
+    }
+
+    span {
+      color: $gray-600;
+    }
+  }
+
+  .donation-privacy-note {
+    color: $gray-600;
+  }
+
+  @media (max-width: 575px) {
+    padding: 1.25rem;
   }
 }
 

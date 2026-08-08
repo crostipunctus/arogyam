@@ -106,12 +106,12 @@
                 <div class="about-team-photo-wrapper">
                   <%= image_tag(rails_public_blob_url(team_member.avatar.variant(:thumb)),
                       class: "about-team-photo",
-                      alt: "#{team_member.name} - #{team_member.role} at ArogyaM",
+                      alt: "#{team_member.name} - #{team_member.position} at ArogyaM",
                       loading: "lazy") %>
                 </div>
                 <div class="about-team-info">
                   <h5 class="about-team-name"><%= team_member.name %></h5>
-                  <p class="about-team-role"><%= team_member.role %></p>
+                  <p class="about-team-role"><%= team_member.position %></p>
                   <p class="about-team-bio"><%= team_member.content %></p>
                 </div>
                 <% if current_user_admin? %>

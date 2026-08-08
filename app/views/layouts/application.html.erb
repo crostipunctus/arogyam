@@ -15,34 +15,27 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://d1w11gv0j27jrz.cloudfront.net">
 
-    <%# All Google Fonts in a single request, deferred via media="print" swap %>
+    <%# All Google Fonts in a single request %>
     <% google_fonts_url = "https://fonts.googleapis.com/css2?family=Barlow&family=Courier+Prime&family=Libre+Baskerville&family=Montserrat:wght@500&family=Nanum+Myeongjo&family=Noto+Serif&family=Open+Sans&family=Playfair+Display&display=swap" %>
-    <link rel="stylesheet" href="<%= google_fonts_url %>" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="<%= google_fonts_url %>"></noscript>
+    <link rel="stylesheet" href="<%= google_fonts_url %>">
 
-    <%# Defer non-critical third-party CSS %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/fancybox.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css">
-      <link rel="stylesheet" href="/fancybox.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.1.0/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/fancybox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLQGEBVGRW"></script>
-    <script>
+    <script nonce="<%= content_security_policy_nonce %>">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-JLQGEBVGRW');
     </script>
 
-    <%= ga_conversion_tag %>
     <%= render 'layouts/json_ld' %>
   </head>
   <body>
+    <div id="analytics-events"><%= ga_conversion_tag %></div>
     <%= render 'layouts/navbar' %>
       <main class="page-wrapper">
 

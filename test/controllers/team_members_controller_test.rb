@@ -1,33 +1,14 @@
 require "test_helper"
 
 class TeamMembersControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get team_members_index_url
+  test "show remains public" do
+    get team_member_url(id: 1)
     assert_response :success
   end
 
-  test "should get show" do
-    get team_members_show_url
-    assert_response :success
-  end
+  test "guests cannot access team management" do
+    get team_members_url
 
-  test "should get new" do
-    get team_members_new_url
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get team_members_edit_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    get team_members_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get team_members_destroy_url
-    assert_response :success
+    assert_redirected_to new_user_session_path
   end
 end

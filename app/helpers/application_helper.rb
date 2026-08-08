@@ -151,15 +151,21 @@ module ApplicationHelper
   def ga_conversion_tag
     return unless flash[:ga_event].present?
 
-    event = flash[:ga_event]
-    event_name = event[:name]
-    event_params = (event[:params] || {}).to_json
+    ga_conversion_event(flash[:ga_event])
+  end
 
-    raw <<~HTML
-      <script>
-        gtag('event', '#{event_name}', #{event_params});
-      </script>
-    HTML
+  def ga_conversion_event(event)
+    event = event.with_indifferent_access
+
+    tag.div(
+      hidden: true,
+      data: {
+        controller: "analytics",
+        analytics_auto_value: true,
+        analytics_event_name_value: event[:name],
+        analytics_params_value: event[:params] || {}
+      }
+    )
   end
 
 
