@@ -12,6 +12,7 @@ module Arogyam
     config.load_defaults 8.1
 
     config.active_job.queue_adapter = :sidekiq
+    config.active_storage.variant_processor = :mini_magick
     
     config.time_zone = 'Asia/Kolkata'
 

@@ -73,8 +73,10 @@ gem 'mail_form'
 
 gem 'gibbon'
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+# Use ImageMagick for Active Storage variants. image_processing 2 keeps image
+# backends optional, avoiding an unsafe fallback to an outdated system libvips.
+gem "image_processing", "~> 2.0"
+gem "mini_magick", "~> 5.3"
 
 gem 'sidekiq', '~> 7.3'
 gem 'connection_pool', '< 3'
@@ -87,8 +89,6 @@ gem 'caxlsx_rails'
 gem 'rails_admin', '~> 3.3'
 
 gem 'kaminari'
-
-gem 'ruby-vips', '~> 2.1', '>= 2.1.4'
 
 gem "sentry-ruby"
 
@@ -147,4 +147,3 @@ group :test do
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
-
