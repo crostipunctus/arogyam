@@ -7,6 +7,8 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
+    assert_select "script[src='https://www.google.com/recaptcha/api.js']", count: 1
+    assert_select "script[src^='https://www.google.com/recaptcha/api.js?render=']", count: 0
     assert_includes response.headers["Cache-Control"], "private"
     assert_includes response.headers["Cache-Control"], "max-age=0"
     assert_includes response.headers["Cache-Control"], "must-revalidate"

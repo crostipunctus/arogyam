@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { recaptchaToken } from "../lib/recaptcha"
 
 export default class extends Controller {
   static values = {
@@ -29,15 +30,7 @@ export default class extends Controller {
   }
 
   recaptchaToken() {
-    if (!this.siteKeyValue || !this.actionNameValue || !window.grecaptcha) {
-      return Promise.reject(new Error("reCAPTCHA unavailable"))
-    }
-
-    return new Promise((resolve, reject) => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha.execute(this.siteKeyValue, { action: this.actionNameValue }).then(resolve).catch(reject)
-      })
-    })
+    return recaptchaToken(this.siteKeyValue, this.actionNameValue)
   }
 
   appendToken(token) {

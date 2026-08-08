@@ -10,6 +10,8 @@ class DonationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{donate_path}'][method='post']"
     assert_select "input[name='donation_request[donor_name]']"
     assert_select "input[name='donation_request[amount]'][type='hidden']"
+    assert_select "script[src^='https://www.google.com/recaptcha/api.js?render=']", count: 1
+    assert_select "script[src='https://www.google.com/recaptcha/api.js']", count: 0
     assert_no_match(/X-API-Key/i, response.body)
   end
 
