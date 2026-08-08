@@ -7,7 +7,7 @@ class DonationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", "Help wellbeing take root"
-    assert_select "form[action='#{donate_path}'][method='post']"
+    assert_select "form[action='#{donate_path}'][method='post'][data-turbo='false']"
     assert_select "input[name='donation_request[donor_name]']"
     assert_select "input[name='donation_request[amount]'][type='hidden']"
     assert_select "script[src^='https://www.google.com/recaptcha/api.js?render=']", count: 1

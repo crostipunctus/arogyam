@@ -74,6 +74,7 @@
                   html: {
                     class: "donation-form",
                     data: {
+                      turbo: false,
                       controller: "donation-planner",
                       action: "submit->donation-planner#submit",
                       donation_planner_site_key_value: Rails.application.credentials.dig(:recaptcha, :site_key),
