@@ -35,6 +35,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     policy = response.headers["Content-Security-Policy"]
     assert_includes policy, "default-src 'self'"
     assert_includes policy, "object-src 'none'"
+    assert_includes policy, "form-action 'self' https://donate.satsang-foundation.org"
     assert_includes policy, "frame-ancestors 'self'"
     assert_includes response.headers["Feature-Policy"], "camera 'none'"
 

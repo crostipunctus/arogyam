@@ -16,7 +16,7 @@ Rails.application.configure do
                        "https://*.google-analytics.com",
                        "https://*.analytics.google.com"
     policy.font_src :self, :https, :data
-    policy.form_action :self
+    policy.form_action :self, "https://donate.satsang-foundation.org"
     policy.frame_ancestors :self
     policy.frame_src :self, "https://www.google.com", "https://www.youtube.com"
     policy.img_src :self, :https, :data, :blob
