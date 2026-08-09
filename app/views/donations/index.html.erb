@@ -352,5 +352,45 @@
         </div>
       </div>
     </div>
+
+    <div class="row g-4 mt-5 donation-contact-options">
+      <div class="col-12 col-lg-6">
+        <div class="donation-contact-card">
+          <span class="donation-value-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-mail"></use></svg>
+          </span>
+          <div class="donation-contact-card-body">
+            <h3>International Donations</h3>
+            <p>For international donations, please contact:</p>
+            <%= mail_to "treasurer@satsang-foundation.org",
+                        "treasurer@satsang-foundation.org",
+                        class: "donation-contact-email" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="donation-contact-card">
+          <span class="donation-value-icon" aria-hidden="true">
+            <svg class="donation-icon-svg"><use href="#donation-icon-people"></use></svg>
+          </span>
+          <div class="donation-contact-card-body">
+            <h3>CSR Opportunities</h3>
+            <p>
+              To explore CSR partnership opportunities and support impactful healthcare initiatives at
+              Swaasthya Hospitals.
+            </p>
+            <p class="donation-contact-follow-up">
+              We would be delighted to discuss how your organization can create lasting social impact
+              through a meaningful CSR collaboration.
+            </p>
+            <p class="donation-contact-prompt">To discuss CSR opportunities, please reach out to:</p>
+            <%= mail_to "csr@satsang-foundation.org",
+                        "csr@satsang-foundation.org",
+                        class: "donation-contact-email" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

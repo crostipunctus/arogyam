@@ -12,6 +12,10 @@ class DonationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='donation_request[amount]'][type='hidden']"
     assert_select "script[src^='https://www.google.com/recaptcha/api.js?render=']", count: 1
     assert_select "script[src='https://www.google.com/recaptcha/api.js']", count: 0
+    assert_select "h3", text: "International Donations"
+    assert_select "a.donation-contact-email[href='mailto:treasurer@satsang-foundation.org']"
+    assert_select "h3", text: "CSR Opportunities"
+    assert_select "a.donation-contact-email[href='mailto:csr@satsang-foundation.org']"
     assert_no_match(/X-API-Key/i, response.body)
   end
 
