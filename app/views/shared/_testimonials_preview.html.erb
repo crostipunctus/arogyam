@@ -1,11 +1,16 @@
-<section class="py-5" style="background-color: #f8f9fa;">
+<section class="testimonials-preview section-space">
   <div class="container">
-    <h2 class="text-center mb-2">What Our Guests Say</h2>
-    <p class="text-center text-muted mb-4">Hear from patients who experienced our health programmes</p>
-    <div class="row justify-content-center g-4">
+    <div class="section-heading-row">
+      <div>
+        <p class="eyebrow">Guest experiences</p>
+        <h2 class="display-heading">In their own words</h2>
+      </div>
+      <%= link_to "Hear more stories", testimonials_path, class: "brand-link d-none d-md-inline-flex" %>
+    </div>
+    <div class="row justify-content-center g-4 testimonials-preview__grid">
       <% testimonials_preview.each do |testimonial| %>
         <div class="col-12 col-md-6">
-          <div class="ratio ratio-16x9">
+          <div class="ratio ratio-16x9 testimonials-preview__video">
             <iframe src="https://www.youtube.com/embed/<%= testimonial.youtube_id %>?rel=0"
                     title="<%= testimonial.title.presence || 'ArogyaM patient testimonial' %>"
                     frameborder="0"
@@ -15,8 +20,6 @@
         </div>
       <% end %>
     </div>
-    <div class="text-center mt-4">
-      <%= link_to "View all testimonials", testimonials_path, class: "btn btn-outline-primary rounded-pill" %>
-    </div>
+    <%= link_to "Hear more stories", testimonials_path, class: "btn btn-outline-primary w-100 d-md-none mt-4" %>
   </div>
 </section>

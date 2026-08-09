@@ -1,227 +1,159 @@
-  <% set_meta_tags title: 'Ayurvedic Wellness Center',
-                   description: 'ArogyaM is an Ayurvedic wellness center at Sacred Grove, Chowdepalli. Discover holistic health programmes, yoga, Panchakarma treatments, and healing retreats by Satsang Foundation.',
-                   keywords: 'Ayurveda, yoga, wellness center, Panchakarma, Sacred Grove, Chowdepalli, Satsang Foundation, Sri M, health retreat, holistic healing' %>
+<% set_meta_tags title: 'Ayurvedic Wellness Center',
+                 description: 'ArogyaM is an Ayurvedic wellness center at Sacred Grove, Chowdepalli. Discover holistic health programmes, yoga, Panchakarma treatments, and healing retreats by Satsang Foundation.',
+                 keywords: 'Ayurveda, yoga, wellness center, Panchakarma, Sacred Grove, Chowdepalli, Satsang Foundation, Sri M, health retreat, holistic healing' %>
 
-  <%# Critical CSS inline to avoid render blocking %>
-  <style>
-    .cover {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      color: #fff;
-      padding-top: 5vh;
-    }
-    .big-logo, .newlogo {
-      text-align: center;
-      z-index: 2;
-    }
-    .big-logo {
-      margin-bottom: 1vh;
-    }
-    .big-logo img {
-      max-width: 100%;
-      height: auto;
-      width: auto;
-      min-width: 300px;
-    }
-    .newlogo {
-      margin-top: 0;
-    }
-    /* Critical font styles - handled by Google Fonts CSS */
-    /* Critical Swiper styles */
-    .swiper-container {
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      z-index: 1;
-    }
-    /* Gallery styles now in _user.scss */
-    /* Newsletter section styles */
-    .arogyam-newsletter-section {
-      background-color: #f6f9fc;
-      padding: 3rem 1rem;
-    }
-    .arogyam-newsletter-wrapper {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .arogyam-newsletter-input-group {
-      display: flex;
-      gap: 0.75rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .arogyam-newsletter-email {
-      flex: 1;
-      padding: 0.75rem 1rem;
-      border: 1px solid #e3e9ef;
-      border-radius: 0.5rem;
-      outline: none;
-    }
-    .arogyam-newsletter-submit {
-      padding: 0.75rem 1.5rem;
-      background-color: #414833;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    /* Add other critical styles here */
-  </style>
+<link rel="preload" href="https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp" as="image" fetchpriority="high" type="image/webp">
 
-  <%# Preload critical background image with proper priority %>
-  <link rel="preload" href="https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp" as="image" fetchpriority="high" type="image/webp">
-  
-  <%# Fonts are loaded via Google Fonts CSS below %>
-
-  <div class="cover" style="background-image: url(https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp);" id="coverElement">
-      <div class="big-logo">
-          <%= image_tag(dev_images("big-logo-2.png"), alt: 'Arogyam logo', loading: 'eager', fetchpriority: 'high', width: '400', height: '200', decoding: 'async') %>
+<section class="home-hero" style="--hero-image: url('https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp')">
+  <div class="container home-hero__container">
+    <div class="home-hero__content">
+      <p class="eyebrow home-hero__eyebrow">Ayurveda · Yoga · Sacred Grove</p>
+      <h1>Return to your<br><em>natural balance.</em></h1>
+      <p class="home-hero__lead">Personalised healing journeys rooted in the enduring wisdom of Ayurveda and Yoga.</p>
+      <div class="home-hero__actions">
+        <%= link_to "Explore health programmes", programmes_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Discover ArogyaM", about_path, class: "home-hero__text-link" %>
       </div>
-      <div class="newlogo">
-          <div class="homeLogo"><%= image_tag(dev_images("symbol.png"), alt: 'Arogyam symbol', loading: 'eager', fetchpriority: 'high', width: '100', height: '100', decoding: 'async') %></div>
-          <div class="ayurvedicWellness">WELLNESS CENTER</div>
-          <div>Mindful living <br><span class="for">for</span><br> body & mind wellness</div>
-          <div class="landingpagetext">Arogyam (noun): <strong>Health</strong>. Derived from "<i>aroga</i>" which means absence of disease. "<i>roga</i>": 
-              derived from the Sanskrit root "<i>ruk</i>" or pain.
-          </div>
-          <%= link_to "See our health programmes", programmes_path, class: "landingBookButton btn btn-outline-primary rounded-pill", data: {turbo: false} %>
-      </div>
+    </div>
+
+    <aside class="home-hero__definition" aria-label="Meaning of ArogyaM">
+      <span class="home-hero__definition-word">ārogyam</span>
+      <span class="home-hero__definition-type">noun · Sanskrit</span>
+      <p>A state of health; freedom from disease and the pain it causes.</p>
+    </aside>
   </div>
-   
-<div class="hometextContainer">
- 
-  <div > 
-    <%= render "home_text" %>
-    <div class='home_buttons'>
-      <%= link_to "Explore programmes", programmes_path, class: "HomePageButton btn btn-outline-primary rounded-pill"%>
+  <div class="home-hero__location">Chowdepalli, Andhra Pradesh</div>
+</section>
+
+<section class="home-intro section-space">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-12 col-lg-5">
+        <p class="eyebrow">A considered path to wellbeing</p>
+        <h2 class="display-heading">Care for the whole person.</h2>
+      </div>
+      <div class="col-12 col-lg-6 offset-lg-1">
+        <p class="home-intro__lead">At ArogyaM, we nurture complete wellbeing through the timeless disciplines of <strong>Ayurveda</strong> and <strong>Yoga</strong>.</p>
+        <p>Each journey brings together traditional Ayurvedic treatments, Asana, Pranayama, nourishing food, and time for quiet reflection—guided by the understanding that every person is unique.</p>
+        <%= link_to "Read about our philosophy", about_path, class: "brand-link" %>
+      </div>
+    </div>
+
+    <div class="home-pillars">
+      <article>
+        <span>01</span>
+        <h3>Personalised</h3>
+        <p>Programmes are shaped around your constitution, health needs, and stage of life.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Traditional</h3>
+        <p>Classical Ayurvedic knowledge and Yogic practice form the foundation of our care.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Restorative</h3>
+        <p>A peaceful natural setting creates the time and space required for meaningful renewal.</p>
+      </article>
     </div>
   </div>
-</div>
+</section>
 
 <% if @featured_packages.present? %>
-  <section class="container py-5 home-featured-programmes">
-    <div class="text-center mb-5">
-      <p class="home-featured-label">Begin Your Journey</p>
-      <h2 class="home-featured-title">Featured Programmes</h2>
-      <p class="home-featured-subtitle">Healing journeys rooted in Ayurveda and yoga at the Sacred Grove</p>
-    </div>
+  <section class="home-programmes section-space">
+    <div class="container">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Begin your journey</p>
+          <h2 class="display-heading">Featured programmes</h2>
+        </div>
+        <%= link_to "View every programme", programmes_path, class: "brand-link d-none d-md-inline-flex" %>
+      </div>
 
-    <div class="row g-4 justify-content-center">
-      <% @featured_packages.each do |package| %>
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-          <div class="programme-card h-100">
-            <div class="programme-card-inner h-100">
-              <%= link_to programme_path(package), class: "text-decoration-none text-reset", data: { turbo: false } do %>
+      <div class="row g-4">
+        <% @featured_packages.each_with_index do |package, index| %>
+          <div class="col-12 col-md-6 <%= index.zero? ? 'col-xl-6' : 'col-xl-3' %>">
+            <article class="programme-card programme-card--home h-100">
+              <%= link_to programme_path(package), class: "programme-card__link", data: { turbo: false } do %>
                 <div class="programme-card-image">
                   <% if package.package_image.attached? %>
                     <%= image_tag(rails_public_blob_url(package.package_image.variant(:card)), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                   <% else %>
                     <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
                   <% end %>
+                  <span class="programme-card__number"><%= format('%02d', index + 1) %></span>
                 </div>
                 <div class="programme-card-body">
-                  <h5 class="programme-card-title"><%= package.name %></h5>
+                  <p class="programme-card__meta"><%= package.duration %> days · Rs. <%= package.cost %></p>
+                  <h3 class="programme-card-title"><%= package.name %></h3>
                   <p class="programme-card-description"><%= package.short_description %></p>
-                  <div class="programme-card-meta">
-                    <span><%= package.duration %></span>
-                    <span class="programme-card-divider"></span>
-                    <span>Rs. <%= package.cost %></span>
-                  </div>
+                  <span class="programme-card__discover">Discover programme <span aria-hidden="true">→</span></span>
                 </div>
               <% end %>
-              <div class="programme-card-actions">
-                <%= link_to "Book now", new_registration_path(package_id: package.id), class: "btn btn-primary rounded-pill w-100", data: { turbo: false } %>
-                <%= link_to "Learn more", programme_path(package), class: "btn btn-link rounded-pill w-100 mt-1", data: { turbo: false } %>
-              </div>
-            </div>
+            </article>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
 
-    <div class="text-center mt-5">
-      <%= link_to "See all programmes", programmes_path, class: "btn btn-outline-primary rounded-pill px-4", data: { turbo: false } %>
+      <%= link_to "View every programme", programmes_path, class: "btn btn-outline-primary w-100 d-md-none mt-4" %>
     </div>
   </section>
 <% end %>
 
-<section class="container py-4 mt-4">
-  <div class="gallery-container">
-      <% if gallery_index && gallery_index.images.attached? %>
-      <div class="gallery-grid">
-        <% gallery_index.images.each do |image| %>
-          <div class="gallery-item">
-            <%= link_to rails_public_blob_url(image.variant(:large)), data: { fancybox: 'imageGallery' } do %>
-              <%= image_tag(rails_public_blob_url(image.variant(:thumb)),
-                            alt: 'ArogyaM wellness center at Sacred Grove',
-                            loading: 'lazy',
-                            decoding: 'async') %>
-            <% end %>
-            <% if current_user_admin? %>
-              <%= link_to destroy_gallery_path(gallery_index, param2: "#{image.id}"), 
-                  class: "delete-gallery-image", 
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                <i class="fas fa-times"></i>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
+<section class="home-place section-space">
+  <div class="container">
+    <div class="home-place__frame">
+      <div class="home-place__image">
+        <%= image_tag(dev_images('acco4.jpg'), alt: 'The courtyard and gardens at ArogyaM, Sacred Grove', loading: 'lazy') %>
       </div>
-    <% else %>
-      <%= image_tag("https://d1w11gv0j27jrz.cloudfront.net/flowers.jpg", 
-                    loading: 'lazy',
-                    decoding: 'async',
-                    data: {fancybox: 'imageGallery'}, 
-                    alt: 'Sacred Grove gardens at ArogyaM',
-                    style: 'max-width: 100%; height: auto;') %>
-    <% end %>
+      <div class="home-place__content">
+        <p class="eyebrow">The Sacred Grove</p>
+        <h2 class="display-heading">Space to slow down.<br>Nature to return to.</h2>
+        <p>ArogyaM is surrounded by rolling hills, gardens, and quiet walking paths. Our rooms gather around a courtyard where Dhanwantri is enshrined beneath a forty-year-old tamarind tree.</p>
+        <div class="home-place__facts">
+          <div><strong>9</strong><span>guest rooms</span></div>
+          <div><strong>3 hr</strong><span>from Bengaluru airport</span></div>
+        </div>
+        <%= link_to "Explore your stay", accommodation_path, class: "brand-link" %>
+      </div>
+    </div>
   </div>
 </section>
 
+<% if gallery_index && gallery_index.images.attached? %>
+  <section class="home-gallery section-space">
+    <div class="container">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Life at ArogyaM</p>
+          <h2 class="display-heading">From the grove</h2>
+        </div>
+        <%= link_to "Visit the gallery", gallery_index_path, class: "brand-link" %>
+      </div>
+      <div class="home-gallery__grid">
+        <% gallery_index.images.first(5).each_with_index do |gallery_image, index| %>
+          <%= link_to rails_public_blob_url(gallery_image.variant(:large)), class: "home-gallery__item home-gallery__item--#{index + 1}", data: { fancybox: 'homeGallery' } do %>
+            <%= image_tag(rails_public_blob_url(gallery_image.variant(:thumb)), alt: 'Life and landscape at ArogyaM wellness center', loading: 'lazy', decoding: 'async') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
 <%= render 'shared/testimonials_preview' %>
 
-<section class="arogyam-newsletter-section">
-  <div class="arogyam-newsletter-wrapper">
-    <div id="newsletter-form-container">
-      <div class="arogyam-newsletter-header">
-        <h2>Join Our Community</h2>
-        <p>Subscribe to receive wellness tips, event updates, and other insights.</p>
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-section__inner">
+      <div>
+        <p class="eyebrow">Notes for mindful living</p>
+        <h2>Seasonal wisdom, from our grove to your inbox.</h2>
+        <p>Receive programme news, Ayurvedic practices, and reflections from Sacred Grove.</p>
       </div>
-
-      <%= render "newsletter_subscriptions/form" %>
+      <div id="newsletter-form-container">
+        <%= render "newsletter_subscriptions/form" %>
+      </div>
     </div>
   </div>
-</section>   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-      
-
-
-
-  
-  
-   
-
+</section>

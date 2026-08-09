@@ -1,9 +1,12 @@
 <% set_meta_tags title: 'Testimonials',
                  description: 'Read testimonials from guests who experienced Ayurvedic treatments and wellness programmes at ArogyaM Wellness Center.' %>
 
-<section class="container py-5 mt-5 mb-md-3 mb-lg-4 mb-xxl-5">
-  <h1 class="cardHeading packages text-center">Testimonials</h1>
-  <p class="text-center text-muted mb-5">Hear from patients who experienced our health programmes</p>
+<%= render "shared/page_header",
+           eyebrow: "Guest experiences",
+           title: "Stories of renewal",
+           description: "Guests reflect on their time, care, and healing journeys at ArogyaM." %>
+
+<section class="container page-section testimonials-page">
 
   <div class="row g-4 justify-content-center">
     <% @testimonials.each do |testimonial| %>
