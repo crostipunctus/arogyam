@@ -60,7 +60,7 @@ class RegistrationsController < ApplicationController
   end
 
   def show
-    @registration = Registration.find(params[:id])
+    @registration = Registration.includes(:package, user: :user_profile).find(params[:id])
     unless current_user_admin? || @registration.user == current_user
       redirect_to root_path, alert: "You are not authorized to view this registration."
       return

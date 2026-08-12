@@ -18,7 +18,7 @@
               <tr class="<%= 'table-danger' if registration.status == 'Cancelled' %>">
                 <td class="ps-4">
                   <div>
-                    <%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "fw-medium text-decoration-none" %>
+                    <%= link_to user_full_name(registration.user), user_profile_path(user_id: registration.user.id), class: "fw-medium text-decoration-none", data: { turbo_frame: "_top" } %>
                   </div>
                   <small class="text-muted"><%= registration.user.email %></small>
                 </td>
@@ -52,13 +52,13 @@
                   <% if registration.comments && registration.comments.length > 40 %>
                     <button class="btn btn-link btn-sm p-0 ms-1" data-action="click->expand#expand">more</button>
                   <% end %>
-                  <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-link btn-sm p-0 ms-1' %>
+                  <%= link_to "Edit", edit_registration_path(registration), class: 'btn btn-link btn-sm p-0 ms-1', data: { turbo_frame: "_top" } %>
                 </td>
                 <td class="pe-4 text-end">
                   <div class="d-flex justify-content-end gap-1">
-                    <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-primary btn-sm' %>
+                    <%= link_to 'View', registration_path(registration), class: 'btn btn-outline-primary btn-sm', data: { turbo_frame: "_top" } %>
                     <% if registration.completed == false %>
-                      <%= button_to 'Cancel', registration_path(registration), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure you want to cancel this registration?' } }, class: 'btn btn-outline-danger btn-sm' %>
+                      <%= button_to 'Cancel', registration_path(registration), method: :delete, form: { data: { turbo_frame: "_top", turbo_confirm: 'Are you sure you want to cancel this registration?' } }, class: 'btn btn-outline-danger btn-sm' %>
                     <% end %>
                   </div>
                 </td>

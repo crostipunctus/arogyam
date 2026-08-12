@@ -94,6 +94,7 @@
       </div>
 
       <% if current_user_admin? %>
+        <% user_profile = @registration.user.user_profile %>
         <%# Participant Info Card %>
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body p-4">
@@ -111,45 +112,53 @@
                   <div class="review-value"><%= @registration.user.email %></div>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="review-detail">
-                  <div class="review-label">Gender</div>
-                  <div class="review-value"><%= @registration.user.user_profile.gender %></div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="review-detail">
-                  <div class="review-label">Date of Birth</div>
-                  <div class="review-value"><%= formatted_date_of_birth(@registration.user.user_profile.date_of_birth.to_s) %></div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="review-detail">
-                  <div class="review-label">Phone</div>
-                  <div class="review-value"><%= @registration.user.user_profile.phone_number %></div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="review-detail">
-                  <div class="review-label">Occupation</div>
-                  <div class="review-value"><%= @registration.user.user_profile.occupation %></div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="review-detail">
-                  <div class="review-label">Marital Status</div>
-                  <div class="review-value"><%= @registration.user.user_profile.marital_status %></div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="review-detail">
-                  <div class="review-label">Address</div>
-                  <div class="review-value">
-                    <%= @registration.user.user_profile.address %><br>
-                    <%= @registration.user.user_profile.city %>, <%= @registration.user.user_profile.country %> <%= @registration.user.user_profile.zip %>
+              <% if user_profile.present? %>
+                <div class="col-sm-6">
+                  <div class="review-detail">
+                    <div class="review-label">Gender</div>
+                    <div class="review-value"><%= user_profile.gender.presence || 'Not provided' %></div>
                   </div>
                 </div>
-              </div>
+                <div class="col-sm-6">
+                  <div class="review-detail">
+                    <div class="review-label">Date of Birth</div>
+                    <div class="review-value"><%= user_profile.date_of_birth.present? ? formatted_date_of_birth(user_profile.date_of_birth.to_s) : 'Not provided' %></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="review-detail">
+                    <div class="review-label">Phone</div>
+                    <div class="review-value"><%= user_profile.phone_number.presence || 'Not provided' %></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="review-detail">
+                    <div class="review-label">Occupation</div>
+                    <div class="review-value"><%= user_profile.occupation.presence || 'Not provided' %></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="review-detail">
+                    <div class="review-label">Marital Status</div>
+                    <div class="review-value"><%= user_profile.marital_status.presence || 'Not provided' %></div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="review-detail">
+                    <div class="review-label">Address</div>
+                    <div class="review-value">
+                      <%= user_profile.address.presence || 'Not provided' %><br>
+                      <%= [user_profile.city, user_profile.country, user_profile.zip].select(&:present?).join(', ').presence || 'Not provided' %>
+                    </div>
+                  </div>
+                </div>
+              <% else %>
+                <div class="col-12">
+                  <div class="alert alert-warning mb-0">
+                    This participant has not completed their profile yet.
+                  </div>
+                </div>
+              <% end %>
               <% if @registration.comments.present? %>
                 <div class="col-12">
                   <div class="review-detail">
