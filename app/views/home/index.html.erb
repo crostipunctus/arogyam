@@ -7,22 +7,18 @@
 <section class="home-hero" style="--hero-image: url('https://d1w11gv0j27jrz.cloudfront.net/pouring2compressed.webp')">
   <div class="container home-hero__container">
     <div class="home-hero__content">
-      <p class="eyebrow home-hero__eyebrow">Ayurveda · Yoga · Sacred Grove</p>
-      <h1>Return to your<br><em>natural balance.</em></h1>
-      <p class="home-hero__lead">Personalised healing journeys rooted in the enduring wisdom of Ayurveda and Yoga.</p>
+      <p class="eyebrow home-hero__eyebrow">Wellness Center</p>
+      <h1>
+        <span class="home-hero__title-line">Mindful living</span>
+        <em class="home-hero__for">for</em>
+        <span class="home-hero__title-line home-hero__title-line--wellness">body &amp; mind wellness</span>
+      </h1>
+      <p class="home-hero__lead">Arogyam (noun): <strong>Health</strong>. Derived from "<em>aroga</em>" which means absence of disease. "<em>roga</em>": derived from the Sanskrit root "<em>ruk</em>" or pain.</p>
       <div class="home-hero__actions">
-        <%= link_to "Explore health programmes", programmes_path, class: "btn btn-primary btn-lg" %>
-        <%= link_to "Discover ArogyaM", about_path, class: "home-hero__text-link" %>
+        <%= link_to "See our health programmes", programmes_path, class: "btn btn-primary btn-lg", data: { turbo: false } %>
       </div>
     </div>
-
-    <aside class="home-hero__definition" aria-label="Meaning of ArogyaM">
-      <span class="home-hero__definition-word">ārogyam</span>
-      <span class="home-hero__definition-type">noun · Sanskrit</span>
-      <p>A state of health; freedom from disease and the pain it causes.</p>
-    </aside>
   </div>
-  <div class="home-hero__location">Chowdepalli, Andhra Pradesh</div>
 </section>
 
 <section class="home-intro section-space">
@@ -108,7 +104,7 @@
       </div>
       <div class="home-place__content">
         <p class="eyebrow">The Sacred Grove</p>
-        <h2 class="display-heading">Space to slow down.<br>Nature to return to.</h2>
+        <h2 class="display-heading">Space to slow down and nature to return to.</h2>
         <p>ArogyaM is surrounded by rolling hills, gardens, and quiet walking paths. Our rooms gather around a courtyard where Dhanwantri is enshrined beneath a forty-year-old tamarind tree.</p>
         <div class="home-place__facts">
           <div><strong>9</strong><span>guest rooms</span></div>

@@ -27,7 +27,6 @@
 
         <div class="offcanvas-body site-nav__drawer-body">
           <ul class="navbar-nav site-nav__links">
-            <li class="nav-item"><%= link_to "Programmes", programmes_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: { turbo: false } %></li>
             <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "Stories", blogs_path, class: "nav-link", data: { turbo: false } %></li>
@@ -44,9 +43,21 @@
               <li class="nav-item"><%= link_to "Registrations", registrations_path, class: "nav-link" %></li>
             <% end %>
 
+          </ul>
+
+          <div class="site-nav__actions">
+            <%= link_to "Donate", donate_path, class: "btn btn-link site-nav__donate" %>
+            <%= link_to "Find a programme", programmes_path, class: "btn btn-primary" %>
+
             <% if current_user %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= current_user.first_name %></a>
+              <div class="dropdown site-nav__account">
+                <a class="nav-link dropdown-toggle site-nav__account-link site-nav__account-link--signed-in" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg class="site-nav__account-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <circle cx="10" cy="6" r="3"></circle>
+                    <path d="M4 17c.35-3.5 2.35-5.25 6-5.25S15.65 13.5 16 17"></path>
+                  </svg>
+                  <span><%= current_user.first_name %></span>
+                </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountMenu">
                   <li><%= link_to "Profile", user_profile_path(user_id: current_user.id), class: "dropdown-item" %></li>
                   <% if current_user_admin? %>
@@ -55,15 +66,18 @@
                   <li><hr class="dropdown-divider"></li>
                   <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
                 </ul>
-              </li>
+              </div>
             <% else %>
-              <li class="nav-item site-nav__signin"><%= link_to "Sign in", new_user_session_path, class: "nav-link" %></li>
+              <div class="site-nav__account">
+                <%= link_to new_user_session_path, class: "nav-link site-nav__account-link" do %>
+                  <svg class="site-nav__account-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <circle cx="10" cy="6" r="3"></circle>
+                    <path d="M4 17c.35-3.5 2.35-5.25 6-5.25S15.65 13.5 16 17"></path>
+                  </svg>
+                  <span>Sign in</span>
+                <% end %>
+              </div>
             <% end %>
-          </ul>
-
-          <div class="site-nav__actions">
-            <%= link_to "Donate", donate_path, class: "btn btn-link site-nav__donate" %>
-            <%= link_to "Find a programme", programmes_path, class: "btn btn-primary" %>
           </div>
         </div>
       </div>
