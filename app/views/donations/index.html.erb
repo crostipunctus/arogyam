@@ -1,6 +1,6 @@
 <% set_meta_tags title: "Donate",
-                 description: "Support ArogyaM Wellness Center at Sacred Grove. Choose a cause and help nurture holistic wellbeing through Ayurveda and yoga.",
-                 keywords: "donate to ArogyaM, support Ayurveda wellness, Sacred Grove donation, holistic wellbeing donation" %>
+                 description: "Support ArogyaM's Village Outreach Programme and help bring Ayurvedic care, wellness education, and support to communities around the Sacred Grove.",
+                 keywords: "donate to ArogyaM, Village Outreach Programme, Ayurvedic care for villages, Sacred Grove donation, accessible wellness" %>
 
 <% selected_category = @donation.category.presence || @sub_causes.first[:key] %>
 <% selected_sub_cause = @sub_causes.find { |sub_cause| sub_cause[:key] == selected_category } || @sub_causes.first %>
@@ -55,11 +55,40 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-9 text-center">
-        <p class="donation-eyebrow">A thoughtful act of care</p>
-        <h1>Help wellbeing take root</h1>
+        <p class="donation-eyebrow">Wellness within reach</p>
+        <h1>Your support can reach a village, a family, a senior, or someone in need</h1>
         <p class="donation-hero-copy">
-          Your contribution can help ArogyaM nurture spaces, care, and initiatives grounded in the
-          timeless wisdom of Ayurveda and yoga.
+          Help us bring Ayurvedic care, wellness education, and compassionate support closer to the
+          people who need it most.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="donation-story-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <p class="donation-story-lead">
+          When Sri M. envisioned a Wellness Centre for Yoga and Ayurveda at the Sacred Grove, he
+          believed that wellness should be accessible to everyone, regardless of their economic
+          circumstances.
+        </p>
+        <p>
+          At ArogyaM, we are committed to carrying this vision into the surrounding villages. Today,
+          people travel to ArogyaM for care from within a 150-kilometre radius, representing more than
+          40 villages.
+        </p>
+        <p>
+          Through our Village Outreach Programme, we bring Ayurvedic care, wellness education, and
+          support directly to communities and to people who may not be able to afford or easily access
+          healthcare and wellness services.
+        </p>
+        <p>Our goal is simple: to bring wellness closer to the people who need it most.</p>
+        <p class="donation-story-closing">
+          Your support can help us reach more villages, care for more people, and make Sri M.'s vision
+          of accessible wellness a reality.
         </p>
       </div>
     </div>

@@ -6,7 +6,7 @@ class DonationsControllerTest < ActionDispatch::IntegrationTest
     get donate_path
 
     assert_response :success
-    assert_select "h1", "Help wellbeing take root"
+    assert_select "h1", "Your support can reach a village, a family, a senior, or someone in need"
     assert_select "form[action='#{donate_path}'][method='post'][data-turbo='false']"
     assert_select "input[name='donation_request[donor_name]']"
     assert_select "input[name='donation_request[amount]'][type='hidden']"
