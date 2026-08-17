@@ -41,7 +41,7 @@
         <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
 
         <%# Programme Selection Card %>
-        <div class="card border-0 shadow-sm mb-4">
+        <div class="card border-0 shadow-sm mb-4" data-controller="programme-duration">
           <div class="card-body p-4">
             <h5 class="card-section-title mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event me-2" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
@@ -58,7 +58,11 @@
               <%= f.collection_select :package_id, Package.all, :id, :name,
                   { selected: @selected_package_id, prompt: "Select a programme" },
                   class: "form-select py-2",
-                  id: "package-select" %>
+                  id: "package-select",
+                  data: {
+                    programme_duration_target: "programme",
+                    action: "change->programme-duration#update"
+                  } %>
             </div>
 
             <div class="mb-3">
@@ -66,14 +70,14 @@
               <%= f.date_field :start_date, class: "form-control py-2" %>
             </div>
 
-            <div id="vishram-days" class="mb-3" style="display: none;">
+            <div id="vishram-days" class="mb-3" hidden data-programme-duration-target="vishraamFields">
               <%= f.label :duration, "Duration *", class: "form-label fw-medium" %>
               <%= f.select :duration, [['3 days', "3"], ['5 days', "5"]],
                   { prompt: 'Select days' },
                   class: 'form-select py-2' %>
             </div>
 
-            <div id="shamanam-days" class="mb-3" style="display: none;">
+            <div id="shamanam-days" class="mb-3" hidden data-programme-duration-target="shamanamFields">
               <%= f.label :shamanam_duration, "Duration *", class: "form-label fw-medium" %>
               <%= f.select :shamanam_duration, [['7 days', "7"], ['14 days', "14"]],
                   { prompt: 'Select days' },

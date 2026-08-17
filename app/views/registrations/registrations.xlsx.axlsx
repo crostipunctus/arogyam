@@ -38,7 +38,7 @@ wb.add_worksheet(name: 'Registrations') do |sheet|
       user_profile.zip,
       user_profile.occupation,
       user_profile.marital_status,
-      registration.package.name,
+      registration.programme_label,
       formatted_date_with_year(registration.start_date.to_s),
       registration.status
     ]

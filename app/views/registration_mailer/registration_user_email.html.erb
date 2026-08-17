@@ -1,6 +1,6 @@
 <% is_vishraam = @registration.package.name == "VishraM" %>
 <% start_date = @registration.start_date %>
-<% duration = is_vishraam ? @registration.duration : @registration.package.duration %>
+<% duration = @registration.selected_duration %>
 <% end_date = start_date.present? ? start_date + duration.to_i.days : nil %>
 <% start_time = is_vishraam ? "10 a.m." : "5 p.m." %>
 
@@ -29,7 +29,7 @@
   <tr>
     <td style="padding:16px 20px; border-bottom:1px solid #e8e4dc; font-size:14px; color:#6b6b6b;">Duration</td>
     <td style="padding:16px 20px; border-bottom:1px solid #e8e4dc; font-size:15px; color:#2c3e2d; font-weight:500; text-align:right;">
-      <%= duration %><%= is_vishraam ? " days" : "" %>
+      <%= duration %><%= @registration.variable_duration_programme? ? " days" : "" %>
     </td>
   </tr>
   <% if end_date.present? %>

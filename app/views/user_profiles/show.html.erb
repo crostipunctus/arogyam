@@ -46,7 +46,7 @@
             <% if registration.start_date %>
               starting from <%= formatted_date(registration.start_date) %>
             <% end %>
-            for <%= registration.duration %> days
+            for <%= registration.selected_duration %> days
             <% if registration.status == 'Payment Pending' %>
               <span class="badge bg-warning fs-sm">Payment Pending</span>
             <% end %>

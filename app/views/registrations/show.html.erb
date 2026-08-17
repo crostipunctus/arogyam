@@ -53,11 +53,11 @@
                 <div class="review-value"><%= @registration.package.name %></div>
               </div>
             </div>
-            <% if @registration.package.name == "VishraM" || @registration.package.name == "ShamanaM" %>
+            <% if @registration.variable_duration_programme? %>
               <div class="col-sm-6">
                 <div class="review-detail">
                   <div class="review-label">Duration</div>
-                  <div class="review-value"><%= @registration.duration %> days</div>
+                  <div class="review-value"><%= @registration.selected_duration %> days</div>
                 </div>
               </div>
             <% end %>

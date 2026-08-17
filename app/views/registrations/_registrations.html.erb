@@ -22,7 +22,7 @@
                   </div>
                   <small class="text-muted"><%= registration.user.email %></small>
                 </td>
-                <td><%= registration.package.name %></td>
+                <td><%= registration.programme_label %></td>
                 <td><%= registration.start_date&.strftime("%d %b %Y") || 'Not set' %></td>
                 <td data-controller="status" data-status-endpoint-value="<%= registration_path(registration) %>">
                   <span data-status-target="status">

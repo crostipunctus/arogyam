@@ -117,6 +117,9 @@ class RegistrationsController < ApplicationController
       if @package.name == 'VishraM'
         @registration.duration = registration_params[:duration]
         Rails.logger.debug "Set VishraM duration to: #{@registration.duration}"
+      elsif @package.name == 'ShamanaM'
+        @registration.duration = registration_params[:shamanam_duration]
+        Rails.logger.debug "Set ShamanaM duration to: #{@registration.duration}"
       else
         @registration.duration = @package.duration
         Rails.logger.debug "Set fixed package duration to: #{@registration.duration}"
@@ -288,7 +291,7 @@ class RegistrationsController < ApplicationController
           <tr style="background-color: <%= cycle('#ccffd9', '#e6ffec') %>;">
             <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= user_full_name(registration.user) %></td>
             <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.user.email %></td>
-            <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.package.name %></td>
+            <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;"><%= registration.programme_label %></td>
             <td style="padding: 8px 10px; text-align: left; border: 1px solid #000;">
               <%= registration.start_date ? formatted_date(registration.start_date) : 'Not set' %>
             </td>

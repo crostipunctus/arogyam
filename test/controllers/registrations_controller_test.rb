@@ -47,6 +47,47 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to review_registrations_path
   end
 
+  test "ShamanaM registration keeps and displays the selected duration" do
+    shamanam = Package.create!(name: "ShamanaM", cost: "100", duration: "7 or 14 days")
+    sign_in @user
+
+    post registrations_path, params: {
+      registration: {
+        package_id: shamanam.id,
+        start_date: 2.weeks.from_now.to_date,
+        shamanam_duration: "14",
+        lifestyle: "Active",
+        substances: "None",
+        health_conditions: "None",
+        medication: "None",
+        agreement: "1",
+        terms: "1"
+      }
+    }
+
+    assert_redirected_to review_registrations_path
+
+    get review_registrations_path
+    assert_response :success
+    assert_select ".review-value", text: "14 days"
+
+    assert_difference("Registration.count", 1) do
+      post confirm_registrations_path
+    end
+
+    registration = Registration.order(:id).last
+    assert_equal "14", registration.duration
+    assert_equal "14", registration.shamanam_duration
+    assert_equal "ShamanaM — 14 days", registration.programme_label
+
+    admin = User.create!(email: "admin@example.com", password: "password", admin: true, confirmed_at: Time.current)
+    sign_in admin
+    get registrations_path(filter: "all")
+
+    assert_response :success
+    assert_select "td", text: "ShamanaM — 14 days"
+  end
+
 
   test "should not create registration without agreement or terms" do
     sign_in @user

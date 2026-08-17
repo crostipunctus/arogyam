@@ -56,8 +56,8 @@
               <div class="review-detail">
                 <div class="review-label">Duration</div>
                 <div class="review-value">
-                  <% if @registration.package&.name == "VishraM" || @registration.package&.name == "ShamanaM" %>
-                    <%= @registration.duration %> days
+                  <% if @registration.variable_duration_programme? %>
+                    <%= @registration.selected_duration %> days
                   <% else %>
                     <%= @registration.package&.duration %>
                   <% end %>

@@ -12,5 +12,4 @@ import './collection_select'
 import './swiper'
 import './date_picker'
 import "./theme"
-import "./duration"
 import "./fancybox"
