@@ -1,14 +1,20 @@
 <% set_meta_tags title: 'Blog',
                  description: 'Read articles on Ayurveda, yoga, wellness, and holistic health from ArogyaM Wellness Center.' %>
 
-<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
-  <div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-    <h1 class="cardHeading packages text-center">Blog</h1>    
-  </div>
+<%= render "shared/page_header",
+           eyebrow: "The ArogyaM journal",
+           title: "Notes on wellbeing",
+           description: "Seasonal Ayurvedic guidance, practices for daily life, and stories from Sacred Grove." %>
 
-  <div class="alert alert-info text-center p-4 mb-4" style="background-color: #d0f6ea; border: none;">
-    <h3 class="display-6 mb-0">Coming Soon</h3>
-  </div>
+<div class="container page-section journal-page">
+
+  <% if @blogs.empty? %>
+    <div class="journal-empty text-center p-4 mb-4">
+      <p class="eyebrow">In preparation</p>
+      <h2>Our journal is coming soon.</h2>
+      <p>We are gathering thoughtful notes on Ayurveda, Yoga, and life at Sacred Grove.</p>
+    </div>
+  <% end %>
 
   <% if current_user_admin? %>
     <div class="admin">
@@ -40,7 +46,7 @@
               <div class="col-sm-12 text-muted fs-sm mb-5">
                   <%= blog.created_at.strftime("%d %b %y %H:%M") %>
               </div>
-              
+
                 <% if current_user_admin? %>
                   <div class="admin">
                     <%= link_to "Edit", edit_blog_path(blog), class: "btn btn-outline-success btn-sm" %>
@@ -56,8 +62,3 @@
 </div>
 
 </div>
-
-
-    
-  
-    

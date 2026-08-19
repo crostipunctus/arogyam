@@ -1,61 +1,86 @@
-<header class="header navbar navbar-expand-lg navbar-light bg-light fixed-top"> 
-  <div class="container-fluid">
-    <span id="logospan">
-      <%= link_to image_tag(dev_images("full-logo.png"), width: 150, alt: "ArogyaM Wellness Center logo"), root_path, id:"desktopLogo", data: {turbo: false} %>
-    </span>
-   <div class="centerLogoCont"> <%= link_to(image_tag('https://d1w11gv0j27jrz.cloudfront.net/full-logo.png', width: 150, class: "centerlogo no-border-radius", alt: 'Logo'), root_path, class: "nav-link", data: {turbo: false}) %></div>
-    <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end " id="primaryMenu">
-      <div class="offcanvas-header">
-        <h6 class="mt-1 mb-0"></h6>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body pt-0 justify-content-center">
-        <ul class="navbar-nav p-0" style="--ar-scroll-height: 520px;">
-          <li id="homeMenuItem" class="nav-item"><%= link_to "Home", root_path, class: "nav-link", data: {turbo: false} %></li> 
-          <li class="nav-item"><%= link_to "Health Programmes", programmes_path, class: "nav-link"%></li>  
-          <% if current_user_admin? %>
-            <%# <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link"%></li> 
-            <li class="nav-item"><%= link_to "Registrations", registrations_path, class: "nav-link"%>
-
-          <% end %>
-          
-<li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: {turbo: false}%></li> 
-          <li class="nav-item"><%= link_to "Blog", blogs_path, class: "nav-link", data: {turbo: false}%></li>
-          <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link"%></li>
-          <li class="nav-item"><%= link_to "Contact", contacts_path, class: "nav-link", data: {turbo: false}%></li>
-          <li class="nav-item"><%= link_to "Donate", donate_path, class: "nav-link", data: { turbo: false } %></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-              About
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to "About", about_path, class: "dropdown-item"%></li>
-              <li><%= link_to "Gallery", gallery_index_path, class: "dropdown-item", data: {turbo: false}%></li>
-            </ul>
-          </li>
-          <% if current_user %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-              <%= current_user.first_name %>
-            </a>
-             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to 'Profile', user_profile_path(user_id: current_user.id), class: "dropdown-item"%></li>
-              <% if current_user_admin? %>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= link_to 'Admin Dashboard', rails_admin_path, class: "dropdown-item", data: { turbo: false } %></li>
-                <li><hr class="dropdown-divider"></li>
-              <% end %>
-              <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item",  data: { turbo_method: :delete} %></li>
-            </ul>
-          </li>
-          <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: "navbarBookButton btn btn-outline-primary rounded-pill" %>
-          <% end %>
-        </ul>
-      </div>
+<header class="site-header">
+  <div class="site-header__context">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span>Sacred Grove · Chowdepalli</span>
+      <%= link_to "A unit of The Satsang Foundation", "https://satsang-foundation.org", target: "_blank", rel: "noopener" %>
     </div>
   </div>
+
+  <nav class="navbar navbar-expand-xl site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <%= link_to root_path, class: "site-nav__brand", data: { turbo: false }, aria: { label: "ArogyaM home" } do %>
+        <%= image_tag(dev_images("full-logo.png"), alt: "ArogyaM Wellness Center", width: 176, height: 58, class: "site-nav__logo") %>
+      <% end %>
+
+      <button type="button" class="navbar-toggler site-nav__toggle" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu" aria-controls="primaryMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end site-nav__drawer" tabindex="-1" id="primaryMenu" aria-labelledby="primaryMenuLabel">
+        <div class="offcanvas-header site-nav__drawer-header">
+          <div>
+            <span class="site-nav__drawer-kicker">ArogyaM</span>
+            <h2 class="offcanvas-title" id="primaryMenuLabel">Explore</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
+        </div>
+
+        <div class="offcanvas-body site-nav__drawer-body">
+          <ul class="navbar-nav site-nav__links">
+            <li class="nav-item"><%= link_to "Accommodation", accommodation_path, class: "nav-link", data: { turbo: false } %></li>
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Stories", blogs_path, class: "nav-link", data: { turbo: false } %></li>
+            <li class="nav-item"><%= link_to "Testimonials", testimonials_path, class: "nav-link" %></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="visitMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Visit</a>
+              <ul class="dropdown-menu" aria-labelledby="visitMenu">
+                <li><%= link_to "Gallery", gallery_index_path, class: "dropdown-item", data: { turbo: false } %></li>
+                <li><%= link_to "Contact & directions", contacts_path, class: "dropdown-item", data: { turbo: false } %></li>
+              </ul>
+            </li>
+
+            <% if current_user_admin? %>
+              <li class="nav-item"><%= link_to "Registrations", registrations_path, class: "nav-link" %></li>
+            <% end %>
+
+          </ul>
+
+          <div class="site-nav__actions">
+            <%= link_to "Donate", donate_path, class: "btn btn-link site-nav__donate" %>
+            <%= link_to "Find a programme", programmes_path, class: "btn btn-primary" %>
+
+            <% if current_user %>
+              <div class="dropdown site-nav__account">
+                <a class="nav-link dropdown-toggle site-nav__account-link site-nav__account-link--signed-in" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg class="site-nav__account-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <circle cx="10" cy="6" r="3"></circle>
+                    <path d="M4 17c.35-3.5 2.35-5.25 6-5.25S15.65 13.5 16 17"></path>
+                  </svg>
+                  <span><%= current_user.first_name %></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountMenu">
+                  <li><%= link_to "Profile", user_profile_path(user_id: current_user.id), class: "dropdown-item" %></li>
+                  <% if current_user_admin? %>
+                    <li><%= link_to "Admin dashboard", rails_admin_path, class: "dropdown-item", data: { turbo: false } %></li>
+                  <% end %>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
+                </ul>
+              </div>
+            <% else %>
+              <div class="site-nav__account">
+                <%= link_to new_user_session_path, class: "nav-link site-nav__account-link" do %>
+                  <svg class="site-nav__account-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <circle cx="10" cy="6" r="3"></circle>
+                    <path d="M4 17c.35-3.5 2.35-5.25 6-5.25S15.65 13.5 16 17"></path>
+                  </svg>
+                  <span>Sign in</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>

@@ -23,7 +23,6 @@
 @import './user-variables';
 //@import './theme.css';
 //@import './theme.min.css';
-@import 'bootstrap/scss/bootstrap';
 @import './theme.scss';
 @import 'swiper';
 
@@ -31,3 +30,4 @@
 $bootstrap-icons-font-dir: "../fonts";
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'actiontext';
+@import './brand';

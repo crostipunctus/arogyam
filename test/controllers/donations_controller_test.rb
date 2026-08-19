@@ -16,8 +16,8 @@ class DonationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.donation-contact-email[href='mailto:treasurer@satsang-foundation.org']"
     assert_select "h3", text: "CSR Opportunities"
     assert_select "a.donation-contact-email[href='mailto:csr@satsang-foundation.org']"
-    assert_select "header a.nav-link[href='#{donate_path}']", text: "Donate"
-    assert_select "footer a.nav-link[href='#{donate_path}']", text: "Donate"
+    assert_select "header a[href='#{donate_path}']", text: "Donate"
+    assert_select "footer a[href='#{donate_path}']", text: "Donate"
     assert_no_match(/X-API-Key/i, response.body)
   end
 

@@ -1,0 +1,13 @@
+<header class="page-hero">
+  <div class="container">
+    <div class="page-hero__content">
+      <% if local_assigns[:eyebrow].present? %>
+        <p class="eyebrow"><%= eyebrow %></p>
+      <% end %>
+      <h1><%= title %></h1>
+      <% if local_assigns[:description].present? %>
+        <p><%= description %></p>
+      <% end %>
+    </div>
+  </div>
+</header>

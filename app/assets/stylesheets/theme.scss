@@ -4,18 +4,16 @@
  * Theme styles
 */
 
-// User variables
+// Brand variables and Bootstrap configuration
 @import './user-variables.scss';
-
-// Configuration & utilities
-@import './user-variables.scss';
-@import './utilities.scss';
-
-// Bootstrap
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
+@import './utilities.scss';
+
+// Bootstrap layout and components used by the application
 @import 'bootstrap/scss/root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
