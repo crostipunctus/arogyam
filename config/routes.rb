@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get 'vishraam_pdf' => 'vishraam_registrations#pdf'
 
   get 'privacy_policy', to: 'privacy_policy#index', as: :privacy_policy
+  get 'cookie-policy', to: 'cookie_policy#index', as: :cookie_policy
 
   resources :newsletter_subscriptions, only: [:create]
 

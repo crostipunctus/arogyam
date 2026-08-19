@@ -1,0 +1,32 @@
+<section class="cookie-consent position-fixed bottom-0 start-0 end-0 p-3 p-md-4"
+         data-cookie-consent-target="banner"
+         role="dialog"
+         aria-modal="false"
+         aria-labelledby="cookie-consent-title"
+         aria-describedby="cookie-consent-description"
+         hidden>
+  <div class="cookie-consent__panel mx-auto shadow-lg">
+    <div class="cookie-consent__copy">
+      <p class="cookie-consent__eyebrow mb-1">Your privacy</p>
+      <h2 id="cookie-consent-title" class="h5 mb-2">Help us improve the website?</h2>
+      <p id="cookie-consent-description" class="mb-0">
+        Essential cookies keep the website and forms secure. If you accept all cookies, we also use
+        Google Analytics to understand how the site is used. The website works either way, and you can change your choice later.
+        <%= link_to "Read our Cookie Policy", cookie_policy_path %>.
+      </p>
+    </div>
+    <div class="cookie-consent__actions">
+      <button type="button"
+              class="btn btn-outline-secondary rounded-pill"
+              data-action="cookie-consent#reject">
+        Use essential cookies only
+      </button>
+      <button type="button"
+              class="btn btn-primary rounded-pill"
+              data-cookie-consent-target="acceptButton"
+              data-action="cookie-consent#accept">
+        Accept all cookies
+      </button>
+    </div>
+  </div>
+</section>

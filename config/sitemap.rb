@@ -12,6 +12,7 @@ SitemapGenerator::Sitemap.create do
   add donate_path, changefreq: 'monthly', priority: 0.7
   add contacts_path, changefreq: 'monthly', priority: 0.5
   add privacy_policy_path, changefreq: 'yearly', priority: 0.2
+  add cookie_policy_path, changefreq: 'yearly', priority: 0.2
 
   # Dynamic pages - Health Programmes
   Package.find_each do |package|

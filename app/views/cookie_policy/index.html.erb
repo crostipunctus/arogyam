@@ -1,0 +1,74 @@
+<% set_meta_tags title: "Cookie Policy",
+                 description: "Learn how ArogyaM uses essential cookies, local storage, reCAPTCHA, and optional analytics." %>
+
+<%= render "shared/page_header",
+           eyebrow: "Your choices",
+           title: "Cookie policy",
+           description: "What we store in your browser, why we use it, and how you can control optional analytics." %>
+
+<div class="container page-section">
+  <article class="privacy-policy">
+    <p><strong>Last updated: August 19, 2026</strong></p>
+
+    <p>
+      This Cookie Policy explains how ArogyaM uses cookies and similar browser technologies on
+      <strong>arogyam.life</strong>. It should be read together with our
+      <%= link_to "Privacy Policy", privacy_policy_path %>.
+    </p>
+
+    <h3>1. What cookies and local storage are</h3>
+    <p>
+      Cookies are small text files stored by your browser. Local storage is a similar browser feature
+      that lets a website remember a setting on your device. We use these technologies only for the
+      purposes described below.
+    </p>
+
+    <h3>2. Essential technologies</h3>
+    <p>
+      Essential technologies keep the website secure and allow requested features to work. They do
+      not require analytics consent and cannot be switched off through our banner.
+    </p>
+    <ul>
+      <li><strong>ArogyaM session cookie (<code>_arogyam_session</code>):</strong> maintains a secure session, sign-in state, form progress, and fraud protection. It is removed when the session expires.</li>
+      <li><strong>Google reCAPTCHA:</strong> helps protect public forms from spam and automated abuse. Google may process device and usage information for this security purpose when a protected form is displayed.</li>
+      <li><strong>Cookie preference:</strong> your analytics choice is saved in local storage under <code>arogyam_cookie_consent_v1</code> until you change it or clear browser data.</li>
+    </ul>
+
+    <h3>3. Optional analytics</h3>
+    <p>
+      If you select <strong>Accept all cookies</strong>, we load Google Analytics 4 to understand, in
+      aggregate, how visitors use the website and which programme and enquiry journeys are effective.
+      Google Analytics may set cookies such as <code>_ga</code> and <code>_ga_*</code>, generally for up
+      to two years. Advertising storage and personalised advertising remain disabled.
+    </p>
+    <p>
+      If you select <strong>Use essential cookies only</strong>, the Google Analytics tag is not loaded
+      and analytics events are not sent from your browser.
+    </p>
+
+    <h3>4. Changing your choice</h3>
+    <p>
+      You can accept all cookies or use essential cookies only when the banner first appears. You can revisit your choice at
+      any time by selecting <strong>Cookie settings</strong> in the website footer. Rejecting analytics
+      after previously accepting it updates Google consent and removes ArogyaM’s accessible Google
+      Analytics cookies from your browser.
+    </p>
+    <button type="button" class="btn btn-outline-primary rounded-pill" data-action="cookie-consent#open">
+      Open cookie settings
+    </button>
+
+    <h3>5. Third-party information</h3>
+    <p>
+      Google’s handling of information is governed by its own policies. You can read
+      <%= link_to "Google’s Privacy Policy", "https://policies.google.com/privacy", target: "_blank", rel: "noopener" %>
+      and learn about
+      <%= link_to "Google Analytics safeguards", "https://support.google.com/analytics/answer/6004245", target: "_blank", rel: "noopener" %>.
+    </p>
+
+    <h3>6. Contact us</h3>
+    <p>
+      For questions about cookies or personal information, contact
+      <%= mail_to "admin@arogyam.life" %>.
+    </p>
+  </article>
+</div>

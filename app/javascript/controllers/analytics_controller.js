@@ -12,6 +12,7 @@ export default class extends Controller {
   }
 
   track() {
+    if (!window.arogyamAnalyticsAllowed?.()) return
     if (typeof window.gtag !== "function" || !this.eventNameValue) return
 
     window.gtag("event", this.eventNameValue, this.paramsValue)

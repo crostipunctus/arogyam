@@ -33,3 +33,6 @@ application.register("recaptcha-form", RecaptchaFormController)
 
 import AnalyticsController from "./analytics_controller"
 application.register("analytics", AnalyticsController)
+
+import CookieConsentController from "./cookie_consent_controller"
+application.register("cookie-consent", CookieConsentController)

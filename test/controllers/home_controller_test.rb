@@ -15,6 +15,20 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_nil response.headers["Expires"]
   end
 
+  test "shows cookie choices without loading Google Analytics before consent" do
+    get root_url
+
+    assert_response :success
+    assert_select "body[data-controller~='cookie-consent']"
+    assert_select "section[data-cookie-consent-target='banner'][hidden]"
+    assert_select "button[data-action='cookie-consent#reject']", text: /Use essential cookies only/
+    assert_select "button[data-action='cookie-consent#accept']", text: /Accept all cookies/
+    assert_select "script[src^='https://www.googletagmanager.com/gtag/js']", count: 0
+    assert_includes response.body, 'analytics_storage: analyticsGranted ? "granted" : "denied"'
+    assert_select "a[href='#{cookie_policy_path}']", minimum: 1
+    assert_select "button[data-action='cookie-consent#open']", minimum: 1
+  end
+
   test "authenticated HTML responses are never stored" do
     sign_in User.create!(
       email: "cache-test@example.com",

@@ -23,17 +23,62 @@
     <link rel="stylesheet" href="/fancybox.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLQGEBVGRW"></script>
     <script nonce="<%= content_security_policy_nonce %>">
+      const arogyaMConsentStorageKey = "arogyam_cookie_consent_v1";
+      const arogyaMAnalyticsId = "G-JLQGEBVGRW";
+
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-JLQGEBVGRW');
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+
+      window.arogyamAnalyticsAllowed = function() {
+        try {
+          return window.localStorage.getItem(arogyaMConsentStorageKey) === "accepted";
+        } catch (_error) {
+          return false;
+        }
+      };
+
+      function arogyaMConsentState(analyticsGranted) {
+        return {
+          analytics_storage: analyticsGranted ? "granted" : "denied",
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied"
+        };
+      }
+
+      window.gtag("consent", "default", arogyaMConsentState(window.arogyamAnalyticsAllowed()));
+      window.gtag("set", "ads_data_redaction", true);
+
+      window.loadArogyaMAnalytics = function() {
+        if (document.querySelector("script[data-arogyam-analytics]")) return;
+
+        window.gtag("js", new Date());
+        window.gtag("config", arogyaMAnalyticsId, {
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+
+        const analyticsScript = document.createElement("script");
+        analyticsScript.async = true;
+        analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${arogyaMAnalyticsId}`;
+        analyticsScript.dataset.arogyamAnalytics = "true";
+        document.head.appendChild(analyticsScript);
+      };
+
+      window.setArogyaMAnalyticsConsent = function(analyticsGranted) {
+        window.gtag("consent", "update", arogyaMConsentState(analyticsGranted));
+        if (analyticsGranted) window.loadArogyaMAnalytics();
+      };
+
+      if (window.arogyamAnalyticsAllowed()) window.loadArogyaMAnalytics();
     </script>
 
     <%= render 'layouts/json_ld' %>
   </head>
-  <body class="site-body controller-<%= controller.controller_name %> action-<%= controller.action_name %>">
+  <body class="site-body controller-<%= controller.controller_name %> action-<%= controller.action_name %>"
+        data-controller="cookie-consent"
+        data-cookie-consent-storage-key-value="arogyam_cookie_consent_v1">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div id="analytics-events"><%= ga_conversion_tag %></div>
     <%= render 'layouts/navbar' %>
@@ -51,5 +96,6 @@
 
       <%= render 'layouts/footer' %>
       <%= render 'shared/whatsapp_button' %>
+      <%= render 'shared/cookie_consent' %>
   </body>
 </html>
