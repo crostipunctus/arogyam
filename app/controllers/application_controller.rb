@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :testimonials_preview
   protect_from_forgery with: :exception
 
+  before_action :reject_null_byte_parameters
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_cache_headers, if: -> { request.get? }
@@ -18,6 +19,28 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def reject_null_byte_parameters
+    return unless contains_null_byte?(params)
+
+    Rails.logger.warn("Rejected request containing a null byte: #{request.request_method} #{request.path}")
+    head :bad_request
+  end
+
+  def contains_null_byte?(value)
+    case value
+    when String
+      value.include?("\0")
+    when Array
+      value.any? { |item| contains_null_byte?(item) }
+    when Hash, ActionController::Parameters
+      value.each_pair.any? do |key, item|
+        contains_null_byte?(key.to_s) || contains_null_byte?(item)
+      end
+    else
+      false
+    end
+  end
 
   def storable_location?
 

@@ -86,6 +86,35 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "sign up rejects null bytes before Devise processes the password" do
+    assert_no_difference("User.count") do
+      post user_registration_path, params: {
+        user: {
+          email: "newuser@example.com",
+          first_name: "Arjun",
+          last_name: "Sharma",
+          password: "password\u0000123",
+          password_confirmation: "password\u0000123",
+          privacy_policy: "1"
+        },
+        recaptcha_token: "test_token"
+      }
+    end
+
+    assert_response :bad_request
+  end
+
+  test "sign in rejects null bytes before Devise queries for the email" do
+    post user_session_path, params: {
+      user: {
+        email: "member\0@example.com",
+        password: "password123"
+      }
+    }
+
+    assert_response :bad_request
+  end
+
   # === SIGN IN FEEDBACK TESTS (Turbo) ===
   # Regression: a failed Turbo sign-in used to return a 401 that Turbo discarded,
   # so the user was bounced back to the form with no message. The Turbo failure
