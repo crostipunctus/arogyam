@@ -26,18 +26,17 @@ class UserProfilesController < ApplicationController
 
   def new 
     if @user.user_profile.present? 
-      redirect_to user_profile_path(@user), notice: "Your profile is already completed!"
+      redirect_to profile_completion_path, notice: "Your profile is already completed!"
     else  
       @profile = UserProfile.new
     end 
   end 
 
   def create 
-    @profile = UserProfile.create(profile_params)
-    @profile.user = @user 
+    @profile = @user.build_user_profile(profile_params)
 
     if @profile.save 
-      redirect_to programmes_path, notice: "Profile created successfully!"
+      redirect_to profile_completion_path, notice: "Profile created successfully! Continue below to complete your registration."
     else  
       render :new, status: :unprocessable_entity
     end 
@@ -61,4 +60,14 @@ class UserProfilesController < ApplicationController
   def profile_params 
     params.require(:user_profile).permit(:gender, :date_of_birth, :phone_number, :address, :city, :zip, :country, :alternate_phone_number, :doctor_contact_details, :nationality, :marital_status, :occupation)
   end 
+
+  def profile_completion_path
+    package = Package.find_by(id: params[:package_id])
+
+    if package
+      new_registration_path(package_id: package.id)
+    else
+      programmes_path
+    end
+  end
 end
