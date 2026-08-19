@@ -1,0 +1,5 @@
+daily_session_cleanup:
+  cron: "30 3 * * * Asia/Kolkata"
+  class: "SessionCleanupJob"
+  queue: low
+  description: "Remove sessions that have been inactive for more than 30 days"

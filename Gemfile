@@ -79,6 +79,7 @@ gem "image_processing", "~> 2.0"
 gem "mini_magick", "~> 5.3"
 
 gem 'sidekiq', '~> 7.3'
+gem 'sidekiq-cron', '~> 2.4'
 gem 'connection_pool', '< 3'
 
 
