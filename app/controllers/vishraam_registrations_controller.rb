@@ -48,8 +48,7 @@ class VishraamRegistrationsController < ApplicationController
   end 
 
   def create
-    recaptcha_token = params[:recaptcha_token]
-    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'vishraam_registration')
+    recaptcha_success = recaptcha_verified_for?("vishraam_registration")
     unless recaptcha_success
       @vishraam_registration = VishraamRegistration.new(vishraam_registration_params)
       flash.now[:alert] = "reCAPTCHA verification failed. Please try again."

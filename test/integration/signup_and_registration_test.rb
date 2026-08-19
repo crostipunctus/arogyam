@@ -115,6 +115,27 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     assert_response :bad_request
   end
 
+  test "sign up treats a non-string reCAPTCHA token as failed verification" do
+    assert_no_difference("User.count") do
+      post user_registration_path, params: {
+        user: {
+          email: "newuser@example.com",
+          first_name: "Arjun",
+          last_name: "Sharma",
+          password: "password123",
+          password_confirmation: "password123",
+          privacy_policy: "1"
+        },
+        recaptcha_token: { malformed: "token" }
+      }, headers: { "Accept" => "text/vnd.turbo-stream.html, text/html" }
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal "text/html", response.media_type
+    assert_select "form#registration_form"
+    assert_match(/CAPTCHA verification/i, response.body)
+  end
+
   # === SIGN IN FEEDBACK TESTS (Turbo) ===
   # Regression: a failed Turbo sign-in used to return a 401 that Turbo discarded,
   # so the user was bounced back to the form with no message. The Turbo failure

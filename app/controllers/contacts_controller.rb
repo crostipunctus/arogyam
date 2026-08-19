@@ -7,8 +7,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    recaptcha_token = params[:recaptcha_token]
-    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'contact')
+    recaptcha_success = recaptcha_verified_for?("contact")
     Rails.logger.info "reCAPTCHA response: #{recaptcha_reply.inspect}"
     if recaptcha_success && @contact.save
       ContactMailer.contact_email(@contact).deliver_later

@@ -24,6 +24,8 @@ class NewsletterSubscriptionsController < ApplicationController
 
   def verify_recaptcha_token
     recaptcha_token = params['g-recaptcha-response']
+    return false unless recaptcha_token.is_a?(String)
+
     recaptcha_secret_key = Rails.application.credentials.recaptcha_v2[:secret_key]
 
     uri = URI.parse('https://www.google.com/recaptcha/api/siteverify')

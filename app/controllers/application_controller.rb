@@ -42,6 +42,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def recaptcha_verified_for?(action)
+    recaptcha_token = params[:recaptcha_token]
+    return false unless recaptcha_token.nil? || recaptcha_token.is_a?(String)
+
+    verify_recaptcha(
+      secret_key: Rails.application.credentials.dig(:recaptcha, :secret_key),
+      response: recaptcha_token.to_s,
+      action: action
+    )
+  end
+
   def storable_location?
 
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?

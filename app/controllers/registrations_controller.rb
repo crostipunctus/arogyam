@@ -89,8 +89,7 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    recaptcha_token = params[:recaptcha_token]
-    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'registration')
+    recaptcha_success = recaptcha_verified_for?("registration")
     unless recaptcha_success
       @registration = Registration.new(registration_params)
       @selected_package_id = params[:registration][:package_id]

@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
-  after_action :subscribe_to_newsletter, only: [:create]
+  after_action :subscribe_to_newsletter, only: [:create], if: :newsletter_subscription_requested?
   respond_to :html, :json
   # before_action :configure_account_update_params, only: [:update]
 
@@ -14,16 +14,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    recaptcha_token = params[:recaptcha_token]
-    recaptcha_success = verify_recaptcha(secret_key: Rails.application.credentials.recaptcha[:secret_key], response: recaptcha_token, action: 'register')
+    recaptcha_success = recaptcha_verified_for?("register")
 
     if recaptcha_success
       super
     else
       self.resource = resource_class.new sign_up_params
       resource.validate # Check for other validation errors besides reCAPTCHA
+      flash.now[:alert] = "There was an error with the CAPTCHA verification. Please try again."
       set_minimum_password_length
-      respond_with_navigational(resource) { render :new }
+
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render :new, formats: :html, content_type: "text/html", status: :unprocessable_entity
+        end
+        format.json { render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -60,30 +67,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private 
 
+  def newsletter_subscription_requested?
+    resource&.persisted? && resource.newsletter_subscription == "1"
+  end
+
   def subscribe_to_newsletter
-    if resource.persisted? && resource.newsletter_subscription == "1"
-      if Rails.env.development?
-        # Log the action instead of making an API call in development
-        Rails.logger.info "Newsletter subscription: Would subscribe #{resource.email} to newsletter in production."
-      else
-        # Actual subscription logic for non-development environments
-        gibbon = Gibbon::Request.new(api_key: Rails.application.credentials.gibbon[:api])
-        list_id = "5b6215d26b" # Replace with your actual list ID
-  
-        begin
-          response = gibbon.lists(list_id).members.create(
-            body: {
-              email_address: resource.email,
-              status: "subscribed"
-            }
-          )
-          flash[:notice] = "You have been successfully subscribed to the newsletter."
-        rescue Gibbon::MailChimpError => e
-          handle_mailchimp_error(e)
-        end
-      end
+    if Rails.env.development?
+      # Log the action instead of making an API call in development
+      Rails.logger.info "Newsletter subscription: Would subscribe #{resource.email} to newsletter in production."
     else
-      flash[:alert] = "There was an error with the CAPTCHA verification. Please try again."
+      # Actual subscription logic for non-development environments
+      gibbon = Gibbon::Request.new(api_key: Rails.application.credentials.gibbon[:api])
+      list_id = "5b6215d26b" # Replace with your actual list ID
+
+      begin
+        gibbon.lists(list_id).members.create(
+          body: {
+            email_address: resource.email,
+            status: "subscribed"
+          }
+        )
+        flash[:notice] = "You have been successfully subscribed to the newsletter."
+      rescue Gibbon::MailChimpError => e
+        handle_mailchimp_error(e)
+      end
     end
   end
   

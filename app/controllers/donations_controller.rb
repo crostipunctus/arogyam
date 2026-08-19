@@ -51,11 +51,7 @@ class DonationsController < ApplicationController
   end
 
   def valid_recaptcha?
-    verify_recaptcha(
-      secret_key: Rails.application.credentials.dig(:recaptcha, :secret_key),
-      response: params[:recaptcha_token],
-      action: "donation"
-    )
+    recaptcha_verified_for?("donation")
   end
 
   def donation_api_key
