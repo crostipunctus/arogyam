@@ -24,26 +24,26 @@
               <%= render "shared/errors", object: resource %>
               <div class="pb-3 mb-3">
                 <div class="position-relative mb-3">
-                  <%= f.label :email, class: "custom-label" %><br />
+                  <%= f.label :email, class: "form-label" %><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg ps-5" %>
                 </div>
                 <div class="field mb-3">
-                  <%= f.label :first_name, class: "custom-label" %><br />
+                  <%= f.label :first_name, class: "form-label" %><br />
                   <%= f.text_field :first_name, class: "form-control form-control-lg ps-5" %>
                 </div>
                 <div class="field mb-3">
-                  <%= f.label :last_name, class: "custom-label" %><br />
+                  <%= f.label :last_name, class: "form-label" %><br />
                   <%= f.text_field :last_name, class: "form-control form-control-lg ps-5" %>
                 </div>
                 <div class="field mb-3">
-                  <%= f.label :password, class: "custom-label" %><br />
+                  <%= f.label :password, class: "form-label" %><br />
                   <% if @minimum_password_length %>
                     <em>(<%= @minimum_password_length %> characters minimum)</em>
                   <% end %><br />
                   <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg ps-5" %>
                 </div>
                 <div class="field mb-3">
-                  <%= f.label :password_confirmation, class: "custom-label" %><br />
+                  <%= f.label :password_confirmation, class: "form-label" %><br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg ps-5" %>
                 </div>
                 <br>
