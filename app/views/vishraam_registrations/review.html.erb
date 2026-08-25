@@ -1,6 +1,6 @@
 <section class="container py-5 my-5">
   <div class="card mx-auto d-block border-0" style="max-width: 40rem;">
-    <div class="card-body text-white" id="uniqueCardColor">
+    <div class="card-body">
       <h2 class="card-title text-center mb-4" id="registration_review">VishraM Registration Review</h2>
       <!-- Display all registration details here for review -->
       <ul class="list-group list-group-flush">
@@ -19,8 +19,8 @@
       <%= form_with url: confirm_vishraam_registrations_path, method: :post, html: { class: 'mt-4' } do %>
         <%= hidden_field_tag :confirm, true %>
         <div class="text-center">
-          <%= submit_tag 'Confirm Registration', class: 'btn btn-light btn-lg' %>
-          <%= link_to 'Edit', new_vishraam_registration_path(session[:registration_params]), class: 'btn btn-outline-light ms-2' %>
+          <%= submit_tag 'Confirm Registration', class: 'btn btn-primary btn-lg' %>
+          <%= link_to 'Edit', new_vishraam_registration_path(session[:registration_params]), class: 'btn btn-outline-secondary ms-2' %>
         </div>
       <% end %>
     </div>
