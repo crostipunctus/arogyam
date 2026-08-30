@@ -1,4 +1,9 @@
 class VishraamRegistration < ApplicationRecord
+  DURATION_OPTIONS = {
+    '3 days' => 3,
+    '5 days' => 5
+  }.freeze
+
   belongs_to :user
 
   validates :date, presence: true, uniqueness: { scope: :user_id, message: "You have already registered for VishraM on this date. Please select another date." }
@@ -8,11 +13,14 @@ class VishraamRegistration < ApplicationRecord
 
   before_destroy :send_cancel_email
   after_create :registered
-  
 
   validates :lifestyle, :substances, :health_conditions, :medication, presence: true
   validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
   validates :terms, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
+
+  def formatted_cost
+    Package.formatted_cost(name: "VishraM", duration: duration)
+  end
 
   private 
 
@@ -23,11 +31,6 @@ class VishraamRegistration < ApplicationRecord
     }
     VishraamRegistrationMailer.vishraam_registration_cancel_email(vishraam_registration_data).deliver_later
   end 
-
-  DURATION_OPTIONS = {
-    '3 days' => 3,
-    '5 days' => 5
-  }
 
   def registered 
     self.status = "Registered"

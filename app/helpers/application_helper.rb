@@ -178,15 +178,6 @@ module ApplicationHelper
 
 
 
-  def vishraam_cost(duration)
-    if duration == "3"
-      "Rs. 16,280"
-    else 
-      "Rs. 27,000"
-    end 
-  end 
-
-  
   def display_country_name(country_input)
     return 'No country specified' if country_input.blank?
 

@@ -80,7 +80,7 @@
                   <span class="programme-card__number"><%= format('%02d', index + 1) %></span>
                 </div>
                 <div class="programme-card-body">
-                  <p class="programme-card__meta"><%= package.duration %> days · Rs. <%= package.cost %></p>
+                  <p class="programme-card__meta"><%= package.duration %> days · <%= package.formatted_cost %></p>
                   <h3 class="programme-card-title"><%= package.name %></h3>
                   <p class="programme-card-description"><%= package.short_description %></p>
                   <span class="programme-card__discover">Discover programme <span aria-hidden="true">→</span></span>

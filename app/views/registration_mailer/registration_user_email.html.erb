@@ -42,7 +42,7 @@
   <% end %>
   <tr>
     <td style="padding:16px 20px; font-size:14px; color:#6b6b6b;">Cost</td>
-    <td style="padding:16px 20px; font-size:15px; color:#2c3e2d; font-weight:600; text-align:right;">Rs. <%= @registration.package.cost %></td>
+    <td style="padding:16px 20px; font-size:15px; color:#2c3e2d; font-weight:600; text-align:right;"><%= @registration.package.formatted_cost(duration: @registration.selected_duration) %></td>
   </tr>
 </table>
 

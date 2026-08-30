@@ -8,7 +8,7 @@
         <li class="list-group-item bg-transparent"><strong>Start date:</strong> <%= formatted_date(@vishraam_registration.date) %> at 10 a.m.</li>
         <li class="list-group-item bg-transparent"><strong>End date:</strong> <%= formatted_date(@vishraam_registration.date + @vishraam_registration.duration.to_i) %> at 11 a.m.</li>
         <li class="list-group-item bg-transparent"><strong>Duration: <%= @vishraam_registration.duration %> days </strong>     
-        <li class="list-group-item bg-transparent"><strong>Cost: <%= vishraam_cost(@vishraam_registration.duration) %> </strong>     
+        <li class="list-group-item bg-transparent"><strong>Cost: <%= @vishraam_registration.formatted_cost %> </strong>
 
       </ul>
       <h5 class="list-group-item bg-transparent advance-payment-notice">Please make the payment in advance.</h5>
