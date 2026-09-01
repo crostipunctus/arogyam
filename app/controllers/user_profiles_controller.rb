@@ -62,7 +62,7 @@ class UserProfilesController < ApplicationController
   end 
 
   def profile_completion_path
-    package = Package.find_by(id: params[:package_id])
+    package = Package.published.find_by(id: params[:package_id])
 
     if package
       new_registration_path(package_id: package.id)

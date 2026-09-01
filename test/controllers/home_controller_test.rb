@@ -3,6 +3,15 @@ require "test_helper"
 class HomeControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
+  test "does not feature unpublished programmes" do
+    Package.create!(name: "SoukhyaM", short_description: "Hidden", published: false)
+
+    get root_url
+
+    assert_response :success
+    assert_select ".programme-card-title", text: "SoukhyaM", count: 0
+  end
+
   test "anonymous HTML responses are not publicly cached" do
     get root_url
 

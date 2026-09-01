@@ -55,7 +55,7 @@
                 <%= f.label :package_id, "Selected Programme *", class: "form-label fw-medium" %>
                 <div class="text-muted small mb-1">You can change your selected programme here:</div>
               <% end %>
-              <%= f.collection_select :package_id, Package.all, :id, :name,
+              <%= f.collection_select :package_id, Package.published.order(:name), :id, :name,
                   { selected: @selected_package_id, prompt: "Select a programme" },
                   class: "form-select py-2",
                   id: "package-select",

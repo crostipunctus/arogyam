@@ -14,6 +14,7 @@ class Registration < ApplicationRecord
   validates :agreement, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
   validates :terms, acceptance: { accept: ["1", true], message: "must be accepted" }, on: :create
   validates :start_date, presence: true
+  validate :package_must_be_published, on: :create
   validates :shamanam_duration,
             inclusion: { in: SHAMANAM_DURATIONS, message: "must be 7 or 14 days" },
             if: :shamanam?
@@ -43,6 +44,10 @@ class Registration < ApplicationRecord
   end
   
   private 
+
+  def package_must_be_published
+    errors.add(:package, "is no longer available") if package && !package.published?
+  end
 
   
 

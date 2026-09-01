@@ -4,14 +4,14 @@ class PackagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index 
-    @packages = Package.with_attached_package_image
+    @packages = Package.published.with_attached_package_image
                       .includes(:registrations)
                       .order(:name)
   end 
 
   def show 
     Rails.logger.info "Looking for package with slug: #{params[:id]}"
-    @package = Package.find_by!(slug: params[:id])
+    @package = Package.published.find_by!(slug: params[:id])
     if @package
       Rails.logger.info "Package found: #{@package}"
     else

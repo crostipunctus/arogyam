@@ -1,6 +1,17 @@
 require "test_helper"
 
 class RegistrationTest < ActiveSupport::TestCase
+  test "an unpublished programme cannot accept a new registration" do
+    registration = Registration.new(
+      package: Package.new(name: "SoukhyaM", published: false),
+      start_date: Date.current
+    )
+
+    registration.valid?
+
+    assert_includes registration.errors[:package], "is no longer available"
+  end
+
   test "ShamanaM uses the selected duration in its programme label" do
     registration = Registration.new(
       package: Package.new(name: "ShamanaM", duration: "7 or 14 days"),

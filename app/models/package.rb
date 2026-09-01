@@ -19,6 +19,8 @@ class Package < ApplicationRecord
     attachable.variant :hero, resize_to_limit: [1400, 900], saver: { quality: 82 }
   end
   has_many :registrations
+
+  scope :published, -> { where(published: true) }
   
   validates :name, presence: true, uniqueness: true
 

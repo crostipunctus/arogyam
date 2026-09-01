@@ -15,7 +15,7 @@ SitemapGenerator::Sitemap.create do
   add cookie_policy_path, changefreq: 'yearly', priority: 0.2
 
   # Dynamic pages - Health Programmes
-  Package.find_each do |package|
+  Package.published.find_each do |package|
     add programme_path(package), lastmod: package.updated_at, changefreq: 'weekly', priority: 0.8
   end
 
