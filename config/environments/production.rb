@@ -101,8 +101,8 @@ Rails.application.configure do
   # Enable email delivery error reporting
   config.action_mailer.raise_delivery_errors = true
   
-  # Log email deliveries for debugging
-  config.action_mailer.logger = Logger.new(STDOUT)
+  # Use the Rails logger at :info for delivery status; a separate debug logger
+  # would log full email bodies, including confirmation tokens.
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

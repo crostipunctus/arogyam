@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  include ActionMailer::TestHelper
 
   def setup
     @package = Package.create!(name: "Panchakarma", cost: "15000", duration: 14, short_description: "A 14-day detox programme", dates: "Year round")
@@ -34,6 +35,33 @@ class SignupAndRegistrationTest < ActionDispatch::IntegrationTest
     assert_equal "newuser@example.com", user.email
     assert_equal "Arjun", user.first_name
     assert_equal "Sharma", user.last_name
+    assert_response :see_other
+    assert_empty ActionMailer::Base.deliveries
+    assert_enqueued_with(job: ConfirmationInstructionsJob, queue: "critical")
+
+    assert_emails 1 do
+      perform_enqueued_jobs(only: ConfirmationInstructionsJob)
+    end
+
+    email = ActionMailer::Base.deliveries.last
+    assert_equal [user.email], email.to
+    assert_includes email.body.decoded, user.confirmation_token
+
+    get user_confirmation_path(confirmation_token: user.confirmation_token)
+    assert_redirected_to new_user_session_path
+    assert user.reload.confirmed?
+  end
+
+  test "resending confirmation instructions queues a new delivery" do
+    user = User.create!(email: "resend@example.com", password: "password123", privacy_policy: "1")
+    clear_enqueued_jobs
+
+    assert_enqueued_with(job: ConfirmationInstructionsJob, queue: "critical") do
+      post user_confirmation_path, params: { user: { email: user.email } }
+    end
+
+    assert_redirected_to new_user_session_path
+    assert_empty ActionMailer::Base.deliveries
   end
 
   test "sign up fails without privacy policy acceptance" do

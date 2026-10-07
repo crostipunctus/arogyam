@@ -37,7 +37,13 @@ class User < ApplicationRecord
     result
   end
 
+  protected
 
+  def send_devise_notification(notification, *args)
+    return super unless notification == :confirmation_instructions
 
+    ConfirmationInstructionsJob.perform_later(
+      self, confirmation_token_digest: Digest::SHA256.hexdigest(args.first)
+    )
+  end
 end
- 
