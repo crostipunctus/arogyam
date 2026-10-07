@@ -1,0 +1,15 @@
+<div class="programme-booking__cta">
+  <% if current_user %>
+    <% if !has_profile?(current_user) %>
+      <p class="small mb-3">Complete your profile to register.</p>
+      <%= link_to "Complete Profile", new_user_profile_path(current_user, package_id: package.id), class: "btn btn-primary w-100" %>
+    <% elsif has_active_registration?(current_user) %>
+      <p class="small mb-3">Cancel your current registration first.</p>
+      <%= link_to "View My Registrations", registrations_path, class: "btn btn-outline-primary w-100" %>
+    <% else %>
+      <%= link_to "Register Now", new_registration_path(package_id: package.id), class: "btn btn-primary w-100", id: "registerButton", data: { turbo: false } %>
+    <% end %>
+  <% else %>
+    <%= link_to "Sign In to Register", new_user_session_path, class: "btn btn-primary w-100" %>
+  <% end %>
+</div>

@@ -1151,6 +1151,10 @@ label,
   color: var(--ag-leaf);
 }
 
+a[href^="mailto:"] {
+  overflow-wrap: anywhere;
+}
+
 .contact-page > .row:first-child {
   border-bottom: 1px solid var(--ag-line);
   margin-bottom: clamp(3rem, 7vw, 6rem) !important;

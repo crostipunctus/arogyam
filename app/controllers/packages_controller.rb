@@ -4,8 +4,9 @@ class PackagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index 
+    @special_package = Package.published.special.order(:name).first
     @packages = Package.published.with_attached_package_image
-                      .includes(:registrations)
+                      .where.not(id: @special_package&.id)
                       .order(:name)
   end 
 
@@ -61,7 +62,7 @@ class PackagesController < ApplicationController
   private 
 
   def package_params 
-    params.require(:package).permit(:name, :cost, :duration, :content, :eligibility, :note, :package_image, :short_description, :dates, :benefits)
+    params.require(:package).permit(:name, :cost, :duration, :content, :eligibility, :note, :package_image, :short_description, :dates, :benefits, :special)
   end
 
 

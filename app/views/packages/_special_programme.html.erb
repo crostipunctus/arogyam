@@ -1,0 +1,30 @@
+<% cache ["special-programme", package] do %>
+  <section class="special-programme" aria-labelledby="special-programme-title">
+    <div class="container">
+      <div class="row g-4 g-lg-5 align-items-center">
+        <div class="col-12 col-lg-7">
+          <p class="special-programme__eyebrow"><span class="programme-special-badge">Special programme</span> <span>Sacred Grove</span></p>
+          <h2 id="special-programme-title" class="special-programme__title"><%= package.name %></h2>
+          <p class="special-programme__description"><%= package.short_description %></p>
+          <%= link_to "Explore #{package.name}", programme_path(package), class: "btn special-programme__button", data: { turbo: false } %>
+        </div>
+        <div class="col-12 col-lg-5">
+          <dl class="special-programme__facts mb-0">
+            <div>
+              <dt>Programme dates</dt>
+              <dd><%= package.dates %></dd>
+            </div>
+            <div>
+              <dt>Duration</dt>
+              <dd><%= programme_duration(package) %></dd>
+            </div>
+            <div>
+              <dt>Programme fee</dt>
+              <dd><%= package.formatted_cost %></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

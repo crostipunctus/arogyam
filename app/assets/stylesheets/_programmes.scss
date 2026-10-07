@@ -1,0 +1,274 @@
+// Special programme campaign and programme detail pages.
+.programme-special-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: #a94d22;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.special-programme {
+  background: #f9e8c8;
+  border-block: 1px solid #e4ba77;
+  box-shadow: inset 0 5px #d48b32;
+  color: #493b2c;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.special-programme__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.special-programme__eyebrow > span:last-child {
+  color: #795331;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.special-programme__title {
+  color: #44331f;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.special-programme__description {
+  max-width: 35rem;
+  margin-bottom: 1.75rem;
+  font-size: 1.1rem;
+}
+
+.special-programme .special-programme__button {
+  background: #a94d22;
+  border-color: #a94d22;
+  color: #fff;
+}
+
+.special-programme .special-programme__button:hover {
+  background: #873a18;
+  border-color: #873a18;
+}
+
+.special-programme__facts {
+  background: rgba(255, 254, 249, 0.65);
+  border: 1px solid #e4ba77;
+  padding: 0.5rem clamp(1.25rem, 3vw, 2rem);
+}
+
+.special-programme__facts > div {
+  padding-block: 1.1rem;
+}
+
+.special-programme__facts > div + div {
+  border-top: 1px solid #e7cfaa;
+}
+
+.special-programme__facts dt,
+.programme-booking__facts dt {
+  color: #795331;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.special-programme__facts dd {
+  color: #44331f;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  margin: 0.35rem 0 0;
+}
+
+.programme-detail {
+  padding-block: clamp(2rem, 4vw, 3.5rem) 4rem;
+}
+
+.programme-detail__header {
+  border-bottom: 1px solid var(--ag-line);
+  padding-bottom: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.programme-detail__back {
+  display: inline-block;
+  color: var(--ag-muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.programme-detail__header h1 {
+  font-size: clamp(2.7rem, 6vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.programme-detail__lead {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  max-width: 44rem;
+  margin: 0;
+}
+
+.programme-detail__image {
+  width: 100%;
+  max-height: 22rem;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.programme-detail .trix-content {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.programme-detail .trix-content h2,
+.programme-detail__section-title {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.programme-detail__introduction {
+  margin-bottom: 2.5rem;
+}
+
+.programme-detail__disclosure {
+  border-top: 1px solid var(--ag-line);
+}
+
+.programme-detail__disclosure:last-child {
+  border-bottom: 1px solid var(--ag-line);
+}
+
+.programme-detail__disclosure summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  color: var(--ag-ink);
+  font-weight: 500;
+  line-height: 1.5;
+  list-style: none;
+  cursor: pointer;
+}
+
+.programme-detail__disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.programme-detail__disclosure summary::after {
+  content: "+";
+  color: #a94d22;
+  font-size: 1.35rem;
+}
+
+.programme-detail__disclosure[open] summary::after {
+  content: "−";
+}
+
+.programme-detail__disclosure summary:hover {
+  color: #a94d22;
+}
+
+.programme-detail__disclosure summary:focus-visible {
+  outline: 3px solid var(--ag-sun);
+  outline-offset: 3px;
+}
+
+.programme-detail__disclosure > .trix-content {
+  padding: 0 1.5rem 1rem 0;
+}
+
+.programme-detail__practical {
+  background: var(--ag-paper);
+  margin-top: 2.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.programme-detail__practical h3 {
+  font-family: var(--ag-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.programme-booking {
+  background: var(--ag-paper);
+  border-top: 3px solid #d48b32;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.programme-booking h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.programme-booking__facts {
+  margin: 0;
+}
+
+.programme-booking__facts > div {
+  margin-bottom: 1.2rem;
+}
+
+.programme-booking__facts dd {
+  color: var(--ag-ink);
+  font-size: 1.05rem;
+  margin: 0.3rem 0 0;
+}
+
+.programme-booking__facts .programme-booking__price {
+  font-size: 1.75rem;
+}
+
+.programme-booking__cta {
+  border-top: 1px solid var(--ag-line);
+  padding-top: 1.25rem;
+}
+
+.programme-detail__stories {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--ag-line);
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+}
+
+@media (min-width: 992px) {
+  .programme-detail__sidebar {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .programme-booking__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+  }
+
+  .programme-booking__dates {
+    grid-column: 1 / -1;
+  }
+
+  .programme-booking__facts .programme-booking__price {
+    font-size: 1.35rem;
+  }
+}

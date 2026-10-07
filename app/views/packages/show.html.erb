@@ -1,136 +1,58 @@
 <% set_meta_tags title: @package.name,
                  description: @package.short_description.presence || "Learn about the #{@package.name} programme at ArogyaM Wellness Center." %>
 
-<section class="container pt-5 mt-5 mb-4">
-  <%= link_to programmes_path, class: "text-muted text-decoration-none d-inline-flex align-items-center mb-3", data: { turbo: false } do %>
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-1" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/></svg> All Programmes
-  <% end %>
+<section class="programme-detail">
+  <div class="container">
+    <header class="programme-detail__header">
+      <%= link_to "← All programmes", programmes_path, class: "programme-detail__back", data: { turbo: false } %>
+      <% if @package.special? %>
+        <p class="mt-4 mb-3"><span class="programme-special-badge">Special programme</span></p>
+      <% end %>
+      <h1><%= @package.name %></h1>
+      <p class="programme-detail__lead"><%= @package.short_description %></p>
+    </header>
 
-  <div class="row g-5">
-    <%# Left column: Image + Quick Info %>
-    <div class="col-12 col-lg-5">
-      <div class="programme-image-wrapper mb-4">
-        <% if @package.package_image.attached? %>
-          <%= image_tag(rails_public_blob_url(@package.package_image.variant(:hero)),
-              class: "programme-hero-image",
-              alt: "#{@package.name} - Ayurvedic wellness programme at ArogyaM",
-              loading: "lazy") %>
-        <% else %>
-          <%= image_tag(dev_images('flowers.jpg'),
-              class: "programme-hero-image",
-              alt: "#{@package.name} - ArogyaM wellness programme",
-              loading: "lazy") %>
-        <% end %>
-      </div>
-
-      <%# Quick Info Card %>
-      <div class="programme-info-card mb-4">
-        <div class="programme-info-item">
-          <div class="programme-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
-          </div>
-          <div>
-            <div class="programme-meta-label">Duration</div>
-            <div class="programme-meta-value"><%= @package.duration %> days</div>
-          </div>
-        </div>
-
-        <div class="programme-info-item">
-          <div class="programme-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm0 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm5.5 3a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h1z"/></svg>
-          </div>
-          <div>
-            <div class="programme-meta-label">Cost</div>
-            <div class="programme-meta-value"><%= @package.formatted_cost %></div>
-          </div>
-        </div>
-
-        <% if @package.dates.present? %>
-          <div class="programme-info-item">
-            <div class="programme-info-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
+    <div class="row g-4 g-lg-5 align-items-start">
+      <aside class="col-12 col-lg-4 order-lg-2 programme-detail__sidebar" aria-label="Programme booking details">
+        <div class="programme-booking">
+          <h2>Plan your stay</h2>
+          <dl class="programme-booking__facts">
+            <% if @package.dates.present? %>
+              <div class="programme-booking__dates">
+                <dt>Programme dates</dt>
+                <dd><%= @package.dates %></dd>
+              </div>
+            <% end %>
+            <div>
+              <dt>Duration</dt>
+              <dd><%= programme_duration(@package) %></dd>
             </div>
             <div>
-              <div class="programme-meta-label">Upcoming Dates</div>
-              <div class="programme-meta-value"><%= @package.dates %></div>
+              <dt>Programme fee</dt>
+              <dd class="programme-booking__price"><%= @package.formatted_cost %></dd>
             </div>
+          </dl>
+          <%= render "registration_cta", package: @package %>
+        </div>
+        <% if current_user_admin? %>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <%= link_to "Edit Programme", edit_package_path(@package), class: "small" %>
+            <%= link_to "Delete Programme", destroy_package_path(@package), class: "small text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this programme?" } %>
           </div>
         <% end %>
+      </aside>
 
-        <%# CTA %>
-        <div class="programme-cta-wrapper">
-          <% if current_user %>
-            <% if !has_profile?(current_user) %>
-              <p class="text-muted small mb-2">Complete your profile to register</p>
-              <%= link_to new_user_profile_path(current_user, package_id: @package.id),
-                  class: "btn btn-outline-primary rounded-pill w-100" do %>
-                Complete Profile
-              <% end %>
-            <% elsif has_active_registration?(current_user) %>
-              <p class="text-muted small mb-2">Cancel your current registration first</p>
-              <%= link_to registrations_path,
-                  class: "btn btn-outline-warning rounded-pill w-100" do %>
-                View My Registrations
-              <% end %>
-            <% else %>
-              <%= link_to new_registration_path(package_id: @package.id),
-                  class: "btn programme-cta-btn rounded-pill w-100",
-                  id: "registerButton",
-                  data: { turbo: false } do %>
-                Register Now
-              <% end %>
-            <% end %>
-          <% else %>
-            <p class="text-muted small mb-2">Sign in to register for this programme</p>
-            <%= link_to new_user_session_path,
-                class: "btn btn-outline-primary rounded-pill w-100" do %>
-              Sign In to Register
-            <% end %>
-          <% end %>
-        </div>
+      <div class="col-12 col-lg-8 order-lg-1 programme-content">
+        <% if @package.package_image.attached? %>
+          <%= image_tag rails_public_blob_url(@package.package_image.variant(:hero)), class: "programme-detail__image", alt: "#{@package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy" %>
+        <% end %>
+        <%= render "programme_content", package: @package %>
       </div>
-
-      <% if current_user_admin? %>
-        <div class="d-flex gap-2">
-          <%= link_to "Edit Programme", edit_package_path(@package), class: "btn btn-outline-primary btn-sm rounded-pill px-3" %>
-          <%= link_to "Delete Programme", destroy_package_path(@package), class: "btn btn-outline-danger btn-sm rounded-pill px-3", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this programme?" } %>
-        </div>
-      <% end %>
     </div>
 
-    <%# Right column: Content %>
-    <div class="col-12 col-lg-7">
-      <h1 class="programme-title"><%= @package.name %></h1>
-      <p class="programme-tagline"><%= @package.short_description %></p>
-
-      <div class="programme-content">
-        <div class="programme-section">
-          <%= @package.content %>
-        </div>
-
-        <% if @package.benefits.present? %>
-          <div class="programme-section">
-            <h3 class="programme-section-heading">Benefits</h3>
-            <%= @package.benefits %>
-          </div>
-        <% end %>
-
-        <% if @package.eligibility.present? %>
-          <div class="programme-section">
-            <h3 class="programme-section-heading">Eligibility</h3>
-            <%= @package.eligibility %>
-          </div>
-        <% end %>
-
-        <% if @package.note.present? %>
-          <div class="programme-section">
-            <h3 class="programme-section-heading">Important Note</h3>
-            <%= @package.note %>
-          </div>
-        <% end %>
-      </div>
+    <div class="programme-detail__stories">
+      <p class="mb-0">Discover what a stay at ArogyaM can feel like.</p>
+      <%= link_to "Read participant stories →", testimonials_path, class: "brand-link" %>
     </div>
   </div>
 </section>
-
-<%= render 'shared/testimonials_preview' %>

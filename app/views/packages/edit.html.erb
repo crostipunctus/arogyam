@@ -6,6 +6,7 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
+      <%= render "special_field", form: f %>
       <div class="form-group">
         <%= f.label :content %>
         <%= f.rich_text_area :content, class: "form-control" %>

@@ -21,6 +21,7 @@ class Package < ApplicationRecord
   has_many :registrations
 
   scope :published, -> { where(published: true) }
+  scope :special, -> { where(special: true) }
   
   validates :name, presence: true, uniqueness: true
 

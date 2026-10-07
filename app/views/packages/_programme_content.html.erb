@@ -1,0 +1,44 @@
+<% sections = programme_content_sections(package.content) %>
+<% introduction = sections.first %>
+
+<% if introduction %>
+  <div class="programme-detail__introduction trix-content">
+    <% if introduction[:heading].present? %>
+      <h2><%= introduction[:heading] %></h2>
+    <% end %>
+    <%= sanitize introduction[:body] %>
+  </div>
+<% end %>
+
+<% if sections.many? || package.benefits.present? %>
+  <div class="programme-detail__explore">
+    <h2 class="programme-detail__section-title">Explore the programme</h2>
+    <p class="small text-muted mb-3">Open a section to learn more.</p>
+    <% sections.drop(1).each do |section| %>
+      <details class="programme-detail__disclosure">
+        <summary><%= section[:heading] %></summary>
+        <div class="trix-content"><%= sanitize section[:body] %></div>
+      </details>
+    <% end %>
+    <% if package.benefits.present? %>
+      <details class="programme-detail__disclosure">
+        <summary>Programme highlights</summary>
+        <div class="trix-content"><%= package.benefits %></div>
+      </details>
+    <% end %>
+  </div>
+<% end %>
+
+<% if package.eligibility.present? || package.note.present? %>
+  <section class="programme-detail__practical" aria-labelledby="before-registering-title">
+    <h2 id="before-registering-title" class="programme-detail__section-title">Before you register</h2>
+    <% if package.eligibility.present? %>
+      <h3>Who can join</h3>
+      <%= package.eligibility %>
+    <% end %>
+    <% if package.note.present? %>
+      <h3>Good to know</h3>
+      <%= package.note %>
+    <% end %>
+  </section>
+<% end %>
