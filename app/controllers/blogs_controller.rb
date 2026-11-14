@@ -2,6 +2,7 @@ class BlogsController < ApplicationController
   
   before_action :authenticate_user!, except: [:index, :show]
   before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
+  before_action :hide_journal_from_public, only: [:index, :show]
 
   def index
     @blogs = Blog.with_attached_image.order(created_at: :asc)
@@ -50,9 +51,14 @@ class BlogsController < ApplicationController
     redirect_to blogs_path
   end 
 
-  private 
+  private
 
-  def blog_params 
+  # The journal ("Stories") is hidden from the public; admins can still manage posts.
+  def hide_journal_from_public
+    redirect_to root_path unless current_user_admin?
+  end
+
+  def blog_params
     params.require(:blog).permit(:title, :content, :image, :subtitle)
   end 
 
