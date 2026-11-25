@@ -197,6 +197,18 @@
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
+// A global rule removes text underlines with !important, so use a border.
+.programme-detail__practical a {
+  border-bottom: 1px solid currentColor;
+  color: var(--ag-forest);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.programme-detail__practical a[href^="tel:"] {
+  white-space: nowrap;
+}
+
 .programme-detail__practical h3 {
   font-family: var(--ag-sans);
   font-size: 0.95rem;

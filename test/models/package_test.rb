@@ -23,6 +23,20 @@ class PackageTest < ActiveSupport::TestCase
     assert_equal "Rs. 30,000", package.formatted_cost(duration: "5")
   end
 
+  # Production generates variants inline while rendering programme pages, so a
+  # rejected transformation would turn into a page error.
+  test "generates the card and hero image variants" do
+    package = Package.create!(name: "Imaged programme")
+    package.package_image.attach(io: Rails.root.join("db/data/mandalam-nasya-treatment.jpg").open("rb"),
+                                 filename: "programme.jpg", content_type: "image/jpeg")
+
+    hero = package.package_image.variant(:hero).processed.image.blob
+    hero.analyze
+
+    assert_equal [1350, 900], hero.metadata.values_at("width", "height")
+    assert package.package_image.variant(:card).processed.key.present?
+  end
+
   test "formats the stored cost when no duration-specific cost applies" do
     package = Package.new(name: "ShodhanaM", cost: "1,20,000/-")
 

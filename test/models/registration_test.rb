@@ -1,6 +1,21 @@
 require "test_helper"
 
 class RegistrationTest < ActiveSupport::TestCase
+  test "setting a fixed programme date does not change existing registrations" do
+    user = User.create!(email: "existing@example.com", password: "password123", confirmed_at: Time.current)
+    programme = Package.create!(name: "Mandalam")
+    registration = Registration.create!(
+      user: user, package: programme, start_date: Date.new(2027, 1, 12),
+      lifestyle: "Active", substances: "None", health_conditions: "None", medication: "None",
+      agreement: "1", terms: "1"
+    )
+
+    programme.update!(fixed_start_date: Date.new(2027, 1, 17))
+    registration.update!(comments: "Existing booking")
+
+    assert_equal Date.new(2027, 1, 12), registration.reload.start_date
+  end
+
   test "an unpublished programme cannot accept a new registration" do
     registration = Registration.new(
       package: Package.new(name: "SoukhyaM", published: false),

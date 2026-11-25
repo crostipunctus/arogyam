@@ -6,6 +6,7 @@ class Registration < ApplicationRecord
   attr_accessor :agreement
   attr_accessor :terms
 
+  before_validation :use_fixed_start_date, on: :create
   after_create :registered
   after_create :not_cancelled
  
@@ -44,6 +45,10 @@ class Registration < ApplicationRecord
   end
   
   private 
+
+  def use_fixed_start_date
+    self.start_date = package.fixed_start_date if package&.fixed_start_date.present?
+  end
 
   def package_must_be_published
     errors.add(:package, "is no longer available") if package && !package.published?

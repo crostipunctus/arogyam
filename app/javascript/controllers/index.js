@@ -28,6 +28,9 @@ application.register("donation-planner", DonationPlannerController)
 import ProgrammeDurationController from "./programme_duration_controller"
 application.register("programme-duration", ProgrammeDurationController)
 
+import RegistrationStartDateController from "./registration_start_date_controller"
+application.register("registration-start-date", RegistrationStartDateController)
+
 import RecaptchaFormController from "./recaptcha_form_controller"
 application.register("recaptcha-form", RecaptchaFormController)
 

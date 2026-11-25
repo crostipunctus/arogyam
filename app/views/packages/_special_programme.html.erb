@@ -10,10 +10,12 @@
         </div>
         <div class="col-12 col-lg-5">
           <dl class="special-programme__facts mb-0">
-            <div>
-              <dt>Programme dates</dt>
-              <dd><%= package.dates %></dd>
-            </div>
+            <% if package.dates.present? %>
+              <div>
+                <dt>Programme dates</dt>
+                <dd><%= package.dates %></dd>
+              </div>
+            <% end %>
             <div>
               <dt>Duration</dt>
               <dd><%= programme_duration(package) %></dd>

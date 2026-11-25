@@ -41,7 +41,11 @@
         <%= render 'shared/errors', object: @registration if @registration.errors.any? %>
 
         <%# Programme Selection Card %>
-        <div class="card border-0 shadow-sm mb-4" data-controller="programme-duration">
+        <% programmes = Package.published.order(:name).to_a %>
+        <% selected_package_id = (@selected_package_id || @registration.package_id).to_i %>
+        <% selected_programme = programmes.find { |programme| programme.id == selected_package_id } %>
+        <% fixed_start_date = selected_programme&.fixed_start_date %>
+        <div class="card border-0 shadow-sm mb-4" data-controller="programme-duration registration-start-date">
           <div class="card-body p-4">
             <h5 class="card-section-title mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event me-2" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
@@ -55,19 +59,29 @@
                 <%= f.label :package_id, "Selected Programme *", class: "form-label fw-medium" %>
                 <div class="text-muted small mb-1">You can change your selected programme here:</div>
               <% end %>
-              <%= f.collection_select :package_id, Package.published.order(:name), :id, :name,
-                  { selected: @selected_package_id, prompt: "Select a programme" },
+              <%= f.select :package_id, registration_programme_options(programmes),
+                  { selected: selected_package_id, prompt: "Select a programme" },
                   class: "form-select py-2",
                   id: "package-select",
                   data: {
                     programme_duration_target: "programme",
-                    action: "change->programme-duration#update"
+                    registration_start_date_target: "programme",
+                    action: "change->programme-duration#update change->registration-start-date#update"
                   } %>
             </div>
 
             <div class="mb-3">
-              <%= f.label :start_date, "Start Date *", class: "form-label fw-medium" %>
-              <%= f.date_field :start_date, class: "form-control py-2" %>
+              <%= f.label :start_date, "Start Date *", class: "form-label fw-medium",
+                  hidden: fixed_start_date.present?, data: { registration_start_date_target: "dateLabel" } %>
+              <%= f.text_field :start_date, type: fixed_start_date.present? ? "hidden" : "date",
+                  value: (fixed_start_date || @registration.start_date)&.iso8601,
+                  class: "form-control py-2", data: { registration_start_date_target: "dateInput" } %>
+              <%= tag.div hidden: fixed_start_date.blank?, data: { registration_start_date_target: "fixedDetails" } do %>
+                <div class="form-label fw-medium">Start Date</div>
+                <p class="mb-1" data-registration-start-date-target="fixedDate"><%= fixed_start_date&.strftime("%-d %B %Y") %></p>
+                <p class="text-muted small mb-1" data-registration-start-date-target="programmeDates"><%= selected_programme&.dates %></p>
+                <p class="form-text mb-0">The start date is fixed for this programme.</p>
+              <% end %>
             </div>
 
             <div id="vishram-days" class="mb-3" hidden data-programme-duration-target="vishraamFields">

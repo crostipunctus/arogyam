@@ -13,7 +13,10 @@ module Arogyam
 
     config.active_job.queue_adapter = :sidekiq
     config.active_storage.variant_processor = :mini_magick
-    
+    # Our named variants set JPEG quality with `saver: { quality: ... }`.
+    # Active Storage's ImageMagick transformer rejects `saver` unless allowed.
+    config.active_storage.supported_image_processing_methods = %w[saver]
+
     config.time_zone = 'Asia/Kolkata'
 
     # Configuration for the application, engines, and railties goes here.

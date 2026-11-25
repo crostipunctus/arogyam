@@ -1,4 +1,16 @@
 module RegistrationsHelper
+  def registration_programme_options(programmes)
+    programmes.map do |programme|
+      [programme.name, programme.id, {
+        data: {
+          fixed_start_date: programme.fixed_start_date&.iso8601,
+          fixed_start_date_label: programme.fixed_start_date&.strftime("%-d %B %Y"),
+          programme_dates: programme.dates
+        }
+      }]
+    end
+  end
+
   def consultation_status_class(consultation)
     if consultation.status == 'confirmed'
       'bg-success'
