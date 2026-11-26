@@ -12,6 +12,28 @@ class PackagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h5", text: unpublished_package.name, count: 0
   end
 
+  test "programmes are listed cheapest first by default" do
+    Package.create!(name: "ShodhanaM", cost: "1,20,000/-", duration: "21")
+    Package.create!(name: "ShamanaM", cost: "41,000/- or Rs. 82,000/-", duration: "7 or 14")
+    Package.create!(name: "VishraM", cost: "18,000 or Rs. 30,000", duration: "3 or 5")
+    Package.create!(name: "Unpriced programme")
+
+    get programmes_path
+
+    assert_equal ["VishraM", "ShamanaM", "ShodhanaM", "Unpriced programme"], css_select("h5.programme-card-title").map(&:text)
+  end
+
+  test "programmes can be filtered by any duration they offer" do
+    Package.create!(name: "ShodhanaM", cost: "1,20,000/-", duration: "21")
+    Package.create!(name: "ShamanaM", cost: "41,000/- or Rs. 82,000/-", duration: "7 or 14")
+    Package.create!(name: "VishraM", cost: "18,000 or Rs. 30,000", duration: "3 or 5")
+
+    get programmes_path(duration: "two_weeks", sort: "price_desc")
+
+    assert_equal ["ShamanaM"], css_select("h5.programme-card-title").map(&:text)
+    assert_select "select#duration option[selected]", text: "8 to 14 days"
+  end
+
   test "an unpublished programme page is not publicly available" do
     unpublished_package = Package.create!(name: "SoukhyaM", published: false)
 

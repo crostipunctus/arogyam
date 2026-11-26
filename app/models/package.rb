@@ -40,7 +40,29 @@ class Package < ApplicationRecord
     self.class.formatted_cost(name: name, cost: cost, duration: duration)
   end
 
-  private 
+  # Cost and duration are free text such as "41,000/- or Rs. 82,000/-" and
+  # "7 or 14", so listings compare the numbers written in them.
+  def starting_price
+    price_amounts.min
+  end
+
+  def shortest_duration
+    duration_days.min
+  end
+
+  def lasts_within?(day_range)
+    duration_days.any? { |days| day_range.cover?(days) }
+  end
+
+  private
+
+  def price_amounts
+    cost.to_s.scan(/\d[\d,]*/).map { |amount| amount.delete(",").to_i }
+  end
+
+  def duration_days
+    duration.to_s.scan(/\d+/).map(&:to_i)
+  end
 
   def set_slug
     self.slug = name.parameterize

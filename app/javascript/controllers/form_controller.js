@@ -1,14 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="form"
+// Submits the form when a field changes.
+// Usage: data-controller="form" data-action="change->form#submit"
 export default class extends Controller {
-  connect() {
-    this.element.addEventListener('change', () => this.submit())
-
-    console.log("Hello, Stimulus!", this.element);
-  }
-
   submit() {
-    this.element.requestSubmit();
+    this.element.requestSubmit()
   }
 }

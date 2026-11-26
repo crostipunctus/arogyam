@@ -284,3 +284,29 @@
     font-size: 1.35rem;
   }
 }
+
+.programme-filters {
+  border-bottom: 1px solid var(--ag-line);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+}
+
+.programme-filters .form-select {
+  background-position: right 0 center;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .programme-filters .form-select {
+    min-width: 12rem;
+  }
+}
+
+.programme-results-count {
+  color: var(--ag-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}

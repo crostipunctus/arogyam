@@ -15,34 +15,64 @@
 
 <section class="container py-5 mb-md-3 mb-lg-4 mb-xxl-5">
 
-  <div class="row g-4 justify-content-center">
-    <% @packages.each do |package| %>
-      <% cache package do %>
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-          <%= link_to programme_path(package), class: "programme-card d-block text-decoration-none h-100", data: { turbo: false } do %>
-            <div class="programme-card-inner h-100">
-              <div class="programme-card-image">
-                <% if package.package_image.attached? %>
-                  <%= image_tag(rails_public_blob_url(package.package_image.variant(:card)), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
-                <% else %>
-                  <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
-                <% end %>
-              </div>
-              <div class="programme-card-body">
-                <h5 class="programme-card-title"><%= package.name %></h5>
-                <p class="programme-card-description"><%= package.short_description %></p>
-                <div class="programme-card-meta">
-                  <span><%= package.duration %> days</span>
-                  <span class="programme-card-divider"></span>
-                  <span><%= package.formatted_cost %></span>
+  <%= form_with url: programmes_path, method: :get, class: "programme-filters",
+        data: { controller: "form", action: "change->form#submit", turbo_frame: "programmes", turbo_action: "advance" } do |form| %>
+    <div class="row g-3 align-items-end">
+      <div class="col-6 col-md-auto">
+        <%= form.label :duration, "Duration", class: "form-label mb-0" %>
+        <%= form.select :duration, options_for_select(@listing.duration_options, @listing.duration),
+              { include_blank: "Any duration" }, class: "form-select" %>
+      </div>
+      <div class="col-6 col-md-auto">
+        <%= form.label :sort, "Sort by", class: "form-label mb-0" %>
+        <%= form.select :sort, options_for_select(@listing.sort_options, @listing.sort), {}, class: "form-select" %>
+      </div>
+      <noscript>
+        <div class="col-auto"><%= form.submit "Apply", name: nil, class: "btn btn-outline-primary rounded-pill px-4" %></div>
+      </noscript>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "programmes" do %>
+    <p class="programme-results-count" role="status"><%= pluralize(@listing.programmes.size, "programme") %></p>
+
+    <% if @listing.programmes.empty? %>
+      <div class="text-center py-5">
+        <p class="mb-3">No programmes match that duration right now.</p>
+        <%= link_to "Show all programmes", programmes_path(sort: @listing.sort),
+              class: "btn btn-outline-primary rounded-pill px-4", data: { turbo_frame: "_top" } %>
+      </div>
+    <% end %>
+
+    <div class="row g-4 justify-content-center">
+      <% @listing.programmes.each do |package| %>
+        <% cache package do %>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <%= link_to programme_path(package), class: "programme-card d-block text-decoration-none h-100", data: { turbo: false } do %>
+              <div class="programme-card-inner h-100">
+                <div class="programme-card-image">
+                  <% if package.package_image.attached? %>
+                    <%= image_tag(rails_public_blob_url(package.package_image.variant(:card)), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                  <% else %>
+                    <%= image_tag(dev_images('flowers.jpg'), alt: "#{package.name} - Ayurvedic wellness programme at ArogyaM", loading: "lazy") %>
+                  <% end %>
+                </div>
+                <div class="programme-card-body">
+                  <h5 class="programme-card-title"><%= package.name %></h5>
+                  <p class="programme-card-description"><%= package.short_description %></p>
+                  <div class="programme-card-meta">
+                    <span><%= package.duration %> days</span>
+                    <span class="programme-card-divider"></span>
+                    <span><%= package.formatted_cost %></span>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <% if current_user_admin? %>
     <div class="text-center mt-5">

@@ -5,10 +5,11 @@ class PackagesController < ApplicationController
 
   def index 
     @special_package = Package.published.special.order(:name).first
-    @packages = Package.published.with_attached_package_image
-                      .where.not(id: @special_package&.id)
-                      .order(:name)
-  end 
+    @listing = ProgrammeListing.new(
+      Package.published.with_attached_package_image.where.not(id: @special_package&.id),
+      sort: params[:sort], duration: params[:duration]
+    )
+  end
 
   def show 
     Rails.logger.info "Looking for package with slug: #{params[:id]}"
